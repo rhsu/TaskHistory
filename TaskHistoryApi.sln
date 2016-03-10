@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryApi", "TaskHistoryApi.csproj", "{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryTestBench", "TaskHistoryTestBench\TaskHistoryTestBench.csproj", "{C95125C9-F282-4DB1-A0A2-35EBB4E56126}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryImpl", "TaskHistoryTestBench\TaskHistoryImpl.csproj", "{C95125C9-F282-4DB1-A0A2-35EBB4E56126}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
