@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryApi", "TaskHistoryApi.csproj", "{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryImpl", "TaskHistoryTestBench\TaskHistoryImpl.csproj", "{C95125C9-F282-4DB1-A0A2-35EBB4E56126}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryImpl", "TaskHistoryImpl\TaskHistoryImpl.csproj", "{72D931D2-0537-4089-A50A-D7E2622073A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C95125C9-F282-4DB1-A0A2-35EBB4E56126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C95125C9-F282-4DB1-A0A2-35EBB4E56126}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C95125C9-F282-4DB1-A0A2-35EBB4E56126}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C95125C9-F282-4DB1-A0A2-35EBB4E56126}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D931D2-0537-4089-A50A-D7E2622073A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D931D2-0537-4089-A50A-D7E2622073A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D931D2-0537-4089-A50A-D7E2622073A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D931D2-0537-4089-A50A-D7E2622073A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
