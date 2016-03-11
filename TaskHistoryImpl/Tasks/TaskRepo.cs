@@ -5,7 +5,7 @@ using TaskHistoryImpl.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
 
-namespace TaskHistoryImpl.TaskRepo
+namespace TaskHistoryImpl.Tasks
 {
 	public class TaskRepo : ITaskRepo
 	{
