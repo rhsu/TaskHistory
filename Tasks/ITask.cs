@@ -7,6 +7,5 @@ namespace TaskHistoryApi.Tasks
 		int TaskId { get; }
 		string Content { get; }
 		bool IsCompleted { get; }
-		bool IsDeleted { get; }
 	}
 }
