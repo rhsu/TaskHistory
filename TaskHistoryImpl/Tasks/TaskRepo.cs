@@ -15,23 +15,54 @@ namespace TaskHistoryImpl.TaskRepo
 		public void CreateTask (ITask task)
 		{
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("Task_Insert");
-			command.CommandType = CommandType.StoredProcedure;
-
+			command.Parameters.Add (new MySqlParameter ("pTaskContent", task.Content));
+			command.Parameters.Add (new MySqlParameter ("pUserId", 0));
+			command.Connection.Open ();
+			command.ExecuteNonQuery ();
+			command.Connection.Close ();
 		}
 
 		public void DeleteTask (int taskId)
 		{
-			throw new NotImplementedException ();
+			var command = _mySqlCommandFactory.CreateMySqlCommand ("Task_LogicalDelete");
+			command.Parameters.Add (new MySqlParameter ("pTaskId", taskId));
+			command.Connection.Open ();
+			command.ExecuteNonQuery ();
+			command.Connection.Close ();
 		}
 
 		public void UpdateTask (int taskId, ITask newTaskDto)
 		{
-			throw new NotImplementedException ();
+			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Update");
+			command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));
+			command.Parameters.Add (new MySqlParameter ("pIsCompleted", newTaskDto.IsCompleted));
+			command.Parameters.Add (new MySqlParameter ("pTaskID", newTaskDto.TaskId));
+			command.Connection.Open ();
+			command.ExecuteNonQuery ();
+			command.Connection.Close ();
 		}
 
 		public IEnumerable<ITask> GetTasksByUserId (int userId)
 		{
-			throw new NotImplementedException ();
+			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Select");
+			command.Parameters.Add (new MySqlParameter ("pUserId", userId));
+			command.Connection.Open ();
+
+			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+
+			List<ITask> returnVal = new List<ITask> ();
+
+			while (reader.Read ()) 
+			{
+				int taskId = Convert.ToInt32 (reader ["TaskId"]);
+				string content = reader ["Content"].ToString ();
+				bool isCompleted = Convert.ToBoolean (reader ["IsCompleted"]);
+
+				ITask task = _taskFactory.CreateTask (taskId, content, isCompleted);
+				returnVal.Add (task);
+			}
+
+			return null;
 		}
 
 		public TaskRepo (TaskFactory taskFactory, MySqlCommandFactory commandFactory)
