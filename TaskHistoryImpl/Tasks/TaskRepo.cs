@@ -62,7 +62,7 @@ namespace TaskHistoryImpl.TaskRepo
 				returnVal.Add (task);
 			}
 
-			return null;
+			return returnVal;
 		}
 
 		public TaskRepo (TaskFactory taskFactory, MySqlCommandFactory commandFactory)
