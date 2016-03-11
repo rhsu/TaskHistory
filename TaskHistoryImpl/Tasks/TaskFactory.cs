@@ -1,6 +1,6 @@
 ﻿using System;
 using TaskHistoryApi.Tasks;
-using TaskHistoryImpl.Task;
+using TaskHistoryImpl.Tasks;
 
 namespace TaskHistoryImpl.Tasks
 {
@@ -10,7 +10,7 @@ namespace TaskHistoryImpl.Tasks
 		{
 		}
 
-		public ITask createTask(int taskId, string content, bool isCompleted)
+		public ITask CreateTask(int taskId, string content, bool isCompleted)
 		{
 			return new Task (taskId, content, isCompleted);
 		}
