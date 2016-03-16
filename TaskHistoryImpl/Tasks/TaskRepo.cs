@@ -14,9 +14,9 @@ namespace TaskHistoryImpl.Tasks
 
 		public void CreateTask (ITask task)
 		{
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("Task_Insert");
+			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Insert");
 			command.Parameters.Add (new MySqlParameter ("pTaskContent", task.Content));
-			command.Parameters.Add (new MySqlParameter ("pUserId", 0));
+			// command.Parameters.Add (new MySqlParameter ("pUserId", 1));
 			command.Connection.Open ();
 			command.ExecuteNonQuery ();
 			command.Connection.Close ();
@@ -24,7 +24,7 @@ namespace TaskHistoryImpl.Tasks
 
 		public void DeleteTask (int taskId)
 		{
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("Task_LogicalDelete");
+			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_LogicalDelete");
 			command.Parameters.Add (new MySqlParameter ("pTaskId", taskId));
 			command.Connection.Open ();
 			command.ExecuteNonQuery ();
