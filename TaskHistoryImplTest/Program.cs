@@ -17,15 +17,18 @@ namespace TaskHistoryImplTest
 				kernel.Bind<ITask> ()
 					.To<Task> ();
 
+				var taskFactory = kernel.Get<TaskFactory> ();
+
 				bool isCompleted = true;
-				var testDto = new Task (1, "Hello", isCompleted);
+				//var testDto = new Task (1, "Hello", isCompleted);
+				taskFactory.CreateTask(
+
 				ITaskRepo myRepo = kernel.Get<ITaskRepo> ();
 
 				myRepo.CreateTask (testDto);
 			}
 
-
-			Console.WriteLine ("Hello World!");
+			Console.WriteLine ("Successfully inserted a task");
 		}
 	}
 }

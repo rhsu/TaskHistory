@@ -12,7 +12,7 @@ namespace TaskHistoryImpl.Tasks
 		private readonly TaskFactory _taskFactory;
 		private readonly MySqlCommandFactory _mySqlCommandFactory;
 
-		public void CreateTask (ITask task)
+		public ITask CreateTask (string taskContent)
 		{
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Insert");
 			command.Parameters.Add (new MySqlParameter ("pTaskContent", task.Content));
