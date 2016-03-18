@@ -17,8 +17,8 @@ namespace TaskHistoryImplTest
 				kernel.Bind<ITask> ()
 					.To<Task> ();
 
-
-				var testDto = new Task (1, "Hello", true);
+				bool isCompleted = true;
+				var testDto = new Task (1, "Hello", isCompleted);
 				ITaskRepo myRepo = kernel.Get<ITaskRepo> ();
 
 				myRepo.CreateTask (testDto);
