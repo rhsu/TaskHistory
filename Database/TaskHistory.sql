@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.5.47, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.5.47, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: TaskHistory
 -- ------------------------------------------------------
@@ -71,7 +71,7 @@ CREATE TABLE `Tasks` (
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`TaskID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,24 +226,28 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Insert`(IN `pTaskContent` VARCHAR(64))
-    NO SQL
-INSERT INTO `Tasks` 
-(
-    `Content`
-    ,`IsActive` 
-)
-VALUES
-(
-    `pTaskContent`
-    ,1
-) ;;
+BEGIN 
+	INSERT INTO `Tasks`
+	(
+		`Content`
+		,`IsActive`
+	)
+	VALUES
+	(
+		pTaskContent
+		,1
+	);
+
+	SELECT * FROM `Tasks`
+	WHERE `TaskId` = last_insert_id();
+END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -378,4 +382,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-18 16:26:18
+-- Dump completed on 2016-03-19 21:09:37
