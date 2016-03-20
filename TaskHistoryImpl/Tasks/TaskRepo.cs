@@ -4,27 +4,36 @@ using System.Collections.Generic;
 using TaskHistoryImpl.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
+using TaskHistoryApi.User;
 
-namespace TaskHistoryImpl.TaskRepo
+namespace TaskHistoryImpl.Tasks
 {
 	public class TaskRepo : ITaskRepo
 	{
 		private readonly TaskFactory _taskFactory;
 		private readonly MySqlCommandFactory _mySqlCommandFactory;
 
-		public void CreateTask (ITask task)
+		public ITask CreateTask (string taskContent)
 		{
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("Task_Insert");
-			command.Parameters.Add (new MySqlParameter ("pTaskContent", task.Content));
-			command.Parameters.Add (new MySqlParameter ("pUserId", 0));
+			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Insert");
+			command.Parameters.Add (new MySqlParameter ("pTaskContent", taskContent));
+			// command.Parameters.Add (new MySqlParameter ("pUserId", 1));
 			command.Connection.Open ();
-			command.ExecuteNonQuery ();
-			command.Connection.Close ();
-		}
+			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+			ITask task = null;
 
+			if (reader.Read ()) 
+			{
+				task = CreateTaskFromReader (reader);
+			}
+			command.Connection.Close ();
+
+			return task;
+		}
+			
 		public void DeleteTask (int taskId)
 		{
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("Task_LogicalDelete");
+			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_LogicalDelete");
 			command.Parameters.Add (new MySqlParameter ("pTaskId", taskId));
 			command.Connection.Open ();
 			command.ExecuteNonQuery ();
@@ -42,10 +51,13 @@ namespace TaskHistoryImpl.TaskRepo
 			command.Connection.Close ();
 		}
 
-		public IEnumerable<ITask> GetTasksByUserId (int userId)
+		public IEnumerable<ITask> GetTasksForUser (IUser user)
 		{
+			if (user == null)
+				throw new ArgumentNullException ("user");
+
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Select");
-			command.Parameters.Add (new MySqlParameter ("pUserId", userId));
+			command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
 			command.Connection.Open ();
 
 			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
@@ -54,15 +66,24 @@ namespace TaskHistoryImpl.TaskRepo
 
 			while (reader.Read ()) 
 			{
-				int taskId = Convert.ToInt32 (reader ["TaskId"]);
-				string content = reader ["Content"].ToString ();
-				bool isCompleted = Convert.ToBoolean (reader ["IsCompleted"]);
-
-				ITask task = _taskFactory.CreateTask (taskId, content, isCompleted);
+				ITask task = CreateTaskFromReader (reader);
 				returnVal.Add (task);
 			}
 
+			command.Connection.Close ();
+
 			return returnVal;
+		}
+
+		private ITask CreateTaskFromReader(MySqlDataReader reader)
+		{
+			int taskId = Convert.ToInt32 (reader ["TaskId"]);
+			string content = reader ["Content"].ToString ();
+			bool isCompleted = Convert.ToBoolean (reader ["IsCompleted"]);
+
+			ITask task = _taskFactory.CreateTask (taskId, content, isCompleted);
+
+			return task;
 		}
 
 		public TaskRepo (TaskFactory taskFactory, MySqlCommandFactory commandFactory)
