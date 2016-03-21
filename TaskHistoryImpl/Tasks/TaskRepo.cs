@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using TaskHistoryImpl.Tasks;
 using MySql.Data.MySqlClient;
 using System.Data;
-using TaskHistoryApi.User;
+using TaskHistoryApi.Users;
+using TaskHistoryImpl.MySql;
 
 namespace TaskHistoryImpl.Tasks
 {
@@ -13,7 +14,7 @@ namespace TaskHistoryImpl.Tasks
 		private readonly TaskFactory _taskFactory;
 		private readonly MySqlCommandFactory _mySqlCommandFactory;
 
-		public ITask CreateTask (string taskContent)
+		public ITask InsertNewTask (string taskContent)
 		{
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Insert");
 			command.Parameters.Add (new MySqlParameter ("pTaskContent", taskContent));
@@ -40,7 +41,7 @@ namespace TaskHistoryImpl.Tasks
 			command.Connection.Close ();
 		}
 
-		public void UpdateTask (int taskId, ITask newTaskDto)
+		public void UpdateTask (ITask newTaskDto)
 		{
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Update");
 			command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));

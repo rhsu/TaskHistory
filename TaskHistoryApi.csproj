@@ -37,11 +37,14 @@
     <Compile Include="Users\IUser.cs" />
     <Compile Include="Labels\ILabel.cs" />
     <Compile Include="Labels\ILabelRepo.cs" />
+    <Compile Include="TasksComplex\ITaskWithLabels.cs" />
+    <Compile Include="TasksComplex\ITaskWithLabelsRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Tasks\" />
     <Folder Include="Users\" />
     <Folder Include="Labels\" />
+    <Folder Include="TasksComplex\" />
   </ItemGroup>
 </Project>

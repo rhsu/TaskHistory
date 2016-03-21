@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaskHistoryApi.User;
+using TaskHistoryApi.Users;
 
 namespace TaskHistoryApi.Tasks
 {
 	public interface ITaskRepo
 	{
-		ITask CreateTask (string taskContent);
+		ITask InsertNewTask (string taskContent);
 		void DeleteTask (int taskId);
-		void UpdateTask (int taskId, ITask newTaskDto);
+		void UpdateTask (ITask newTaskDto);
 		IEnumerable<ITask> GetTasksForUser(IUser user);
 	}
 }
