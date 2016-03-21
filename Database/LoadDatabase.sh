@@ -1,2 +1,2 @@
 #!/bin/bash
-mysql -u root -p TaskHistory
+mysql -u root -p TaskHistory < TaskHistory.sql
