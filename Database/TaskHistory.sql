@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.5.47, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.47, for debian-linux-gnu (i686)
 --
 -- Host: localhost    Database: TaskHistory
 -- ------------------------------------------------------
@@ -24,14 +24,11 @@ DROP TABLE IF EXISTS `Labels`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Labels` (
   `LabelID` int(11) NOT NULL AUTO_INCREMENT,
-  `UserID` int(11) NOT NULL,
   `Content` varchar(64) NOT NULL,
   `IsActive` tinyint(1) NOT NULL DEFAULT '1',
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`LabelID`),
-  UNIQUE KEY `UserID` (`UserID`),
-  CONSTRAINT `LabelsToUsers_FK` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`LabelID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -382,4 +379,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-19 21:09:37
+-- Dump completed on 2016-03-22 13:44:02
