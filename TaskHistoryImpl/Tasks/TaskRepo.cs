@@ -1,11 +1,11 @@
 ﻿using System;
-using TaskHistoryApi.Tasks;
 using System.Collections.Generic;
-using TaskHistoryImpl.Tasks;
-using MySql.Data.MySqlClient;
 using System.Data;
+using MySql.Data.MySqlClient;
+using TaskHistoryApi.Tasks;
 using TaskHistoryApi.Users;
 using TaskHistoryImpl.MySql;
+using TaskHistoryImpl.Tasks;
 
 namespace TaskHistoryImpl.Tasks
 {
@@ -18,8 +18,8 @@ namespace TaskHistoryImpl.Tasks
 		{
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Insert");
 			command.Parameters.Add (new MySqlParameter ("pTaskContent", taskContent));
-			// command.Parameters.Add (new MySqlParameter ("pUserId", 1));
 			command.Connection.Open ();
+
 			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
 			ITask task = null;
 

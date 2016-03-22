@@ -9,7 +9,7 @@ namespace TaskHistoryImpl.Tasks
 		public string Content { get; }
 		public bool IsCompleted { get; }
 
-		public Task (int taskId, string content, bool isCompleted)
+		internal Task (int taskId, string content, bool isCompleted)
 		{
 			this.TaskId = taskId;
 			this.Content = content;

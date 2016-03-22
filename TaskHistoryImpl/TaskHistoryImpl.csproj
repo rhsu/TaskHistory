@@ -45,11 +45,16 @@
     <Compile Include="Tasks\TaskFactory.cs" />
     <Compile Include="Tasks\TaskRepo.cs" />
     <Compile Include="MySql\MySqlCommandFactory.cs" />
+    <Compile Include="Labels\Label.cs" />
+    <Compile Include="Labels\LabelRepo.cs" />
+    <Compile Include="Labels\LabelFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Tasks\" />
     <Folder Include="MySql\" />
+    <Folder Include="TasksComplex\" />
+    <Folder Include="Labels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -59,6 +64,7 @@
     <ProjectReference Include="..\TaskHistoryApi.csproj">
       <Project>{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}</Project>
       <Name>TaskHistoryApi</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
 </Project>
