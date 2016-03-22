@@ -43,6 +43,9 @@ namespace TaskHistoryImpl.Tasks
 
 		public void UpdateTask (ITask newTaskDto)
 		{
+			if (newTaskDto == null)
+				throw new ArgumentNullException ("newTaskDto");
+
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Update");
 			command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));
 			command.Parameters.Add (new MySqlParameter ("pIsCompleted", newTaskDto.IsCompleted));
@@ -78,6 +81,9 @@ namespace TaskHistoryImpl.Tasks
 
 		private ITask CreateTaskFromReader(MySqlDataReader reader)
 		{
+			if (reader == null)
+				throw new ArgumentNullException ("reader");
+
 			int taskId = Convert.ToInt32 (reader ["TaskId"]);
 			string content = reader ["Content"].ToString ();
 			bool isCompleted = Convert.ToBoolean (reader ["IsCompleted"]);

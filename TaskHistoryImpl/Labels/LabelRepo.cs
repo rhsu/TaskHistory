@@ -58,13 +58,24 @@ namespace TaskHistoryImpl.Labels
 
 		public void DeleteLabel(int labelId)
 		{
-			
+			var command = _mySqlCommandFactory.CreateMySqlCommand ("Logical_Delete");
+			command.Parameters.Add (new MySqlParameter ("pLabelId", labelId));
+			command.Connection.Open ();
+			command.ExecuteNonQuery ();
+			command.Connection.Close ();
 		}
 
 		public void UpdateLabel (ILabel labelDto)
 		{
 			if (labelDto == null)
 				throw new ArgumentNullException ("labelDto");
+
+			var command = _mySqlCommandFactory.CreateMySqlCommand ("Labels_Update");
+			command.Parameters.Add (new MySqlParameter ("pContent", labelDto.Name));
+			command.Parameters.Add (new MySqlParameter ("pLabelId", labelDto.LabelId));
+			command.Connection.Open ();
+			command.ExecuteNonQuery ();
+			command.Connection.Close ();
 		}
 
 		private ILabel CreateLabelFromReader(MySqlDataReader reader)
