@@ -28,6 +28,27 @@ namespace TaskHistoryImpl.Users
 			return user;
 		}
 
+		public IUser RegisterUser (string username, string password, string firstName, string lastName, string email)
+		{
+			var command = _mySqlCommandFactory.CreateMySqlCommand ("User_Insert");
+			command.Parameters.Add (new MySqlParameter ("pUsername", username));
+			command.Parameters.Add (new MySqlParameter ("pPassword", password));
+			command.Parameters.Add (new MySqlParameter ("pFirstName", firstName));
+			command.Parameters.Add (new MySqlParameter ("pFirstName", lastName));			
+			command.Parameters.Add (new MySqlParameter ("pFirstName", email));
+
+			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+
+			IUser user = null;
+
+			if (reader.Read ()) 
+			{
+				user = CreateUserFromReader (reader);
+			}
+
+			return user;
+		}
+
 		private IUser CreateUserFromReader(MySqlDataReader reader)
 		{
 			if (reader == null)
