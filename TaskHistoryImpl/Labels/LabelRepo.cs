@@ -8,10 +8,9 @@ using System.Data;
 
 namespace TaskHistoryImpl.Labels
 {
-	public class LabelRepo : ILabelRepo
+	public class LabelRepo : AbstractMySqlRepo, ILabelRepo
 	{
 		private readonly LabelFactory _labelFactory;
-		private readonly MySqlCommandFactory _mySqlCommandFactory;
 
 		public IEnumerable<ILabel> GetAllLabelsForUser(IUser user)
 		{
@@ -90,10 +89,10 @@ namespace TaskHistoryImpl.Labels
 			return label;
 		}
 
-		public LabelRepo (LabelFactory labelFactory, MySqlCommandFactory mySqlCommandFactory)
+		public LabelRepo (LabelFactory labelFactory, MySqlCommandFactory commandFactory)
+			: base (commandFactory)
 		{
 			_labelFactory = labelFactory;
-			_mySqlCommandFactory = mySqlCommandFactory;
 		}
 	}
 }

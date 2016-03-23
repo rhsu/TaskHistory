@@ -9,10 +9,9 @@ using TaskHistoryImpl.Tasks;
 
 namespace TaskHistoryImpl.Tasks
 {
-	public class TaskRepo : ITaskRepo
+	public class TaskRepo : AbstractMySqlRepo, ITaskRepo
 	{
 		private readonly TaskFactory _taskFactory;
-		private readonly MySqlCommandFactory _mySqlCommandFactory;
 
 		public ITask InsertNewTask (string taskContent)
 		{
@@ -94,9 +93,9 @@ namespace TaskHistoryImpl.Tasks
 		}
 
 		public TaskRepo (TaskFactory taskFactory, MySqlCommandFactory commandFactory)
+			: base (commandFactory)
 		{
 			_taskFactory = taskFactory;
-			_mySqlCommandFactory = commandFactory;
 		}
 	}
 }
