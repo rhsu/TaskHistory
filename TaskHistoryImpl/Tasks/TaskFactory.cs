@@ -10,7 +10,7 @@ namespace TaskHistoryImpl.Tasks
 		{
 		}
 
-		internal ITask CreateTask(int taskId, string content, bool isCompleted)
+		public ITask CreateTask(int taskId, string content, bool isCompleted)
 		{
 			return new Task (taskId, content, isCompleted);
 		}

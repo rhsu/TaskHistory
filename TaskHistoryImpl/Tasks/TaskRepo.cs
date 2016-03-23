@@ -1,10 +1,11 @@
 ﻿using System;
-using TaskHistoryApi.Tasks;
 using System.Collections.Generic;
-using TaskHistoryImpl.Tasks;
-using MySql.Data.MySqlClient;
 using System.Data;
-using TaskHistoryApi.User;
+using MySql.Data.MySqlClient;
+using TaskHistoryApi.Tasks;
+using TaskHistoryApi.Users;
+using TaskHistoryImpl.MySql;
+using TaskHistoryImpl.Tasks;
 
 namespace TaskHistoryImpl.Tasks
 {
@@ -13,12 +14,12 @@ namespace TaskHistoryImpl.Tasks
 		private readonly TaskFactory _taskFactory;
 		private readonly MySqlCommandFactory _mySqlCommandFactory;
 
-		public ITask CreateTask (string taskContent)
+		public ITask InsertNewTask (string taskContent)
 		{
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Insert");
 			command.Parameters.Add (new MySqlParameter ("pTaskContent", taskContent));
-			// command.Parameters.Add (new MySqlParameter ("pUserId", 1));
 			command.Connection.Open ();
+
 			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
 			ITask task = null;
 
@@ -40,8 +41,11 @@ namespace TaskHistoryImpl.Tasks
 			command.Connection.Close ();
 		}
 
-		public void UpdateTask (int taskId, ITask newTaskDto)
+		public void UpdateTask (ITask newTaskDto)
 		{
+			if (newTaskDto == null)
+				throw new ArgumentNullException ("newTaskDto");
+
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Update");
 			command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));
 			command.Parameters.Add (new MySqlParameter ("pIsCompleted", newTaskDto.IsCompleted));
@@ -77,6 +81,9 @@ namespace TaskHistoryImpl.Tasks
 
 		private ITask CreateTaskFromReader(MySqlDataReader reader)
 		{
+			if (reader == null)
+				throw new ArgumentNullException ("reader");
+
 			int taskId = Convert.ToInt32 (reader ["TaskId"]);
 			string content = reader ["Content"].ToString ();
 			bool isCompleted = Convert.ToBoolean (reader ["IsCompleted"]);

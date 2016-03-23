@@ -18,7 +18,7 @@ namespace TaskHistoryImplTest
 					.To<Task> ();
 
 				ITaskRepo myRepo = kernel.Get<ITaskRepo> ();
-				ITask thing = myRepo.CreateTask ("Hello World");
+				ITask thing = myRepo.InsertNewTask ("Hello World");
 
 				Console.WriteLine (thing.TaskId);
 				Console.WriteLine (thing.Content);

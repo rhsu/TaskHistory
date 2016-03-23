@@ -2,9 +2,9 @@
 
 namespace TaskHistoryImpl
 {
-	public class EmptyClass
+	public class TasksComplex
 	{
-		public EmptyClass ()
+		public TasksComplex ()
 		{
 		}
 	}
