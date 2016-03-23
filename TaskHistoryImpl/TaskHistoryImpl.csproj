@@ -48,12 +48,17 @@
     <Compile Include="Labels\Label.cs" />
     <Compile Include="Labels\LabelRepo.cs" />
     <Compile Include="Labels\LabelFactory.cs" />
+    <Compile Include="TasksComplex\TaskComplex.cs" />
+    <Compile Include="TasksComplex\TaskComplexRepo.cs" />
+    <Compile Include="TasksComplex\TaskComplexFactory.cs" />
+    <Compile Include="MySql\AbstractMySqlRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Tasks\" />
     <Folder Include="MySql\" />
     <Folder Include="Labels\" />
+    <Folder Include="TasksComplex\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

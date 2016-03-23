@@ -5,7 +5,7 @@ using TaskHistoryApi.Users;
 
 namespace TaskHistoryApi.TasksComplex
 {
-	public interface ITasksComplex
+	public interface ITaskComplexRepo
 	{
 		IEnumerable<ITaskComplex> GetComplexTasksForUser(IUser user);
 	}
