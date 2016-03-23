@@ -65,7 +65,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskHistoryApi.csproj">
+    <ProjectReference Include="..\TaskHistoryApi\TaskHistoryApi.csproj">
       <Project>{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}</Project>
       <Name>TaskHistoryApi</Name>
       <Private>False</Private>

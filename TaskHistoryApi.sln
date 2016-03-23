@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryApi", "TaskHistoryApi.csproj", "{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryImpl", "TaskHistoryImpl\TaskHistoryImpl.csproj", "{72D931D2-0537-4089-A50A-D7E2622073A2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryImplTest", "TaskHistoryImplTest\TaskHistoryImplTest.csproj", "{6554A38F-BC34-461A-AF63-D5F573AD9983}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryApi", "TaskHistoryApi\TaskHistoryApi.csproj", "{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
