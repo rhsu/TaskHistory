@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `Labels`;
 CREATE TABLE `Labels` (
   `LabelID` int(11) NOT NULL AUTO_INCREMENT,
   `Content` varchar(64) NOT NULL,
-  `IsActive` tinyint(1) NOT NULL DEFAULT '1',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`LabelID`)
@@ -44,7 +44,7 @@ CREATE TABLE `Subtasks` (
   `TaskID` int(11) NOT NULL,
   `Content` varchar(128) NOT NULL,
   `IsCompleted` bit(1) NOT NULL DEFAULT b'0',
-  `IsActive` bit(1) NOT NULL DEFAULT b'1',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   `CreationDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`SubtaskID`),
@@ -64,11 +64,11 @@ CREATE TABLE `Tasks` (
   `TaskID` int(11) NOT NULL AUTO_INCREMENT,
   `Content` varchar(256) NOT NULL,
   `IsCompleted` bit(1) NOT NULL,
-  `IsActive` tinyint(1) NOT NULL DEFAULT '1',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`TaskID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,6 +83,7 @@ CREATE TABLE `Users` (
   `Username` varchar(32) NOT NULL,
   `Password` varchar(32) NOT NULL,
   `Email` varchar(64) NOT NULL,
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`UserID`)
@@ -123,9 +124,9 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
@@ -137,7 +138,7 @@ SELECT
 FROM
 	`Labels`
 WHERE
-	`IsActive` = 1 ;;
+	`IsDeleted` = 0 ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -174,9 +175,9 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
@@ -190,7 +191,7 @@ SELECT
 FROM
 	`Subtasks`
 WHERE
-	`IsActive` = 1 ;;
+	`IsDeleted` = 0 ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -254,9 +255,9 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
@@ -270,7 +271,7 @@ SELECT
 FROM 
 	`Tasks`
 WHERE 
-	`IsActive` = 1 ;;
+	`IsDeleted` = 0 ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -379,4 +380,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-22 13:44:02
+-- Dump completed on 2016-03-24 10:54:17
