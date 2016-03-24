@@ -96,4 +96,10 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskHistoryOrchestrator\TaskHistoryOrchestrator.csproj">
+      <Project>{9B92E6DC-65A8-4CE9-B093-4A64556FFCED}</Project>
+      <Name>TaskHistoryOrchestrator</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

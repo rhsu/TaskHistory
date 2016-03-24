@@ -1,4 +1,5 @@
 ﻿using System;
+using TaskHistoryApi.Users;
 
 namespace TaskHistoryOrchestrator.ViewModels
 {
@@ -11,6 +12,11 @@ namespace TaskHistoryOrchestrator.ViewModels
 
 		public UserRegisterViewModel ()
 		{
+		}
+
+		public IUser ConverToUserObject()
+		{
+			return null;
 		}
 	}
 }
