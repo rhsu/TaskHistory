@@ -7,12 +7,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryImplTest", "Task
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryApi", "TaskHistoryApi\TaskHistoryApi.csproj", "{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory", "TaskHistory\TaskHistory.csproj", "{4C636183-7D20-466E-B2AB-E279582C5285}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C636183-7D20-466E-B2AB-E279582C5285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C636183-7D20-466E-B2AB-E279582C5285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C636183-7D20-466E-B2AB-E279582C5285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C636183-7D20-466E-B2AB-E279582C5285}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6554A38F-BC34-461A-AF63-D5F573AD9983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6554A38F-BC34-461A-AF63-D5F573AD9983}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6554A38F-BC34-461A-AF63-D5F573AD9983}.Release|Any CPU.ActiveCfg = Release|Any CPU
