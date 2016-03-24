@@ -10,7 +10,7 @@ namespace TaskHistoryImpl.Users
 	{
 		private readonly UserFactory _userFactory;
 
-		public IUser GetUserByUsernameAndPassword (string username, string password)
+		public IUser ValidateUsernameAndPassword (string username, string password)
 		{
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("User_Validate");
 			command.Parameters.Add (new MySqlParameter ("pUsername", username));
