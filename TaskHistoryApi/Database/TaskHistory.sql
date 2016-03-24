@@ -64,7 +64,7 @@ CREATE TABLE `Tasks` (
   `TaskID` int(11) NOT NULL AUTO_INCREMENT,
   `Content` varchar(256) NOT NULL,
   `IsCompleted` bit(1) NOT NULL,
-  `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
+  `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`TaskID`)
@@ -380,4 +380,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-24 10:52:37
+-- Dump completed on 2016-03-24 10:54:17
