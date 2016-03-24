@@ -11,12 +11,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory", "TaskHistory\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryOrchestrator", "TaskHistoryOrchestrator\TaskHistoryOrchestrator.csproj", "{9B92E6DC-65A8-4CE9-B093-4A64556FFCED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistoryObjectMapper", "TaskHistoryObjectMapper\TaskHistoryObjectMapper.csproj", "{326E57DF-28B8-49BD-977E-2463D328CAA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{326E57DF-28B8-49BD-977E-2463D328CAA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{326E57DF-28B8-49BD-977E-2463D328CAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{326E57DF-28B8-49BD-977E-2463D328CAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{326E57DF-28B8-49BD-977E-2463D328CAA4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4C636183-7D20-466E-B2AB-E279582C5285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4C636183-7D20-466E-B2AB-E279582C5285}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C636183-7D20-466E-B2AB-E279582C5285}.Release|Any CPU.ActiveCfg = Release|Any CPU
