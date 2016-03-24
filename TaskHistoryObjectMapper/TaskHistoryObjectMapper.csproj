@@ -31,9 +31,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Home\UserRegisterViewModel.cs" />
+    <Compile Include="ObjectMappers\User\ObjectMapperUser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -48,5 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="ObjectMappers\" />
+    <Folder Include="ObjectMappers\User\" />
   </ItemGroup>
 </Project>

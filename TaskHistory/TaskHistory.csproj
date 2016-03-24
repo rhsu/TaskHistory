@@ -101,5 +101,9 @@
       <Project>{9B92E6DC-65A8-4CE9-B093-4A64556FFCED}</Project>
       <Name>TaskHistoryOrchestrator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TaskHistoryObjectMapper\TaskHistoryObjectMapper.csproj">
+      <Project>{326E57DF-28B8-49BD-977E-2463D328CAA4}</Project>
+      <Name>TaskHistoryObjectMapper</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

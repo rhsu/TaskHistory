@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
-using TaskHistoryOrchestrator.ViewModels;
 
 namespace TaskHistory.Controllers
 {
@@ -17,7 +16,7 @@ namespace TaskHistory.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult RegisterUser(UserRegisterViewModel userRegister)
+		public ActionResult RegisterUser()
 		{
 
 
