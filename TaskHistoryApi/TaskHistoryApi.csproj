@@ -39,6 +39,7 @@
     <Compile Include="Labels\ILabelRepo.cs" />
     <Compile Include="TasksComplex\ITaskComplex.cs" />
     <Compile Include="TasksComplex\ITaskComplexRepo.cs" />
+    <Compile Include="Users\IUserRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
