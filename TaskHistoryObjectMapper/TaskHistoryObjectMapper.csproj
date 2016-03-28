@@ -31,8 +31,17 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\TaskHistoryApi\TaskHistoryApi.csproj">
+      <Project>{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}</Project>
+      <Name>TaskHistoryApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskHistoryImpl\TaskHistoryImpl.csproj">
+      <Project>{72D931D2-0537-4089-A50A-D7E2622073A2}</Project>
+      <Name>TaskHistoryImpl</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
