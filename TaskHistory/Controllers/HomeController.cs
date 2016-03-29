@@ -4,20 +4,45 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
+using TaskHistoryOrchestrator;
+using TaskHistoryViewModel.ViewModels;
 
 namespace TaskHistory.Controllers
 {
-	public class HomeController : Controller
+	// TODO: https://github.com/rhsu/TaskHistory/issues/39
+	public class HomeController: Controller
 	{
+		[HttpGet]
 		public ActionResult Index ()
 		{
-			var mvcName = typeof(Controller).Assembly.GetName ();
-			var isMono = Type.GetType ("Mono.Runtime") != null;
-
-			ViewData ["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
-			ViewData ["Runtime"] = isMono ? "Mono" : ".NET";
-
 			return View ();
+		}
+	}
+
+	public class HomeControllerNew : Controller
+	{
+		private HomeOrchestrator _homeOrchestrator;
+
+		[HttpGet]
+		public ActionResult Index ()
+		{
+			return View ();
+		}
+
+		[HttpPost]
+		public ActionResult RegisterUser (UserRegisterViewModel userRegisterViewModel)
+		{
+			if (userRegisterViewModel == null)
+				throw new ArgumentNullException ("userRegisterViewModel");
+
+			_homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
+
+			return RedirectToAction ("Index");
+		}
+
+		public HomeControllerNew(HomeOrchestrator homeOrchestrator)
+		{
+			_homeOrchestrator = homeOrchestrator;
 		}
 	}
 }
