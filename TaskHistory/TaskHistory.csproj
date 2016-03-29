@@ -100,5 +100,13 @@
       <Project>{012C3866-D51D-4917-AFC6-1B7AD7DD6FC7}</Project>
       <Name>TaskHistoryViewModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TaskHistoryOrchestrator\TaskHistoryOrchestrator.csproj">
+      <Project>{9B92E6DC-65A8-4CE9-B093-4A64556FFCED}</Project>
+      <Name>TaskHistoryOrchestrator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskHistoryApi\TaskHistoryApi.csproj">
+      <Project>{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}</Project>
+      <Name>TaskHistoryApi</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -15,4 +15,3 @@ namespace TaskHistoryApi.Users
 		IUser RegisterUser (string username, string password, string firstName, string lastName, string email);
 	}
 }
-
