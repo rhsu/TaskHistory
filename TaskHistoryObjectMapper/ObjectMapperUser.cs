@@ -7,6 +7,7 @@ namespace TaskHistoryObjectMapper
 {
 	public class ObjectMapperUser
 	{
+		//TODO: https://github.com/rhsu/TaskHistory/issues/40
 		public IUser Map(UserRegisterViewModel viewModel)
 		{
 			if (viewModel == null)

@@ -9,6 +9,7 @@ using TaskHistoryViewModel.ViewModels;
 
 namespace TaskHistory.Controllers
 {
+	// TODO: https://github.com/rhsu/TaskHistory/issues/39
 	public class HomeController: Controller
 	{
 		[HttpGet]
