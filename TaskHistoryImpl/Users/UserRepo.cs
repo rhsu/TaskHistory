@@ -30,6 +30,7 @@ namespace TaskHistoryImpl.Users
 
 		public IUser RegisterUser (string username, string password, string firstName, string lastName, string email)
 		{
+			//TODO: https://github.com/rhsu/TaskHistory/issues/42
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("User_Insert");
 			command.Parameters.Add (new MySqlParameter ("pUsername", username));
 			command.Parameters.Add (new MySqlParameter ("pPassword", password));
