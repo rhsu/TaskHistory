@@ -95,4 +95,10 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskHistoryViewModel\TaskHistoryViewModel.csproj">
+      <Project>{012C3866-D51D-4917-AFC6-1B7AD7DD6FC7}</Project>
+      <Name>TaskHistoryViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
