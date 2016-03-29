@@ -12,7 +12,7 @@ namespace TaskHistoryObjectMapper
 			if (viewModel == null)
 				throw new ArgumentNullException("viewModel");
 
-			var userFactory = new UserFactory ();
+			// var userFactory = new UserFactory ();
 			// userFactory
 
 			return null;
