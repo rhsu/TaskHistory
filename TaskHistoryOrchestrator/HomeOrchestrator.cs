@@ -4,7 +4,7 @@ using TaskHistoryViewModel.ViewModels;
 
 namespace TaskHistoryOrchestrator
 {
-	public class UserOrchestrator
+	public class HomeOrchestrator
 	{
 		private IUserRepo _userRepo;
 
@@ -25,7 +25,7 @@ namespace TaskHistoryOrchestrator
 			return newUser;
 		}
 
-		public UserOrchestrator (IUserRepo userRepo)
+		public HomeOrchestrator (IUserRepo userRepo)
 		{
 			_userRepo = userRepo;
 		}
