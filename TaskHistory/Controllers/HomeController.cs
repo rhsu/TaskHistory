@@ -9,17 +9,7 @@ using TaskHistory.ViewModel.Users;
 
 namespace TaskHistory.Controllers
 {
-	// TODO: https://github.com/rhsu/TaskHistory/issues/39
-	public class HomeController: Controller
-	{
-		[HttpGet]
-		public ActionResult Index ()
-		{
-			return View ();
-		}
-	}
-
-	public class HomeControllerNew : Controller
+	public class HomeController : Controller
 	{
 		private HomeOrchestrator _homeOrchestrator;
 
@@ -40,7 +30,7 @@ namespace TaskHistory.Controllers
 			return RedirectToAction ("Index");
 		}
 
-		public HomeControllerNew(HomeOrchestrator homeOrchestrator)
+		public HomeController(HomeOrchestrator homeOrchestrator)
 		{
 			_homeOrchestrator = homeOrchestrator;
 		}
