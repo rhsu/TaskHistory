@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Impl", "TaskHistoryImpl\TaskHistory.Impl.csproj", "{72D931D2-0537-4089-A50A-D7E2622073A2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Impl.Test", "TaskHistoryImplTest\TaskHistory.Impl.Test.csproj", "{6554A38F-BC34-461A-AF63-D5F573AD9983}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Api", "TaskHistoryApi\TaskHistory.Api.csproj", "{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}"
@@ -16,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.ViewModel", "TaskHistoryViewModel\TaskHistory.ViewModel.csproj", "{012C3866-D51D-4917-AFC6-1B7AD7DD6FC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Bindings", "TaskHistory.Bindings\TaskHistory.Bindings.csproj", "{513BEE59-6C11-49FE-9B3B-72CFBC501AF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Impl", "TaskHistory.Impl\TaskHistory.Impl.csproj", "{72D931D2-0537-4089-A50A-D7E2622073A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

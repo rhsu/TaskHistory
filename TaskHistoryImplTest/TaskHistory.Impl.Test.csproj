@@ -43,7 +43,7 @@
       <Project>{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}</Project>
       <Name>TaskHistory.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TaskHistoryImpl\TaskHistory.Impl.csproj">
+    <ProjectReference Include="..\TaskHistory.Impl\TaskHistory.Impl.csproj">
       <Project>{72D931D2-0537-4089-A50A-D7E2622073A2}</Project>
       <Name>TaskHistory.Impl</Name>
     </ProjectReference>
