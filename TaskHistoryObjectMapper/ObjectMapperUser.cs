@@ -3,7 +3,7 @@ using TaskHistory.Api.Users;
 using TaskHistoryViewModel.ViewModels;
 using TaskHistoryImpl;
 
-namespace TaskHistoryObjectMapper
+namespace TaskHistory.ObjectMapper
 {
 	public class ObjectMapperUser
 	{
