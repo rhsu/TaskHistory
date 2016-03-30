@@ -36,17 +36,17 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\TaskHistoryApi\TaskHistoryApi.csproj">
+    <ProjectReference Include="..\TaskHistoryApi\TaskHistory.Api.csproj">
       <Project>{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}</Project>
-      <Name>TaskHistoryApi</Name>
+      <Name>TaskHistory.Api</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TaskHistoryObjectMapper\TaskHistoryObjectMapper.csproj">
+    <ProjectReference Include="..\TaskHistoryObjectMapper\TaskHistory.ObjectMapper.csproj">
       <Project>{326E57DF-28B8-49BD-977E-2463D328CAA4}</Project>
-      <Name>TaskHistoryObjectMapper</Name>
+      <Name>TaskHistory.ObjectMapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TaskHistoryViewModel\TaskHistoryViewModel.csproj">
+    <ProjectReference Include="..\TaskHistoryViewModel\TaskHistory.ViewModel.csproj">
       <Project>{012C3866-D51D-4917-AFC6-1B7AD7DD6FC7}</Project>
-      <Name>TaskHistoryViewModel</Name>
+      <Name>TaskHistory.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
