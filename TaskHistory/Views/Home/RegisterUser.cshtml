@@ -1,3 +1,23 @@
-﻿<div>Hello From User Register Partial View</div>
+﻿@using TaskHistory.ViewModel.Users;
+@model UserRegisterViewModel
+<div>Hello From User Register Partial View</div>
 
-<!-- TODO: https://github.com/rhsu/TaskHistory/issues/41-->
+@using (Html.BeginForm())
+{
+	@Html.LabelFor(model => model.Username)
+	@Html.TextBoxFor(model => model.Username)
+
+	@Html.LabelFor(model => model.Password)
+	@Html.PasswordFor(model => model.Password)
+
+	@Html.LabelFor(model => model.FirstName)
+	@Html.TextBoxFor(model => model.FirstName)
+
+	@Html.LabelFor(model => model.LastName)	
+	@Html.TextBoxFor(model => model.LastName)
+
+	@Html.LabelFor(model => model.Email)
+	@Html.TextBoxFor(model => model.Email)
+
+	<button>Register</button>
+}
