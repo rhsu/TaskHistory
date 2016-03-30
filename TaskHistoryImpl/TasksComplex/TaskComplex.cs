@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using TaskHistory.Api.Labels;
 using TaskHistory.Api.Tasks;
-using TaskHistoryImpl.Tasks;
+using TaskHistory.Impl.Tasks;
 
-namespace TaskHistoryImpl.TasksComplex
+namespace TaskHistory.Impl.TasksComplex
 {
 	public class TaskComplex : Task, ITaskComplex
 	{

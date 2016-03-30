@@ -1,6 +1,6 @@
 ﻿using System;
 using TaskHistory.Api.Users;
-using TaskHistoryImpl.MySql;
+using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
 

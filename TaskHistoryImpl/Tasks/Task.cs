@@ -1,7 +1,6 @@
-﻿using System;
-using TaskHistory.Api.Tasks;
+﻿using TaskHistory.Api.Tasks;
 
-namespace TaskHistoryImpl.Tasks
+namespace TaskHistory.Impl.Tasks
 {
 	public class Task : ITask
 	{

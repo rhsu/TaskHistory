@@ -2,12 +2,12 @@
 using TaskHistory.Api.TasksComplex;
 using System.Collections.Generic;
 using TaskHistory.Api.Users;
-using TaskHistoryImpl.MySql;
+using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
 using TaskHistory.Api.Labels;
 
-namespace TaskHistoryImpl.TasksComplex
+namespace TaskHistory.Impl.TasksComplex
 {
 	public class TaskComplexRepo : AbstractMySqlRepo,ITaskComplexRepo
 	{

@@ -6,4 +6,3 @@
 		string Name { get; }
 	}
 }
-

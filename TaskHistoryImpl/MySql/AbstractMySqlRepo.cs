@@ -1,7 +1,6 @@
-﻿using System;
-using TaskHistoryImpl.MySql;
+﻿using TaskHistory.Impl.MySql;
 
-namespace TaskHistoryImpl
+namespace TaskHistory.Impl.MySql
 {
 	public abstract class AbstractMySqlRepo
 	{
@@ -13,4 +12,3 @@ namespace TaskHistoryImpl
 		}
 	}
 }
-

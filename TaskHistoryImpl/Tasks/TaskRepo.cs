@@ -4,10 +4,10 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
-using TaskHistoryImpl.MySql;
-using TaskHistoryImpl.Tasks;
+using TaskHistory.Impl.MySql;
+using TaskHistory.Impl.Tasks;
 
-namespace TaskHistoryImpl.Tasks
+namespace TaskHistory.Impl.Tasks
 {
 	public class TaskRepo : AbstractMySqlRepo, ITaskRepo
 	{

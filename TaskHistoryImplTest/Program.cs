@@ -1,7 +1,7 @@
 ﻿using System;
 using Ninject;
 using TaskHistory.Api.Tasks;
-using TaskHistoryImpl.Tasks;
+using TaskHistory.Impl.Tasks;
 
 namespace TaskHistoryImplTest
 {

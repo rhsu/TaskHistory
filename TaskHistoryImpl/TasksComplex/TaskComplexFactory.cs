@@ -3,7 +3,7 @@ using TaskHistory.Api.TasksComplex;
 using System.Collections.Generic;
 using TaskHistory.Api.Labels;
 
-namespace TaskHistoryImpl.TasksComplex
+namespace TaskHistory.Impl.TasksComplex
 {
 	public class TaskComplexFactory
 	{
