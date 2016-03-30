@@ -1,9 +1,9 @@
 ﻿using System;
-using TaskHistoryApi.Users;
-using TaskHistoryViewModel.ViewModels;
+using TaskHistory.Api.Users;
+using TaskHistory.ViewModel.Users;
 using TaskHistoryImpl;
 
-namespace TaskHistoryObjectMapper
+namespace TaskHistory.ObjectMapper
 {
 	public class ObjectMapperUser
 	{

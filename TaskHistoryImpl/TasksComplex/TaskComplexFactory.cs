@@ -1,9 +1,9 @@
 ﻿using System;
-using TaskHistoryApi.TasksComplex;
+using TaskHistory.Api.TasksComplex;
 using System.Collections.Generic;
-using TaskHistoryApi.Labels;
+using TaskHistory.Api.Labels;
 
-namespace TaskHistoryImpl.TasksComplex
+namespace TaskHistory.Impl.TasksComplex
 {
 	public class TaskComplexFactory
 	{

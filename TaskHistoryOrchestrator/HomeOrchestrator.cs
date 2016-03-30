@@ -1,8 +1,8 @@
 ﻿using System;
-using TaskHistoryApi.Users;
-using TaskHistoryViewModel.ViewModels;
+using TaskHistory.Api.Users;
+using TaskHistory.ViewModel.Users;
 
-namespace TaskHistoryOrchestrator
+namespace TaskHistory.Orchestrator
 {
 	public class HomeOrchestrator
 	{

@@ -1,9 +1,8 @@
-﻿using System;
-using TaskHistoryApi.Tasks;
+﻿using TaskHistory.Api.Tasks;
 using System.Collections.Generic;
-using TaskHistoryApi.Users;
+using TaskHistory.Api.Users;
 
-namespace TaskHistoryApi.TasksComplex
+namespace TaskHistory.Api.TasksComplex
 {
 	public interface ITaskComplexRepo
 	{

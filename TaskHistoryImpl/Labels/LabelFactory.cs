@@ -1,7 +1,7 @@
 ﻿using System;
-using TaskHistoryApi.Labels;
+using TaskHistory.Api.Labels;
 
-namespace TaskHistoryImpl
+namespace TaskHistory.Impl
 {
 	public class LabelFactory
 	{

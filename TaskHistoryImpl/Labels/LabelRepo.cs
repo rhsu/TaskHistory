@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaskHistoryApi.Labels;
-using TaskHistoryApi.Users;
-using TaskHistoryImpl.MySql;
+using TaskHistory.Api.Labels;
+using TaskHistory.Api.Users;
+using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
 
-namespace TaskHistoryImpl.Labels
+namespace TaskHistory.Impl.Labels
 {
 	public class LabelRepo : AbstractMySqlRepo, ILabelRepo
 	{

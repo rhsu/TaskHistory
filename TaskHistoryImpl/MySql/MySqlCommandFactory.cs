@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
 
-namespace TaskHistoryImpl.MySql
+namespace TaskHistory.Impl.MySql
 {
 	public class MySqlCommandFactory
 	{

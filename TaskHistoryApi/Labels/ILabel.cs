@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TaskHistoryApi.Labels
+﻿namespace TaskHistory.Api.Labels
 {
 	public interface ILabel
 	{
@@ -8,4 +6,3 @@ namespace TaskHistoryApi.Labels
 		string Name { get; }
 	}
 }
-

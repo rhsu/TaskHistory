@@ -1,8 +1,7 @@
-﻿using System;
-using TaskHistoryApi.Tasks;
-using TaskHistoryImpl.Tasks;
+﻿using TaskHistory.Api.Tasks;
+using TaskHistory.Impl.Tasks;
 
-namespace TaskHistoryImpl.Tasks
+namespace TaskHistory.Impl.Tasks
 {
 	public class TaskFactory
 	{

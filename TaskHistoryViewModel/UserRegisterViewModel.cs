@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TaskHistoryViewModel.ViewModels
+﻿namespace TaskHistory.ViewModel.Users
 {
 	public class UserRegisterViewModel
 	{

@@ -1,11 +1,10 @@
-﻿using System;
-using TaskHistoryApi.TasksComplex;
+﻿using TaskHistory.Api.TasksComplex;
 using System.Collections.Generic;
-using TaskHistoryApi.Labels;
-using TaskHistoryApi.Tasks;
-using TaskHistoryImpl.Tasks;
+using TaskHistory.Api.Labels;
+using TaskHistory.Api.Tasks;
+using TaskHistory.Impl.Tasks;
 
-namespace TaskHistoryImpl.TasksComplex
+namespace TaskHistory.Impl.TasksComplex
 {
 	public class TaskComplex : Task, ITaskComplex
 	{
