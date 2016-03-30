@@ -1,6 +1,6 @@
 ﻿using System;
 using TaskHistory.Api.Users;
-using TaskHistoryViewModel.ViewModels;
+using TaskHistory.ViewModel.Users;
 
 namespace TaskHistory.Orchestrator
 {

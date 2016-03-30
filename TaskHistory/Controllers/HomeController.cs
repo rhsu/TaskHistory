@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using TaskHistory.Orchestrator;
-using TaskHistoryViewModel.ViewModels;
+using TaskHistory.ViewModel.Users;
 
 namespace TaskHistory.Controllers
 {
