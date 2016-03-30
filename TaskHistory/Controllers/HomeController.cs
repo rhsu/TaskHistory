@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
-using TaskHistoryOrchestrator;
+using TaskHistory.Orchestrator;
 using TaskHistoryViewModel.ViewModels;
 
 namespace TaskHistory.Controllers

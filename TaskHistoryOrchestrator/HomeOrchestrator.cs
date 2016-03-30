@@ -2,7 +2,7 @@
 using TaskHistory.Api.Users;
 using TaskHistoryViewModel.ViewModels;
 
-namespace TaskHistoryOrchestrator
+namespace TaskHistory.Orchestrator
 {
 	public class HomeOrchestrator
 	{
