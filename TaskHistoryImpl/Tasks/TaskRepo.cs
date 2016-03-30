@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using MySql.Data.MySqlClient;
-using TaskHistoryApi.Tasks;
-using TaskHistoryApi.Users;
+using TaskHistory.Api.Tasks;
+using TaskHistory.Api.Users;
 using TaskHistoryImpl.MySql;
 using TaskHistoryImpl.Tasks;
 

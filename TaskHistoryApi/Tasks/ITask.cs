@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TaskHistoryApi.Tasks
+﻿namespace TaskHistory.Api.Tasks
 {
 	public interface ITask
 	{

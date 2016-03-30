@@ -1,5 +1,5 @@
 ﻿using System;
-using TaskHistoryApi.Users;
+using TaskHistory.Api.Users;
 using TaskHistoryViewModel.ViewModels;
 
 namespace TaskHistoryOrchestrator

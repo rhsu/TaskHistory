@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using TaskHistoryApi.Users;
-using TaskHistoryApi.Tasks;
+﻿using System.Collections.Generic;
+using TaskHistory.Api.Users;
+using TaskHistory.Api.Tasks;
 
-namespace TaskHistoryApi.Labels
+namespace TaskHistory.Api.Labels
 {
 	public interface ILabelRepo
 	{
@@ -20,4 +19,3 @@ namespace TaskHistoryApi.Labels
 		IEnumerable<ILabel> GetAllLabelsForTask(ITask task);
 	}
 }
-

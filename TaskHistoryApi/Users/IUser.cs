@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaskHistoryApi.Users
+namespace TaskHistory.Api.Users
 {
 	public interface IUser
 	{

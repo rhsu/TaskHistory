@@ -1,11 +1,11 @@
 ﻿using System;
-using TaskHistoryApi.TasksComplex;
+using TaskHistory.Api.TasksComplex;
 using System.Collections.Generic;
-using TaskHistoryApi.Users;
+using TaskHistory.Api.Users;
 using TaskHistoryImpl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
-using TaskHistoryApi.Labels;
+using TaskHistory.Api.Labels;
 
 namespace TaskHistoryImpl.TasksComplex
 {

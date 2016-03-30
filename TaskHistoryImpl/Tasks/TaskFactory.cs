@@ -1,5 +1,5 @@
 ﻿using System;
-using TaskHistoryApi.Tasks;
+using TaskHistory.Api.Tasks;
 using TaskHistoryImpl.Tasks;
 
 namespace TaskHistoryImpl.Tasks

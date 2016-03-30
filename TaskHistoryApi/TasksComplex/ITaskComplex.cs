@@ -1,9 +1,9 @@
 ﻿using System;
-using TaskHistoryApi.Tasks;
+using TaskHistory.Api.Tasks;
 using System.Collections.Generic;
-using TaskHistoryApi.Labels;
+using TaskHistory.Api.Labels;
 
-namespace TaskHistoryApi.TasksComplex
+namespace TaskHistory.Api.TasksComplex
 {
 	public interface ITaskComplex : ITask
 	{
