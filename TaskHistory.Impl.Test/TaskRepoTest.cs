@@ -19,22 +19,38 @@ namespace TaskHistory.Impl.Test
 		[Test]
 		public void InsertNewTaskTest ()
 		{
+			string taskContent = "Hello World";
+
+			ITask testTask = _taskRepo.InsertNewTask (taskContent);
+
+			Assert.AreEqual (taskContent, testTask.Content);
+			// Assert that SELECT taskContent FROM tasks WHERE Id = testTask.Id 
+			// contains the correct taskContent
 		}
 
 		[Test]
 		public void DeleteTask ()
 		{
-			
+			// INSERT INTO taskTable
+			// Return last inserted ID
+
+			// call _taskRepo.DeleteTask(lastInsertedId);
 		}
 
 		[Test]
 		public void UpdateTask ()
 		{
+			// INSERT INTO taskTable
+			// call _taskRepo.UpdateTask
+
+			// Assert that SELECT taskContent = dto's content
+			// Assert that SELECT taskIsCompleted = dtos' isCompleted
 		}
 
 		[Test]
 		public void GetTasksForUser()
 		{
+			// TODO: https://github.com/rhsu/TaskHistory/issues/52
 		}
 	}
 }
