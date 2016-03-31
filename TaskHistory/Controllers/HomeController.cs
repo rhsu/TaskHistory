@@ -14,8 +14,10 @@ namespace TaskHistory.Controllers
 		private HomeOrchestrator _homeOrchestrator;
 
 		[HttpGet]
-		public ActionResult Index ()
+		public ActionResult Index (UserSuccessfulRegisteredViewModel confirmationViewModel)
 		{
+			ViewBag.UserRegistered = confirmationViewModel;
+
 			return View ();
 		}
 
