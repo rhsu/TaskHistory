@@ -13,7 +13,8 @@ namespace TaskHistory.Impl.Test
 		[SetUp]
 		public void Init()
 		{
-			_taskRepo = new TaskRepo ();
+			// TODO: https://github.com/rhsu/TaskHistory/issues/54
+			// _taskRepo = new TaskRepo ();
 		}
 
 		[Test]
