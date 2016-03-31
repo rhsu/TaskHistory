@@ -22,9 +22,6 @@ namespace TaskHistory.Controllers
 		[HttpPost]
 		public ActionResult RegisterUser (UserRegisterViewModel userRegisterViewModel)
 		{
-			if (userRegisterViewModel == null)
-				throw new ArgumentNullException ("userRegisterViewModel");
-
 			_homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
 
 			return RedirectToAction ("Index");
