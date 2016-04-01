@@ -15,6 +15,8 @@ namespace TaskHistory.Bindings
 
 			kernel.Bind<ITaskRepo> ()
 				.To<TaskRepo> ();
+				//.To<UserRepo>();
+				.To<FakeUserRepo>();
 		}
 	}
 }

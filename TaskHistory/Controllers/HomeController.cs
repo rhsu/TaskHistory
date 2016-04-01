@@ -14,17 +14,16 @@ namespace TaskHistory.Controllers
 		private HomeOrchestrator _homeOrchestrator;
 
 		[HttpGet]
-		public ActionResult Index ()
+		public ActionResult Index (UserSuccessfulRegisteredViewModel confirmationViewModel)
 		{
+			ViewBag.UserRegistered = confirmationViewModel;
+
 			return View ();
 		}
 
 		[HttpPost]
 		public ActionResult RegisterUser (UserRegisterViewModel userRegisterViewModel)
 		{
-			if (userRegisterViewModel == null)
-				throw new ArgumentNullException ("userRegisterViewModel");
-
 			_homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
 
 			return RedirectToAction ("Index");
