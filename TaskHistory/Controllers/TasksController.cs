@@ -20,6 +20,14 @@ namespace TaskHistory.Controllers
 			return View (vmTasks);
         }
 
+		[HttpPost]
+		public ActionResult CreateTask(string content)
+		{
+			_taskOrchestrator.OrchestratorCreateTask (content);
+
+			return RedirectToAction ("Index");
+		}
+
 		public TasksController(TasksOrchestrator taskOrchestrator)
 		{
 			_taskOrchestrator = taskOrchestrator;

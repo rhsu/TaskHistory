@@ -2,6 +2,7 @@
 
 @model IEnumerable<ITask>
 
+@{ Html.RenderPartial("InsertTask"); }
 
 @if (Model.Count() > 0)
 {

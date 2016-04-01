@@ -1,11 +1,7 @@
-﻿@using TaskHistory.Api.Tasks
-
-@model ITask
-
-@using(Html.BeginForm("Tasks", "InsertTask"))
+﻿@using(Html.BeginForm("CreateTask", "Tasks"))
 {
-	@Html.LabelFor(model => model.Content);
-	@Html.TextBoxFor(model => model.Content);
+	@Html.Label("Content: ");
+	@Html.TextBox("content");
 
 	<button>Insert</button>
 }

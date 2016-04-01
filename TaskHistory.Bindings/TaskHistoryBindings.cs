@@ -11,12 +11,11 @@ namespace TaskHistory.Bindings
 		public static void BindAll(IKernel kernel)
 		{
 			kernel.Bind<IUserRepo>()
-				.To<UserRepo>();
+				//.To<UserRepo>();
+				.To<FakeUserRepo>();
 
 			kernel.Bind<ITaskRepo> ()
 				.To<TaskRepo> ();
-				//.To<UserRepo>();
-				.To<FakeUserRepo>();
 		}
 	}
 }
