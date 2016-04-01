@@ -48,6 +48,7 @@ namespace TaskHistory.Impl.Tasks
 			var command = _mySqlCommandFactory.CreateMySqlCommand ("Tasks_Update");
 			command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));
 			command.Parameters.Add (new MySqlParameter ("pIsCompleted", newTaskDto.IsCompleted));
+			// TODO: https://github.com/rhsu/TaskHistory/issues/51
 			command.Parameters.Add (new MySqlParameter ("pTaskID", newTaskDto.TaskId));
 			command.Connection.Open ();
 			command.ExecuteNonQuery ();
