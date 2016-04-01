@@ -1,0 +1,30 @@
+﻿@using TaskHistory.Api.Tasks
+
+@model IEnumerable<ITask>
+
+@{ Html.RenderPartial("InsertTask"); }
+
+@if (Model.Count() > 0)
+{
+	<table>
+		<tr>
+			<th></th>
+			<th>Content</th>
+		</tr>
+
+		@foreach (var task in Model)
+		{
+		<tr>
+			<td>
+				<input type='checkbox' />
+			</td>	
+			<td>@task.Content</td>
+		</tr>
+		}
+
+	</table>
+}
+else {
+	<div>What?</div>
+
+}
