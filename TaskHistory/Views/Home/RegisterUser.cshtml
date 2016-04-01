@@ -2,7 +2,7 @@
 @model UserRegisterViewModel
 <div>Hello From User Register Partial View</div>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("RegisterUser", "Home"))
 {
 	@Html.LabelFor(model => model.Username)
 	@Html.TextBoxFor(model => model.Username)
