@@ -1,7 +1,10 @@
-﻿@using(Html.BeginForm("CreateTask", "Tasks"))
+﻿@using(Html.BeginForm("CreateTask", "Tasks", FormMethod.Post, new { @class = "form-inline", @style = "padding: 25px;"}))
 {
-	@Html.Label("Content: ");
-	@Html.TextBox("content");
+	<div class="form-group">
+		@Html.Label("Content: ")
+		<!-- TODO https://github.com/rhsu/TaskHistory/issues/62-->
+		@Html.TextBox("content", null, new { @class = "form-control", @required = "required"})
+	</div>
 
-	<button>Insert</button>
+	<button type="submit" class="btn btn-default">Insert</button>
 }
