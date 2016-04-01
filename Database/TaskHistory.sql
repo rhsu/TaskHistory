@@ -63,12 +63,12 @@ DROP TABLE IF EXISTS `Tasks`;
 CREATE TABLE `Tasks` (
   `TaskID` int(11) NOT NULL AUTO_INCREMENT,
   `Content` varchar(256) NOT NULL,
-  `IsCompleted` bit(1) NOT NULL,
+  `IsCompleted` bit(1) NOT NULL DEFAULT b'0',
   `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`TaskID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -235,12 +235,10 @@ BEGIN
 	INSERT INTO `Tasks`
 	(
 		`Content`
-		,`IsActive`
 	)
 	VALUES
 	(
 		pTaskContent
-		,1
 	);
 
 	SELECT * FROM `Tasks`
@@ -264,10 +262,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Select`()
     NO SQL
 SELECT 
-	`TaskID`
-    ,`Content`
-    ,`IsActive` 
-    ,`IsCompleted`
+	*
 FROM 
 	`Tasks`
 WHERE 
@@ -380,4 +375,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-24 10:54:17
+-- Dump completed on 2016-04-01 15:23:09
