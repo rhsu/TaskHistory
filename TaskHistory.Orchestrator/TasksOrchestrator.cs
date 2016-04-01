@@ -5,7 +5,7 @@ using TaskHistory.Api.Users;
 
 namespace TaskHistory.Orchestrator.Tasks
 {
-	public class TaskOrchestrator
+	public class TasksOrchestrator
 	{
 		private ITaskRepo _taskRepo;
 
@@ -13,7 +13,13 @@ namespace TaskHistory.Orchestrator.Tasks
 		{
 			var fakeUser = new FakeTempUser ();
 
-			return _taskRepo.GetTasksForUser (fakeUser);
+			//return _taskRepo.GetTasksForUser (fakeUser);
+
+			var returnVal = new List<ITask> ();
+
+			returnVal.Add(new FakeTempTask(1, "Hello"));
+
+			return returnVal;
 		}
 
 		public ITask OrchestratorCreateTask(string content)
@@ -21,7 +27,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			return _taskRepo.InsertNewTask (content);
 		}
 
-		public TaskOrchestrator (ITaskRepo taskRepo)
+		public TasksOrchestrator (ITaskRepo taskRepo)
 		{
 			_taskRepo = taskRepo;
 		}
@@ -45,6 +51,20 @@ namespace TaskHistory.Orchestrator.Tasks
 			this.LastName = "Last Name";
 			this.FullName = "Full Name";
 			this.Email = "Email";
+		}
+	}
+
+	public class FakeTempTask : ITask
+	{
+		public int TaskId { get; }
+		public string Content { get; }
+		public bool IsCompleted { get; }
+
+		public FakeTempTask(int id, string content)
+		{
+			TaskId = id;
+			Content = content;
+			IsCompleted = false;
 		}
 	}
 }
