@@ -8,23 +8,25 @@
 {
 	<table>
 		<tr>
-			<th></th>
+			<th><input type='checkbox' /></th>
+			<th>#</th>
 			<th>Content</th>
 		</tr>
 
-		@foreach (var task in Model)
+		@for (int i = 0; i < Model.Count(); i++)
 		{
 		<tr>
 			<td>
 				<input type='checkbox' />
-			</td>	
-			<td>@task.Content</td>
+			</td>
+			<td>@(i+1)</td>	
+			<td>@Model.ElementAt(i).Content</td>
 		</tr>
 		}
 
 	</table>
 }
-else {
-	<div>What?</div>
-
+else 
+{
+	<div>You have no tasks</div>
 }
