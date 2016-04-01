@@ -1,9 +1,17 @@
-﻿<div>User Register</div>
+﻿<html>
+	<head>
+		<link rel='stylesheet' href='/Content/bootstrap.css'/>		
+		<link rel='stylesheet' href='/Content/bootstrap-theme.css'/>
 
-@{ Html.RenderPartial("RegisterUser"); }
+		<title>Home - Task History</title>
+	</head>
+	<body>
+		<div>User Register</div>
+		@{ Html.RenderPartial("RegisterUser"); }
+		<div>User Login</div>
+		<div>
+			<a href='/Tasks/'>Tasks Page</a>
+		</div>
+	</body>
+</html>
 
-<div>User Login</div>
-
-<div>
-	<a href='/Tasks/'>Tasks Page</a>
-</div>
