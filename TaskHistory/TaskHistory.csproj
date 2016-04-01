@@ -103,6 +103,7 @@
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Home\RegisterUser.cshtml" />
     <Content Include="Views\Tasks\Index.cshtml" />
+    <Content Include="Views\Tasks\InsertTask.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
