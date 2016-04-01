@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
