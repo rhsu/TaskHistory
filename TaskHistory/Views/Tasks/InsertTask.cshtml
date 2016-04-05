@@ -1,8 +1,8 @@
 ﻿@using(Html.BeginForm("CreateTask", "Tasks", FormMethod.Post, new { @class = "form-inline", 
-	@style = "padding-top: 25px; padding-bottom: 25px; padding-left: 2.5%"}))
+	@style = "padding-top: 25px; padding-bottom: 25px;"}))
 {
 	<div class="form-group">
-		@Html.Label("content", "Content: ")
+		@Html.Label("content", "Task: ")
 		<!-- TODO https://github.com/rhsu/TaskHistory/issues/62-->
 		@Html.TextBox("content", null, new { @class = "form-control", @required = "required"})
 	</div>
