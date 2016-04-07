@@ -2,7 +2,6 @@
 @model UserRegisterViewModel
 
 <div class="container">
-<b>Register New User</b>
 @using (Html.BeginForm("RegisterUser", "Home"))
 {
 	<div class="form-group">
@@ -30,6 +29,6 @@
 		@Html.TextBoxFor(model => model.Email, new { @class="form-control", required = "required", type="email" })
 	</div>
 
-	<button>Register</button>
+	<button class="btn btn-default">Register</button>
 }
 </div>

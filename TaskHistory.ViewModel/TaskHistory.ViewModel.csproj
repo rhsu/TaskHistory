@@ -36,6 +36,7 @@
     <Compile Include="UserRegisterViewModel.cs" />
     <Compile Include="TaskDisplayForGridViewViewModel.cs" />
     <Compile Include="UserSuccessfulRegisteredViewModel.cs" />
+    <Compile Include="UserLoginViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
