@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel='stylesheet' href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
     
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 <body>
-    
+    <div class="container">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="content">Task:</label>
+                <input type="text" name="content" class="form-control required"/>
+            </div>
+
+            <button class="btn btn-default">Insert</button>
+        </form>
+    </div>
 </body>
