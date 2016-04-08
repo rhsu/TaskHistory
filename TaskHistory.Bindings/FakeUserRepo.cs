@@ -22,22 +22,5 @@ namespace TaskHistory.Bindings
 			this.Email = "123@gmail.com";
 		}
 	}
-
-	public class FakeUserRepo : IUserRepo
-	{
-		public IUser ValidateUsernameAndPassword (string username, string password)
-		{
-			return new FakeUser();
-		}
-
-		public IUser RegisterUser (string username, string password, string firstName, string lastName, string email)
-		{
-			return new FakeUser ();
-		}
-
-		public FakeUserRepo ()
-		{
-		}
-	}
 }
 
