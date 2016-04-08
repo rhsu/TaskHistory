@@ -68,7 +68,7 @@ CREATE TABLE `Tasks` (
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`TaskID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,11 +83,13 @@ CREATE TABLE `Users` (
   `Username` varchar(32) NOT NULL,
   `Password` varchar(32) NOT NULL,
   `Email` varchar(64) NOT NULL,
+  `FirstName` varchar(64) NOT NULL,
+  `LastName` varchar(64) NOT NULL,
   `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,13 +304,13 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Users_Insert`(IN `pUsername` VARCHAR(32), IN `pPassword` VARCHAR(32), IN `pEmail` VARCHAR(64))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Users_Insert`(IN `pUsername` VARCHAR(32), IN `pPassword` VARCHAR(32), IN `pEmail` VARCHAR(64), IN `pFirstName` VARCHAR(64), IN `pLastName` VARCHAR(64))
     MODIFIES SQL DATA
 BEGIN
 
@@ -327,12 +329,16 @@ BEGIN
             `Username`
             ,`Password`
             ,`Email`
+            ,`FirstName`
+            ,`LastName`
         )
         VALUES
         (
             `pUsername`
             ,`pPassword`
             ,`pEmail`
+            ,`pFirstName`
+            ,`pLastName`
         );
     END IF;
 END ;;
@@ -375,4 +381,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-01 15:23:09
+-- Dump completed on 2016-04-08 16:20:36
