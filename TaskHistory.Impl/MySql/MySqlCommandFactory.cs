@@ -5,6 +5,7 @@ using System.Data;
 
 namespace TaskHistory.Impl.MySql
 {
+	[Obsolete]
 	public class MySqlCommandFactory
 	{
 		private static MySqlConnection _mySqlConnection = new MySqlConnection(ConfigurationManager.AppSettings["MySqlConnection"]);
