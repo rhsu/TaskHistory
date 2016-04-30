@@ -31,24 +31,27 @@ namespace TaskHistoryImpl.Users
 
 		public IUser RegisterUser (string username, string password, string firstName, string lastName, string email)
 		{
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("Users_Insert");
-			command.Parameters.Add (new MySqlParameter ("pUsername", username));
-			command.Parameters.Add (new MySqlParameter ("pPassword", password));
-			command.Parameters.Add (new MySqlParameter ("pFirstName", firstName));
-			command.Parameters.Add (new MySqlParameter ("pLastName", lastName));			
-			command.Parameters.Add (new MySqlParameter ("pEmail", email));
-			command.Connection.Open ();
-
-			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-
-			IUser user = null;
-
-			if (reader.Read ()) 
+			using (var command = _mySqlCommandFactory.CreateMySqlCommand ("Users_Insert")) 
 			{
-				user = CreateUserFromReader (reader);
-			}
+				command.Parameters.Add (new MySqlParameter ("pUsername", username));
+				command.Parameters.Add (new MySqlParameter ("pPassword", password));
+				command.Parameters.Add (new MySqlParameter ("pFirstName", firstName));
+				command.Parameters.Add (new MySqlParameter ("pLastName", lastName));			
+				command.Parameters.Add (new MySqlParameter ("pEmail", email));
+				command.Connection.Open ();
 
-			return user;
+				using (MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection)) 
+				{
+					IUser user = null;
+
+					if (reader.Read ()) 
+					{
+						user = CreateUserFromReader (reader);
+					}
+
+					return user;
+				}
+			}
 		}
 
 		private IUser CreateUserFromReader(MySqlDataReader reader)
