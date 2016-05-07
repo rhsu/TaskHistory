@@ -6,10 +6,11 @@ using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
 using TaskHistory.Api.Labels;
+using System.Configuration;
 
 namespace TaskHistory.Impl.TasksComplex
 {
-	public class TaskComplexRepo : AbstractMySqlRepo,ITaskComplexRepo
+	public class TaskComplexRepo : ITaskComplexRepo
 	{
 		private readonly TaskComplexFactory _taskComplexFactory;
 
@@ -20,17 +21,20 @@ namespace TaskHistory.Impl.TasksComplex
 
 			var returnVal = new List<ITaskComplex> ();
 
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("ComplexTasks_ForUser_Select");
-			command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
-			command.Connection.Open ();
-			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-
-			while (reader.Read ()) 
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand ("Labels_Get", connection)) 
 			{
-				ITaskComplex task = CreateTaskComplexFromReader (reader);
-				returnVal.Add (task);
-			}
+				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
+				command.Connection.Open ();
+				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
 
+				while (reader.Read ()) 
+				{
+					ITaskComplex task = CreateTaskComplexFromReader (reader);
+					returnVal.Add (task);
+				}
+			}
+				
 			return returnVal;
 		}
 
@@ -51,8 +55,7 @@ namespace TaskHistory.Impl.TasksComplex
 			return returnVal;
 		}
 
-		public TaskComplexRepo (MySqlCommandFactory mySqlCommandFactory, TaskComplexFactory taskComplexFactory)
-			: base (mySqlCommandFactory)
+		public TaskComplexRepo (TaskComplexFactory taskComplexFactory)
 		{
 			_taskComplexFactory = taskComplexFactory;
 		}

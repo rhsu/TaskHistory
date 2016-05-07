@@ -5,10 +5,11 @@ using TaskHistory.Api.Users;
 using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace TaskHistory.Impl.Labels
 {
-	public class LabelRepo : AbstractMySqlRepo, ILabelRepo
+	public class LabelRepo : ILabelRepo
 	{
 		private readonly LabelFactory _labelFactory;
 
@@ -19,49 +20,53 @@ namespace TaskHistory.Impl.Labels
 
 			var returnVal = new List<ILabel> ();
 
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("Labels_ForUser_Select");
-			command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
-			command.Connection.Open ();
-
-			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-
-			while (reader.Read ()) 
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand ("Labels_Get", connection)) 
 			{
-				ILabel label = CreateLabelFromReader (reader);
-				returnVal.Add (label);
-			}
+				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
+				command.Connection.Open ();
 
-			command.Connection.Close ();
-			
+				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+
+				while (reader.Read ()) 
+				{
+					ILabel label = CreateLabelFromReader (reader);
+					returnVal.Add (label);
+				}
+			}
+				
 			return returnVal;
 		}
 
 		public ILabel InsertNewLabel (string content)
 		{
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("Labels_Insert");
-			command.Parameters.Add(new MySqlParameter("pContent", content));
-			command.Connection.Open ();
-
-			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-			ILabel label = null;
-
-			if (reader.Read ()) 
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand ("Labels_Insert", connection)) 
 			{
-				label = CreateLabelFromReader (reader);
+				command.Parameters.Add(new MySqlParameter("pContent", content));
+				command.Connection.Open ();
+
+				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+				ILabel label = null;
+
+				if (reader.Read ()) 
+				{
+					label = CreateLabelFromReader (reader);
+				}
+				return label;
 			}
-
-			command.Connection.Close ();
-
-			return label;
 		}
 
 		public void DeleteLabel(int labelId)
 		{
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("Logical_Delete");
-			command.Parameters.Add (new MySqlParameter ("pLabelId", labelId));
-			command.Connection.Open ();
-			command.ExecuteNonQuery ();
-			command.Connection.Close ();
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand ("Logical_Delete", connection)) 
+			{
+				command.Parameters.Add (new MySqlParameter ("pLabelId", labelId));
+				command.Connection.Open ();
+				command.ExecuteNonQuery ();
+				command.Connection.Close ();
+			}
 		}
 
 		public void UpdateLabel (ILabel labelDto)
@@ -69,12 +74,15 @@ namespace TaskHistory.Impl.Labels
 			if (labelDto == null)
 				throw new ArgumentNullException ("labelDto");
 
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("Labels_Update");
-			command.Parameters.Add (new MySqlParameter ("pContent", labelDto.Name));
-			command.Parameters.Add (new MySqlParameter ("pLabelId", labelDto.LabelId));
-			command.Connection.Open ();
-			command.ExecuteNonQuery ();
-			command.Connection.Close ();
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand ("Label_Update", connection)) 
+			{
+				command.Parameters.Add (new MySqlParameter ("pContent", labelDto.Name));
+				command.Parameters.Add (new MySqlParameter ("pLabelId", labelDto.LabelId));
+				command.Connection.Open ();
+				command.ExecuteNonQuery ();
+				command.Connection.Close ();
+			}
 		}
 
 		private ILabel CreateLabelFromReader(MySqlDataReader reader)
@@ -89,8 +97,7 @@ namespace TaskHistory.Impl.Labels
 			return label;
 		}
 
-		public LabelRepo (LabelFactory labelFactory, MySqlCommandFactory commandFactory)
-			: base (commandFactory)
+		public LabelRepo (LabelFactory labelFactory)
 		{
 			_labelFactory = labelFactory;
 		}
