@@ -13,6 +13,12 @@ namespace TaskHistory.Impl.Labels
 	{
 		private readonly LabelFactory _labelFactory;
 
+		private const string CreateStoredProcedure = "";
+		private const string ReadStoredProcedure = "";
+		private const string UpdateStoredProcedure = "";
+		private const string DeleteStoredProcedure = "";
+
+
 		public IEnumerable<ILabel> GetAllLabelsForUser(IUser user)
 		{
 			if (user == null)
