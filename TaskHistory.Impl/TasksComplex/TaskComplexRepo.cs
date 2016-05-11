@@ -12,6 +12,11 @@ namespace TaskHistory.Impl.TasksComplex
 {
 	public class TaskComplexRepo : ITaskComplexRepo
 	{
+		private const string CreateStoredProcedure = "TaskComplex_Insert";
+		private const string ReadStoredProcedure = "TaskComplex_For_User_Select";
+		private const string UpdateStoredProcedure = "TaskComplex_Update";
+		private const string DeleteStoredProcedure = "TaskComplex_Logical_Delete";
+
 		private readonly TaskComplexFactory _taskComplexFactory;
 
 		public IEnumerable<ITaskComplex> GetComplexTasksForUser (IUser user)
@@ -22,7 +27,7 @@ namespace TaskHistory.Impl.TasksComplex
 			var returnVal = new List<ITaskComplex> ();
 
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand ("Labels_Get", connection)) 
+			using (var command = new MySqlCommand (ReadStoredProcedure, connection)) 
 			{
 				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
 				command.Connection.Open ();

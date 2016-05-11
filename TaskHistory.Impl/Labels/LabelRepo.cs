@@ -13,11 +13,10 @@ namespace TaskHistory.Impl.Labels
 	{
 		private readonly LabelFactory _labelFactory;
 
-		private const string CreateStoredProcedure = "";
-		private const string ReadStoredProcedure = "";
-		private const string UpdateStoredProcedure = "";
-		private const string DeleteStoredProcedure = "";
-
+		private const string CreateStoredProcedure = "Labels_Insert";
+		private const string ReadStoredProcedure = "Labels_For_User_Select";
+		private const string UpdateStoredProcedure = "Labels_Update";
+		private const string DeleteStoredProcedure = "Labels_Logical_Delete";
 
 		public IEnumerable<ILabel> GetAllLabelsForUser(IUser user)
 		{
@@ -27,7 +26,7 @@ namespace TaskHistory.Impl.Labels
 			var returnVal = new List<ILabel> ();
 
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand ("Labels_Get", connection)) 
+			using (var command = new MySqlCommand (ReadStoredProcedure, connection)) 
 			{
 				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
 				command.Connection.Open ();
@@ -47,7 +46,7 @@ namespace TaskHistory.Impl.Labels
 		public ILabel InsertNewLabel (string content)
 		{
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand ("Labels_Insert", connection)) 
+			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
 			{
 				command.Parameters.Add(new MySqlParameter("pContent", content));
 				command.Connection.Open ();
@@ -66,7 +65,7 @@ namespace TaskHistory.Impl.Labels
 		public void DeleteLabel(int labelId)
 		{
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand ("Logical_Delete", connection)) 
+			using (var command = new MySqlCommand (DeleteStoredProcedure, connection)) 
 			{
 				command.Parameters.Add (new MySqlParameter ("pLabelId", labelId));
 				command.Connection.Open ();
@@ -81,7 +80,7 @@ namespace TaskHistory.Impl.Labels
 				throw new ArgumentNullException ("labelDto");
 
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand ("Label_Update", connection)) 
+			using (var command = new MySqlCommand (UpdateStoredProcedure, connection)) 
 			{
 				command.Parameters.Add (new MySqlParameter ("pContent", labelDto.Name));
 				command.Parameters.Add (new MySqlParameter ("pLabelId", labelDto.LabelId));

@@ -12,12 +12,17 @@ namespace TaskHistory.Impl.Tasks
 {
 	public class TaskRepo : ITaskRepo
 	{
+		private const string CreateStoredProcedure = "Tasks_Insert";
+		private const string ReadStoredProcedure = "Tasks_Select";
+		private const string UpdateStoredProcedure = "Tasks_Update";
+		private const string DeleteStoredProcedure = "Tasks_Delete";
+
 		private readonly TaskFactory _taskFactory;
 
 		public ITask InsertNewTask (string taskContent)
 		{
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand ("Tasks_Insert")) 
+			using (var command = new MySqlCommand (CreateStoredProcedure)) 
 			{
 				command.CommandType = CommandType.StoredProcedure;
 				
@@ -41,7 +46,7 @@ namespace TaskHistory.Impl.Tasks
 		public void DeleteTask (int taskId)
 		{
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand ("Tasks_LogicalDelete")) 
+			using (var command = new MySqlCommand (DeleteStoredProcedure)) 
 			{
 				command.Parameters.Add (new MySqlParameter ("pTaskId", taskId));
 				command.Connection.Open ();
@@ -56,7 +61,7 @@ namespace TaskHistory.Impl.Tasks
 				throw new ArgumentNullException ("newTaskDto");
 
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand ("Tasks_Update", connection)) 
+			using (var command = new MySqlCommand (UpdateStoredProcedure, connection)) 
 			{
 				command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));
 				command.Parameters.Add (new MySqlParameter ("pIsCompleted", newTaskDto.IsCompleted));
@@ -73,7 +78,7 @@ namespace TaskHistory.Impl.Tasks
 				throw new ArgumentNullException ("user");
 
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand("Tasks_Select", connection))
+			using (var command = new MySqlCommand(ReadStoredProcedure, connection))
 			{
 				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
 				command.Connection.Open ();
