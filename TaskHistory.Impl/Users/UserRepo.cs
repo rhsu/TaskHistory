@@ -36,6 +36,7 @@ namespace TaskHistoryImpl.Users
 			}
 		}
 
+		// TODO Too many parameters https://github.com/rhsu/TaskHistory/issues/82
 		public IUser RegisterUser (string username, string password, string firstName, string lastName, string email)
 		{
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
