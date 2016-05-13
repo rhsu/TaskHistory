@@ -13,12 +13,12 @@ namespace TaskHistory.Orchestrator.Tasks
 		{
 			var fakeUser = new FakeTempUser ();
 
-			return _taskRepo.GetTasksForUser (fakeUser);
+			return _taskRepo.ReadTasksForUser (fakeUser);
 		}
 
 		public ITask OrchestratorCreateTask(string content)
 		{
-			return _taskRepo.InsertNewTask (content);
+			return _taskRepo.CreateNewTask (content);
 		}
 
 		public TasksOrchestrator (ITaskRepo taskRepo)

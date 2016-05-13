@@ -6,35 +6,44 @@ using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
 using TaskHistory.Api.Labels;
+using System.Configuration;
 
 namespace TaskHistory.Impl.TasksComplex
 {
-	public class TaskComplexRepo : AbstractMySqlRepo,ITaskComplexRepo
+	public class TaskComplexRepo : ITaskComplexRepo
 	{
+		private const string CreateStoredProcedure = "TaskComplex_Insert";
+		private const string ReadStoredProcedure = "TaskComplex_For_User_Select";
+		private const string UpdateStoredProcedure = "TaskComplex_Update";
+		private const string DeleteStoredProcedure = "TaskComplex_Logical_Delete";
+
 		private readonly TaskComplexFactory _taskComplexFactory;
 
-		public IEnumerable<ITaskComplex> GetComplexTasksForUser (IUser user)
+		public IEnumerable<ITaskComplex> ReadComplexTasksForUser (IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
 
 			var returnVal = new List<ITaskComplex> ();
 
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("ComplexTasks_ForUser_Select");
-			command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
-			command.Connection.Open ();
-			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-
-			while (reader.Read ()) 
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand (ReadStoredProcedure, connection)) 
 			{
-				ITaskComplex task = CreateTaskComplexFromReader (reader);
-				returnVal.Add (task);
-			}
+				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
+				command.Connection.Open ();
+				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
 
+				while (reader.Read ()) 
+				{
+					ITaskComplex task = MakeTaskComplexFromReader (reader);
+					returnVal.Add (task);
+				}
+			}
+				
 			return returnVal;
 		}
 
-		private ITaskComplex CreateTaskComplexFromReader(MySqlDataReader reader)
+		private ITaskComplex MakeTaskComplexFromReader(MySqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");
@@ -51,8 +60,7 @@ namespace TaskHistory.Impl.TasksComplex
 			return returnVal;
 		}
 
-		public TaskComplexRepo (MySqlCommandFactory mySqlCommandFactory, TaskComplexFactory taskComplexFactory)
-			: base (mySqlCommandFactory)
+		public TaskComplexRepo (TaskComplexFactory taskComplexFactory)
 		{
 			_taskComplexFactory = taskComplexFactory;
 		}

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using TaskHistory.Orchestrator;
 using TaskHistory.ViewModel.Users;
+using TaskHistory.Api.Users;
 
 namespace TaskHistory.Controllers
 {
@@ -24,7 +25,16 @@ namespace TaskHistory.Controllers
 		[HttpPost]
 		public ActionResult RegisterUser (UserRegisterViewModel userRegisterViewModel)
 		{
-			_homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
+			IUser user = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
+
+			/* if (user == null) 
+			{
+				return RedirectToAction ("Index");
+			} 
+			else 
+			{
+				return RedirectToAction ("Something");
+			}*/
 
 			return RedirectToAction ("Index");
 		}

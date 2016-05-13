@@ -3,51 +3,66 @@ using TaskHistory.Api.Users;
 using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Configuration;
 
 namespace TaskHistoryImpl.Users
 {
-	public class UserRepo : AbstractMySqlRepo, IUserRepo
+	public class UserRepo : IUserRepo
 	{
 		private readonly UserFactory _userFactory;
 
 		public IUser ValidateUsernameAndPassword (string username, string password)
 		{
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("User_Validate");
-			command.Parameters.Add (new MySqlParameter ("pUsername", username));
-			command.Parameters.Add (new MySqlParameter ("pPassword", password));
-
-			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-
-			IUser user = null;
-
-			if (reader.Read ()) 
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand ("User_Validate", connection)) 
 			{
-				user = CreateUserFromReader (reader);
-			}
+				command.CommandType = CommandType.StoredProcedure;
 
-			return user;
+				command.Parameters.Add (new MySqlParameter ("pUsername", username));
+				command.Parameters.Add (new MySqlParameter ("pPassword", password));
+				command.Connection.Open ();
+
+				using (var reader = command.ExecuteReader (CommandBehavior.CloseConnection)) 
+				{
+					IUser user = null;
+
+					if (reader.Read ()) 
+					{
+						user = CreateUserFromReader (reader);
+					}
+
+					return user;
+				}
+			}
 		}
 
+		// TODO Too many parameters https://github.com/rhsu/TaskHistory/issues/82
 		public IUser RegisterUser (string username, string password, string firstName, string lastName, string email)
 		{
-			//TODO: https://github.com/rhsu/TaskHistory/issues/42
-			var command = _mySqlCommandFactory.CreateMySqlCommand ("User_Insert");
-			command.Parameters.Add (new MySqlParameter ("pUsername", username));
-			command.Parameters.Add (new MySqlParameter ("pPassword", password));
-			command.Parameters.Add (new MySqlParameter ("pFirstName", firstName));
-			command.Parameters.Add (new MySqlParameter ("pFirstName", lastName));			
-			command.Parameters.Add (new MySqlParameter ("pFirstName", email));
-
-			MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-
-			IUser user = null;
-
-			if (reader.Read ()) 
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand("Users_Insert", connection))
 			{
-				user = CreateUserFromReader (reader);
-			}
+				command.CommandType = CommandType.StoredProcedure;
 
-			return user;
+				command.Parameters.Add (new MySqlParameter ("pUsername", username));
+				command.Parameters.Add (new MySqlParameter ("pPassword", password));
+				command.Parameters.Add (new MySqlParameter ("pFirstName", firstName));
+				command.Parameters.Add (new MySqlParameter ("pLastName", lastName));			
+				command.Parameters.Add (new MySqlParameter ("pEmail", email));
+				command.Connection.Open ();
+
+				using (MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection)) 
+				{
+					IUser user = null;
+
+					if (reader.Read ()) 
+					{
+						user = CreateUserFromReader (reader);
+					}
+
+					return user;
+				}
+			}
 		}
 
 		private IUser CreateUserFromReader(MySqlDataReader reader)
@@ -65,8 +80,7 @@ namespace TaskHistoryImpl.Users
 			return user;
 		}
 
-		public UserRepo (MySqlCommandFactory commandFactory, UserFactory userFactory)
-			: base (commandFactory)
+		public UserRepo (UserFactory userFactory)
 		{
 			_userFactory = userFactory;
 		}

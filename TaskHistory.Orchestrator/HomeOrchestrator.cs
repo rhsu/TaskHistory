@@ -19,9 +19,6 @@ namespace TaskHistory.Orchestrator
 								vmUserRegister.LastName,
 				                vmUserRegister.Email);
 
-			if (newUser == null)
-				throw new NullReferenceException ("Null IUser object returned from user repo when registering a user");
-
 			return newUser;
 		}
 

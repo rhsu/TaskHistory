@@ -22,7 +22,7 @@ namespace TaskHistory.Impl.Test
 		{
 			string taskContent = "Hello World";
 
-			ITask testTask = _taskRepo.InsertNewTask (taskContent);
+			ITask testTask = _taskRepo.CreateNewTask (taskContent);
 
 			Assert.AreEqual (taskContent, testTask.Content);
 			// Assert that SELECT taskContent FROM tasks WHERE Id = testTask.Id 
