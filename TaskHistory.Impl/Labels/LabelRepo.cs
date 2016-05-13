@@ -18,7 +18,26 @@ namespace TaskHistory.Impl.Labels
 		private const string UpdateStoredProcedure = "Labels_Update";
 		private const string DeleteStoredProcedure = "Labels_Logical_Delete";
 
-		public IEnumerable<ILabel> GetAllLabelsForUser(IUser user)
+		public ILabel CreateNewLabel (string content)
+		{
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
+			{
+				command.Parameters.Add(new MySqlParameter("pContent", content));
+				command.Connection.Open ();
+
+				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+				ILabel label = null;
+
+				if (reader.Read ()) 
+				{
+					label = MakeLabelFromReader (reader);
+				}
+				return label;
+			}
+		}
+
+		public IEnumerable<ILabel> ReadAllLabelsForUser(IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
@@ -35,43 +54,12 @@ namespace TaskHistory.Impl.Labels
 
 				while (reader.Read ()) 
 				{
-					ILabel label = CreateLabelFromReader (reader);
+					ILabel label = MakeLabelFromReader (reader);
 					returnVal.Add (label);
 				}
 			}
 				
 			return returnVal;
-		}
-
-		public ILabel InsertNewLabel (string content)
-		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
-			{
-				command.Parameters.Add(new MySqlParameter("pContent", content));
-				command.Connection.Open ();
-
-				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-				ILabel label = null;
-
-				if (reader.Read ()) 
-				{
-					label = CreateLabelFromReader (reader);
-				}
-				return label;
-			}
-		}
-
-		public void DeleteLabel(int labelId)
-		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (DeleteStoredProcedure, connection)) 
-			{
-				command.Parameters.Add (new MySqlParameter ("pLabelId", labelId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-				command.Connection.Close ();
-			}
 		}
 
 		public void UpdateLabel (ILabel labelDto)
@@ -90,7 +78,19 @@ namespace TaskHistory.Impl.Labels
 			}
 		}
 
-		private ILabel CreateLabelFromReader(MySqlDataReader reader)
+		public void DeleteLabel(int labelId)
+		{
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand (DeleteStoredProcedure, connection)) 
+			{
+				command.Parameters.Add (new MySqlParameter ("pLabelId", labelId));
+				command.Connection.Open ();
+				command.ExecuteNonQuery ();
+				command.Connection.Close ();
+			}
+		}
+
+		private ILabel MakeLabelFromReader(MySqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");
