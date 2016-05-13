@@ -6,6 +6,6 @@ namespace TaskHistory.Api.TasksComplex
 {
 	public interface ITaskComplexRepo
 	{
-		IEnumerable<ITaskComplex> GetComplexTasksForUser(IUser user);
+		IEnumerable<ITaskComplex> ReadComplexTasksForUser(IUser user);
 	}
 }

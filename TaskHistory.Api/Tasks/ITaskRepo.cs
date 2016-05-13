@@ -5,9 +5,9 @@ namespace TaskHistory.Api.Tasks
 {
 	public interface ITaskRepo
 	{
-		ITask InsertNewTask (string taskContent);
-		void DeleteTask (int taskId);
+		ITask CreateNewTask (string taskContent);
+		IEnumerable<ITask> ReadTasksForUser(IUser user);
 		void UpdateTask (ITask newTaskDto);
-		IEnumerable<ITask> GetTasksForUser(IUser user);
+		void DeleteTask (int taskId);
 	}
 }

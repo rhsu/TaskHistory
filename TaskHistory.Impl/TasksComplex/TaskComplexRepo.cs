@@ -19,7 +19,7 @@ namespace TaskHistory.Impl.TasksComplex
 
 		private readonly TaskComplexFactory _taskComplexFactory;
 
-		public IEnumerable<ITaskComplex> GetComplexTasksForUser (IUser user)
+		public IEnumerable<ITaskComplex> ReadComplexTasksForUser (IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
@@ -35,7 +35,7 @@ namespace TaskHistory.Impl.TasksComplex
 
 				while (reader.Read ()) 
 				{
-					ITaskComplex task = CreateTaskComplexFromReader (reader);
+					ITaskComplex task = MakeTaskComplexFromReader (reader);
 					returnVal.Add (task);
 				}
 			}
@@ -43,7 +43,7 @@ namespace TaskHistory.Impl.TasksComplex
 			return returnVal;
 		}
 
-		private ITaskComplex CreateTaskComplexFromReader(MySqlDataReader reader)
+		private ITaskComplex MakeTaskComplexFromReader(MySqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");

@@ -6,11 +6,10 @@ namespace TaskHistory.Api.Labels
 {
 	public interface ILabelRepo
 	{
-		IEnumerable<ILabel> ReadAllLabelsForUser(IUser user);
 		ILabel CreateNewLabel (string content);
-
-		void DeleteLabel(int labelId);
+		IEnumerable<ILabel> ReadAllLabelsForUser(IUser user);
 		void UpdateLabel (ILabel labelDto);
+		void DeleteLabel(int labelId);
 	}
 
 	public interface ILabelRepoAdvanced : ILabelRepo

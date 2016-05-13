@@ -19,7 +19,7 @@ namespace TaskHistory.Impl.Tasks
 
 		private readonly TaskFactory _taskFactory;
 
-		public ITask InsertNewTask (string taskContent)
+		public ITask CreateNewTask (string taskContent)
 		{
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (CreateStoredProcedure)) 
@@ -42,37 +42,8 @@ namespace TaskHistory.Impl.Tasks
 				}
 			}
 		}
-			
-		public void DeleteTask (int taskId)
-		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (DeleteStoredProcedure)) 
-			{
-				command.Parameters.Add (new MySqlParameter ("pTaskId", taskId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-			}
 
-		}
-
-		public void UpdateTask (ITask newTaskDto)
-		{
-			if (newTaskDto == null)
-				throw new ArgumentNullException ("newTaskDto");
-
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (UpdateStoredProcedure, connection)) 
-			{
-				command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));
-				command.Parameters.Add (new MySqlParameter ("pIsCompleted", newTaskDto.IsCompleted));
-				// TODO: https://github.com/rhsu/TaskHistory/issues/51
-				command.Parameters.Add (new MySqlParameter ("pTaskID", newTaskDto.TaskId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-			}
-		}
-
-		public IEnumerable<ITask> GetTasksForUser (IUser user)
+		public IEnumerable<ITask> ReadTasksForUser (IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
@@ -95,7 +66,34 @@ namespace TaskHistory.Impl.Tasks
 
 				return returnVal;
 			}
+		}
 
+		public void UpdateTask (ITask newTaskDto)
+		{
+			if (newTaskDto == null)
+				throw new ArgumentNullException ("newTaskDto");
+
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand (UpdateStoredProcedure, connection)) 
+			{
+				command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));
+				command.Parameters.Add (new MySqlParameter ("pIsCompleted", newTaskDto.IsCompleted));
+				// TODO: https://github.com/rhsu/TaskHistory/issues/51
+				command.Parameters.Add (new MySqlParameter ("pTaskID", newTaskDto.TaskId));
+				command.Connection.Open ();
+				command.ExecuteNonQuery ();
+			}
+		}
+
+		public void DeleteTask (int taskId)
+		{
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand (DeleteStoredProcedure)) 
+			{
+				command.Parameters.Add (new MySqlParameter ("pTaskId", taskId));
+				command.Connection.Open ();
+				command.ExecuteNonQuery ();
+			}
 		}
 
 		private ITask CreateTaskFromReader(MySqlDataReader reader)
