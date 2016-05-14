@@ -29,8 +29,10 @@ namespace TaskHistory.Impl.TasksComplex
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (ReadStoredProcedure, connection)) 
 			{
+				command.CommandType = CommandType.StoredProcedure;
 				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
 				command.Connection.Open ();
+
 				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
 
 				while (reader.Read ()) 

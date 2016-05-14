@@ -17,7 +17,6 @@ namespace TaskHistoryImpl.Users
 			using (var command = new MySqlCommand ("User_Validate", connection)) 
 			{
 				command.CommandType = CommandType.StoredProcedure;
-
 				command.Parameters.Add (new MySqlParameter ("pUsername", username));
 				command.Parameters.Add (new MySqlParameter ("pPassword", password));
 				command.Connection.Open ();
@@ -43,7 +42,6 @@ namespace TaskHistoryImpl.Users
 			using (var command = new MySqlCommand("Users_Insert", connection))
 			{
 				command.CommandType = CommandType.StoredProcedure;
-
 				command.Parameters.Add (new MySqlParameter ("pUsername", username));
 				command.Parameters.Add (new MySqlParameter ("pPassword", password));
 				command.Parameters.Add (new MySqlParameter ("pFirstName", firstName));

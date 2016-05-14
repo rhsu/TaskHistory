@@ -22,10 +22,9 @@ namespace TaskHistory.Impl.Tasks
 		public ITask CreateNewTask (string taskContent)
 		{
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (CreateStoredProcedure)) 
+			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
 			{
 				command.CommandType = CommandType.StoredProcedure;
-				
 				command.Parameters.Add (new MySqlParameter ("pTaskContent", taskContent));
 				command.Connection.Open ();
 
@@ -51,6 +50,7 @@ namespace TaskHistory.Impl.Tasks
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand(ReadStoredProcedure, connection))
 			{
+				command.CommandType = CommandType.StoredProcedure;
 				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
 				command.Connection.Open ();
 
@@ -76,6 +76,7 @@ namespace TaskHistory.Impl.Tasks
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (UpdateStoredProcedure, connection)) 
 			{
+				command.CommandType = CommandType.StoredProcedure;
 				command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));
 				command.Parameters.Add (new MySqlParameter ("pIsCompleted", newTaskDto.IsCompleted));
 				// TODO: https://github.com/rhsu/TaskHistory/issues/51
@@ -90,6 +91,7 @@ namespace TaskHistory.Impl.Tasks
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (DeleteStoredProcedure)) 
 			{
+				command.CommandType = CommandType.StoredProcedure;
 				command.Parameters.Add (new MySqlParameter ("pTaskId", taskId));
 				command.Connection.Open ();
 				command.ExecuteNonQuery ();
