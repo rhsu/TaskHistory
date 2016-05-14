@@ -27,14 +27,14 @@ namespace TaskHistory.Controllers
 		{
 			IUser user = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
 
-			/* if (user == null) 
+			if (user == null) 
 			{
 				return RedirectToAction ("Index");
 			} 
 			else 
 			{
 				return RedirectToAction ("Something");
-			}*/
+			}
 
 			return RedirectToAction ("Index");
 		}
