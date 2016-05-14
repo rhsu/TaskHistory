@@ -23,6 +23,7 @@ namespace TaskHistory.Impl.Labels
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
 			{
+				command.CommandType = CommandType.StoredProcedure;
 				command.Parameters.Add(new MySqlParameter("pContent", content));
 				command.Connection.Open ();
 
@@ -47,6 +48,7 @@ namespace TaskHistory.Impl.Labels
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (ReadStoredProcedure, connection)) 
 			{
+				command.CommandType = CommandType.StoredProcedure;
 				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
 				command.Connection.Open ();
 
@@ -70,6 +72,7 @@ namespace TaskHistory.Impl.Labels
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (UpdateStoredProcedure, connection)) 
 			{
+				command.CommandType = CommandType.StoredProcedure;
 				command.Parameters.Add (new MySqlParameter ("pContent", labelDto.Name));
 				command.Parameters.Add (new MySqlParameter ("pLabelId", labelDto.LabelId));
 				command.Connection.Open ();
@@ -83,6 +86,7 @@ namespace TaskHistory.Impl.Labels
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (DeleteStoredProcedure, connection)) 
 			{
+				command.CommandType = CommandType.StoredProcedure;
 				command.Parameters.Add (new MySqlParameter ("pLabelId", labelId));
 				command.Connection.Open ();
 				command.ExecuteNonQuery ();
@@ -108,4 +112,3 @@ namespace TaskHistory.Impl.Labels
 		}
 	}
 }
-
