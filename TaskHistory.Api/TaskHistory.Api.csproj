@@ -41,7 +41,7 @@
     <Compile Include="TasksComplex\ITaskComplexRepo.cs" />
     <Compile Include="Users\IUserRepo.cs" />
     <Compile Include="Sql\IFromDataReaderFactory.cs" />
-    <Compile Include="Sql\IDataReader.cs" />
+    <Compile Include="Sql\ISqlDataReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

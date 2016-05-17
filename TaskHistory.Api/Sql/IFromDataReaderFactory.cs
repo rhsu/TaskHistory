@@ -4,6 +4,6 @@ namespace TaskHistory.Api.Sql
 {
 	public interface IFromDataReaderFactory<T>
 	{
-		T MakeTypeFromDataReader(IDataReader reader);
+		T CreateTypeFromDataReader(ISqlDataReader reader);
 	}
 }

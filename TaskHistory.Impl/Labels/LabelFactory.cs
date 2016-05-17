@@ -16,15 +16,15 @@ namespace TaskHistory.Impl
 		}
 
 		// TODO: Temporary AD HOC method until DataReader implementation is built
-		/*public ILabel MakeTypeFromDataReader(MySqlDataReader reader)
+		public ILabel CreateTypeFromDataReader(MySqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");
 
+			throw new NotImplementedException ("Not sure yet");
+		}
 
-		}*/
-
-		public ILabel MakeTypeFromDataReader(IDataReader reader)
+		public ILabel CreateTypeFromDataReader(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");

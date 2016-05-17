@@ -2,7 +2,7 @@
 
 namespace TaskHistory.Api.Sql
 {
-	public interface IDataReader
+	public interface ISqlDataReader
 	{
 		bool Read();
 
@@ -10,6 +10,6 @@ namespace TaskHistory.Api.Sql
 
 		string GetString(string propertyName);
 
-		int GetBool(string propertyName);
+		bool GetBool(string propertyName);
 	}
 }

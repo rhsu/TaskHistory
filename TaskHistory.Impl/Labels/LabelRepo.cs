@@ -32,7 +32,7 @@ namespace TaskHistory.Impl.Labels
 
 				if (reader.Read ()) 
 				{
-					label = _labelFactory.MakeTypeFromDataReader (reader);
+					label = _labelFactory.CreateTypeFromDataReader (reader);
 				}
 				return label;
 			}
@@ -56,7 +56,7 @@ namespace TaskHistory.Impl.Labels
 
 				while (reader.Read ()) 
 				{
-					ILabel label = _labelFactory.CreateLabel (reader);
+					ILabel label = _labelFactory.CreateTypeFromDataReader (reader);
 					returnVal.Add (label);
 				}
 			}

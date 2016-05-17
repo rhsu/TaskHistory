@@ -7,7 +7,7 @@ namespace TaskHistory.Impl.MySql
 	// TODO: until I figure out a better place to put this
 	public class DataReaderFactory
 	{
-		IDataReader MakeDataReader (MySqlDataReader reader)
+		ISqlDataReader MakeDataReader (MySqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");
@@ -16,7 +16,7 @@ namespace TaskHistory.Impl.MySql
 		}
 	}
 
-	public class DataReader : IDataReader
+	public class DataReader : ISqlDataReader
 	{
 		private MySqlDataReader _reader;
 
@@ -42,19 +42,19 @@ namespace TaskHistory.Impl.MySql
 			return _reader.Read ();
 		}
 
-		int GetInt(string propertyName)
+		public int GetInt(string propertyName)
 		{
 			var obj = GetObjectFromReader (propertyName);
 			return Convert.ToInt32 (obj);
 		}
 
-		string GetString(string propertyName)
+		public string GetString(string propertyName)
 		{
 			var obj = GetObjectFromReader (propertyName);
 			return obj.ToString ();
 		}
 
-		int GetBool(string propertyName)
+		public bool GetBool(string propertyName)
 		{
 			var obj = GetObjectFromReader (propertyName);
 			return Convert.ToBoolean (obj);
