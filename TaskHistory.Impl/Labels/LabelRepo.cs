@@ -32,7 +32,7 @@ namespace TaskHistory.Impl.Labels
 
 				if (reader.Read ()) 
 				{
-					label = _labelFactory.CreateLabel (reader);
+					label = _labelFactory.MakeTypeFromDataReader (reader);
 				}
 				return label;
 			}
