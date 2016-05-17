@@ -34,7 +34,7 @@ namespace TaskHistory.Impl.Tasks
 
 					if (reader.Read ()) 
 					{
-						task = CreateTaskFromReader (reader);
+						task = _taskFactory.CreateTask (reader);
 					}
 
 					return task;
@@ -60,7 +60,7 @@ namespace TaskHistory.Impl.Tasks
 
 				while (reader.Read ()) 
 				{
-					ITask task = CreateTaskFromReader (reader);
+					ITask task = _taskFactory.CreateTask (reader);
 					returnVal.Add (task);
 				}
 
@@ -96,20 +96,6 @@ namespace TaskHistory.Impl.Tasks
 				command.Connection.Open ();
 				command.ExecuteNonQuery ();
 			}
-		}
-
-		private ITask CreateTaskFromReader(MySqlDataReader reader)
-		{
-			if (reader == null)
-				throw new ArgumentNullException ("reader");
-
-			int taskId = Convert.ToInt32 (reader ["TaskId"]);
-			string content = reader ["Content"].ToString ();
-			bool isCompleted = Convert.ToBoolean (reader ["IsCompleted"]);
-
-			ITask task = _taskFactory.CreateTask (taskId, content, isCompleted);
-
-			return task;
 		}
 
 		public TaskRepo (TaskFactory taskFactory)
