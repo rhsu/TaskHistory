@@ -1,13 +1,20 @@
 ﻿using System;
 using TaskHistory.Api.Labels;
+using MySql.Data.MySqlClient;
 
 namespace TaskHistory.Impl
 {
 	public class LabelFactory
 	{
-		public ILabel CreateLabel(int id, string name)
+		public ILabel CreateLabel(MySqlDataReader reader)
 		{
-			return new Label (id, name);
+			if (reader == null)
+				throw new ArgumentNullException ("reader");
+			
+			int labelId = Convert.ToInt32 (reader ["labelId"]);
+			string name = reader ["name"].ToString ();
+
+			return new Label (labelId, name);
 		}
 
 		public LabelFactory ()
