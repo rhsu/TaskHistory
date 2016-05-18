@@ -3,6 +3,8 @@ using TaskHistory.Api.Users;
 using TaskHistoryImpl.Users;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.Tasks;
+using TaskHistory.Api.ViewRepos;
+using TaskHistory.Impl.ViewRepos;
 
 namespace TaskHistory.Bindings
 {
@@ -15,6 +17,9 @@ namespace TaskHistory.Bindings
 			
 			kernel.Bind<ITaskRepo> ()
 				.To<TaskRepo> ();
+
+			kernel.Bind<ITaskViewRepo> ()
+				.To<TaskViewRepo> ();
 		}
 	}
 }
