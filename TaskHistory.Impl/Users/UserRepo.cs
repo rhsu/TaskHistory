@@ -27,7 +27,7 @@ namespace TaskHistoryImpl.Users
 
 					if (reader.Read ()) 
 					{
-						user = CreateUserFromReader (reader);
+						user = _userFactory.CreateUser (reader);
 					}
 
 					return user;
@@ -55,27 +55,12 @@ namespace TaskHistoryImpl.Users
 
 					if (reader.Read ()) 
 					{
-						user = CreateUserFromReader (reader);
+						user = _userFactory.CreateUser (reader);
 					}
 
 					return user;
 				}
 			}
-		}
-
-		private IUser CreateUserFromReader(MySqlDataReader reader)
-		{
-			if (reader == null)
-				throw new ArgumentNullException ("reader");
-
-			int userId = Convert.ToInt32 (reader ["UserId"]);
-			string userName = reader ["Username"].ToString ();
-			string firstName = reader ["FirstName"].ToString ();
-			string lastName = reader ["LastName"].ToString ();
-			string email = reader ["Email"].ToString ();
-
-			var user = _userFactory.CreateUser (userId, userName, firstName, lastName, email);
-			return user;
 		}
 
 		public UserRepo (UserFactory userFactory)

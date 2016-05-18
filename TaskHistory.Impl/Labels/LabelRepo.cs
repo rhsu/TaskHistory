@@ -32,12 +32,13 @@ namespace TaskHistory.Impl.Labels
 
 				if (reader.Read ()) 
 				{
-					label = MakeLabelFromReader (reader);
+					label = _labelFactory.CreateLabel (reader);
 				}
 				return label;
 			}
 		}
 
+		[Obsolete]
 		public IEnumerable<ILabel> ReadAllLabelsForUser(IUser user)
 		{
 			if (user == null)
@@ -56,7 +57,7 @@ namespace TaskHistory.Impl.Labels
 
 				while (reader.Read ()) 
 				{
-					ILabel label = MakeLabelFromReader (reader);
+					ILabel label = _labelFactory.CreateLabel (reader);
 					returnVal.Add (label);
 				}
 			}
@@ -92,18 +93,6 @@ namespace TaskHistory.Impl.Labels
 				command.ExecuteNonQuery ();
 				command.Connection.Close ();
 			}
-		}
-
-		private ILabel MakeLabelFromReader(MySqlDataReader reader)
-		{
-			if (reader == null)
-				throw new ArgumentNullException ("reader");
-
-			int labelId = Convert.ToInt32 (reader ["labelId"]);
-			string name = reader ["name"].ToString ();
-			ILabel label = _labelFactory.CreateLabel (labelId, name);
-
-			return label;
 		}
 
 		public LabelRepo (LabelFactory labelFactory)
