@@ -7,7 +7,7 @@ namespace TaskHistory.Impl.MySql
 	// TODO: until I figure out a better place to put this
 	public class DataReaderFactory
 	{
-		ISqlDataReader MakeDataReader (MySqlDataReader reader)
+		public ISqlDataReader MakeDataReader (MySqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");

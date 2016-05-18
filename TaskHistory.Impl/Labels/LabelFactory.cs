@@ -21,17 +21,20 @@ namespace TaskHistory.Impl
 			if (reader == null)
 				throw new ArgumentNullException ("reader");
 
-			throw new NotImplementedException ("Not sure yet");
+			var sqlDataReader = _dataReaderFactory.MakeDataReader (reader);
+
+			ILabel label = CreateTypeFromDataReader (sqlDataReader);
+			if (label == null)
+				throw new NullReferenceException ("Null returned from CreateTypeFromReader");
+
+			return label;
 		}
 
 		public ILabel CreateTypeFromDataReader(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");
-
-			//int labelId = Convert.ToInt32 (reader ["labelId"]);
-			//string name = reader ["name"].ToString ();
-
+			
 			int labelId = reader.GetInt ("labelId");
 			string name = reader.GetString ("name");
 
