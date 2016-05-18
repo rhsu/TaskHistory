@@ -42,6 +42,7 @@
     <Compile Include="Users\IUserRepo.cs" />
     <Compile Include="Sql\IFromDataReaderFactory.cs" />
     <Compile Include="Sql\ISqlDataReader.cs" />
+    <Compile Include="ViewRepos\ITaskViewRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -50,5 +51,6 @@
     <Folder Include="Labels\" />
     <Folder Include="TasksComplex\" />
     <Folder Include="Sql\" />
+    <Folder Include="ViewRepos\" />
   </ItemGroup>
 </Project>
