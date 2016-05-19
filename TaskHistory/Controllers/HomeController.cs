@@ -23,6 +23,7 @@ namespace TaskHistory.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public ActionResult RegisterUser (UserRegisterViewModel userRegisterViewModel)
 		{
 			IUser user = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
