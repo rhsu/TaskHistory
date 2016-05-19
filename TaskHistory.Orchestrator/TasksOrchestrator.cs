@@ -2,18 +2,20 @@
 using TaskHistory.Api.Tasks;
 using System.Collections.Generic;
 using TaskHistory.Api.Users;
+using TaskHistory.Api.ViewRepos;
 
 namespace TaskHistory.Orchestrator.Tasks
 {
 	public class TasksOrchestrator
 	{
 		private ITaskRepo _taskRepo;
+		private ITaskViewRepo _taskViewRepo;
 
 		public IEnumerable<ITask> OrchestratorGetTasks()
 		{
 			var fakeUser = new FakeTempUser ();
 
-			return _taskRepo.ReadTasksForUser (fakeUser);
+			return _taskViewRepo.ReadTasksForUser (fakeUser);
 		}
 
 		public ITask OrchestratorCreateTask(string content)
@@ -21,9 +23,10 @@ namespace TaskHistory.Orchestrator.Tasks
 			return _taskRepo.CreateNewTask (content);
 		}
 
-		public TasksOrchestrator (ITaskRepo taskRepo)
+		public TasksOrchestrator (ITaskRepo taskRepo, ITaskViewRepo taskViewRepo)
 		{
 			_taskRepo = taskRepo;
+			_taskViewRepo = taskViewRepo;
 		}
 	}
 
