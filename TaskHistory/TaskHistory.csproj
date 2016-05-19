@@ -107,6 +107,8 @@
     <Content Include="Views\Tasks\InsertTask.cshtml" />
     <Content Include="Scripts\Tasks\index.js" />
     <Content Include="Views\Home\UserLogin.cshtml" />
+    <Content Include="Views\Shared\Navbar.cshtml" />
+    <Content Include="Content\StarterTemplate.css" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
