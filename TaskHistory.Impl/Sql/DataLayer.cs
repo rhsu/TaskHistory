@@ -2,6 +2,8 @@
 using TaskHistory.Api.Sql;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
+using System.Configuration;
+using System.Data;
 
 namespace TaskHistory.Impl.MySql
 {
@@ -13,7 +15,31 @@ namespace TaskHistory.Impl.MySql
 			string storedProcedureName,
 			IEnumerable<MySqlParameter> parameters)
 		{
-			return null;
+			if (factory == null)
+				throw new ArgumentNullException ("factory");
+
+			if (parameters == null)
+				throw new ArgumentNullException ("parameters");
+
+			if (storedProcedureName == string.Empty || storedProcedureName == null)
+				throw new ArgumentNullException ("storedProcedureName");
+
+			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var command = new MySqlCommand (storedProcedureName, connection)) 
+			{
+				command.CommandType = CommandType.StoredProcedure;
+				command.Parameters.AddRange (parameters);
+				command.Connection.Open ();
+
+				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+				T returnVal = null;
+
+				if (reader.Read ()) 
+				{
+					returnVal = factory.CreateTypeFromDataReader (reader);
+				}
+				return returnVal;
+			}
 		}
 
 		public void ExecuteNonQuery()

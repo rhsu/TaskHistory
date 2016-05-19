@@ -38,7 +38,6 @@ namespace TaskHistory.Impl.Labels
 			}
 		}
 
-		[Obsolete]
 		public IEnumerable<ILabel> ReadAllLabelsForUser(IUser user)
 		{
 			if (user == null)

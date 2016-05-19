@@ -44,6 +44,7 @@
     <Compile Include="Sql\ISqlDataReader.cs" />
     <Compile Include="ViewRepos\ITaskViewRepo.cs" />
     <Compile Include="Sql\IDataParameter.cs" />
+    <Compile Include="Sql\IDataLayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

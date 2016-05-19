@@ -42,7 +42,6 @@ namespace TaskHistory.Impl.Tasks
 			}
 		}
 
-		[Obsolete]
 		public IEnumerable<ITask> ReadTasksForUser (IUser user)
 		{
 			if (user == null)
