@@ -59,6 +59,7 @@
     <Compile Include="ViewRepos\TaskViewRepo.cs" />
     <Compile Include="Sql\DataLayer.cs" />
     <Compile Include="Sql\DataParameter.cs" />
+    <Compile Include="Sql\DataParameterFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -7,13 +7,11 @@ using System.Data;
 
 namespace TaskHistory.Impl.MySql
 {
-	public class DataLayer
+	public class DataLayer : IDataLayer
 	{
-		private DataParameterCollectionFactory _dataParameterCollectionFactory;
-
 		public T ExecuteReader<T> (IFromDataReaderFactory<T> factory, 
 			string storedProcedureName,
-			IEnumerable<MySqlParameter> parameters)
+			IEnumerable<ISqlDataParameter> parameters)
 		{
 			if (factory == null)
 				throw new ArgumentNullException ("factory");
@@ -28,11 +26,11 @@ namespace TaskHistory.Impl.MySql
 			using (var command = new MySqlCommand (storedProcedureName, connection)) 
 			{
 				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.AddRange (parameters);
+				command.Parameters.AddRange (CreateMySqlParametersFromSqlDataParams(parameters));
 				command.Connection.Open ();
 
 				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-				T returnVal = null;
+				T returnVal = default(T);
 
 				if (reader.Read ()) 
 				{
@@ -40,6 +38,21 @@ namespace TaskHistory.Impl.MySql
 				}
 				return returnVal;
 			}
+		}
+
+		public static List<MySqlParameter> CreateMySqlParametersFromSqlDataParams(IEnumerable<ISqlDataParameter> parameters)
+		{
+			if (parameters == null)
+				throw new ArgumentNullException ("parameters");
+
+			var returnVal = new List<MySqlParameter> ();
+
+			foreach (var p in parameters) 
+			{
+				returnVal.Add (null);
+			}
+
+			return returnVal;
 		}
 
 		public void ExecuteNonQuery()

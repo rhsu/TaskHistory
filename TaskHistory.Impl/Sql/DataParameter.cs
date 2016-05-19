@@ -5,40 +5,16 @@ using System.Collections.Generic;
 
 namespace TaskHistory.Impl.MySql
 {
-	public class DataParameterCollectionFactory
+	public class DataParameter : ISqlDataParameter
 	{
-		public IEnumerable<DataParameter> CreateDataParameterCollection(IEnumerable<MySqlParameter> mySqlParameters)
+		public string ParameterName { get; }
+
+		public object Value { get; }
+
+		public DataParameter(string name, object value)
 		{
-			if (mySqlParameters == null)
-				throw new ArgumentNullException ("mySqlParameters");
-
-			var returnVal = new List<DataParameter> ();
-
-			foreach (var param in mySqlParameters) 
-			{
-				returnVal.Add (new DataParameter (param));
-			}
-
-			return returnVal;
-		}
-
-		public DataParameterCollectionFactory() 
-		{
-		}
-	}
-
-	public class DataParameter : IDataParameter<MySqlParameter>
-	{
-		private MySqlParameter _sqlParameter;
-
-		public MySqlParameter GetParameter()
-		{
-			return _sqlParameter;
-		}
-
-		public DataParameter (MySqlParameter sqlParameter)
-		{
-			_sqlParameter = sqlParameter;
+			this.ParameterName = name;
+			this.Value = value;
 		}
 	}
 }
