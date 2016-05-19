@@ -26,7 +26,12 @@ namespace TaskHistory.Impl.MySql
 			using (var command = new MySqlCommand (storedProcedureName, connection)) 
 			{
 				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.AddRange (CreateMySqlParametersFromSqlDataParams(parameters));
+
+				foreach (var param in CreateMySqlParametersFromSqlDataParams(parameters)) 
+				{
+					command.Parameters.Add (param);
+				}
+
 				command.Connection.Open ();
 
 				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
