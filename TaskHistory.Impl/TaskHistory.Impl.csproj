@@ -55,6 +55,7 @@
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\UserRepo.cs" />
     <Compile Include="Users\UserFactory.cs" />
+    <Compile Include="ViewRepos\TaskViewRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -63,6 +64,7 @@
     <Folder Include="Labels\" />
     <Folder Include="TasksComplex\" />
     <Folder Include="Users\" />
+    <Folder Include="ViewRepos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
