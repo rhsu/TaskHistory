@@ -1,17 +1,11 @@
-﻿<html>
-	<head>
-		<link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css'/>		
-		<link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap-theme.css'/>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-		<title>Home - Task History</title>
-	</head>
-	<body>
-		@{ Html.RenderPartial("RegisterUser"); }
-		<div style="padding-top: 25px; padding-bottom: 25px"></div>
-		@{ Html.RenderPartial("UserLogin"); }
-		<div>
-			<a href='/Tasks/'>Tasks Page</a>
-		</div>
-	</body>
-</html>
 
+@{ Html.RenderPartial("RegisterUser"); }
+<div style="padding-top: 25px; padding-bottom: 25px"></div>
+@{ Html.RenderPartial("UserLogin"); }
+
+
+<div><a href='/Tasks/'>Tasks Page</a></div>
