@@ -37,7 +37,7 @@ namespace TaskHistory.Impl.Sql
 				command.Connection.Open ();
 
 				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-				SqlDataReader sqlReader = _sqlDataReaderFactory.MakeDataReader(reader);
+				ISqlDataReader sqlReader = _sqlDataReaderFactory.MakeDataReader(reader);
 
 				T returnVal = default(T);
 
