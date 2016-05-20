@@ -6,6 +6,7 @@ using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Configuration;
+using TaskHistory.Impl.Lables;
 
 namespace TaskHistory.Impl.Labels
 {

@@ -5,10 +5,12 @@ using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
 
-namespace TaskHistory.Impl.MySql
+namespace TaskHistory.Impl.Sql
 {
 	public class DataLayer : IDataLayer
 	{
+		private SqlDataReaderFactory _sqlDataReaderFactory;
+
 		public T ExecuteReader<T> (IFromDataReaderFactory<T> factory, 
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
@@ -35,11 +37,13 @@ namespace TaskHistory.Impl.MySql
 				command.Connection.Open ();
 
 				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+				SqlDataReader sqlReader = _sqlDataReaderFactory.MakeDataReader(reader);
+
 				T returnVal = default(T);
 
 				if (reader.Read ()) 
 				{
-					returnVal = factory.CreateTypeFromDataReader (reader);
+					returnVal = factory.CreateTypeFromDataReader (sqlReader);
 				}
 				return returnVal;
 			}
@@ -64,8 +68,9 @@ namespace TaskHistory.Impl.MySql
 		{
 		}
 
-		public DataLayer ()
+		public DataLayer (SqlDataReaderFactory sqlDataReaderFactory)
 		{
+			_sqlDataReaderFactory = sqlDataReaderFactory;
 		}
 	}
 }

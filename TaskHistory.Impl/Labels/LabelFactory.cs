@@ -3,14 +3,15 @@ using TaskHistory.Api.Labels;
 using MySql.Data.MySqlClient;
 using TaskHistory.Api.Sql;
 using TaskHistory.Impl.MySql;
+using TaskHistory.Impl.Sql;
 
-namespace TaskHistory.Impl
+namespace TaskHistory.Impl.Lables
 {
 	public class LabelFactory : IFromDataReaderFactory<ILabel>
 	{
-		private DataReaderFactory _dataReaderFactory;
+		private SqlDataReaderFactory _dataReaderFactory;
 
-		public LabelFactory (DataReaderFactory dataReaderFactory)
+		public LabelFactory (SqlDataReaderFactory dataReaderFactory)
 		{
 			_dataReaderFactory = dataReaderFactory;
 		}

@@ -3,7 +3,7 @@ using MySql.Data.MySqlClient;
 using TaskHistory.Api.Sql;
 using System.Collections.Generic;
 
-namespace TaskHistory.Impl.MySql
+namespace TaskHistory.Impl.Sql
 {
 	public class DataParameter : ISqlDataParameter
 	{

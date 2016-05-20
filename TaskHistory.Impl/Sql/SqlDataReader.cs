@@ -1,22 +1,10 @@
 ﻿using System;
-using TaskHistory.Api.Sql;
 using MySql.Data.MySqlClient;
+using TaskHistory.Api.Sql;
 
-namespace TaskHistory.Impl.MySql
+namespace TaskHistory.Impl.Sql
 {
-	// TODO: until I figure out a better place to put this
-	public class DataReaderFactory
-	{
-		public ISqlDataReader MakeDataReader (MySqlDataReader reader)
-		{
-			if (reader == null)
-				throw new ArgumentNullException ("reader");
-
-			return new DataReader (reader);
-		}
-	}
-
-	public class DataReader : ISqlDataReader
+	public class SqlDataReader : ISqlDataReader
 	{
 		private MySqlDataReader _reader;
 
@@ -60,7 +48,7 @@ namespace TaskHistory.Impl.MySql
 			return Convert.ToBoolean (obj);
 		}
 
-		public DataReader (MySqlDataReader reader)
+		public SqlDataReader (MySqlDataReader reader)
 		{
 			_reader = reader;
 		}

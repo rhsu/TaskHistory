@@ -1,7 +1,7 @@
 ﻿using System;
 using TaskHistory.Api.Sql;
 
-namespace TaskHistory.Impl.MySql
+namespace TaskHistory.Impl.Sql
 {
 	public class DataParameterFactory
 	{
