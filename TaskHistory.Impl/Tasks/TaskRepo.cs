@@ -7,6 +7,7 @@ using TaskHistory.Api.Users;
 using TaskHistory.Impl.MySql;
 using TaskHistory.Impl.Tasks;
 using System.Configuration;
+using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Tasks
 {
@@ -18,10 +19,18 @@ namespace TaskHistory.Impl.Tasks
 		private const string DeleteStoredProcedure = "Tasks_Delete";
 
 		private readonly TaskFactory _taskFactory;
+		private readonly IDataLayer _dataLayer;
 
 		public ITask CreateNewTask (string taskContent)
 		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			MySqlParameter pTaskContent = new MySqlParameter ("pTaskContent", taskContent);
+
+			// RH [TODO] There should be an override when there's only 1 taskContent
+			var returnVal = _dataLayer.ExecuteReader<ITask> (null, CreateStoredProcedure, null);
+
+
+			return null;
+			/*using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
 			{
 				command.CommandType = CommandType.StoredProcedure;
@@ -39,7 +48,7 @@ namespace TaskHistory.Impl.Tasks
 
 					return task;
 				}
-			}
+			}*/
 		}
 
 		public IEnumerable<ITask> ReadTasksForUser (IUser user)
@@ -98,9 +107,10 @@ namespace TaskHistory.Impl.Tasks
 			}
 		}
 
-		public TaskRepo (TaskFactory taskFactory)
+		public TaskRepo (TaskFactory taskFactory, IDataLayer dataLayer)
 		{
 			_taskFactory = taskFactory;
+			_dataLayer = dataLayer;
 		}
 	}
 }
