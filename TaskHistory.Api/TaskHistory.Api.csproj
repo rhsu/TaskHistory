@@ -45,6 +45,9 @@
     <Compile Include="ViewRepos\ITaskViewRepo.cs" />
     <Compile Include="Sql\IDataLayer.cs" />
     <Compile Include="Sql\ISqlDataParameter.cs" />
+    <Compile Include="Configuration\IConfigurationProvider.cs" />
+    <Compile Include="Sql\IDataReaderProvider.cs" />
+    <Compile Include="Sql\IDataNonQueryProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -54,5 +57,6 @@
     <Folder Include="TasksComplex\" />
     <Folder Include="Sql\" />
     <Folder Include="ViewRepos\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 </Project>

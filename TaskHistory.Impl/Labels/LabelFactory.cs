@@ -5,7 +5,7 @@ using TaskHistory.Api.Sql;
 using TaskHistory.Impl.MySql;
 using TaskHistory.Impl.Sql;
 
-namespace TaskHistory.Impl.Lables
+namespace TaskHistory.Impl.Labels
 {
 	public class LabelFactory : AbstractFromDataReaderFactory<ILabel>
 	{

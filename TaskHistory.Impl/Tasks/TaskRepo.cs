@@ -21,7 +21,7 @@ namespace TaskHistory.Impl.Tasks
 
 		private readonly TaskFactory _taskFactory;
 		private readonly IDataLayer _dataLayer;
-		private readonly SqlDataReaderFactory _dataReaderFactory;
+		// private readonly SqlDataReaderFactory _dataReaderFactory;
 		private readonly SqlParameterFactory _paramFactory;
 
 		public ITask CreateNewTask (string taskContent)
@@ -81,13 +81,13 @@ namespace TaskHistory.Impl.Tasks
 
 		public TaskRepo (TaskFactory taskFactory, 
 			SqlParameterFactory paramFactory,
-			IDataLayer dataLayer, 
-			SqlDataReaderFactory dataReaderFactory)
+			IDataLayer dataLayer)
+			//SqlDataReaderFactory dataReaderFactory)
 		{
 			_taskFactory = taskFactory;
 			_paramFactory = paramFactory;
 			_dataLayer = dataLayer;
-			_dataReaderFactory = dataReaderFactory;
+			// _dataReaderFactory = dataReaderFactory;
 		}
 	}
 }

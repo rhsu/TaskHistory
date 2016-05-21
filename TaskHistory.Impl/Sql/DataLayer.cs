@@ -2,21 +2,22 @@
 using TaskHistory.Api.Sql;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using System.Configuration;
 using System.Data;
 using System.Linq;
+using TaskHistory.Api.Configuration;
 
 namespace TaskHistory.Impl.Sql
 {
-	public class DataLayer : IDataLayer
+	public class DataLayer : BaseDataLayer, IDataLayer
 	{
-		private SqlDataReaderFactory _sqlDataReaderFactory;
+		private readonly SqlDataReaderFactory _sqlDataReaderFactory;
+		private readonly string _connectionString;
 
 		public T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			ISqlDataParameter parameter)
 		{
-			CheckParameters<T> (factory, parameter, storedProcedureName);
+			BaseDataLayer.CheckParameters<T> (factory, parameter, storedProcedureName);
 
 			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameter);
 
@@ -27,7 +28,7 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
-			CheckParameters<T> (factory, parameters, storedProcedureName);
+			BaseDataLayer.CheckParameters<T> (factory, parameters, storedProcedureName);
 
 			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameters);
 
@@ -38,7 +39,7 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			ISqlDataParameter parameter)
 		{
-			CheckParameters (factory, parameter, storedProcedureName);
+			BaseDataLayer.CheckParameters (factory, parameter, storedProcedureName);
 
 			return this.ExecuteReaderForTypeCollection<T> (factory, 
 				storedProcedureName, 
@@ -49,14 +50,14 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
-			CheckParameters (factory, parameters, storedProcedureName);
+			BaseDataLayer.CheckParameters (factory, parameters, storedProcedureName);
 
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			using (var connection = new MySqlConnection (_connectionString))
 			using (var command = new MySqlCommand (storedProcedureName, connection)) 
 			{
 				command.CommandType = CommandType.StoredProcedure;
 
-				foreach (var param in CreateMySqlParametersFromSqlDataParams(parameters)) 
+				foreach (var param in BaseDataLayer.CreateMySqlParametersFromSqlDataParams(parameters)) 
 				{
 					command.Parameters.Add (param);
 				}
@@ -77,62 +78,15 @@ namespace TaskHistory.Impl.Sql
 			}
 		}
 
-		private static List<MySqlParameter> CreateMySqlParametersFromSqlDataParams(IEnumerable<ISqlDataParameter> parameters)
-		{
-			if (parameters == null)
-				throw new ArgumentNullException ("parameters");
-
-			var returnVal = new List<MySqlParameter> ();
-
-			foreach (var p in parameters) 
-			{
-				returnVal.Add(CreateSqlParameterFromSqlDataParams(p));
-			}
-
-			return returnVal;
-		}
-
-		private static MySqlParameter CreateSqlParameterFromSqlDataParams(ISqlDataParameter parameters)
-		{
-			return new MySqlParameter (parameters.ParamName, parameters.Value);
-		}
-
-		private static void CheckParameters<T>(IFromDataReaderFactory<T> factory,
-			IEnumerable<ISqlDataParameter> parameters,
-			string storedProcedureName)
-		{
-			if (factory == null)
-				throw new ArgumentNullException ("factory");
-
-			if (parameters == null)
-				throw new ArgumentNullException ("parameters");
-
-			if (storedProcedureName == string.Empty || storedProcedureName == null)
-				throw new ArgumentNullException ("storedProcedureName");
-		}
-
-		private static void CheckParameters<T>(IFromDataReaderFactory<T> factory, 
-			ISqlDataParameter parameter, 
-			string storedProcedureName)
-		{
-			if (factory == null)
-				throw new ArgumentNullException ("factory");
-
-			if (parameter == null)
-				throw new ArgumentNullException ("parameters");
-
-			if (storedProcedureName == string.Empty || storedProcedureName == null)
-				throw new ArgumentNullException ("storedProcedureName");
-		}
-
 		public void ExecuteNonQuery()
 		{
 		}
 
-		public DataLayer (SqlDataReaderFactory sqlDataReaderFactory)
+		public DataLayer (SqlDataReaderFactory sqlDataReaderFactory, IConfigurationProvider configurationProvider)
+			: base()
 		{
 			_sqlDataReaderFactory = sqlDataReaderFactory;
+			_connectionString = configurationProvider.SqlConnectionString;
 		}
 	}
 }
-

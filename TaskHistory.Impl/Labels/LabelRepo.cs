@@ -6,13 +6,16 @@ using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
 using System.Configuration;
-using TaskHistory.Impl.Lables;
+using TaskHistory.Impl.Sql;
+using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Labels
 {
 	public class LabelRepo : ILabelRepo
 	{
 		private readonly LabelFactory _labelFactory;
+		private readonly SqlParameterFactory _paramFactory;
+		private readonly IDataLayer _dataLayer;
 
 		private const string CreateStoredProcedure = "Labels_Insert";
 		private const string ReadStoredProcedure = "Labels_For_User_Select";
@@ -21,53 +24,27 @@ namespace TaskHistory.Impl.Labels
 
 		public ILabel CreateNewLabel (string content)
 		{
-			/*using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add(new MySqlParameter("pContent", content));
-				command.Connection.Open ();
+			var contentParameter = _paramFactory.CreateParameter ("pContent", content);
 
-				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-				ILabel label = null;
+			var returnVal = _dataLayer.ExecuteReaderForSingleType (_labelFactory, CreateStoredProcedure, contentParameter);
+			if (returnVal == null)
+				throw new NullReferenceException ("Null returned from data layer");
 
-				if (reader.Read ()) 
-				{
-					label = _labelFactory.CreateTypeFromDataReader (reader);
-				}
-				return label;
-			}*/
-
-			return null;
+			return returnVal;
 		}
 
 		public IEnumerable<ILabel> ReadAllLabelsForUser(IUser user)
 		{
-			/*if (user == null)
+			if (user == null)
 				throw new ArgumentNullException ("user");
 
-			var returnVal = new List<ILabel> ();
+			var userIdParam = _paramFactory.CreateParameter ("pUserId", user.UserId);
 
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (ReadStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
-				command.Connection.Open ();
+			var returnVal = _dataLayer.ExecuteReaderForTypeCollection (_labelFactory, ReadStoredProcedure, userIdParam);
+			if (returnVal == null)
+				throw new NullReferenceException ("Null returned from data layer");
 
-				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-
-
-
-				while (reader.Read ()) 
-				{
-					ILabel label = _labelFactory.CreateTypeFromDataReader (reader);
-					returnVal.Add (label);
-				}
-			}
-				
-			return returnVal;*/
-			return null;
+			return returnVal;
 		}
 
 		public void UpdateLabel (ILabel labelDto)
