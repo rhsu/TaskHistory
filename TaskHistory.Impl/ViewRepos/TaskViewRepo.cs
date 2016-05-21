@@ -20,17 +20,14 @@ namespace TaskHistory.Impl.ViewRepos
 		private readonly TaskFactory _taskFactory;
 		private readonly SqlParameterFactory _paramFactory;
 		private readonly IDataLayer _dataLayer;
-		private readonly SqlDataReaderFactory _dataReaderFactory;
 
 		public TaskViewRepo (TaskFactory taskFactory,
 			SqlParameterFactory paramFactory,
-			IDataLayer dataLayer,
-			SqlDataReaderFactory dataReaderFactory)
+			IDataLayer dataLayer)
 		{
 			_taskFactory = taskFactory;
 			_paramFactory = paramFactory;
 			_dataLayer = dataLayer;
-			_dataReaderFactory = dataReaderFactory;
 		}
 
 		public IEnumerable<ITask> ReadTasksForUser (IUser user)
@@ -38,26 +35,13 @@ namespace TaskHistory.Impl.ViewRepos
 			if (user == null)
 				throw new ArgumentNullException ("user");
 
-			/*using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand(ReadStoredProcedure, connection))
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
-				command.Connection.Open ();
+			var parameter = _paramFactory.CreateParameter("pUserId", user.UserId);
 
-				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+			var returnVal = _dataLayer.ExecuteReaderForTypeCollection (_taskFactory, ReadStoredProcedure, parameter);
+			if (returnVal == null)
+				throw new NullReferenceException ("Null returned from dataLayer");
 
-				List<ITask> returnVal = new List<ITask> ();
-
-				while (reader.Read ()) 
-				{
-					ITask task = _taskFactory.CreateTask (reader);
-					returnVal.Add (task);
-				}
-
-				return returnVal;
-			}*/
-			return null;
+			return returnVal;
 		}
 	}
 }

@@ -6,7 +6,6 @@ using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.MySql;
 using TaskHistory.Impl.Tasks;
-using System.Configuration;
 using TaskHistory.Api.Sql;
 using TaskHistory.Impl.Sql;
 
@@ -21,8 +20,8 @@ namespace TaskHistory.Impl.Tasks
 
 		private readonly TaskFactory _taskFactory;
 		private readonly IDataLayer _dataLayer;
-		// private readonly SqlDataReaderFactory _dataReaderFactory;
 		private readonly SqlParameterFactory _paramFactory;
+		private readonly INonQueryDataProvider _nonQueryDataProvider;
 
 		public ITask CreateNewTask (string taskContent)
 		{
@@ -49,45 +48,36 @@ namespace TaskHistory.Impl.Tasks
 			return returnVal;
 		}
 
+		// TODO: https://github.com/rhsu/TaskHistory/issues/51
 		public void UpdateTask (ITask newTaskDto)
 		{
 			if (newTaskDto == null)
 				throw new ArgumentNullException ("newTaskDto");
 
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (UpdateStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));
-				command.Parameters.Add (new MySqlParameter ("pIsCompleted", newTaskDto.IsCompleted));
-				// TODO: https://github.com/rhsu/TaskHistory/issues/51
-				command.Parameters.Add (new MySqlParameter ("pTaskID", newTaskDto.TaskId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-			}
+			var parameters = new List<ISqlDataParameter> ();
+
+			parameters.Add (_paramFactory.CreateParameter ("pContent", newTaskDto.Content));
+			parameters.Add (_paramFactory.CreateParameter ("pIsCompleted", newTaskDto.IsCompleted));
+			parameters.Add (_paramFactory.CreateParameter ("pTaskId", newTaskDto.TaskId));
+
+			_nonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);
 		}
 
 		public void DeleteTask (int taskId)
 		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (DeleteStoredProcedure)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pTaskId", taskId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-			}
+			var parameter = _paramFactory.CreateParameter ("pTaskId", taskId);
+
+			_nonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 
 		public TaskRepo (TaskFactory taskFactory, 
 			SqlParameterFactory paramFactory,
+			INonQueryDataProvider nonQueryDataProvider,
 			IDataLayer dataLayer)
-			//SqlDataReaderFactory dataReaderFactory)
 		{
 			_taskFactory = taskFactory;
 			_paramFactory = paramFactory;
 			_dataLayer = dataLayer;
-			// _dataReaderFactory = dataReaderFactory;
 		}
 	}
 }

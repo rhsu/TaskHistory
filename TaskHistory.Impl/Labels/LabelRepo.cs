@@ -5,7 +5,6 @@ using TaskHistory.Api.Users;
 using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
-using System.Configuration;
 using TaskHistory.Impl.Sql;
 using TaskHistory.Api.Sql;
 
@@ -16,6 +15,7 @@ namespace TaskHistory.Impl.Labels
 		private readonly LabelFactory _labelFactory;
 		private readonly SqlParameterFactory _paramFactory;
 		private readonly IDataLayer _dataLayer;
+		private readonly INonQueryDataProvider _nonQueryDataProvider;
 
 		private const string CreateStoredProcedure = "Labels_Insert";
 		private const string ReadStoredProcedure = "Labels_For_User_Select";
@@ -52,34 +52,25 @@ namespace TaskHistory.Impl.Labels
 			if (labelDto == null)
 				throw new ArgumentNullException ("labelDto");
 
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (UpdateStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pContent", labelDto.Name));
-				command.Parameters.Add (new MySqlParameter ("pLabelId", labelDto.LabelId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-				command.Connection.Close ();
-			}
+			var parameters = new List<ISqlDataParameter> ();
+
+			parameters.Add (_paramFactory.CreateParameter ("pContent", labelDto.Name));
+			parameters.Add (_paramFactory.CreateParameter ("pLabelId", labelDto.LabelId));
+
+			_nonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);
 		}
 
 		public void DeleteLabel(int labelId)
 		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (DeleteStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pLabelId", labelId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-				command.Connection.Close ();
-			}
+			var parameter = _paramFactory.CreateParameter ("pLabelId", labelId);
+			_nonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 
-		public LabelRepo (LabelFactory labelFactory)
+		public LabelRepo (LabelFactory labelFactory, IDataLayer dataLayer, INonQueryDataProvider nonQueryDataProvider)
 		{
 			_labelFactory = labelFactory;
+			_dataLayer = dataLayer;
+			_nonQueryDataProvider = nonQueryDataProvider;
 		}
 	}
 }

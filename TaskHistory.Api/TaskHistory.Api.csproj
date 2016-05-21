@@ -47,7 +47,7 @@
     <Compile Include="Sql\ISqlDataParameter.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Sql\IDataReaderProvider.cs" />
-    <Compile Include="Sql\IDataNonQueryProvider.cs" />
+    <Compile Include="Sql\INonQueryDataProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

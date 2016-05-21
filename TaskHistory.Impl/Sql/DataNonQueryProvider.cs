@@ -7,7 +7,7 @@ using System.Data;
 
 namespace TaskHistory.Impl.Sql
 {
-	public class DataNonQueryProvider : IDataNonQueryProvider
+	public class DataNonQueryProvider : BaseDataProvider, INonQueryDataProvider
 	{
 		private readonly IConfigurationProvider _configurationProvider;
 
@@ -15,6 +15,8 @@ namespace TaskHistory.Impl.Sql
 		{
 			if (storedProcedureName == null || storedProcedureName == string.Empty)
 				throw new ArgumentNullException ("storedProcedureName");
+
+			this.ExecuteNonQuery(storedProcedureName, new List<ISqlDataParameter>());
 		}
 
 		public void ExecuteNonQuery(string storedProcedureName, ISqlDataParameter parameter)
@@ -24,6 +26,8 @@ namespace TaskHistory.Impl.Sql
 
 			if (parameter == null)
 				throw new ArgumentNullException ("parameter");
+
+			this.ExecuteNonQuery (storedProcedureName, new List<ISqlDataParameter> { parameter });
 		}
 
 		public void ExecuteNonQuery(string storedProcedureName, IEnumerable<ISqlDataParameter> parameters)
@@ -38,13 +42,21 @@ namespace TaskHistory.Impl.Sql
 			using (var command = new MySqlCommand (storedProcedureName)) 
 			{
 				command.CommandType = CommandType.StoredProcedure;
-				// command.Parameters.Add (new MySqlParameter ("pTaskId", taskId));
+
+				var mySqlParams = BaseDataProvider.CreateMySqlParametersFromSqlDataParams (parameters);
+
+				foreach (var p in mySqlParams) 
+				{
+					command.Parameters.Add (p);
+				}
+
 				command.Connection.Open ();
 				command.ExecuteNonQuery ();
 			}
 		}
 
-		public DataNonQueryProvider (IConfigurationProvider configurationProvider)
+		public DataNonQueryProvider (IConfigurationProvider configurationProvider) :
+			base()
 		{
 			_configurationProvider = configurationProvider;
 		}

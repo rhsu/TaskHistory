@@ -7,10 +7,10 @@ using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Labels
 {
-	public class LabelFactory : AbstractFromDataReaderFactory<ILabel>
+	public class LabelFactory : BaseFromDataReaderFactory<ILabel>
 	{
 		public LabelFactory (SqlDataReaderFactory dataReaderFactory)
-			: base(dataReaderFactory)
+			: base()
 		{
 		}
 

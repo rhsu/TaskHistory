@@ -7,10 +7,10 @@ using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Tasks
 {
-	public class TaskFactory : AbstractFromDataReaderFactory<ITask>
+	public class TaskFactory : BaseFromDataReaderFactory<ITask>
 	{
 		public TaskFactory (SqlDataReaderFactory dataReaderFactory)
-			: base (dataReaderFactory)
+			: base ()
 		{
 		}
 

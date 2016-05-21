@@ -2,7 +2,7 @@
 
 namespace TaskHistory.Api.Sql
 {
-	public interface IDataNonQueryProvider
+	public interface INonQueryDataProvider
 	{
 		void ExecuteNonQuery (string storedProcedureName);
 
