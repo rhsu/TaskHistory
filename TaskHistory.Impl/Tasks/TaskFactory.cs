@@ -14,7 +14,7 @@ namespace TaskHistory.Impl.Tasks
 		{
 		}
 
-		public ITask CreateTypeFromDataReader(ISqlDataReader reader)
+		public override ITask CreateTypeFromDataReader(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");

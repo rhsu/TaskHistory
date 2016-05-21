@@ -18,8 +18,8 @@ namespace TaskHistory.Bindings
 			kernel.Bind<ITaskRepo> ()
 				.To<TaskRepo> ();
 
-			kernel.Bind<ITaskViewRepo> ()
-				.To<TaskViewRepo> ();
+			//kernel.Bind<ITaskViewRepo> ()
+			//	.To<TaskViewRepo> ();
 		}
 	}
 }

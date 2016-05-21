@@ -16,7 +16,7 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			ISqlDataParameter parameter)
 		{
-			CheckParameters<T> (factory, storedProcedureName, parameter);
+			CheckParameters<T> (factory, parameter, storedProcedureName);
 
 			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameter);
 
@@ -27,7 +27,7 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
-			CheckParameters<T> (factory, storedProcedureName, parameters);
+			CheckParameters<T> (factory, parameters, storedProcedureName);
 
 			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameters);
 
@@ -38,16 +38,18 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			ISqlDataParameter parameter)
 		{
-			CheckParameters (factory, storedProcedureName, parameter);
+			CheckParameters (factory, parameter, storedProcedureName);
 
-			this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, new List<ISqlDataParameter> { parameter });
+			return this.ExecuteReaderForTypeCollection<T> (factory, 
+				storedProcedureName, 
+				new List<ISqlDataParameter> { parameter });
 		}
 
-		IEnumerable<T> ExecuteReaderForTypeCollection<T> (IFromDataReaderFactory<T> factory,
+		public IEnumerable<T> ExecuteReaderForTypeCollection<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
-			CheckParameters (factory, storedProcedureName, parameters);
+			CheckParameters (factory, parameters, storedProcedureName);
 
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (storedProcedureName, connection)) 
@@ -95,7 +97,9 @@ namespace TaskHistory.Impl.Sql
 			return new MySqlParameter (parameters.ParamName, parameters.Value);
 		}
 
-		private static void CheckParameters<T>(IFromDataReaderFactory<T> factory, IEnumerable<ISqlDataParameter> parameters, string storedProcedureName)
+		private static void CheckParameters<T>(IFromDataReaderFactory<T> factory,
+			IEnumerable<ISqlDataParameter> parameters,
+			string storedProcedureName)
 		{
 			if (factory == null)
 				throw new ArgumentNullException ("factory");
@@ -107,7 +111,9 @@ namespace TaskHistory.Impl.Sql
 				throw new ArgumentNullException ("storedProcedureName");
 		}
 
-		private static void CheckParameters<T>(IFromDataReaderFactory<T> factory, ISqlDataParameter parameter, string storedProcedureName)
+		private static void CheckParameters<T>(IFromDataReaderFactory<T> factory, 
+			ISqlDataParameter parameter, 
+			string storedProcedureName)
 		{
 			if (factory == null)
 				throw new ArgumentNullException ("factory");

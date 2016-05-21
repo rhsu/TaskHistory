@@ -7,14 +7,14 @@ using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Lables
 {
-	public class LabelFactory : AbstractFromDataReaderFactory<Label>
+	public class LabelFactory : AbstractFromDataReaderFactory<ILabel>
 	{
 		public LabelFactory (SqlDataReaderFactory dataReaderFactory)
 			: base(dataReaderFactory)
 		{
 		}
 
-		public ILabel CreateTypeFromDataReader(ISqlDataReader reader)
+		public override ILabel CreateTypeFromDataReader(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");

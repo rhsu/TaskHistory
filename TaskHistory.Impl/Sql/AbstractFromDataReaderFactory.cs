@@ -7,6 +7,8 @@ namespace TaskHistory.Impl.Sql
 	{
 		private readonly SqlDataReaderFactory _dataReaderFactory;
 
+		public abstract T CreateTypeFromDataReader(ISqlDataReader reader);
+
 		public AbstractFromDataReaderFactory (SqlDataReaderFactory dataReaderFactory)
 		{
 			_dataReaderFactory = dataReaderFactory;
