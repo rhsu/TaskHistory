@@ -2,23 +2,26 @@
 using TaskHistory.Impl.Tasks;
 using MySql.Data.MySqlClient;
 using System;
+using TaskHistory.Impl.Sql;
+using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Tasks
 {
-	public class TaskFactory
+	public class TaskFactory : AbstractFromDataReaderFactory<ITask>
 	{
-		public TaskFactory ()
+		public TaskFactory (SqlDataReaderFactory dataReaderFactory)
+			: base (dataReaderFactory)
 		{
 		}
 
-		public ITask CreateTask(MySqlDataReader reader)
+		public ITask CreateTypeFromDataReader(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");
 			
-			int taskId = Convert.ToInt32 (reader ["TaskId"]);
-			string content = reader ["Content"].ToString ();
-			bool isCompleted = Convert.ToBoolean (reader ["IsCompleted"]);
+			int taskId = reader.GetInt ("TaskId");
+			string content = reader.GetString ("Content");
+			bool isCompleted = reader.GetBool ("IsCompleted");
 
 			return new Task (taskId, content, isCompleted);
 		}

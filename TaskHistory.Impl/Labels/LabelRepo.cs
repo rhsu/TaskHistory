@@ -21,7 +21,7 @@ namespace TaskHistory.Impl.Labels
 
 		public ILabel CreateNewLabel (string content)
 		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
+			/*using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
 			{
 				command.CommandType = CommandType.StoredProcedure;
@@ -36,12 +36,14 @@ namespace TaskHistory.Impl.Labels
 					label = _labelFactory.CreateTypeFromDataReader (reader);
 				}
 				return label;
-			}
+			}*/
+
+			return null;
 		}
 
 		public IEnumerable<ILabel> ReadAllLabelsForUser(IUser user)
 		{
-			if (user == null)
+			/*if (user == null)
 				throw new ArgumentNullException ("user");
 
 			var returnVal = new List<ILabel> ();
@@ -55,6 +57,8 @@ namespace TaskHistory.Impl.Labels
 
 				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
 
+
+
 				while (reader.Read ()) 
 				{
 					ILabel label = _labelFactory.CreateTypeFromDataReader (reader);
@@ -62,7 +66,8 @@ namespace TaskHistory.Impl.Labels
 				}
 			}
 				
-			return returnVal;
+			return returnVal;*/
+			return null;
 		}
 
 		public void UpdateLabel (ILabel labelDto)

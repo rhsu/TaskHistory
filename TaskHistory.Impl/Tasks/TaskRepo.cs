@@ -8,6 +8,7 @@ using TaskHistory.Impl.MySql;
 using TaskHistory.Impl.Tasks;
 using System.Configuration;
 using TaskHistory.Api.Sql;
+using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Tasks
 {
@@ -20,35 +21,18 @@ namespace TaskHistory.Impl.Tasks
 
 		private readonly TaskFactory _taskFactory;
 		private readonly IDataLayer _dataLayer;
+		private readonly SqlDataReaderFactory _dataReaderFactory;
+		private readonly SqlParameterFactory _paramFactory;
 
 		public ITask CreateNewTask (string taskContent)
 		{
-			MySqlParameter pTaskContent = new MySqlParameter ("pTaskContent", taskContent);
+			ISqlDataParameter parameter = _paramFactory.CreateParameter ("pTaskContent", taskContent);
 
-			// RH [TODO] There should be an override when there's only 1 taskContent
-			var returnVal = _dataLayer.ExecuteReader<ITask> (null, CreateStoredProcedure, null);
+			var returnVal = _dataLayer.ExecuteReaderForSingleType<ITask> (_taskFactory, CreateStoredProcedure, parameter);
+			if (returnVal == null)
+				throw new NullReferenceException ("Null returned from dataLayer");
 
-
-			return null;
-			/*using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pTaskContent", taskContent));
-				command.Connection.Open ();
-
-				using (var reader = command.ExecuteReader (CommandBehavior.CloseConnection)) 
-				{
-					ITask task = null;
-
-					if (reader.Read ()) 
-					{
-						task = _taskFactory.CreateTask (reader);
-					}
-
-					return task;
-				}
-			}*/
+			return returnVal;
 		}
 
 		public IEnumerable<ITask> ReadTasksForUser (IUser user)
@@ -56,25 +40,13 @@ namespace TaskHistory.Impl.Tasks
 			if (user == null)
 				throw new ArgumentNullException ("user");
 
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand(ReadStoredProcedure, connection))
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
-				command.Connection.Open ();
+			var parameter = _paramFactory.CreateParameter("pUserId", user.UserId);
 
-				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+			var returnVal = _dataLayer.ExecuteReaderForTypeCollection<ITask> (_taskFactory, ReadStoredProcedure, parameter);
+			if (returnVal == null)
+				throw new NullReferenceException ("Null returned from dataLayer");
 
-				List<ITask> returnVal = new List<ITask> ();
-
-				while (reader.Read ()) 
-				{
-					ITask task = _taskFactory.CreateTask (reader);
-					returnVal.Add (task);
-				}
-
-				return returnVal;
-			}
+			return returnVal;
 		}
 
 		public void UpdateTask (ITask newTaskDto)
@@ -107,11 +79,15 @@ namespace TaskHistory.Impl.Tasks
 			}
 		}
 
-		public TaskRepo (TaskFactory taskFactory, IDataLayer dataLayer)
+		public TaskRepo (TaskFactory taskFactory, 
+			SqlParameterFactory paramFactory,
+			IDataLayer dataLayer, 
+			SqlDataReaderFactory dataReaderFactory)
 		{
 			_taskFactory = taskFactory;
+			_paramFactory = paramFactory;
 			_dataLayer = dataLayer;
+			_dataReaderFactory = dataReaderFactory;
 		}
 	}
 }
-

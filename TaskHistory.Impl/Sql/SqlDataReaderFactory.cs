@@ -5,7 +5,6 @@ using TaskHistory.Impl.MySql;
 
 namespace TaskHistory.Impl.Sql
 {
-	// TODO: until I figure out a better place to put this
 	public class SqlDataReaderFactory
 	{
 		public ISqlDataReader MakeDataReader (MySqlDataReader reader)

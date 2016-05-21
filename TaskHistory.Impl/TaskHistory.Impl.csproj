@@ -61,6 +61,9 @@
     <Compile Include="Sql\DataParameterFactory.cs" />
     <Compile Include="Sql\SqlDataReaderFactory.cs" />
     <Compile Include="Sql\SqlDataReader.cs" />
+    <Compile Include="Sql\SqlParameterFactory.cs" />
+    <Compile Include="Sql\SqlDataParameter.cs" />
+    <Compile Include="Sql\AbstractFromDataReaderFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

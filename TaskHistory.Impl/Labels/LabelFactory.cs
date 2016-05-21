@@ -7,28 +7,11 @@ using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Lables
 {
-	public class LabelFactory : IFromDataReaderFactory<ILabel>
+	public class LabelFactory : AbstractFromDataReaderFactory<Label>
 	{
-		private SqlDataReaderFactory _dataReaderFactory;
-
 		public LabelFactory (SqlDataReaderFactory dataReaderFactory)
+			: base(dataReaderFactory)
 		{
-			_dataReaderFactory = dataReaderFactory;
-		}
-
-		// TODO: Temporary AD HOC method until DataReader implementation is built
-		public ILabel CreateTypeFromDataReader(MySqlDataReader reader)
-		{
-			if (reader == null)
-				throw new ArgumentNullException ("reader");
-
-			var sqlDataReader = _dataReaderFactory.MakeDataReader (reader);
-
-			ILabel label = CreateTypeFromDataReader (sqlDataReader);
-			if (label == null)
-				throw new NullReferenceException ("Null returned from CreateTypeFromReader");
-
-			return label;
 		}
 
 		public ILabel CreateTypeFromDataReader(ISqlDataReader reader)
