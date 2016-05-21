@@ -8,7 +8,7 @@ using TaskHistory.Api.Configuration;
 
 namespace TaskHistory.Impl.Sql
 {
-	public class DataLayer : BaseDataLayer, IDataLayer
+	public class DataLayer : BaseDataProvider, IDataLayer
 	{
 		private readonly SqlDataReaderFactory _sqlDataReaderFactory;
 		private readonly string _connectionString;
@@ -17,7 +17,7 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			ISqlDataParameter parameter)
 		{
-			BaseDataLayer.CheckParameters<T> (factory, parameter, storedProcedureName);
+			BaseDataProvider.CheckParameters<T> (factory, parameter, storedProcedureName);
 
 			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameter);
 
@@ -28,7 +28,7 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
-			BaseDataLayer.CheckParameters<T> (factory, parameters, storedProcedureName);
+			BaseDataProvider.CheckParameters<T> (factory, parameters, storedProcedureName);
 
 			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameters);
 
@@ -39,7 +39,7 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			ISqlDataParameter parameter)
 		{
-			BaseDataLayer.CheckParameters (factory, parameter, storedProcedureName);
+			BaseDataProvider.CheckParameters (factory, parameter, storedProcedureName);
 
 			return this.ExecuteReaderForTypeCollection<T> (factory, 
 				storedProcedureName, 
@@ -50,14 +50,14 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
-			BaseDataLayer.CheckParameters (factory, parameters, storedProcedureName);
+			BaseDataProvider.CheckParameters (factory, parameters, storedProcedureName);
 
 			using (var connection = new MySqlConnection (_connectionString))
 			using (var command = new MySqlCommand (storedProcedureName, connection)) 
 			{
 				command.CommandType = CommandType.StoredProcedure;
 
-				foreach (var param in BaseDataLayer.CreateMySqlParametersFromSqlDataParams(parameters)) 
+				foreach (var param in BaseDataProvider.CreateMySqlParametersFromSqlDataParams(parameters)) 
 				{
 					command.Parameters.Add (param);
 				}

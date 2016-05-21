@@ -5,9 +5,9 @@ using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
-	public abstract class BaseDataLayer
+	public abstract class BaseDataProvider
 	{
-		public BaseDataLayer ()
+		public BaseDataProvider ()
 		{
 		}
 
