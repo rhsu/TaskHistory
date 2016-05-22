@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TaskHistoryApi
+namespace TaskHistory.Api.Sql
 {
 	public class IDataReaderProvider
 	{

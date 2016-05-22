@@ -7,7 +7,7 @@ using System.Data;
 
 namespace TaskHistory.Impl.Sql
 {
-	public class DataNonQueryProvider : BaseDataProvider, INonQueryDataProvider
+	public class NonQueryDataProvider : BaseDataProvider, INonQueryDataProvider
 	{
 		private readonly IConfigurationProvider _configurationProvider;
 
@@ -55,7 +55,7 @@ namespace TaskHistory.Impl.Sql
 			}
 		}
 
-		public DataNonQueryProvider (IConfigurationProvider configurationProvider) :
+		public NonQueryDataProvider (IConfigurationProvider configurationProvider) :
 			base()
 		{
 			_configurationProvider = configurationProvider;
