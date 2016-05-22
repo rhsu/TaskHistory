@@ -69,7 +69,7 @@ namespace TaskHistory.Impl.Sql
 
 				var returnVal = new List<T> ();
 
-				if (reader.Read ()) 
+				while (reader.Read ()) 
 				{
 					T currentItem = factory.CreateTypeFromDataReader (sqlReader);
 					returnVal.Add (currentItem);
