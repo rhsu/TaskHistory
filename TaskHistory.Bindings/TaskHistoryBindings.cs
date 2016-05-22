@@ -25,11 +25,11 @@ namespace TaskHistory.Bindings
 
 		private void SetupAllModules()
 		{
-			
 			_allModules.Add (new ConfigurationModule ());
 			_allModules.Add (new SqlModule ());
 			_allModules.Add (new TaskModule ());
 			_allModules.Add (new UserModule ());
+			_allModules.Add (new ViewRepoModule ());
 		}
 
 		public void DoAllBindings(IKernel kernel)

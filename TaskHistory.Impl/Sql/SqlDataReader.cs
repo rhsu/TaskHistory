@@ -10,9 +10,11 @@ namespace TaskHistory.Impl.Sql
 
 		private object GetObjectFromReader (string propertyName)
 		{
+			object obj = null;
+
 			try
 			{
-				var obj = _reader[propertyName];
+				obj = _reader[propertyName];
 			}
 			// TODO: What exception is this?
 			catch (Exception ex) 
@@ -22,7 +24,7 @@ namespace TaskHistory.Impl.Sql
 					propertyName));
 			}
 
-			return null;
+			return obj;
 		}
 
 		public bool Read()

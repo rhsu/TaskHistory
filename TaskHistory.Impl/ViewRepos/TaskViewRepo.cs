@@ -13,7 +13,7 @@ using TaskHistory.Api.Sql;
 namespace TaskHistory.Impl.ViewRepos
 {
 	// TODO: Create a TaskView object
-	public class TaskViewRepo
+	public class TaskViewRepo : ITaskViewRepo
 	{
 		private const string ReadStoredProcedure = "Tasks_Select";
 

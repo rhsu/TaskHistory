@@ -41,6 +41,7 @@
     <Compile Include="Sql\SqlModule.cs" />
     <Compile Include="Users\UserModule.cs" />
     <Compile Include="Tasks\TaskModule.cs" />
+    <Compile Include="ViewRepos\ViewRepoModule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -62,5 +63,6 @@
     <Folder Include="Sql\" />
     <Folder Include="Tasks\" />
     <Folder Include="Users\" />
+    <Folder Include="ViewRepos\" />
   </ItemGroup>
 </Project>
