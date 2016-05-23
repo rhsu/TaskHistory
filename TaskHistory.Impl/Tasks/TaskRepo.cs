@@ -17,6 +17,8 @@ namespace TaskHistory.Impl.Tasks
 		private const string UpdateStoredProcedure = "Tasks_Update";
 		private const string DeleteStoredProcedure = "Tasks_Delete";
 
+		private const string NullFromDataProvider = "Null returned from DataProvider";
+
 		private readonly TaskFactory _taskFactory;
 		private readonly IDataLayer _dataLayer;
 		private readonly SqlParameterFactory _paramFactory;
@@ -28,7 +30,7 @@ namespace TaskHistory.Impl.Tasks
 
 			var returnVal = _dataLayer.ExecuteReaderForSingleType<ITask> (_taskFactory, CreateStoredProcedure, parameter);
 			if (returnVal == null)
-				throw new NullReferenceException ("Null returned from dataLayer");
+				throw new NullReferenceException (NullFromDataProvider);
 
 			return returnVal;
 		}
@@ -42,7 +44,7 @@ namespace TaskHistory.Impl.Tasks
 
 			var returnVal = _dataLayer.ExecuteReaderForTypeCollection<ITask> (_taskFactory, ReadStoredProcedure, parameter);
 			if (returnVal == null)
-				throw new NullReferenceException ("Null returned from dataLayer");
+				throw new NullReferenceException (NullFromDataProvider);
 
 			return returnVal;
 		}

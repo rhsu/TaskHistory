@@ -45,6 +45,9 @@ namespace TaskHistory.Impl.Sql
 
 				var mySqlParams = BaseDataProvider.CreateMySqlParametersFromSqlDataParams (parameters);
 
+				if (mySqlParams == null)
+					throw new NullReferenceException ("Null returned from CreateMySqlParametersFromSqlDataParams in base class");
+
 				foreach (var p in mySqlParams) 
 				{
 					command.Parameters.Add (p);

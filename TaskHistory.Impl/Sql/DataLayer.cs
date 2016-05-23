@@ -13,7 +13,7 @@ namespace TaskHistory.Impl.Sql
 		private readonly SqlDataReaderFactory _sqlDataReaderFactory;
 		private readonly string _connectionString;
 
-		private readonly string NullFromExecuteReaderForTypeCollection = "Null returned from ExceuteReaderForTypeCollection";
+		private const string NullFromExecuteReaderForTypeCollection = "Null returned from ExceuteReaderForTypeCollection";
 
 		public T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
@@ -50,7 +50,7 @@ namespace TaskHistory.Impl.Sql
 
 			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameters);
 			if (collection == null)
-				throw new NullReferenceException ("Null returned from ExecuteReaderForTypeCollection");
+				throw new NullReferenceException (NullFromExecuteReaderForTypeCollection);
 
 			return collection.First ();
 		}
@@ -72,7 +72,8 @@ namespace TaskHistory.Impl.Sql
 				storedProcedureName, 
 				new List<ISqlDataParameter> { parameter });
 
-
+			if (returnVal == null)
+				throw new NullReferenceException (NullFromExecuteReaderForTypeCollection);
 
 			return returnVal;
 		}
@@ -95,7 +96,11 @@ namespace TaskHistory.Impl.Sql
 			{
 				command.CommandType = CommandType.StoredProcedure;
 
-				foreach (var param in BaseDataProvider.CreateMySqlParametersFromSqlDataParams(parameters)) 
+				var dataProviderParameters = base.CreateMySqlParametersFromSqlDataParams (parameters);
+				if (dataProviderParameters == null)
+					throw new NullReferenceException ("Null returned from CreateMySqlParametersFromSqlDataParams in base class");
+
+				foreach (var param in dataProviderParameters) 
 				{
 					command.Parameters.Add (param);
 				}
@@ -104,6 +109,8 @@ namespace TaskHistory.Impl.Sql
 
 				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
 				ISqlDataReader sqlReader = _sqlDataReaderFactory.MakeDataReader(reader);
+				if (sqlReader == null)
+					throw new NullReferenceException ("Null returned from SqlDataReaderFactory");
 
 				var returnVal = new List<T> ();
 
