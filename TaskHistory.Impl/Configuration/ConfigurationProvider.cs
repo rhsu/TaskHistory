@@ -14,7 +14,7 @@ namespace TaskHistory.Impl.Configuration
 
 		public ConfigurationProvider ()
 		{
-			_sqlConnectionString = ConfigurationManager.AppSettings ["MySqlConnection"]; 
+			_sqlConnectionString = ConfigurationManager.AppSettings ["MySqlConnection"];
 		}
 	}
 }

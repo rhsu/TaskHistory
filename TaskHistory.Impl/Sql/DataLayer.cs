@@ -13,13 +13,24 @@ namespace TaskHistory.Impl.Sql
 		private readonly SqlDataReaderFactory _sqlDataReaderFactory;
 		private readonly string _connectionString;
 
+		private readonly string NullFromExecuteReaderForTypeCollection = "Null returned from ExceuteReaderForTypeCollection";
+
 		public T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			ISqlDataParameter parameter)
 		{
-			BaseDataProvider.CheckParameters<T> (factory, parameter, storedProcedureName);
+			if (factory == null)
+				throw new ArgumentNullException ("factory");
+
+			if ((storedProcedureName == null) || (storedProcedureName == string.Empty))
+				throw new ArgumentNullException ("storedProcedureName");
+
+			if (parameter == null)
+				throw new ArgumentNullException ("parameter");
 
 			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameter);
+			if (collection == null)
+				throw new NullReferenceException (NullFromExecuteReaderForTypeCollection);
 
 			return collection.First ();
 		}
@@ -28,9 +39,18 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
-			BaseDataProvider.CheckParameters<T> (factory, parameters, storedProcedureName);
+			if (factory == null)
+				throw new ArgumentNullException ("factory");
+
+			if ((storedProcedureName == null) || (storedProcedureName == string.Empty))
+				throw new ArgumentNullException ("storedProcedureName");
+
+			if (parameters == null)
+				throw new ArgumentNullException ("parameters");
 
 			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameters);
+			if (collection == null)
+				throw new NullReferenceException ("Null returned from ExecuteReaderForTypeCollection");
 
 			return collection.First ();
 		}
@@ -39,18 +59,36 @@ namespace TaskHistory.Impl.Sql
 			string storedProcedureName,
 			ISqlDataParameter parameter)
 		{
-			BaseDataProvider.CheckParameters (factory, parameter, storedProcedureName);
+			if (factory == null)
+				throw new ArgumentNullException ("factory");
 
-			return this.ExecuteReaderForTypeCollection<T> (factory, 
+			if ((storedProcedureName == null) || (storedProcedureName == string.Empty))
+				throw new ArgumentNullException ("storedProcedureName");
+
+			if (parameter == null)
+				throw new ArgumentNullException ("parameter");
+
+			var returnVal = ExecuteReaderForTypeCollection<T> (factory, 
 				storedProcedureName, 
 				new List<ISqlDataParameter> { parameter });
+
+
+
+			return returnVal;
 		}
 
 		public IEnumerable<T> ExecuteReaderForTypeCollection<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
-			BaseDataProvider.CheckParameters (factory, parameters, storedProcedureName);
+			if (factory == null)
+				throw new ArgumentNullException ("factory");
+
+			if ((storedProcedureName == null) || (storedProcedureName == string.Empty))
+				throw new ArgumentNullException ("storedProcedureName");
+
+			if (parameters == null)
+				throw new ArgumentNullException ("parameters");
 
 			using (var connection = new MySqlConnection (_connectionString))
 			using (var command = new MySqlCommand (storedProcedureName, connection)) 

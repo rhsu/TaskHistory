@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TaskHistory.Api.Labels;
 using TaskHistory.Api.Users;
-using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
 using TaskHistory.Impl.Sql;
@@ -22,13 +21,16 @@ namespace TaskHistory.Impl.Labels
 		private const string UpdateStoredProcedure = "Labels_Update";
 		private const string DeleteStoredProcedure = "Labels_Logical_Delete";
 
+		private const string NullFromParamFactory = "Null returned from SqlParameterFactory";
+		private const string NullFromDataProvider = "Null returned from DataProvider";
+
 		public ILabel CreateNewLabel (string content)
 		{
 			var contentParameter = _paramFactory.CreateParameter ("pContent", content);
 
 			var returnVal = _dataLayer.ExecuteReaderForSingleType (_labelFactory, CreateStoredProcedure, contentParameter);
 			if (returnVal == null)
-				throw new NullReferenceException ("Null returned from data layer");
+				throw new NullReferenceException (NullFromDataProvider);
 
 			return returnVal;
 		}
@@ -39,10 +41,12 @@ namespace TaskHistory.Impl.Labels
 				throw new ArgumentNullException ("user");
 
 			var userIdParam = _paramFactory.CreateParameter ("pUserId", user.UserId);
+			if (userIdParam == null)
+				throw new NullReferenceException (NullFromParamFactory);
 
 			var returnVal = _dataLayer.ExecuteReaderForTypeCollection (_labelFactory, ReadStoredProcedure, userIdParam);
 			if (returnVal == null)
-				throw new NullReferenceException ("Null returned from data layer");
+				throw new NullReferenceException (NullFromDataProvider);
 
 			return returnVal;
 		}
@@ -54,8 +58,16 @@ namespace TaskHistory.Impl.Labels
 
 			var parameters = new List<ISqlDataParameter> ();
 
-			parameters.Add (_paramFactory.CreateParameter ("pContent", labelDto.Name));
-			parameters.Add (_paramFactory.CreateParameter ("pLabelId", labelDto.LabelId));
+			var contentParam = _paramFactory.CreateParameter("pContent", labelDto.Name);
+			if (contentParam == null)
+				throw new NullReferenceException (NullFromParamFactory);
+
+			var labelParam = _paramFactory.CreateParameter("pLabelId", labelDto.LabelId);
+			if (labelParam == null)
+				throw new NullReferenceException (NullFromParamFactory);
+
+			parameters.Add (contentParam);
+			parameters.Add (labelParam);
 
 			_nonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);
 		}
@@ -63,6 +75,9 @@ namespace TaskHistory.Impl.Labels
 		public void DeleteLabel(int labelId)
 		{
 			var parameter = _paramFactory.CreateParameter ("pLabelId", labelId);
+			if (parameter == null)
+				throw new NullReferenceException (NullFromParamFactory);
+
 			_nonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 

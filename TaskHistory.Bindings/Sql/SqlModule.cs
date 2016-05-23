@@ -21,12 +21,6 @@ namespace TaskHistory.Bindings
 
 			kernel.Bind<INonQueryDataProvider> ()
 				  .To<NonQueryDataProvider> ();
-
-			/*kernel.Bind<ISqlDataParameter> ()
-				  .To<SqlDataParameter> ();
-
-			kernel.Bind<ISqlDataReader> ()
-				  .To<SqlDataReader> ();*/
 		}
 	}
 }

@@ -2,7 +2,6 @@
 using TaskHistory.Api.TasksComplex;
 using System.Collections.Generic;
 using TaskHistory.Api.Users;
-using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
 using TaskHistory.Api.Labels;

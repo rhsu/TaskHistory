@@ -1,7 +1,6 @@
 ﻿using System;
 using TaskHistory.Api.Sql;
 using MySql.Data.MySqlClient;
-using TaskHistory.Impl.MySql;
 
 namespace TaskHistory.Impl.Sql
 {

@@ -2,7 +2,6 @@
 using TaskHistory.Api.Labels;
 using MySql.Data.MySqlClient;
 using TaskHistory.Api.Sql;
-using TaskHistory.Impl.MySql;
 using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Labels

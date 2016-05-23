@@ -20,7 +20,11 @@ namespace TaskHistory.Impl.Sql
 
 			foreach (var p in parameters) 
 			{
-				returnVal.Add(CreateSqlParameterFromSqlDataParams(p));
+				var sqlParam = CreateSqlParameterFromSqlDataParams (p);
+				if (sqlParam == null)
+					throw new NullReferenceException ("Null returned from CreateMySqlParametersFromSqlDataParams");
+	
+				returnVal.Add(sqlParam);
 			}
 
 			return returnVal;
@@ -30,34 +34,6 @@ namespace TaskHistory.Impl.Sql
 		{
 			// This is not a factory because MySqlParameter is implemented in one of the MySql dlls
 			return new MySqlParameter (parameters.ParamName, parameters.Value);
-		}
-
-		protected static void CheckParameters<T>(IFromDataReaderFactory<T> factory,
-			IEnumerable<ISqlDataParameter> parameters,
-			string storedProcedureName)
-		{
-			if (factory == null)
-				throw new ArgumentNullException ("factory");
-
-			if (parameters == null)
-				throw new ArgumentNullException ("parameters");
-
-			if (storedProcedureName == string.Empty || storedProcedureName == null)
-				throw new ArgumentNullException ("storedProcedureName");
-		}
-
-		protected static void CheckParameters<T>(IFromDataReaderFactory<T> factory, 
-			ISqlDataParameter parameter, 
-			string storedProcedureName)
-		{
-			if (factory == null)
-				throw new ArgumentNullException ("factory");
-
-			if (parameter == null)
-				throw new ArgumentNullException ("parameters");
-
-			if (storedProcedureName == string.Empty || storedProcedureName == null)
-				throw new ArgumentNullException ("storedProcedureName");
 		}
 	}
 }
