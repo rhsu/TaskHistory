@@ -96,7 +96,7 @@ namespace TaskHistory.Impl.Sql
 			{
 				command.CommandType = CommandType.StoredProcedure;
 
-				var dataProviderParameters = base.CreateMySqlParametersFromSqlDataParams (parameters);
+				var dataProviderParameters = BaseDataProvider.CreateMySqlParametersFromSqlDataParams (parameters);
 				if (dataProviderParameters == null)
 					throw new NullReferenceException ("Null returned from CreateMySqlParametersFromSqlDataParams in base class");
 
