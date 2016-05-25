@@ -20,7 +20,7 @@ namespace TaskHistory.Impl.Tasks
 		private const string NullFromDataProvider = "Null returned from DataProvider";
 
 		private readonly TaskFactory _taskFactory;
-		private readonly IDataLayer _dataLayer;
+		private readonly IDataProvider _dataLayer;
 		private readonly SqlParameterFactory _paramFactory;
 		private readonly INonQueryDataProvider _nonQueryDataProvider;
 
@@ -74,7 +74,7 @@ namespace TaskHistory.Impl.Tasks
 		public TaskRepo (TaskFactory taskFactory, 
 			SqlParameterFactory paramFactory,
 			INonQueryDataProvider nonQueryDataProvider,
-			IDataLayer dataLayer)
+			IDataProvider dataLayer)
 		{
 			_taskFactory = taskFactory;
 			_paramFactory = paramFactory;

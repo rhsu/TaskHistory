@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TaskHistory.Api.Sql
 {
-	public interface IDataLayer
+	public interface IDataProvider
 	{
 		T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,

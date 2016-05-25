@@ -43,11 +43,11 @@
     <Compile Include="Sql\IFromDataReaderFactory.cs" />
     <Compile Include="Sql\ISqlDataReader.cs" />
     <Compile Include="ViewRepos\ITaskViewRepo.cs" />
-    <Compile Include="Sql\IDataLayer.cs" />
     <Compile Include="Sql\ISqlDataParameter.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Sql\IDataReaderProvider.cs" />
     <Compile Include="Sql\INonQueryDataProvider.cs" />
+    <Compile Include="Sql\IDataProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

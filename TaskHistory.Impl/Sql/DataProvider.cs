@@ -8,7 +8,7 @@ using TaskHistory.Api.Configuration;
 
 namespace TaskHistory.Impl.Sql
 {
-	public class DataLayer : BaseDataProvider, IDataLayer
+	public class DataProvider : BaseDataProvider, IDataProvider
 	{
 		private readonly SqlDataReaderFactory _sqlDataReaderFactory;
 		private readonly string _connectionString;
@@ -127,7 +127,7 @@ namespace TaskHistory.Impl.Sql
 		{
 		}
 
-		public DataLayer (SqlDataReaderFactory sqlDataReaderFactory, IConfigurationProvider configurationProvider)
+		public DataProvider (SqlDataReaderFactory sqlDataReaderFactory, IConfigurationProvider configurationProvider)
 			: base()
 		{
 			_sqlDataReaderFactory = sqlDataReaderFactory;
