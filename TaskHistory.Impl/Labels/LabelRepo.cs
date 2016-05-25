@@ -13,7 +13,7 @@ namespace TaskHistory.Impl.Labels
 	{
 		private readonly LabelFactory _labelFactory;
 		private readonly SqlParameterFactory _paramFactory;
-		private readonly IDataLayer _dataLayer;
+		private readonly IDataProvider _dataLayer;
 		private readonly INonQueryDataProvider _nonQueryDataProvider;
 
 		private const string CreateStoredProcedure = "Labels_Insert";
@@ -81,7 +81,7 @@ namespace TaskHistory.Impl.Labels
 			_nonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 
-		public LabelRepo (LabelFactory labelFactory, IDataLayer dataLayer, INonQueryDataProvider nonQueryDataProvider)
+		public LabelRepo (LabelFactory labelFactory, IDataProvider dataLayer, INonQueryDataProvider nonQueryDataProvider)
 		{
 			_labelFactory = labelFactory;
 			_dataLayer = dataLayer;

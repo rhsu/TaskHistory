@@ -16,8 +16,8 @@ namespace TaskHistory.Bindings
 			if (kernel == null)
 				throw new ArgumentNullException ("kernel");
 
-			kernel.Bind<IDataLayer> ()
-				  .To<DataLayer> ();
+			kernel.Bind<IDataProvider> ()
+				  .To<DataProvider> ();
 
 			kernel.Bind<INonQueryDataProvider> ()
 				  .To<NonQueryDataProvider> ();

@@ -54,7 +54,6 @@
     <Compile Include="Users\UserRepo.cs" />
     <Compile Include="Users\UserFactory.cs" />
     <Compile Include="ViewRepos\TaskViewRepo.cs" />
-    <Compile Include="Sql\DataLayer.cs" />
     <Compile Include="Sql\DataParameter.cs" />
     <Compile Include="Sql\DataParameterFactory.cs" />
     <Compile Include="Sql\SqlDataReaderFactory.cs" />
@@ -66,6 +65,7 @@
     <Compile Include="Sql\BaseDataProvider.cs" />
     <Compile Include="Sql\BaseFromDataReaderFactory.cs" />
     <Compile Include="Sql\NonQueryDataProvider.cs" />
+    <Compile Include="Sql\DataProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
