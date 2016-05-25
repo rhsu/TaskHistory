@@ -30,7 +30,7 @@ namespace TaskHistory.Impl.Test
 		{
 		}
 
-		[Test]
+		// [Test]
 		public void TestCreateTaskFromDataReader()
 		{
 			var mockSqlDataReader = new Mock<ISqlDataReader> ();
