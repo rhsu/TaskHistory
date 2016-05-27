@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using TaskHistory.Impl.Tasks;
 using Moq;
+using TaskHistory.Api.Tasks;
 
 namespace TaskHistory.Impl.Test
 {
@@ -23,20 +24,18 @@ namespace TaskHistory.Impl.Test
 		[Test]
 		public void TestEqualTestsAreEqual()
 		{
-			try
-			{
-				var otherTask = new Mock<Task> ();
-				otherTask.SetupGet (mock => mock.TaskId).Returns (taskId);
-			}
-			catch (Exception ex) 
-			{
-				var e = ex;
-			}
+			var otherTask = new Mock<ITask> ();
 
-			//otherTask.SetupGet (mock => mock.Content).Returns (taskContent);
-			//otherTask.SetupGet (mock => mock.IsCompleted).Returns (isCompleted);
+			otherTask.SetupGet (mock => mock.TaskId).Returns (taskId);
+			otherTask.SetupGet (mock => mock.Content).Returns (taskContent);
+			otherTask.SetupGet (mock => mock.IsCompleted).Returns (isCompleted);
 
-			// Assert.Equals (_task, otherTask.Object);
+			// TODO Make need a SO Question I have no idea what is going on here.
+			// bool b = _task.Equals (otherTask.Object);
+
+			// bool c = otherTask.Object.Equals (_task);
+
+			Assert.Equals (otherTask.Object, _task);
 		}
 
 		[Test]

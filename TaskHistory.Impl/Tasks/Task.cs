@@ -17,7 +17,7 @@ namespace TaskHistory.Impl.Tasks
 
 		public override bool Equals (object obj)
 		{
-			var taskObj = obj as Task;
+			var taskObj = obj as ITask;
 
 			if (taskObj == null)
 				return false;
