@@ -30,19 +30,23 @@ namespace TaskHistory.Impl.Test
 		{
 		}
 
-		// [Test]
+		[Test]
 		public void TestCreateTaskFromDataReader()
 		{
 			var mockSqlDataReader = new Mock<ISqlDataReader> ();
 			mockSqlDataReader.Setup (mock => mock.GetInt (It.IsAny<string>())).Returns (1);
-			mockSqlDataReader.Setup (Mock => Mock.GetString (It.IsAny<string>())).Returns (Content);
+			mockSqlDataReader.Setup (mock => mock.GetString (It.IsAny<string>())).Returns (Content);
 			mockSqlDataReader.Setup (mock => mock.GetBool (It.IsAny<string>())).Returns (true);
 
 			var _taskFactory = new TaskFactory ();
 
-			var fakeTask = _taskFactory.CreateTypeFromDataReader(mockSqlDataReader.Object);
+			var task = _taskFactory.CreateTypeFromDataReader(mockSqlDataReader.Object);
 
+			bool b = task.Content.Equals (Content);
 
+			Assert.AreEquals (Content, task.Content);
+
+			// Console.WriteLine (task.Content);
 		}
 	}
 }
