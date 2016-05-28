@@ -8,7 +8,7 @@ namespace TaskHistory.Orchestrator
 	{
 		private IUserRepo _userRepo;
 
-		public IUser OrchestrateRegisterUser(UserRegisterViewModel vmUserRegister)
+		public IUser OrchestrateRegisterUser(UserRegistrationParametersViewModel vmUserRegister)
 		{
 			if (vmUserRegister == null)
 				throw new ArgumentNullException ("vmUserRegister");
@@ -22,9 +22,9 @@ namespace TaskHistory.Orchestrator
 			return newUser;
 		}
 
-		public UserSuccessfulRegisteredViewModel OrchestrateRegisterUser (UserRegistrationParameters userRegistrationParameters)
+		public UserRegistrationStatusViewModel OrchestrateRegisterUser (UserRegistrationParameters userRegistrationParameters)
 		{
-			
+			return null;
 		}
 
 		public HomeOrchestrator (IUserRepo userRepo)

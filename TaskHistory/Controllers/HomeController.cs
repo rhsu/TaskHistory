@@ -15,7 +15,7 @@ namespace TaskHistory.Controllers
 		private HomeOrchestrator _homeOrchestrator;
 
 		[HttpGet]
-		public ActionResult Index (UserSuccessfulRegisteredViewModel confirmationViewModel)
+		public ActionResult Index (UserRegistrationStatusViewModel confirmationViewModel)
 		{
 			ViewBag.UserRegistered = confirmationViewModel;
 
@@ -24,7 +24,7 @@ namespace TaskHistory.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult RegisterUser (UserRegisterViewModel userRegisterViewModel)
+		public ActionResult RegisterUser (UserRegistrationParametersViewModel userRegisterViewModel)
 		{
 			IUser user = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
 
