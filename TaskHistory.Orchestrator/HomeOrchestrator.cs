@@ -22,6 +22,11 @@ namespace TaskHistory.Orchestrator
 			return newUser;
 		}
 
+		public UserSuccessfulRegisteredViewModel OrchestrateRegisterUser (UserRegistrationParameters userRegistrationParameters)
+		{
+			
+		}
+
 		public HomeOrchestrator (IUserRepo userRepo)
 		{
 			_userRepo = userRepo;

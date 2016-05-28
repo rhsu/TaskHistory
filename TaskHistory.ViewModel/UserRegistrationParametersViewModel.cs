@@ -2,7 +2,10 @@
 
 namespace TaskHistory.ViewModel.Users
 {
-	public class UserRegisterViewModel
+	/// <summary>
+	/// View Model for the parameters needed to register a User
+	/// </summary>
+	public class UserRegistrationParametersViewModel
 	{
 		[Display(Name = "User Name:")]
 		//[Required] 
@@ -22,7 +25,7 @@ namespace TaskHistory.ViewModel.Users
 		[Display(Name = "Email:")]
 		public string Email { get; set; }
 
-		public UserRegisterViewModel ()
+		public UserRegistrationParametersViewModel ()
 		{
 		}
 	}

@@ -30,11 +30,12 @@ namespace TaskHistory.Controllers
 
 			if (user == null) 
 			{
-				return RedirectToAction ("Index");
+				return View ("Index");//RedirectToAction ("Index");
 			} 
 			else 
 			{
-				return RedirectToAction ("Something");
+				// return RedirectToAction ("Something");
+				return View ("Index");
 			}
 
 			return RedirectToAction ("Index");
