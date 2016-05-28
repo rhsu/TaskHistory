@@ -40,7 +40,14 @@
     <Compile Include="TasksComplex\ITaskComplex.cs" />
     <Compile Include="TasksComplex\ITaskComplexRepo.cs" />
     <Compile Include="Users\IUserRepo.cs" />
+    <Compile Include="Sql\IFromDataReaderFactory.cs" />
+    <Compile Include="Sql\ISqlDataReader.cs" />
     <Compile Include="ViewRepos\ITaskViewRepo.cs" />
+    <Compile Include="Sql\ISqlDataParameter.cs" />
+    <Compile Include="Configuration\IConfigurationProvider.cs" />
+    <Compile Include="Sql\IDataReaderProvider.cs" />
+    <Compile Include="Sql\INonQueryDataProvider.cs" />
+    <Compile Include="Sql\IDataProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -48,6 +55,8 @@
     <Folder Include="Users\" />
     <Folder Include="Labels\" />
     <Folder Include="TasksComplex\" />
+    <Folder Include="Sql\" />
     <Folder Include="ViewRepos\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 </Project>

@@ -1,24 +1,27 @@
 ﻿using System;
 using TaskHistory.Api.Labels;
 using MySql.Data.MySqlClient;
+using TaskHistory.Api.Sql;
+using TaskHistory.Impl.Sql;
 
-namespace TaskHistory.Impl
+namespace TaskHistory.Impl.Labels
 {
-	public class LabelFactory
+	public class LabelFactory : BaseFromDataReaderFactory<ILabel>
 	{
-		public ILabel CreateLabel(MySqlDataReader reader)
+		public LabelFactory (SqlDataReaderFactory dataReaderFactory)
+			: base()
+		{
+		}
+
+		public override ILabel CreateTypeFromDataReader(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");
 			
-			int labelId = Convert.ToInt32 (reader ["labelId"]);
-			string name = reader ["name"].ToString ();
+			int labelId = reader.GetInt ("labelId");
+			string name = reader.GetString ("name");
 
 			return new Label (labelId, name);
-		}
-
-		public LabelFactory ()
-		{
 		}
 	}
 }
