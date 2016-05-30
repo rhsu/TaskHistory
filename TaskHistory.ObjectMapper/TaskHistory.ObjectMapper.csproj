@@ -34,6 +34,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ObjectMapperUser.cs" />
     <Compile Include="ObjectMapperTasks.cs" />
+    <Compile Include="Users\ObjectMapperUsers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -49,5 +50,8 @@
       <Project>{012C3866-D51D-4917-AFC6-1B7AD7DD6FC7}</Project>
       <Name>TaskHistory.ViewModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Users\" />
   </ItemGroup>
 </Project>
