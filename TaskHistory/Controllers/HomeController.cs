@@ -26,21 +26,34 @@ namespace TaskHistory.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult RegisterUser (UserRegistrationParametersViewModel userRegisterViewModel)
 		{
-			var status = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
+			UserRegistrationStatusViewModel status = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
+
+			/*if (status.ContainsErrors) 
+			{
+				return View ("Index", status);
+			} 
+			else 
+			{
+			}*/
+
+			/* if null (return View ("Index", with some message"Didn't work"
+			 * else
+			 * return RedirectToAction ("Successfully Registered"
+			 * /
 
 			/*IUser user = null;
 
 			if (user == null) 
 			{
-				return View ("Index");//RedirectToAction ("Index");
+				return View ("Index");
 			} 
 			else 
 			{
-				// return RedirectToAction ("Something");
-				return View ("Index");
+				return RedirectToAction ("Something");
+
 			}*/
 
-			return RedirectToAction ("Index");
+			//return RedirectToAction ("Index", new );
 		}
 
 		public HomeController(HomeOrchestrator homeOrchestrator)

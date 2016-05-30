@@ -21,9 +21,7 @@ namespace TaskHistory.Orchestrator
 
 			UserRegistrationStatusViewModel registrationStatus = _userObjectMapper.Map (newUser, vmUserRegister);
 
-			//return newUser;
-
-			throw new NotImplementedException ("This is not implemented yet");
+			return registrationStatus;
 		}
 
 		public HomeOrchestrator (IUserRepo userRepo, ObjectMapperUsers userObjectMapper)
