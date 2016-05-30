@@ -26,7 +26,9 @@ namespace TaskHistory.Controllers
 		[ValidateAntiForgeryToken]
 		public ActionResult RegisterUser (UserRegistrationParametersViewModel userRegisterViewModel)
 		{
-			IUser user = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
+			var status = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
+
+			/*IUser user = null;
 
 			if (user == null) 
 			{
@@ -36,7 +38,7 @@ namespace TaskHistory.Controllers
 			{
 				// return RedirectToAction ("Something");
 				return View ("Index");
-			}
+			}*/
 
 			return RedirectToAction ("Index");
 		}

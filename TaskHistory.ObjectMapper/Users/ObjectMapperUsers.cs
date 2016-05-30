@@ -20,6 +20,19 @@ namespace TaskHistory.ObjectMapper.Users
 			return returnVal;
 		}
 
+		public UserRegistrationStatusViewModel Map (IUser newUser, UserRegistrationParametersViewModel vmUserRegister)
+		{
+			// newUser == null means that the user was unable to be registered.
+			// currently the only thing that would cause this to happen is because of a duplicate user name.
+
+			if (vmUserRegister == null)
+				throw new ArgumentNullException ("vmUserRegister");
+
+
+
+			return null;
+		}
+
 		public ObjectMapperUsers ()
 		{
 		}
