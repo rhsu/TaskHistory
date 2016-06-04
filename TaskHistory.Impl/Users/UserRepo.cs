@@ -34,18 +34,21 @@ namespace TaskHistoryImpl.Users
 			}
 		}
 
-		// TODO Too many parameters https://github.com/rhsu/TaskHistory/issues/82
-		public IUser RegisterUser (string username, string password, string firstName, string lastName, string email)
+		// TODO Refactor using the new DataProvider
+		public IUser RegisterUser (UserRegistrationParameters userParams)
 		{
+			if (userParams == null)
+				throw new ArgumentNullException ("userParams");
+
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand("Users_Insert", connection))
 			{
 				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pUsername", username));
-				command.Parameters.Add (new MySqlParameter ("pPassword", password));
-				command.Parameters.Add (new MySqlParameter ("pFirstName", firstName));
-				command.Parameters.Add (new MySqlParameter ("pLastName", lastName));			
-				command.Parameters.Add (new MySqlParameter ("pEmail", email));
+				command.Parameters.Add (new MySqlParameter ("pUsername", userParams.Username));
+				command.Parameters.Add (new MySqlParameter ("pPassword", userParams.Password));
+				command.Parameters.Add (new MySqlParameter ("pFirstName", userParams.FirstName));
+				command.Parameters.Add (new MySqlParameter ("pLastName", userParams.LastName));			
+				command.Parameters.Add (new MySqlParameter ("pEmail", userParams.Email));
 				command.Connection.Open ();
 
 				using (MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection)) 

@@ -48,6 +48,7 @@
     <Compile Include="Sql\IDataReaderProvider.cs" />
     <Compile Include="Sql\INonQueryDataProvider.cs" />
     <Compile Include="Sql\IDataProvider.cs" />
+    <Compile Include="Users\DTOs\UserRegistrationParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -58,5 +59,6 @@
     <Folder Include="Sql\" />
     <Folder Include="ViewRepos\" />
     <Folder Include="Configuration\" />
+    <Folder Include="Users\DTOs\" />
   </ItemGroup>
 </Project>
