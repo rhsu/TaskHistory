@@ -30,12 +30,14 @@ namespace TaskHistory.Impl.Test
 			otherTask.SetupGet (mock => mock.Content).Returns (taskContent);
 			otherTask.SetupGet (mock => mock.IsCompleted).Returns (isCompleted);
 
+			otherTask.Setup (mock => mock.Equals(It.IsAny<Object>())).Returns(true);
+
 			// TODO Make need a SO Question I have no idea what is going on here.
-			// bool b = _task.Equals (otherTask.Object);
+			bool b = _task.Equals (otherTask.Object);
 
-			// bool c = otherTask.Object.Equals (_task);
+			bool c = otherTask.Object.Equals (_task);
 
-			Assert.Equals (otherTask.Object, _task);
+			Assert.AreEqual (otherTask.Object, _task);
 		}
 
 		[Test]
