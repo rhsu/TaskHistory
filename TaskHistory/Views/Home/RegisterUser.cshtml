@@ -1,7 +1,9 @@
 ﻿@using TaskHistory.ViewModel.Users;
-@model UserRegisterViewModel
+@model UserRegistrationParametersViewModel
 
 <div class="container">
+<p class="bg-danger">@ViewBag.Status</p>
+
 @using (Html.BeginForm("RegisterUser", "Home"))
 {
 	@Html.AntiForgeryToken()

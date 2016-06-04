@@ -15,10 +15,8 @@ namespace TaskHistory.Controllers
 		private HomeOrchestrator _homeOrchestrator;
 
 		[HttpGet]
-		public ActionResult Index (UserRegistrationStatusViewModel confirmationViewModel)
+		public ActionResult Index ()
 		{
-			ViewBag.UserRegistered = confirmationViewModel;
-
 			return View ();
 		}
 
@@ -28,32 +26,16 @@ namespace TaskHistory.Controllers
 		{
 			UserRegistrationStatusViewModel status = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
 
-			/*if (status.ContainsErrors) 
+			if (status.ContainsErrors) 
 			{
-				return View ("Index", status);
-			} 
-			else 
-			{
-			}*/
+				ViewBag.Status = "The user already exists. Please log in in or choose a different user name.";
 
-			/* if null (return View ("Index", with some message"Didn't work"
-			 * else
-			 * return RedirectToAction ("Successfully Registered"
-			 * /
-
-			/*IUser user = null;
-
-			if (user == null) 
-			{
 				return View ("Index");
 			} 
 			else 
 			{
-				return RedirectToAction ("Something");
-
-			}*/
-
-			//return RedirectToAction ("Index", new );
+				return RedirectToAction ("Index", "Task");
+			}
 		}
 
 		public HomeController(HomeOrchestrator homeOrchestrator)

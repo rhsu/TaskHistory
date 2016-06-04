@@ -13,13 +13,22 @@ namespace TaskHistory.Orchestrator
 		public UserRegistrationStatusViewModel OrchestrateRegisterUser (UserRegistrationParametersViewModel vmUserRegister)
 		{
 			if (vmUserRegister == null)
-				throw new NullReferenceException ("userParamsViewModel");
+				throw new ArgumentNullException ("userParamsViewModel");
 
 			UserRegistrationParameters userParams = _userObjectMapper.Map (vmUserRegister);
+			if (userParams == null)
+				throw new NullReferenceException ("Null returned from ObjectMapperUser");
 
 			IUser newUser = _userRepo.RegisterUser (userParams);
+			// user repo returning null is not an error. Indicates that the user exists already. 
+			// Probably should be a better way to indicate this
+			//if (newUser == null)
+			//	throw new NullReferenceException ("Null returned from UserRepo");
 
 			UserRegistrationStatusViewModel registrationStatus = _userObjectMapper.Map (newUser, vmUserRegister);
+			if (registrationStatus == null)
+				throw new NullReferenceException ("Null returned from ObjectMapperUser");
+
 
 			return registrationStatus;
 		}

@@ -28,9 +28,17 @@ namespace TaskHistory.ObjectMapper.Users
 			if (vmUserRegister == null)
 				throw new ArgumentNullException ("vmUserRegister");
 
+			bool containsErrors = false;
 
+			if (newUser == null)
+				containsErrors = true;
 
-			return null;
+			var returnVal = new UserRegistrationStatusViewModel (containsErrors, 
+				vmUserRegister.FirstName, 
+				vmUserRegister.Username,
+				vmUserRegister.Email);
+
+			return returnVal;
 		}
 
 		public ObjectMapperUsers ()
