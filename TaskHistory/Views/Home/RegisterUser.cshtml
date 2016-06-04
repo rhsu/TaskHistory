@@ -2,7 +2,11 @@
 @model UserRegistrationParametersViewModel
 
 <div class="container">
-<p class="bg-danger">@ViewBag.Status</p>
+<p class="bg-danger">@ViewBag.ErrorStatus</p>
+
+<!--TODO: ViewBag for successStatus doesn't work. Maybe should use temp data?: -->
+<!-- see http://stackoverflow.com/questions/14497711/set-viewbag-before-redirect -->
+<p class="bg-success">@ViewBag.SuccessStatus</p>
 
 @using (Html.BeginForm("RegisterUser", "Home"))
 {

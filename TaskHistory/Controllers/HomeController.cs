@@ -28,13 +28,15 @@ namespace TaskHistory.Controllers
 
 			if (status.ContainsErrors) 
 			{
-				ViewBag.Status = "The user already exists. Please log in in or choose a different user name.";
+				ViewBag.ErrorStatus = "The user already exists. Please log in in or choose a different user name.";
 
 				return View ("Index");
 			} 
 			else 
 			{
-				return RedirectToAction ("Index", "Task");
+				ViewBag.SuccessStatus = "You are successfully registered";
+
+				return RedirectToAction ("Index");
 			}
 		}
 
