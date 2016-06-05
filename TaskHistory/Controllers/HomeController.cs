@@ -15,29 +15,29 @@ namespace TaskHistory.Controllers
 		private HomeOrchestrator _homeOrchestrator;
 
 		[HttpGet]
-		public ActionResult Index (UserSuccessfulRegisteredViewModel confirmationViewModel)
+		public ActionResult Index ()
 		{
-			ViewBag.UserRegistered = confirmationViewModel;
-
 			return View ();
 		}
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult RegisterUser (UserRegisterViewModel userRegisterViewModel)
+		public ActionResult RegisterUser (UserRegistrationParametersViewModel userRegisterViewModel)
 		{
-			IUser user = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
+			UserRegistrationStatusViewModel status = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
 
-			/* if (user == null) 
+			if (status.ContainsErrors) 
 			{
-				return RedirectToAction ("Index");
+				ViewBag.ErrorStatus = "The user already exists. Please log in in or choose a different user name.";
+
+				return View ("Index");
 			} 
 			else 
 			{
-				return RedirectToAction ("Something");
-			}*/
+				ViewBag.SuccessStatus = "You are successfully registered";
 
-			return RedirectToAction ("Index");
+				return RedirectToAction ("Index");
+			}
 		}
 
 		public HomeController(HomeOrchestrator homeOrchestrator)
