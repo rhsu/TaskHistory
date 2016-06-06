@@ -48,18 +48,18 @@ namespace TaskHistory.Impl.Tasks
 
 			return returnVal;
 		}
-
-		// TODO: https://github.com/rhsu/TaskHistory/issues/51
-		public void UpdateTask (ITask newTaskDto)
+			
+		public void UpdateTask (TaskUpdatingParameters taskParameterDto)
 		{
-			if (newTaskDto == null)
-				throw new ArgumentNullException ("newTaskDto");
+			if (taskParameterDto == null)
+				throw new ArgumentNullException ("taskParameterDto");
 
 			var parameters = new List<ISqlDataParameter> ();
 
-			parameters.Add (_paramFactory.CreateParameter ("pContent", newTaskDto.Content));
-			parameters.Add (_paramFactory.CreateParameter ("pIsCompleted", newTaskDto.IsCompleted));
-			parameters.Add (_paramFactory.CreateParameter ("pTaskId", newTaskDto.TaskId));
+			parameters.Add (_paramFactory.CreateParameter ("pContent", taskParameterDto.Content));
+			parameters.Add (_paramFactory.CreateParameter ("pIsCompleted", taskParameterDto.IsCompleted));
+			parameters.Add (_paramFactory.CreateParameter ("pIsDeleted", taskParameterDto.IsDeleted));
+			parameters.Add (_paramFactory.CreateParameter ("pTaskId", taskParameterDto.TaskId));
 
 			_nonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);
 		}
