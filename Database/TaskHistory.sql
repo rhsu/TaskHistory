@@ -1,4 +1,4 @@
--- MySQL dump 10.13  Distrib 5.5.49, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.49, for debian-linux-gnu (i686)
 --
 -- Host: localhost    Database: TaskHistory
 -- ------------------------------------------------------
@@ -284,14 +284,14 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Update`(IN `pContent` VARCHAR(128), IN `pIsCompleted` BIT(1), IN `pIsActive` BIT(1), IN `pTaskID` INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Update`(IN `pContent` VARCHAR(128), IN `pIsCompleted` BIT(1), IN `pIsDeleted` BIT(1), IN `pTaskID` INT)
     NO SQL
     DETERMINISTIC
 UPDATE `Tasks`
 SET
 	`Content` = `pContent`
     ,`IsCompleted` = `pIsCompleted`
-    ,`IsActive` = `pIsActive`
+    ,`Deleted` = `pIsDeleted`
     ,`ModifiedDate` = NOW()
 WHERE
 	`TaskID` = `pTaskID` ;;
@@ -384,4 +384,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-13 19:24:53
+-- Dump completed on 2016-06-06 15:24:50
