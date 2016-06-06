@@ -55,17 +55,17 @@
     <Compile Include="Users\UserFactory.cs" />
     <Compile Include="ViewRepos\TaskViewRepo.cs" />
     <Compile Include="Sql\DataParameter.cs" />
-    <Compile Include="Sql\DataParameterFactory.cs" />
-    <Compile Include="Sql\SqlDataReaderFactory.cs" />
     <Compile Include="Sql\SqlDataReader.cs" />
-    <Compile Include="Sql\SqlParameterFactory.cs" />
     <Compile Include="Sql\SqlDataParameter.cs" />
     <Compile Include="Configuration\ConfigurationProvider.cs" />
-    <Compile Include="Sql\ApplicationDataLayer.cs" />
     <Compile Include="Sql\BaseDataProvider.cs" />
-    <Compile Include="Sql\BaseFromDataReaderFactory.cs" />
     <Compile Include="Sql\NonQueryDataProvider.cs" />
-    <Compile Include="Sql\DataProvider.cs" />
+    <Compile Include="Sql\Factories\BaseFromDataReaderFactory.cs" />
+    <Compile Include="Sql\Factories\DataParameterFactory.cs" />
+    <Compile Include="Sql\Factories\SqlDataReaderFactory.cs" />
+    <Compile Include="Sql\Factories\SqlParameterFactory.cs" />
+    <Compile Include="Sql\DataReaderProvider.cs" />
+    <Compile Include="Sql\ApplicationDataProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -76,6 +76,7 @@
     <Folder Include="Sql\" />
     <Folder Include="ViewRepos\" />
     <Folder Include="Configuration\" />
+    <Folder Include="Sql\Factories\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

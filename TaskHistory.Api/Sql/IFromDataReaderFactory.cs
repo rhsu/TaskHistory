@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TaskHistory.Api.Sql
+﻿namespace TaskHistory.Api.Sql
 {
 	public interface IFromDataReaderFactory<T>
 	{

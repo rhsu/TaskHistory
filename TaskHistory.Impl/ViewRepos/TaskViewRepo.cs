@@ -19,11 +19,11 @@ namespace TaskHistory.Impl.ViewRepos
 
 		private readonly TaskFactory _taskFactory;
 		private readonly SqlParameterFactory _paramFactory;
-		private readonly IDataProvider _dataLayer;
+		private readonly IDataReaderProvider _dataLayer;
 
 		public TaskViewRepo (TaskFactory taskFactory,
 			SqlParameterFactory paramFactory,
-			IDataProvider dataLayer)
+			IDataReaderProvider dataLayer)
 		{
 			_taskFactory = taskFactory;
 			_paramFactory = paramFactory;

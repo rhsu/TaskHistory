@@ -20,7 +20,7 @@ namespace TaskHistory.Impl.Tasks
 		private const string NullFromDataProvider = "Null returned from DataProvider";
 
 		private readonly TaskFactory _taskFactory;
-		private readonly IDataProvider _dataLayer;
+		private readonly IDataReaderProvider _dataReaderProvider;
 		private readonly SqlParameterFactory _paramFactory;
 		private readonly INonQueryDataProvider _nonQueryDataProvider;
 
@@ -28,7 +28,7 @@ namespace TaskHistory.Impl.Tasks
 		{
 			ISqlDataParameter parameter = _paramFactory.CreateParameter ("pTaskContent", taskContent);
 
-			var returnVal = _dataLayer.ExecuteReaderForSingleType<ITask> (_taskFactory, CreateStoredProcedure, parameter);
+			var returnVal = _dataReaderProvider.ExecuteReaderForSingleType<ITask> (_taskFactory, CreateStoredProcedure, parameter);
 			if (returnVal == null)
 				throw new NullReferenceException (NullFromDataProvider);
 
@@ -42,7 +42,7 @@ namespace TaskHistory.Impl.Tasks
 
 			var parameter = _paramFactory.CreateParameter("pUserId", user.UserId);
 
-			var returnVal = _dataLayer.ExecuteReaderForTypeCollection<ITask> (_taskFactory, ReadStoredProcedure, parameter);
+			var returnVal = _dataReaderProvider.ExecuteReaderForTypeCollection<ITask> (_taskFactory, ReadStoredProcedure, parameter);
 			if (returnVal == null)
 				throw new NullReferenceException (NullFromDataProvider);
 
@@ -74,11 +74,11 @@ namespace TaskHistory.Impl.Tasks
 		public TaskRepo (TaskFactory taskFactory, 
 			SqlParameterFactory paramFactory,
 			INonQueryDataProvider nonQueryDataProvider,
-			IDataProvider dataLayer)
+			IDataReaderProvider dataLayer)
 		{
 			_taskFactory = taskFactory;
 			_paramFactory = paramFactory;
-			_dataLayer = dataLayer;
+			_dataReaderProvider = dataLayer;
 		}
 	}
 }
