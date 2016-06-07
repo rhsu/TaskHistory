@@ -7,6 +7,10 @@ using System.Data;
 
 namespace TaskHistory.Impl.Sql
 {
+	/// <summary>
+	/// Provider that communicates with a mysql database for nonqueries
+	/// Consider using ApplicationDataProxy instead of using this class directly
+	/// </summary>
 	public class NonQueryDataProvider : BaseDataProvider, INonQueryDataProvider
 	{
 		private readonly IConfigurationProvider _configurationProvider;

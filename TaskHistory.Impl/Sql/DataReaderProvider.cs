@@ -8,6 +8,10 @@ using TaskHistory.Api.Configuration;
 
 namespace TaskHistory.Impl.Sql
 {
+	/// <summary>
+	/// Provider that communicates with a my sql database for reading data 
+	/// Consider using ApplicationDataProxy instead of using this class directly
+	/// </summary>
 	public class DataReaderProvider : BaseDataProvider, IDataReaderProvider
 	{
 		private readonly SqlDataReaderFactory _sqlDataReaderFactory;
