@@ -81,8 +81,8 @@ namespace TaskHistory.Impl.Labels
 		public LabelRepo (LabelFactory labelFactory, 
 			ApplicationDataProxy applicationDataProxy)
 		{
-			_labelFactory = labelFactory;
 			_applicationDataProxy = applicationDataProxy;
+			_labelFactory = labelFactory;
 		}
 	}
 }

@@ -36,7 +36,7 @@ namespace TaskHistory.Impl.Sql
 			if (collection == null)
 				throw new NullReferenceException (NullFromExecuteReaderForTypeCollection);
 
-			return collection.First ();
+			return collection.FirstOrDefault ();
 		}
 
 		public T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory, 
@@ -56,7 +56,7 @@ namespace TaskHistory.Impl.Sql
 			if (collection == null)
 				throw new NullReferenceException (NullFromExecuteReaderForTypeCollection);
 
-			return collection.First ();
+			return collection.FirstOrDefault ();
 		}
 
 		public IEnumerable<T> ExecuteReaderForTypeCollection<T> (IFromDataReaderFactory<T> factory,

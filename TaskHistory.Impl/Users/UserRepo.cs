@@ -1,16 +1,70 @@
 ﻿using System;
 using TaskHistory.Api.Users;
-using MySql.Data.MySqlClient;
-using System.Data;
-using System.Configuration;
+using TaskHistory.Impl.Sql;
+using TaskHistory.Api.Sql;
+using System.Collections.Generic;
 
 namespace TaskHistoryImpl.Users
 {
 	public class UserRepo : IUserRepo
 	{
+		private const string UserRegisterStoredProcedure = "Users_Insert";
+		private const string UserValidateStoredProcedure = "User_Validate";
+
 		private readonly UserFactory _userFactory;
+		private readonly ApplicationDataProxy _dataProxy;
 
 		public IUser ValidateUsernameAndPassword (string username, string password)
+		{
+			if (username == null || username == string.Empty)
+				return ArgumentNullException ("username");
+
+			if (username == password || password == string.Empty)
+				return ArgumentNullException ("password");
+
+			return null;
+		}
+
+		public IUser RegisterUser (UserRegistrationParameters userParams)
+		{
+			if (userParams == null)
+				throw new NullReferenceException ("userParams");
+
+			var parameters = CreateDataParameterCollectionFromUserParams (userParams);
+			if (parameters == null)
+				throw new NullReferenceException ("Null returned from CreatingDataParameterCollectionFromUserParams");
+
+			var registeredUser = _dataProxy.DataReaderProvider.ExecuteReaderForSingleType (_userFactory,
+									UserRegisterStoredProcedure,
+				                     parameters);
+
+			// null from dataProxy means that the user is already registered
+
+			return registeredUser;
+		}
+
+		public static IEnumerable<ISqlDataReader> CreateDataParameterCollectionFromUserParams(
+			UserRegistrationParameters userParams,
+			SqlParameterFactory paramFactory)
+		{
+			if (userParams == null)
+				throw new ArgumentNullException ("userParams");
+
+			if (paramFactory == null)
+				throw new ArgumentNullException ("paramFactory");
+			
+			var returnVal = new List<ISqlDataParameter> ();
+
+			returnVal.Add (paramFactory.CreateParameter("pUsername", userParams.Username));
+			returnVal.Add (paramFactory.CreateParameter ("pPassword", userParams.Password));
+			returnVal.Add (paramFactory.CreateParameter ("pEmail", userParams.Email));
+			returnVal.Add (paramFactory.CreateParameter ("pFirstName", userParams.FirstName));
+			returnVal.Add (paramFactory.CreateParameter ("pLastName", userParams.LastName));
+
+			return returnVal;
+		}
+
+		/*public IUser ValidateUsernameAndPassword (string username, string password)
 		{
 			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
 			using (var command = new MySqlCommand ("User_Validate", connection)) 
@@ -63,11 +117,12 @@ namespace TaskHistoryImpl.Users
 					return user;
 				}
 			}
-		}
+		}*/
 
-		public UserRepo (UserFactory userFactory)
+		public UserRepo (UserFactory userFactory, ApplicationDataProxy dataProxy)
 		{
 			_userFactory = userFactory;
+			_dataProxy = dataProxy;
 		}
 	}
 }

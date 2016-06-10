@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Api.Users
 {
