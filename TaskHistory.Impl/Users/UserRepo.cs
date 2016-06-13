@@ -17,12 +17,21 @@ namespace TaskHistoryImpl.Users
 		public IUser ValidateUsernameAndPassword (string username, string password)
 		{
 			if (username == null || username == string.Empty)
-				return ArgumentNullException ("username");
+				throw new ArgumentNullException ("username");
 
 			if (username == password || password == string.Empty)
-				return ArgumentNullException ("password");
+				throw new  ArgumentNullException ("password");
 
-			return null;
+			var parameters = new List<ISqlDataParameter> ();
+
+			parameters.Add(_dataProxy.ParamFactory.CreateParameter ("pUsername", username));
+			parameters.Add (_dataProxy.ParamFactory.CreateParameter ("pPassword", password));
+
+			var validatedUser = _dataProxy.DataReaderProvider.ExecuteReaderForSingleType (_userFactory,
+				                    UserValidateStoredProcedure,
+				                    parameters);
+
+			return validatedUser;
 		}
 
 		public IUser RegisterUser (UserRegistrationParameters userParams)
@@ -30,7 +39,7 @@ namespace TaskHistoryImpl.Users
 			if (userParams == null)
 				throw new NullReferenceException ("userParams");
 
-			var parameters = CreateDataParameterCollectionFromUserParams (userParams);
+			var parameters = CreateDataParameterCollectionFromUserParams (userParams, _dataProxy.ParamFactory);
 			if (parameters == null)
 				throw new NullReferenceException ("Null returned from CreatingDataParameterCollectionFromUserParams");
 
@@ -43,7 +52,7 @@ namespace TaskHistoryImpl.Users
 			return registeredUser;
 		}
 
-		public static IEnumerable<ISqlDataReader> CreateDataParameterCollectionFromUserParams(
+		public static IEnumerable<ISqlDataParameter> CreateDataParameterCollectionFromUserParams(
 			UserRegistrationParameters userParams,
 			SqlParameterFactory paramFactory)
 		{
@@ -64,60 +73,6 @@ namespace TaskHistoryImpl.Users
 			return returnVal;
 		}
 
-		/*public IUser ValidateUsernameAndPassword (string username, string password)
-		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand ("User_Validate", connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pUsername", username));
-				command.Parameters.Add (new MySqlParameter ("pPassword", password));
-				command.Connection.Open ();
-
-				using (var reader = command.ExecuteReader (CommandBehavior.CloseConnection)) 
-				{
-					IUser user = null;
-
-					if (reader.Read ()) 
-					{
-						user = _userFactory.CreateUser (reader);
-					}
-
-					return user;
-				}
-			}
-		}
-
-		// TODO Refactor using the new DataProvider
-		public IUser RegisterUser (UserRegistrationParameters userParams)
-		{
-			if (userParams == null)
-				throw new ArgumentNullException ("userParams");
-
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand("Users_Insert", connection))
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pUsername", userParams.Username));
-				command.Parameters.Add (new MySqlParameter ("pPassword", userParams.Password));
-				command.Parameters.Add (new MySqlParameter ("pFirstName", userParams.FirstName));
-				command.Parameters.Add (new MySqlParameter ("pLastName", userParams.LastName));			
-				command.Parameters.Add (new MySqlParameter ("pEmail", userParams.Email));
-				command.Connection.Open ();
-
-				using (MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection)) 
-				{
-					IUser user = null;
-
-					if (reader.Read ()) 
-					{
-						user = _userFactory.CreateUser (reader);
-					}
-
-					return user;
-				}
-			}
-		}*/
 
 		public UserRepo (UserFactory userFactory, ApplicationDataProxy dataProxy)
 		{
