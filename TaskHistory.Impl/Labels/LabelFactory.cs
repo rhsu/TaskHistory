@@ -8,7 +8,7 @@ namespace TaskHistory.Impl.Labels
 {
 	public class LabelFactory : BaseFromDataReaderFactory<ILabel>
 	{
-		public LabelFactory (SqlDataReaderFactory dataReaderFactory)
+		public LabelFactory ()
 			: base()
 		{
 		}

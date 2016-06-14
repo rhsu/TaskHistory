@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TaskHistory.Api.Users
+﻿namespace TaskHistory.Api.Users
 {
 	public class UserRegistrationParameters
 	{

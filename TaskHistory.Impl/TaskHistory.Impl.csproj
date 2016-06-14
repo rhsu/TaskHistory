@@ -65,7 +65,7 @@
     <Compile Include="Sql\Factories\SqlDataReaderFactory.cs" />
     <Compile Include="Sql\Factories\SqlParameterFactory.cs" />
     <Compile Include="Sql\DataReaderProvider.cs" />
-    <Compile Include="Sql\ApplicationDataProvider.cs" />
+    <Compile Include="Sql\Proxies\ApplicationDataProxy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -77,6 +77,7 @@
     <Folder Include="ViewRepos\" />
     <Folder Include="Configuration\" />
     <Folder Include="Sql\Factories\" />
+    <Folder Include="Sql\Proxies\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

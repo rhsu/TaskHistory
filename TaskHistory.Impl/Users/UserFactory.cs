@@ -1,21 +1,27 @@
 ﻿using System;
 using TaskHistory.Api.Users;
-using MySql.Data.MySqlClient;
+using TaskHistory.Impl.Sql;
+using TaskHistory.Api.Sql;
 
-namespace TaskHistoryImpl
+namespace TaskHistory.Impl.Users
 {
-	public class UserFactory
+	public class UserFactory : BaseFromDataReaderFactory<IUser>
 	{
-		public IUser CreateUser (MySqlDataReader reader)
+		public UserFactory ()
+			: base()
+		{
+		}
+
+		public override IUser CreateTypeFromDataReader(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");
 
-			int userId = Convert.ToInt32 (reader ["UserId"]);
-			string userName = reader ["Username"].ToString ();
-			string firstName = reader ["FirstName"].ToString ();
-			string lastName = reader ["LastName"].ToString ();
-			string email = reader ["Email"].ToString ();
+			int userId = reader.GetInt ("userId");
+			string userName = reader.GetString ("userName");
+			string firstName = reader.GetString ("firstName");
+			string lastName = reader.GetString ("lastName");
+			string email = reader.GetString ("email");
 
 			return new User (userId, userName, firstName, lastName, email);
 		}

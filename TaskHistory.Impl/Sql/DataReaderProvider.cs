@@ -8,6 +8,10 @@ using TaskHistory.Api.Configuration;
 
 namespace TaskHistory.Impl.Sql
 {
+	/// <summary>
+	/// Provider that communicates with a my sql database for reading data 
+	/// Consider using ApplicationDataProxy instead of using this class directly
+	/// </summary>
 	public class DataReaderProvider : BaseDataProvider, IDataReaderProvider
 	{
 		private readonly SqlDataReaderFactory _sqlDataReaderFactory;
@@ -32,7 +36,7 @@ namespace TaskHistory.Impl.Sql
 			if (collection == null)
 				throw new NullReferenceException (NullFromExecuteReaderForTypeCollection);
 
-			return collection.First ();
+			return collection.FirstOrDefault ();
 		}
 
 		public T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory, 
@@ -52,7 +56,7 @@ namespace TaskHistory.Impl.Sql
 			if (collection == null)
 				throw new NullReferenceException (NullFromExecuteReaderForTypeCollection);
 
-			return collection.First ();
+			return collection.FirstOrDefault ();
 		}
 
 		public IEnumerable<T> ExecuteReaderForTypeCollection<T> (IFromDataReaderFactory<T> factory,

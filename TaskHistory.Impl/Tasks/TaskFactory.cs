@@ -9,7 +9,7 @@ namespace TaskHistory.Impl.Tasks
 {
 	public class TaskFactory : BaseFromDataReaderFactory<ITask>
 	{
-		public TaskFactory (SqlDataReaderFactory dataReaderFactory)
+		public TaskFactory ()
 			: base ()
 		{
 		}
