@@ -1,7 +1,7 @@
 ﻿using System;
 using TaskHistory.Api.Users;
 
-namespace TaskHistoryImpl
+namespace TaskHistory.Impl.Users
 {
 	public class User : IUser
 	{

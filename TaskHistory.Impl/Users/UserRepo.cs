@@ -3,6 +3,7 @@ using TaskHistory.Api.Users;
 using TaskHistory.Impl.Sql;
 using TaskHistory.Api.Sql;
 using System.Collections.Generic;
+using TaskHistory.Impl.Users;
 
 namespace TaskHistoryImpl.Users
 {
@@ -31,6 +32,7 @@ namespace TaskHistoryImpl.Users
 				                    UserValidateStoredProcedure,
 				                    parameters);
 
+			//null means that the user is not valid
 			return validatedUser;
 		}
 
@@ -48,7 +50,6 @@ namespace TaskHistoryImpl.Users
 				                     parameters);
 
 			// null from dataProxy means that the user is already registered
-
 			return registeredUser;
 		}
 

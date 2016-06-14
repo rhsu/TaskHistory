@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using TaskHistory.Api.Sql;
-
-namespace TaskHistory.Api.Users
+﻿namespace TaskHistory.Api.Users
 {
 	public class UserRegistrationParameters
 	{

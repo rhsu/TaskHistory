@@ -3,7 +3,7 @@ using TaskHistory.Api.Users;
 using TaskHistory.Impl.Sql;
 using TaskHistory.Api.Sql;
 
-namespace TaskHistoryImpl
+namespace TaskHistory.Impl.Users
 {
 	public class UserFactory : BaseFromDataReaderFactory<IUser>
 	{
