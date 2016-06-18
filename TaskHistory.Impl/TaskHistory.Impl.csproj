@@ -66,6 +66,7 @@
     <Compile Include="Sql\Factories\SqlParameterFactory.cs" />
     <Compile Include="Sql\DataReaderProvider.cs" />
     <Compile Include="Sql\Proxies\ApplicationDataProxy.cs" />
+    <Compile Include="History\HistoryItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -78,6 +79,7 @@
     <Folder Include="Configuration\" />
     <Folder Include="Sql\Factories\" />
     <Folder Include="Sql\Proxies\" />
+    <Folder Include="History\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

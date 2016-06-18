@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskRepoTest.cs" />
+    <Compile Include="History\HistoryItemTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -50,5 +51,8 @@
       <Project>{72D931D2-0537-4089-A50A-D7E2622073A2}</Project>
       <Name>TaskHistory.Impl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="History\" />
   </ItemGroup>
 </Project>
