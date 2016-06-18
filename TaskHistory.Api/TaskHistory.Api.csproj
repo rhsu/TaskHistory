@@ -49,6 +49,10 @@
     <Compile Include="Users\DTOs\UserRegistrationParameters.cs" />
     <Compile Include="Tasks\DTOs\TaskUpdatingParameters.cs" />
     <Compile Include="Sql\IDataReaderProvider.cs" />
+    <Compile Include="History\IHistoryItem.cs" />
+    <Compile Include="History\IHistoryRepo.cs" />
+    <Compile Include="History\enumerations\ActionType.cs" />
+    <Compile Include="History\enumerations\BusinessObjectType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -61,5 +65,7 @@
     <Folder Include="Configuration\" />
     <Folder Include="Users\DTOs\" />
     <Folder Include="Tasks\DTOs\" />
+    <Folder Include="History\" />
+    <Folder Include="History\enumerations\" />
   </ItemGroup>
 </Project>
