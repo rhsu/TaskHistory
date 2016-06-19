@@ -15,12 +15,12 @@ namespace TaskHistory.Impl.Test
 		private const int userId = 34;
 		private const string userName = "User12";
 
-		private HistoryItem itemUnderTest;
+		private HistoryItem objectUnderTest;
 
 		[SetUp]
 		public void Init()
 		{
-			itemUnderTest = new HistoryItem (historyId,
+			objectUnderTest = new HistoryItem (historyId,
 				actionDate,
 				actionDone,
 				businessObjType,
@@ -31,43 +31,43 @@ namespace TaskHistory.Impl.Test
 		[Test]
 		public void ConstructorTest()
 		{
-			Assert.NotNull (itemUnderTest);
+			Assert.NotNull (objectUnderTest);
 		}
 			
 		[Test]
 		public void HistoryIdAccTest()
 		{
-			Assert.Equals (itemUnderTest.HistoryId, historyId);
+			Assert.AreEqual (objectUnderTest.HistoryId, historyId);
 		}
 
 		[Test]
 		public void ActionDateAccTest()
 		{
-			Assert.Equals (itemUnderTest.ActionDate, actionDate);
+			Assert.AreEqual (objectUnderTest.ActionDate, actionDate);
 		}
 
 		[Test]
 		public void ActionDoneAccTest()
 		{
-			Assert.Equals (itemUnderTest.ActionDone, actionDone);
+			Assert.AreEqual (objectUnderTest.ActionDone, actionDone);
 		}
 
 		[Test]
 		public void BusinessObjectAccTest()
 		{
-			Assert.Equals (itemUnderTest.BusinessObject, businessObjType);
+			Assert.AreEqual (objectUnderTest.BusinessObject, businessObjType);
 		}
 
 		[Test]
 		public void UserIdAccTest()
 		{
-			Assert.Equals (itemUnderTest.UserId, userId);
+			Assert.AreEqual (objectUnderTest.UserId, userId);
 		}
 
 		[Test]
 		public void UserNameAccTest()
 		{
-			Assert.Equals (itemUnderTest.UserName, userName);
+			Assert.AreEqual (objectUnderTest.UserName, userName);
 		}
 	}
 }
