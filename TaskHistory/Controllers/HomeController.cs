@@ -49,9 +49,18 @@ namespace TaskHistory.Controllers
 		[HttpPost]
 		public ActionResult LoginUser(UserLoginViewModel userLoginViewModel)
 		{
-			FormsAuthentication.SetAuthCookie ("robert", false);
+			if (userLoginViewModel == null)
+				throw new ArgumentNullException ("userLoginViewModel");
 
-			return RedirectToAction ("Index", "Tasks");
+			IUser user = _homeOrchestrator.OrchestrateValidateUser (userLoginViewModel);
+
+			if (user != null) 
+			{
+				FormsAuthentication.SetAuthCookie (user.Username, false);
+				return RedirectToAction ("Index", "Tasks");
+			}
+				
+			return RedirectToAction ("Index");
 		}
 
 		public HomeController(HomeOrchestrator homeOrchestrator)

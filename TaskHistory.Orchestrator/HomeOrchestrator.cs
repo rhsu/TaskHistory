@@ -20,10 +20,8 @@ namespace TaskHistory.Orchestrator
 				throw new NullReferenceException ("Null returned from ObjectMapperUser");
 
 			IUser newUser = _userRepo.RegisterUser (userParams);
-			// user repo returning null is not an error. Indicates that the user exists already. 
+			// user repo returning null is not an exception. Indicates that the user exists already. 
 			// Probably should be a better way to indicate this
-			//if (newUser == null)
-			//	throw new NullReferenceException ("Null returned from UserRepo");
 
 			UserRegistrationStatusViewModel registrationStatus = _userObjectMapper.Map (newUser, vmUserRegister);
 			if (registrationStatus == null)
@@ -31,6 +29,18 @@ namespace TaskHistory.Orchestrator
 
 
 			return registrationStatus;
+		}
+
+		public IUser OrchestrateValidateUser (UserLoginViewModel userLoginViewModel)
+		{
+			if (userLoginViewModel == null)
+				throw new ArgumentNullException ("userLoginViewModel");
+
+			IUser user = _userRepo.ValidateUsernameAndPassword (userLoginViewModel.Username, userLoginViewModel.Password);
+			// user repo returning null is not an exception. Indicates that the username/password combination is not correct.
+			// Probably should be a better way to indicate this
+
+			return user;
 		}
 
 		public HomeOrchestrator (IUserRepo userRepo, ObjectMapperUsers userObjectMapper)
