@@ -8,6 +8,7 @@ using TaskHistory.Api.Tasks;
 
 namespace TaskHistory.Controllers
 {
+	[Authorize]
     public class TasksController : Controller
     {
 		private TasksOrchestrator _taskOrchestrator;
