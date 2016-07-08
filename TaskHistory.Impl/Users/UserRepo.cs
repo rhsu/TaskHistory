@@ -20,7 +20,7 @@ namespace TaskHistoryImpl.Users
 			if (username == null || username == string.Empty)
 				throw new ArgumentNullException ("username");
 
-			if (username == password || password == string.Empty)
+			if (username == null || password == string.Empty)
 				throw new  ArgumentNullException ("password");
 
 			var parameters = new List<ISqlDataParameter> ();
