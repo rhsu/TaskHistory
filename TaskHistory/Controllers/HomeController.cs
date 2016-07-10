@@ -7,6 +7,7 @@ using System.Web.Mvc.Ajax;
 using TaskHistory.Orchestrator;
 using TaskHistory.ViewModel.Users;
 using TaskHistory.Api.Users;
+using System.Web.Security;
 
 namespace TaskHistory.Controllers
 {
@@ -15,27 +16,51 @@ namespace TaskHistory.Controllers
 		private HomeOrchestrator _homeOrchestrator;
 
 		[HttpGet]
-		public ActionResult Index (UserSuccessfulRegisteredViewModel confirmationViewModel)
+		public ActionResult Index ()
 		{
-			ViewBag.UserRegistered = confirmationViewModel;
-
 			return View ();
 		}
 
 		[HttpPost]
-		public ActionResult RegisterUser (UserRegisterViewModel userRegisterViewModel)
+		[ValidateAntiForgeryToken]
+		public ActionResult RegisterUser (UserRegistrationParametersViewModel userRegisterViewModel)
 		{
-			IUser user = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
+			if (userRegisterViewModel == null)
+				throw new ArgumentNullException ("userRegisterViewModel");
 
-			/* if (user == null) 
+			UserRegistrationStatusViewModel status = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
+			if (status == null)
+				throw new NullReferenceException ("Null returned from Home Orchestrator when registering user");
+
+			if (status.ContainsErrors) 
 			{
-				return RedirectToAction ("Index");
+				ViewBag.ErrorStatus = "The user already exists. Please log in in or choose a different user name.";
+
+				return View ("Index");
 			} 
 			else 
 			{
-				return RedirectToAction ("Something");
-			}*/
+				ViewBag.SuccessStatus = "You are successfully registered";
 
+				return RedirectToAction ("Index");
+			}
+		}
+
+		[HttpPost]
+		public ActionResult LoginUser(UserLoginViewModel userLoginViewModel)
+		{
+			if (userLoginViewModel == null)
+				throw new ArgumentNullException ("userLoginViewModel");
+
+			IUser user = _homeOrchestrator.OrchestrateValidateUser (userLoginViewModel);
+
+			if (user != null) 
+			{
+				FormsAuthentication.SetAuthCookie (user.Username, false);
+				Session ["CurrentUser"] = user;
+				return RedirectToAction ("Index", "Tasks");
+			}
+				
 			return RedirectToAction ("Index");
 		}
 

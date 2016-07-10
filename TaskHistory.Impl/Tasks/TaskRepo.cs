@@ -4,9 +4,9 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
-using TaskHistory.Impl.MySql;
 using TaskHistory.Impl.Tasks;
-using System.Configuration;
+using TaskHistory.Api.Sql;
+using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Tasks
 {
@@ -17,92 +17,76 @@ namespace TaskHistory.Impl.Tasks
 		private const string UpdateStoredProcedure = "Tasks_Update";
 		private const string DeleteStoredProcedure = "Tasks_Delete";
 
+		private const string NullFromApplicationDataProxy = "Null returned from DataProvider";
+
 		private readonly TaskFactory _taskFactory;
+		private readonly ApplicationDataProxy _dataProxy;
 
-		public ITask CreateNewTask (string taskContent)
+		public ITask CreateNewTaskForUser (IUser user, string taskContent)
 		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pTaskContent", taskContent));
-				command.Connection.Open ();
+			if (user == null)
+				throw new ArgumentNullException ("user");
 
-				using (var reader = command.ExecuteReader (CommandBehavior.CloseConnection)) 
-				{
-					ITask task = null;
+			if (taskContent == null)
+				throw new ArgumentNullException ("taskContent");
 
-					if (reader.Read ()) 
-					{
-						task = _taskFactory.CreateTask (reader);
-					}
+			var parameters = new List<ISqlDataParameter> ();
+			var paramFactory = _dataProxy.ParamFactory;
 
-					return task;
-				}
-			}
+			parameters.Add (paramFactory.CreateParameter ("pTaskContent", taskContent));
+			parameters.Add (paramFactory.CreateParameter ("pUserId", user.UserId));
+
+			var returnVal = _dataProxy
+				.DataReaderProvider
+				.ExecuteReaderForSingleType<ITask> (_taskFactory, CreateStoredProcedure, parameters);
+			if (returnVal == null)
+				throw new NullReferenceException (NullFromApplicationDataProxy);
+
+			return returnVal;
 		}
 
-		[Obsolete]
 		public IEnumerable<ITask> ReadTasksForUser (IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
 
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand(ReadStoredProcedure, connection))
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
-				command.Connection.Open ();
+			var parameter = _dataProxy.ParamFactory.CreateParameter("pUserId", user.UserId);
 
-				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
+			var returnVal = _dataProxy.DataReaderProvider.ExecuteReaderForTypeCollection<ITask> (_taskFactory, ReadStoredProcedure, parameter);
+			if (returnVal == null)
+				throw new NullReferenceException (NullFromApplicationDataProxy);
 
-				List<ITask> returnVal = new List<ITask> ();
-
-				while (reader.Read ()) 
-				{
-					ITask task = _taskFactory.CreateTask (reader);
-					returnVal.Add (task);
-				}
-
-				return returnVal;
-			}
+			return returnVal;
 		}
-
-		public void UpdateTask (ITask newTaskDto)
+			
+		public void UpdateTask (TaskUpdatingParameters taskParameterDto)
 		{
-			if (newTaskDto == null)
-				throw new ArgumentNullException ("newTaskDto");
+			if (taskParameterDto == null)
+				throw new ArgumentNullException ("taskParameterDto");
 
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (UpdateStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pContent", newTaskDto.Content));
-				command.Parameters.Add (new MySqlParameter ("pIsCompleted", newTaskDto.IsCompleted));
-				// TODO: https://github.com/rhsu/TaskHistory/issues/51
-				command.Parameters.Add (new MySqlParameter ("pTaskID", newTaskDto.TaskId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-			}
+			var parameters = new List<ISqlDataParameter> ();
+			var paramFactory = _dataProxy.ParamFactory;
+
+			parameters.Add (paramFactory.CreateParameter ("pContent", taskParameterDto.Content));
+			parameters.Add (paramFactory.CreateParameter ("pIsCompleted", taskParameterDto.IsCompleted));
+			parameters.Add (paramFactory.CreateParameter ("pIsDeleted", taskParameterDto.IsDeleted));
+			parameters.Add (paramFactory.CreateParameter ("pTaskId", taskParameterDto.TaskId));
+
+			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);
 		}
 
 		public void DeleteTask (int taskId)
 		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (DeleteStoredProcedure)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pTaskId", taskId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-			}
+			var parameter = _dataProxy.ParamFactory.CreateParameter ("pTaskId", taskId);
+
+			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 
-		public TaskRepo (TaskFactory taskFactory)
+		public TaskRepo (TaskFactory taskFactory, 
+			ApplicationDataProxy applicationDataProxy)
 		{
 			_taskFactory = taskFactory;
+			_dataProxy = applicationDataProxy;
 		}
 	}
 }
-

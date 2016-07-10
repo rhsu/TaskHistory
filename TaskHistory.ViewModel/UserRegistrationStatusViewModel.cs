@@ -2,18 +2,17 @@
 
 namespace TaskHistory.ViewModel.Users
 {
-	public class UserSuccessfulRegisteredViewModel
+	/// <summary>
+	/// View Model Representing the status to display after a user requests a registration
+	/// </summary>UserRegistrationParametersViewModel
+	public class UserRegistrationStatusViewModel
 	{
 		public bool ContainsErrors { get; }
 		public string FirstName { get; }
 		public string Username { get; }
 		public string Email { get; }
 
-		public UserSuccessfulRegisteredViewModel()
-		{
-		}
-
-		public UserSuccessfulRegisteredViewModel (bool containsErrors, 
+		public UserRegistrationStatusViewModel (bool containsErrors, 
 			string firstName, 
 			string userName, 
 			string email)

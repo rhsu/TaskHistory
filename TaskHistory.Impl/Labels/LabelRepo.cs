@@ -2,66 +2,49 @@
 using System.Collections.Generic;
 using TaskHistory.Api.Labels;
 using TaskHistory.Api.Users;
-using TaskHistory.Impl.MySql;
 using MySql.Data.MySqlClient;
 using System.Data;
-using System.Configuration;
+using TaskHistory.Impl.Sql;
+using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Labels
 {
 	public class LabelRepo : ILabelRepo
 	{
 		private readonly LabelFactory _labelFactory;
+		private readonly ApplicationDataProxy _applicationDataProxy;
 
 		private const string CreateStoredProcedure = "Labels_Insert";
 		private const string ReadStoredProcedure = "Labels_For_User_Select";
 		private const string UpdateStoredProcedure = "Labels_Update";
 		private const string DeleteStoredProcedure = "Labels_Logical_Delete";
 
+		private const string NullFromApplicationDataProxy = "Null returned from ApplicationDataProxy";
+
 		public ILabel CreateNewLabel (string content)
 		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (CreateStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add(new MySqlParameter("pContent", content));
-				command.Connection.Open ();
+			var contentParameter = _applicationDataProxy.ParamFactory.CreateParameter ("pContent", content);
 
-				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-				ILabel label = null;
+			var returnVal = _applicationDataProxy.DataReaderProvider.ExecuteReaderForSingleType (_labelFactory, CreateStoredProcedure, contentParameter);
+			if (returnVal == null)
+				throw new NullReferenceException (NullFromApplicationDataProxy);
 
-				if (reader.Read ()) 
-				{
-					label = _labelFactory.CreateLabel (reader);
-				}
-				return label;
-			}
+			return returnVal;
 		}
 
-		[Obsolete]
 		public IEnumerable<ILabel> ReadAllLabelsForUser(IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
 
-			var returnVal = new List<ILabel> ();
+			var userIdParam = _applicationDataProxy.ParamFactory.CreateParameter ("pUserId", user.UserId);
+			if (userIdParam == null)
+				throw new NullReferenceException (NullFromApplicationDataProxy);
 
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (ReadStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pUserId", user.UserId));
-				command.Connection.Open ();
+			var returnVal = _applicationDataProxy.DataReaderProvider.ExecuteReaderForTypeCollection (_labelFactory, ReadStoredProcedure, userIdParam);
+			if (returnVal == null)
+				throw new NullReferenceException (NullFromApplicationDataProxy);
 
-				MySqlDataReader reader = command.ExecuteReader (CommandBehavior.CloseConnection);
-
-				while (reader.Read ()) 
-				{
-					ILabel label = _labelFactory.CreateLabel (reader);
-					returnVal.Add (label);
-				}
-			}
-				
 			return returnVal;
 		}
 
@@ -70,33 +53,35 @@ namespace TaskHistory.Impl.Labels
 			if (labelDto == null)
 				throw new ArgumentNullException ("labelDto");
 
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (UpdateStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pContent", labelDto.Name));
-				command.Parameters.Add (new MySqlParameter ("pLabelId", labelDto.LabelId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-				command.Connection.Close ();
-			}
+			var parameters = new List<ISqlDataParameter> ();
+
+			var contentParam = _applicationDataProxy.ParamFactory.CreateParameter("pContent", labelDto.Name);
+			if (contentParam == null)
+				throw new NullReferenceException (NullFromApplicationDataProxy);
+
+			var labelParam = _applicationDataProxy.ParamFactory.CreateParameter("pLabelId", labelDto.LabelId);
+			if (labelParam == null)
+				throw new NullReferenceException (NullFromApplicationDataProxy);
+
+			parameters.Add (contentParam);
+			parameters.Add (labelParam);
+
+			_applicationDataProxy.NonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);
 		}
 
 		public void DeleteLabel(int labelId)
 		{
-			using (var connection = new MySqlConnection (ConfigurationManager.AppSettings ["MySqlConnection"]))
-			using (var command = new MySqlCommand (DeleteStoredProcedure, connection)) 
-			{
-				command.CommandType = CommandType.StoredProcedure;
-				command.Parameters.Add (new MySqlParameter ("pLabelId", labelId));
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
-				command.Connection.Close ();
-			}
+			var parameter = _applicationDataProxy.ParamFactory.CreateParameter ("pLabelId", labelId);
+			if (parameter == null)
+				throw new NullReferenceException (NullFromApplicationDataProxy);
+
+			_applicationDataProxy.NonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 
-		public LabelRepo (LabelFactory labelFactory)
+		public LabelRepo (LabelFactory labelFactory, 
+			ApplicationDataProxy applicationDataProxy)
 		{
+			_applicationDataProxy = applicationDataProxy;
 			_labelFactory = labelFactory;
 		}
 	}

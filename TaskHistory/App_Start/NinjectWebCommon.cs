@@ -63,7 +63,11 @@ namespace TaskHistory.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-			TaskHistoryBindings.BindAll (kernel);
+			var bindings = TaskHistoryBindings.GetInstance ();
+			if (bindings == null)
+				throw new NullReferenceException ("Null returned from TaskHistoryBindings");
+
+			bindings.DoAllBindings (kernel);
         }        
     }
 }

@@ -44,27 +44,40 @@
     <Compile Include="Tasks\Task.cs" />
     <Compile Include="Tasks\TaskFactory.cs" />
     <Compile Include="Tasks\TaskRepo.cs" />
-    <Compile Include="MySql\MySqlCommandFactory.cs" />
     <Compile Include="Labels\Label.cs" />
     <Compile Include="Labels\LabelRepo.cs" />
     <Compile Include="Labels\LabelFactory.cs" />
     <Compile Include="TasksComplex\TaskComplex.cs" />
     <Compile Include="TasksComplex\TaskComplexRepo.cs" />
     <Compile Include="TasksComplex\TaskComplexFactory.cs" />
-    <Compile Include="MySql\AbstractMySqlRepo.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\UserRepo.cs" />
     <Compile Include="Users\UserFactory.cs" />
     <Compile Include="ViewRepos\TaskViewRepo.cs" />
+    <Compile Include="Sql\DataParameter.cs" />
+    <Compile Include="Sql\SqlDataReader.cs" />
+    <Compile Include="Sql\SqlDataParameter.cs" />
+    <Compile Include="Configuration\ConfigurationProvider.cs" />
+    <Compile Include="Sql\BaseDataProvider.cs" />
+    <Compile Include="Sql\NonQueryDataProvider.cs" />
+    <Compile Include="Sql\Factories\BaseFromDataReaderFactory.cs" />
+    <Compile Include="Sql\Factories\DataParameterFactory.cs" />
+    <Compile Include="Sql\Factories\SqlDataReaderFactory.cs" />
+    <Compile Include="Sql\Factories\SqlParameterFactory.cs" />
+    <Compile Include="Sql\DataReaderProvider.cs" />
+    <Compile Include="Sql\Proxies\ApplicationDataProxy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Tasks\" />
-    <Folder Include="MySql\" />
     <Folder Include="Labels\" />
     <Folder Include="TasksComplex\" />
     <Folder Include="Users\" />
+    <Folder Include="Sql\" />
     <Folder Include="ViewRepos\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Sql\Factories\" />
+    <Folder Include="Sql\Proxies\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
