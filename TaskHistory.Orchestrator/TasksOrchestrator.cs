@@ -11,17 +11,20 @@ namespace TaskHistory.Orchestrator.Tasks
 		private ITaskRepo _taskRepo;
 		private ITaskViewRepo _taskViewRepo;
 
-		public IEnumerable<ITask> OrchestratorGetTasks (IUser theUser)
+		public IEnumerable<ITask> OrchestratorGetTasks (IUser user)
 		{
-			if (theUser == null)
+			if (user == null)
 				throw new ArgumentNullException ("theUser");
 
-			return _taskViewRepo.ReadTasksForUser (theUser);
+			return _taskViewRepo.ReadTasksForUser (user);
 		}
 
-		public ITask OrchestratorCreateTask(string content)
+		public ITask OrchestratorCreateTask(IUser user, string content)
 		{
-			return _taskRepo.CreateNewTask (content);
+			if (user == null)
+				throw new ArgumentNullException ("theUser");
+
+			return _taskRepo.CreateNewTaskForUser (user, content);
 		}
 
 		public TasksOrchestrator (ITaskRepo taskRepo, ITaskViewRepo taskViewRepo)

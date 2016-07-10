@@ -27,7 +27,9 @@ namespace TaskHistory.Controllers
 		[HttpPost]
 		public ActionResult CreateTask(string content)
 		{
-			_taskOrchestrator.OrchestratorCreateTask (content);
+			IUser currentUser = (IUser) Session ["CurrentUser"];
+
+			_taskOrchestrator.OrchestratorCreateTask (currentUser, content);
 
 			return RedirectToAction ("Index");
 		}
