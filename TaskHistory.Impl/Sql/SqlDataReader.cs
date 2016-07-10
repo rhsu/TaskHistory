@@ -17,7 +17,7 @@ namespace TaskHistory.Impl.Sql
 				obj = _reader[propertyName];
 			}
 			// TODO: What exception is this?
-			catch (Exception ex) 
+			catch (Exception) 
 			{
 				// TODO: Create custom excpetion for this.
 				throw new Exception(string.Format("the property name {0} was not found in the dataReader", 

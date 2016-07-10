@@ -45,10 +45,10 @@
     <Compile Include="ViewRepos\ITaskViewRepo.cs" />
     <Compile Include="Sql\ISqlDataParameter.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
-    <Compile Include="Sql\IDataReaderProvider.cs" />
     <Compile Include="Sql\INonQueryDataProvider.cs" />
-    <Compile Include="Sql\IDataProvider.cs" />
     <Compile Include="Users\DTOs\UserRegistrationParameters.cs" />
+    <Compile Include="Tasks\DTOs\TaskUpdatingParameters.cs" />
+    <Compile Include="Sql\IDataReaderProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -60,5 +60,6 @@
     <Folder Include="ViewRepos\" />
     <Folder Include="Configuration\" />
     <Folder Include="Users\DTOs\" />
+    <Folder Include="Tasks\DTOs\" />
   </ItemGroup>
 </Project>

@@ -18,16 +18,13 @@ namespace TaskHistory.Impl.ViewRepos
 		private const string ReadStoredProcedure = "Tasks_Select";
 
 		private readonly TaskFactory _taskFactory;
-		private readonly SqlParameterFactory _paramFactory;
-		private readonly IDataProvider _dataLayer;
+		private readonly ApplicationDataProxy _dataProxy;
 
 		public TaskViewRepo (TaskFactory taskFactory,
-			SqlParameterFactory paramFactory,
-			IDataProvider dataLayer)
+			ApplicationDataProxy dataProxy)
 		{
 			_taskFactory = taskFactory;
-			_paramFactory = paramFactory;
-			_dataLayer = dataLayer;
+			_dataProxy = dataProxy;
 		}
 
 		public IEnumerable<ITask> ReadTasksForUser (IUser user)
@@ -35,9 +32,9 @@ namespace TaskHistory.Impl.ViewRepos
 			if (user == null)
 				throw new ArgumentNullException ("user");
 
-			var parameter = _paramFactory.CreateParameter("pUserId", user.UserId);
+			var parameter = _dataProxy.ParamFactory.CreateParameter("pUserId", user.UserId);
 
-			var returnVal = _dataLayer.ExecuteReaderForTypeCollection (_taskFactory, ReadStoredProcedure, parameter);
+			var returnVal = _dataProxy.DataReaderProvider.ExecuteReaderForTypeCollection (_taskFactory, ReadStoredProcedure, parameter);
 			if (returnVal == null)
 				throw new NullReferenceException ("Null returned from dataLayer");
 

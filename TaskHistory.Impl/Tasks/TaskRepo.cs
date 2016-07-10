@@ -17,20 +17,20 @@ namespace TaskHistory.Impl.Tasks
 		private const string UpdateStoredProcedure = "Tasks_Update";
 		private const string DeleteStoredProcedure = "Tasks_Delete";
 
-		private const string NullFromDataProvider = "Null returned from DataProvider";
+		private const string NullFromApplicationDataProxy = "Null returned from DataProvider";
 
 		private readonly TaskFactory _taskFactory;
-		private readonly IDataProvider _dataLayer;
-		private readonly SqlParameterFactory _paramFactory;
-		private readonly INonQueryDataProvider _nonQueryDataProvider;
+		private readonly ApplicationDataProxy _dataProxy;
 
 		public ITask CreateNewTask (string taskContent)
 		{
-			ISqlDataParameter parameter = _paramFactory.CreateParameter ("pTaskContent", taskContent);
+			ISqlDataParameter parameter = _dataProxy.ParamFactory.CreateParameter ("pTaskContent", taskContent);
 
-			var returnVal = _dataLayer.ExecuteReaderForSingleType<ITask> (_taskFactory, CreateStoredProcedure, parameter);
+			var returnVal = _dataProxy
+				.DataReaderProvider
+				.ExecuteReaderForSingleType<ITask> (_taskFactory, CreateStoredProcedure, parameter);
 			if (returnVal == null)
-				throw new NullReferenceException (NullFromDataProvider);
+				throw new NullReferenceException (NullFromApplicationDataProxy);
 
 			return returnVal;
 		}
@@ -40,45 +40,43 @@ namespace TaskHistory.Impl.Tasks
 			if (user == null)
 				throw new ArgumentNullException ("user");
 
-			var parameter = _paramFactory.CreateParameter("pUserId", user.UserId);
+			var parameter = _dataProxy.ParamFactory.CreateParameter("pUserId", user.UserId);
 
-			var returnVal = _dataLayer.ExecuteReaderForTypeCollection<ITask> (_taskFactory, ReadStoredProcedure, parameter);
+			var returnVal = _dataProxy.DataReaderProvider.ExecuteReaderForTypeCollection<ITask> (_taskFactory, ReadStoredProcedure, parameter);
 			if (returnVal == null)
-				throw new NullReferenceException (NullFromDataProvider);
+				throw new NullReferenceException (NullFromApplicationDataProxy);
 
 			return returnVal;
 		}
-
-		// TODO: https://github.com/rhsu/TaskHistory/issues/51
-		public void UpdateTask (ITask newTaskDto)
+			
+		public void UpdateTask (TaskUpdatingParameters taskParameterDto)
 		{
-			if (newTaskDto == null)
-				throw new ArgumentNullException ("newTaskDto");
+			if (taskParameterDto == null)
+				throw new ArgumentNullException ("taskParameterDto");
 
 			var parameters = new List<ISqlDataParameter> ();
+			var paramFactory = _dataProxy.ParamFactory;
 
-			parameters.Add (_paramFactory.CreateParameter ("pContent", newTaskDto.Content));
-			parameters.Add (_paramFactory.CreateParameter ("pIsCompleted", newTaskDto.IsCompleted));
-			parameters.Add (_paramFactory.CreateParameter ("pTaskId", newTaskDto.TaskId));
+			parameters.Add (paramFactory.CreateParameter ("pContent", taskParameterDto.Content));
+			parameters.Add (paramFactory.CreateParameter ("pIsCompleted", taskParameterDto.IsCompleted));
+			parameters.Add (paramFactory.CreateParameter ("pIsDeleted", taskParameterDto.IsDeleted));
+			parameters.Add (paramFactory.CreateParameter ("pTaskId", taskParameterDto.TaskId));
 
-			_nonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);
+			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);
 		}
 
 		public void DeleteTask (int taskId)
 		{
-			var parameter = _paramFactory.CreateParameter ("pTaskId", taskId);
+			var parameter = _dataProxy.ParamFactory.CreateParameter ("pTaskId", taskId);
 
-			_nonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
+			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 
 		public TaskRepo (TaskFactory taskFactory, 
-			SqlParameterFactory paramFactory,
-			INonQueryDataProvider nonQueryDataProvider,
-			IDataProvider dataLayer)
+			ApplicationDataProxy applicationDataProxy)
 		{
 			_taskFactory = taskFactory;
-			_paramFactory = paramFactory;
-			_dataLayer = dataLayer;
+			_dataProxy = applicationDataProxy;
 		}
 	}
 }
