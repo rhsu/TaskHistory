@@ -82,6 +82,7 @@
     <Folder Include="Views\About\" />
     <Folder Include="Views\Tasks\" />
     <Folder Include="Scripts\Tasks\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Helpers\HtmlHelperExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
