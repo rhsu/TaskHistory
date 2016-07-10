@@ -11,16 +11,20 @@ namespace TaskHistory.Orchestrator.Tasks
 		private ITaskRepo _taskRepo;
 		private ITaskViewRepo _taskViewRepo;
 
-		public IEnumerable<ITask> OrchestratorGetTasks()
+		public IEnumerable<ITask> OrchestratorGetTasks (IUser user)
 		{
-			var fakeUser = new FakeTempUser ();
+			if (user == null)
+				throw new ArgumentNullException ("theUser");
 
-			return _taskViewRepo.ReadTasksForUser (fakeUser);
+			return _taskViewRepo.ReadTasksForUser (user);
 		}
 
-		public ITask OrchestratorCreateTask(string content)
+		public ITask OrchestratorCreateTask(IUser user, string content)
 		{
-			return _taskRepo.CreateNewTask (content);
+			if (user == null)
+				throw new ArgumentNullException ("theUser");
+
+			return _taskRepo.CreateNewTaskForUser (user, content);
 		}
 
 		public TasksOrchestrator (ITaskRepo taskRepo, ITaskViewRepo taskViewRepo)
@@ -29,26 +33,4 @@ namespace TaskHistory.Orchestrator.Tasks
 			_taskViewRepo = taskViewRepo;
 		}
 	}
-
-	// TODO: https://github.com/rhsu/TaskHistory/issues/57
-	public class FakeTempUser : IUser
-	{
-		public int UserId { get; }
-		public string Username { get; }
-		public string FirstName { get; }
-		public string LastName { get; }
-		public string FullName { get; }
-		public string Email { get; }
-
-		public FakeTempUser()
-		{
-			this.UserId = 1;
-			this.Username = "User Name";
-			this.FirstName = "First Name";
-			this.LastName = "Last Name";
-			this.FullName = "Full Name";
-			this.Email = "Email";
-		}
-	}
 }
-
