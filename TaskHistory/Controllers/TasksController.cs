@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TaskHistory.Orchestrator.Tasks;
 using TaskHistory.Api.Tasks;
+using TaskHistory.Api.Users;
 
 namespace TaskHistory.Controllers
 {
@@ -16,7 +17,9 @@ namespace TaskHistory.Controllers
 		[HttpGet]
         public ActionResult Index()
         {
-			var vmTasks = _taskOrchestrator.OrchestratorGetTasks ();
+			IUser currentUser = (IUser) Session ["CurrentUser"];
+
+			var vmTasks = _taskOrchestrator.OrchestratorGetTasks (currentUser);
 
 			return View (vmTasks);
         }

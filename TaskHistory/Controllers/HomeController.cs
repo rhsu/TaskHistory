@@ -57,6 +57,7 @@ namespace TaskHistory.Controllers
 			if (user != null) 
 			{
 				FormsAuthentication.SetAuthCookie (user.Username, false);
+				Session ["CurrentUser"] = user;
 				return RedirectToAction ("Index", "Tasks");
 			}
 				
