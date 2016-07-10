@@ -22,13 +22,23 @@ namespace TaskHistory.Impl.Tasks
 		private readonly TaskFactory _taskFactory;
 		private readonly ApplicationDataProxy _dataProxy;
 
-		public ITask CreateNewTask (string taskContent)
+		public ITask CreateNewTaskForUser (IUser user, string taskContent)
 		{
-			ISqlDataParameter parameter = _dataProxy.ParamFactory.CreateParameter ("pTaskContent", taskContent);
+			if (user == null)
+				throw new ArgumentNullException ("user");
+
+			if (taskContent == null)
+				throw new ArgumentNullException ("taskContent");
+
+			var parameters = new List<ISqlDataParameter> ();
+			var paramFactory = _dataProxy.ParamFactory;
+
+			parameters.Add (paramFactory.CreateParameter ("pTaskContent", taskContent));
+			parameters.Add (paramFactory.CreateParameter ("pUserId", user.UserId));
 
 			var returnVal = _dataProxy
 				.DataReaderProvider
-				.ExecuteReaderForSingleType<ITask> (_taskFactory, CreateStoredProcedure, parameter);
+				.ExecuteReaderForSingleType<ITask> (_taskFactory, CreateStoredProcedure, parameters);
 			if (returnVal == null)
 				throw new NullReferenceException (NullFromApplicationDataProxy);
 
