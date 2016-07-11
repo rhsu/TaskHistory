@@ -3,7 +3,7 @@ using TaskHistory.Api.Users;
 using TaskHistory.ViewModel.Users;
 using TaskHistory.ObjectMapper.Users;
 
-namespace TaskHistory.Orchestrator
+namespace TaskHistory.Orchestrator.Home
 {
 	public class HomeOrchestrator
 	{
@@ -20,6 +20,7 @@ namespace TaskHistory.Orchestrator
 				throw new NullReferenceException ("Null returned from ObjectMapperUser");
 
 			IUser newUser = _userRepo.RegisterUser (userParams);
+			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
 			// user repo returning null is not an exception. Indicates that the user exists already. 
 			// Probably should be a better way to indicate this
 
@@ -37,6 +38,7 @@ namespace TaskHistory.Orchestrator
 				throw new ArgumentNullException ("userLoginViewModel");
 
 			IUser user = _userRepo.ValidateUsernameAndPassword (userLoginViewModel.Username, userLoginViewModel.Password);
+			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
 			// user repo returning null is not an exception. Indicates that the username/password combination is not correct.
 			// Probably should be a better way to indicate this
 
