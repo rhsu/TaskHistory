@@ -60,6 +60,13 @@ namespace TaskHistory.Controllers
 			return RedirectToAction ("Index");
 		}
 
+		[HttpGet]
+		public ActionResult Logout()
+		{
+			FormsAuthentication.SignOut ();
+			return RedirectToAction ("Index");
+		}
+
 		public HomeController(HomeOrchestrator homeOrchestrator)
 		{
 			_homeOrchestrator = homeOrchestrator;
