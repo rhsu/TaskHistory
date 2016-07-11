@@ -64,6 +64,10 @@ namespace TaskHistory.Controllers
 		public ActionResult Logout()
 		{
 			FormsAuthentication.SignOut ();
+
+
+			// This is a RedirectToAction rather than a View("Index") because 
+			// View keeps the url as Home/Logout whereas this will clear the Url
 			return RedirectToAction ("Index");
 		}
 
