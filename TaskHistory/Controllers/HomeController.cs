@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
-using TaskHistory.Orchestrator;
-using TaskHistory.ViewModel.Users;
-using TaskHistory.Api.Users;
 using System.Web.Security;
+using System.Web.Mvc;
+using TaskHistory.Api.Users;
+using TaskHistory.ViewModel.Users;
+using TaskHistory.Orchestrator.Home;
 
 namespace TaskHistory.Controllers
 {
