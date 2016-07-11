@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 namespace TaskHistory.Impl.Sql
 {
-	// RH [TODO] Wrap DataReaderProvider, NonQueryDataProvider, and ParamFactory together since they are always used together
+	/// <summary>
+	/// Proxy responsible for communicating with the database including Reading and Writing to the Database
+	/// </summary>
 	public class ApplicationDataProxy
 	{
 		public IDataReaderProvider DataReaderProvider { get; }

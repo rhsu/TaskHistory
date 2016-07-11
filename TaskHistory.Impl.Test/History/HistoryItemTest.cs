@@ -18,7 +18,7 @@ namespace TaskHistory.Impl.Test
 		private HistoryItem objectUnderTest;
 
 		[SetUp]
-		public void Init()
+		public void SetUp()
 		{
 			objectUnderTest = new HistoryItem (historyId,
 				actionDate,
