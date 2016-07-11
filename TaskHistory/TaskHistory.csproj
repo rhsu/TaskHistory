@@ -91,6 +91,7 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\TerminalController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -109,6 +110,7 @@
     <Content Include="Views\Home\UserLogin.cshtml" />
     <Content Include="Views\Shared\Navbar.cshtml" />
     <Content Include="Content\StarterTemplate.css" />
+    <Content Include="Views\Terminal\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
