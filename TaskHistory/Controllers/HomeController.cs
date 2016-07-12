@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
-using TaskHistory.Orchestrator;
-using TaskHistory.ViewModel.Users;
-using TaskHistory.Api.Users;
 using System.Web.Security;
+using System.Web.Mvc;
+using TaskHistory.Api.Users;
+using TaskHistory.ViewModel.Users;
+using TaskHistory.Orchestrator.Home;
 
 namespace TaskHistory.Controllers
 {
@@ -61,6 +57,17 @@ namespace TaskHistory.Controllers
 				return RedirectToAction ("Index", "Tasks");
 			}
 				
+			return RedirectToAction ("Index");
+		}
+
+		[HttpGet]
+		public ActionResult Logout()
+		{
+			FormsAuthentication.SignOut ();
+
+
+			// This is a RedirectToAction rather than a View("Index") because 
+			// View keeps the url as Home/Logout whereas this will clear the Url
 			return RedirectToAction ("Index");
 		}
 

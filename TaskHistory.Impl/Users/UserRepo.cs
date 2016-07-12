@@ -31,7 +31,7 @@ namespace TaskHistoryImpl.Users
 			var validatedUser = _dataProxy.DataReaderProvider.ExecuteReaderForSingleType (_userFactory,
 				                    UserValidateStoredProcedure,
 				                    parameters);
-
+			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
 			//null means that the user is not valid
 			return validatedUser;
 		}
@@ -48,7 +48,7 @@ namespace TaskHistoryImpl.Users
 			var registeredUser = _dataProxy.DataReaderProvider.ExecuteReaderForSingleType (_userFactory,
 									UserRegisterStoredProcedure,
 				                     parameters);
-
+			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
 			// null from dataProxy means that the user is already registered
 			return registeredUser;
 		}
