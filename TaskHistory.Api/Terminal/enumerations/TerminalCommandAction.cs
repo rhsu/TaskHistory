@@ -1,6 +1,6 @@
 ﻿namespace TaskHistory.Api.Terminal
 {
-	public enum TerminalCommandRequest
+	public enum TerminalCommandAction
 	{
 		/// <summary>
 		/// List Command

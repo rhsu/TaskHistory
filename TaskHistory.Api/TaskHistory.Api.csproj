@@ -50,8 +50,10 @@
     <Compile Include="Tasks\DTOs\TaskUpdatingParameters.cs" />
     <Compile Include="Sql\IDataReaderProvider.cs" />
     <Compile Include="Terminal\ITerminalProvider.cs" />
-    <Compile Include="Terminal\enumerations\TerminalCommandResponse.cs" />
-    <Compile Include="Terminal\enumerations\TerminalCommandRequest.cs" />
+    <Compile Include="Terminal\TerminalCommandResponse.cs" />
+    <Compile Include="Terminal\enumerations\TerminalCommandAction.cs" />
+    <Compile Include="Terminal\enumerations\TerminalCommandOption.cs" />
+    <Compile Include="Terminal\enumerations\TerminalRegisteredObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

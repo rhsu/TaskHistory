@@ -2,6 +2,6 @@
 {
 	public interface ITerminalProvider
 	{
-		TerminalCommandRequest ProcessCommand (string requestCommand);
+		TerminalCommandResponse InterpretStringCommand (string requestCommand);
 	}
 }

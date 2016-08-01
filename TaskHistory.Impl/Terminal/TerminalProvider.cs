@@ -5,39 +5,69 @@ namespace TaskHistory.Impl.TerminalProvider
 {
 	public class TerminalProvider : ITerminalProvider
 	{
-		private const string invalidCommandResponse = "Invalid command detected";
-
-		/// <summary>
-		/// Processes a request and returns a response string
-		/// </summary>
-		/// <returns>a response string</returns>
-		/// <param name="requestCommand">Request command.</param>
-		public TerminalCommandRequest ProcessCommand (string requestInput)
+		public TerminalCommandResponse InterpretStringCommand (string requestInput)
 		{
-			/*string[] tokenizedString = requestInput.ToUpper().Trim().Split (',');
+			if (string.IsNullOrEmpty (requestInput))
+				return TerminalCommandResponse.ErrorResponse;
 
-			TerminalRequestCommand requestCommand = TerminalRequestCommand.Error;
+			// 1. Tokenize the string
+			string[] tokenizedString = requestInput.ToUpper().Trim().Split (' ');
+			if (tokenizedString.Length < 2)
+				return TerminalCommandResponse.ErrorResponse;
 
-			Enum.TryParse<TerminalRequestCommand> (tokenizedString [0], requestCommand);
+			// 2. Determine the Action
+			TerminalCommandAction commandAction = DetermineTerminalCommandAction(tokenizedString[0]);
+			if (commandAction == TerminalCommandAction.Error)
+				return TerminalCommandResponse.ErrorResponse;
 
-			switch (requestCommand) 
-			{
+			// 3. Determine the Object
+			TerminalRegisteredObject registeredObject = DetermineTerminalRegisteredObject(tokenizedString[1]);
+			if (registeredObject == TerminalRegisteredObject.Error)
+				return TerminalCommandResponse.ErrorResponse;
+		
+			// 4. Determine the Option
+			TerminalCommandOption commandOption = DetermineTerminalCommandOption(tokenizedString[2]);
 
-			case TerminalRequestCommand.List:
-					break;
-			case TerminalRequestCommand.Delete:
-					break;
-			case TerminalRequestCommand.Insert:
-					break;
-			case TerminalRequestCommand.Update:
-					break;
-			case TerminalRequestCommand.Error:
-					return invalidCommandResponse;
-					break;
-			}*/
+			// 5. Still here? Then let's construct a TerminalCommandResponse
+			// TODO factory me for unit testing
+			var returnVal = new TerminalCommandResponse(commandAction, registeredObject, commandOption);
 
-			throw new NotImplementedException ("Not done yet");
+			return returnVal;
 		}
+
+		private static TerminalCommandAction DetermineTerminalCommandAction(string commandActionString)
+		{
+			if (string.IsNullOrEmpty (commandActionString))
+				return TerminalCommandAction.Error;
+			
+			TerminalCommandAction requestCommand = TerminalCommandAction.Error;
+			Enum.TryParse (commandActionString, out requestCommand);
+
+			return requestCommand;
+		}
+
+		private static TerminalRegisteredObject DetermineTerminalRegisteredObject(string registeredObjectString)
+		{
+			if (string.IsNullOrEmpty (registeredObjectString))
+				return TerminalRegisteredObject.Error;
+
+			TerminalRegisteredObject registeredObject = TerminalRegisteredObject.Error;
+			Enum.TryParse (registeredObjectString, out registeredObject);
+
+			return registeredObject;
+		}
+
+		private static TerminalCommandOption DetermineTerminalCommandOption(string commandOptionString)
+		{
+			if (string.IsNullOrEmpty (commandOptionString))
+				return TerminalCommandOption.None;
+
+			TerminalCommandOption commandOption = TerminalCommandOption.None;
+			Enum.TryParse (commandOptionString, out commandOption);
+
+			return commandOption;
+		}
+
 
 		public TerminalProvider ()
 		{
