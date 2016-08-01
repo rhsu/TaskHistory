@@ -1,30 +1,30 @@
 ﻿namespace TaskHistory.Api.Terminal
 {
-	public enum TerminalRequestCommand
+	public enum TerminalCommandRequest
 	{
 		/// <summary>
 		/// List Command
 		/// </summary>
-		LIST,
+		List,
 
 		/// <summary>
 		/// Update Command
 		/// </summary>
-		UPDATE,
+		Update,
 
 		/// <summary>
 		/// Delete Command
 		/// </summary>
-		DELETE,
+		Delete,
 
 		/// <summary>
 		/// Insert Command
 		/// </summary>
-		INSERT,
+		Insert,
 
 		/// <summary>
 		/// Denotes an error command
 		/// </summary>
-		ERROR
+		Error
 	}
 }

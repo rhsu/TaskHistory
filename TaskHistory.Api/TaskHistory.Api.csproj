@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TaskHistoryApi</RootNamespace>
+    <RootNamespace>TaskHistory.Api</RootNamespace>
     <AssemblyName>TaskHistoryApi</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -49,8 +49,9 @@
     <Compile Include="Users\DTOs\UserRegistrationParameters.cs" />
     <Compile Include="Tasks\DTOs\TaskUpdatingParameters.cs" />
     <Compile Include="Sql\IDataReaderProvider.cs" />
-    <Compile Include="Terminal\enumerations\TerminalRequestCommand.cs" />
     <Compile Include="Terminal\ITerminalProvider.cs" />
+    <Compile Include="Terminal\enumerations\TerminalCommandResponse.cs" />
+    <Compile Include="Terminal\enumerations\TerminalCommandRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

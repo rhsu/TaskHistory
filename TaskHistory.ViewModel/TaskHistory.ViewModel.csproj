@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{012C3866-D51D-4917-AFC6-1B7AD7DD6FC7}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TaskHistoryViewModel</RootNamespace>
+    <RootNamespace>TaskHistory.ViewModel</RootNamespace>
     <AssemblyName>TaskHistoryViewModel</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>

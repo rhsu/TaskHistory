@@ -12,28 +12,29 @@ namespace TaskHistory.Impl.TerminalProvider
 		/// </summary>
 		/// <returns>a response string</returns>
 		/// <param name="requestCommand">Request command.</param>
-		public string ProcessCommand (string requestInput)
+		public TerminalCommandRequest ProcessCommand (string requestInput)
 		{
-			string[] tokenizedString = requestInput.ToUpper().Trim().Split (',');
+			/*string[] tokenizedString = requestInput.ToUpper().Trim().Split (',');
 
-			TerminalRequestCommand requestCommand = TerminalRequestCommand.ERROR;
+			TerminalRequestCommand requestCommand = TerminalRequestCommand.Error;
 
 			Enum.TryParse<TerminalRequestCommand> (tokenizedString [0], requestCommand);
 
 			switch (requestCommand) 
 			{
-				case TerminalRequestCommand.LIST:
+
+			case TerminalRequestCommand.List:
 					break;
-				case TerminalRequestCommand.DELETE:
+			case TerminalRequestCommand.Delete:
 					break;
-				case TerminalRequestCommand.INSERT:
+			case TerminalRequestCommand.Insert:
 					break;
-				case TerminalRequestCommand.UPDATE:
+			case TerminalRequestCommand.Update:
 					break;
-				case TerminalRequestCommand.ERROR:
+			case TerminalRequestCommand.Error:
 					return invalidCommandResponse;
 					break;
-			}
+			}*/
 
 			throw new NotImplementedException ("Not done yet");
 		}
