@@ -67,6 +67,7 @@
     <Compile Include="Sql\DataReaderProvider.cs" />
     <Compile Include="Sql\Proxies\ApplicationDataProxy.cs" />
     <Compile Include="Terminal\TerminalProvider.cs" />
+    <Compile Include="Terminal\TerminalProxyRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

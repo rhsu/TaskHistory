@@ -3,7 +3,7 @@ using System;
 
 namespace TaskHistory.Impl.TerminalProvider
 {
-	public class TerminalProvider : ITerminalProvider
+	public class TerminalProvider : ITerminalInterpreter
 	{
 		public TerminalCommandResponse InterpretStringCommand (string requestInput)
 		{
