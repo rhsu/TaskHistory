@@ -13,7 +13,7 @@ namespace TaskHistoryImpl.Users
 		private const string UserValidateStoredProcedure = "User_Validate";
 
 		private readonly UserFactory _userFactory;
-		private readonly ApplicationDataProxy _dataProxy;
+		private readonly IApplicationDataProxy _dataProxy;
 
 		public IUser ValidateUsernameAndPassword (string username, string password)
 		{
@@ -55,7 +55,7 @@ namespace TaskHistoryImpl.Users
 
 		public static IEnumerable<ISqlDataParameter> CreateDataParameterCollectionFromUserParams(
 			UserRegistrationParameters userParams,
-			SqlParameterFactory paramFactory)
+			ISqlParameterFactory paramFactory)
 		{
 			if (userParams == null)
 				throw new ArgumentNullException ("userParams");
@@ -75,7 +75,7 @@ namespace TaskHistoryImpl.Users
 		}
 
 
-		public UserRepo (UserFactory userFactory, ApplicationDataProxy dataProxy)
+		public UserRepo (UserFactory userFactory, IApplicationDataProxy dataProxy)
 		{
 			_userFactory = userFactory;
 			_dataProxy = dataProxy;

@@ -12,7 +12,7 @@ namespace TaskHistory.Impl.Labels
 	public class LabelRepo : ILabelRepo
 	{
 		private readonly LabelFactory _labelFactory;
-		private readonly ApplicationDataProxy _applicationDataProxy;
+		private readonly IApplicationDataProxy _applicationDataProxy;
 
 		private const string CreateStoredProcedure = "Labels_Insert";
 		private const string ReadStoredProcedure = "Labels_For_User_Select";
@@ -79,7 +79,7 @@ namespace TaskHistory.Impl.Labels
 		}
 
 		public LabelRepo (LabelFactory labelFactory, 
-			ApplicationDataProxy applicationDataProxy)
+			IApplicationDataProxy applicationDataProxy)
 		{
 			_applicationDataProxy = applicationDataProxy;
 			_labelFactory = labelFactory;

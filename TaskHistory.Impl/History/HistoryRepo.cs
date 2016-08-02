@@ -2,12 +2,14 @@
 using TaskHistory.Api.History;
 using System.Collections.Generic;
 using TaskHistory.Impl.Sql;
+using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.History
 {
 	public class HistoryRepo : IHistoryRepo
 	{
-		private ApplicationDataProxy _dataProxy;
+		private IApplicationDataProxy _dataProxy;
+		private IFromDataReaderFactory<IHistoryItem> _historyItemFactory;
 
 		/// <summary>
 		/// Gets all the history for a user
@@ -15,6 +17,12 @@ namespace TaskHistory.Impl.History
 		/// <param name="userId">User identifier.</param>
 		public IEnumerable<IHistoryItem> ReadHistoryForUser(int userId)
 		{
+			var parameters = new List<ISqlDataParameter> ();
+			var paramFactory = _dataProxy.ParamFactory;
+
+			parameters.Add (paramFactory.CreateParameter ("pUserId", userId));
+
+
 			throw new NotImplementedException ("Not implemented");
 		}
 
@@ -45,9 +53,10 @@ namespace TaskHistory.Impl.History
 			throw new NotImplementedException ("Not implemented");
 		}
 
-		public HistoryRepo (ApplicationDataProxy dataProxy)
+		public HistoryRepo (IApplicationDataProxy dataProxy, IFromDataReaderFactory<IHistoryItem> historyItemFactory)
 		{
 			_dataProxy = dataProxy;
+			_historyItemFactory = historyItemFactory;
 		}
 	}
 }

@@ -68,6 +68,7 @@
     <Compile Include="Sql\Proxies\ApplicationDataProxy.cs" />
     <Compile Include="History\HistoryItem.cs" />
     <Compile Include="History\HistoryRepo.cs" />
+    <Compile Include="Sql\Proxies\IApplicationDataProxy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

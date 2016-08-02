@@ -53,6 +53,7 @@
     <Compile Include="History\IHistoryRepo.cs" />
     <Compile Include="History\enumerations\ActionType.cs" />
     <Compile Include="History\enumerations\BusinessObjectType.cs" />
+    <Compile Include="Sql\ISqlParameterFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

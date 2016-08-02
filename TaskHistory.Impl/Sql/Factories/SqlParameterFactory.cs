@@ -3,7 +3,7 @@ using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
-	public class SqlParameterFactory
+	public class SqlParameterFactory : ISqlParameterFactory
 	{
 		public ISqlDataParameter CreateParameter(string paramName, object value)
 		{
