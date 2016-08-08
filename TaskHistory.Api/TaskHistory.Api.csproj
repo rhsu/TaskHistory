@@ -55,6 +55,7 @@
     <Compile Include="Terminal\enumerations\TerminalRegisteredObject.cs" />
     <Compile Include="Terminal\ITerminalInterpreter.cs" />
     <Compile Include="Terminal\ITerminalProxyRepo.cs" />
+    <Compile Include="Terminal\TerminalObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

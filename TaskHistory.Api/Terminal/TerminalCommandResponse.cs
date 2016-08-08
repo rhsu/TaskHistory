@@ -1,5 +1,6 @@
 ﻿namespace TaskHistory.Api.Terminal
 {
+	// TODO This should probably be a struct
 	public class TerminalCommandResponse
 	{
 		private TerminalCommandAction _terminalCommandAction;

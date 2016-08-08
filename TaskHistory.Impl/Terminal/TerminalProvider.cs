@@ -1,5 +1,7 @@
 ﻿using TaskHistory.Api.Terminal;
 using System;
+using System.Collections.Generic;
+using TaskHistory.Api.Users;
 
 namespace TaskHistory.Impl.TerminalProvider
 {
@@ -33,6 +35,68 @@ namespace TaskHistory.Impl.TerminalProvider
 			var returnVal = new TerminalCommandResponse(commandAction, registeredObject, commandOption);
 
 			return returnVal;
+		}
+
+		// Translate TerminalCommandResponse to IEnumerable of TerminalObjects
+		public IEnumerable<TerminalObject> TranslateTerminalCommandResponse(TerminalCommandResponse commandResponse)
+		{
+			if (commandResponse == null)
+				throw new ArgumentNullException ("commandResponse");
+
+			if (commandResponse == TerminalCommandResponse.ErrorResponse)
+				throw new ArgumentOutOfRangeException ("commandResponse", "ErrorResponse detected");
+
+			var returnVal = new List<TerminalObject> ();
+
+			switch (commandResponse.TheObject) 
+			{
+			case TerminalRegisteredObject.Task:
+				break;
+			case TerminalRegisteredObject.User:
+				break;
+			}
+
+			return returnVal;
+		}
+
+
+		public Type DetermineType(int testNum)
+		{
+			switch (testNum) 
+			{
+			case 1:
+				return typeof(IUser);
+			case 2:
+				break;
+			}
+
+			return null;
+		}
+
+		public void Test()
+		{
+			var t = DetermineType (1);
+
+			IEnumerable<t> stuff = new List<t> ();
+		}
+
+		public static IEnumerable<int> TestFunction(int i)
+		{
+			return null;
+		}
+
+
+		public static Func<int, IEnumerable<int>> Test()
+		{
+
+			return TestFunction;
+		}
+
+		public static void Bench()
+		{
+			var thing = Test ();
+
+			thing.Invoke (5);
 		}
 
 		private static TerminalCommandAction DetermineTerminalCommandAction(string commandActionString)
