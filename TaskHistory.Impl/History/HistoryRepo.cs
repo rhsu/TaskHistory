@@ -8,8 +8,10 @@ namespace TaskHistory.Impl.History
 {
 	public class HistoryRepo : IHistoryRepo
 	{
-		private IApplicationDataProxy _dataProxy;
-		private IFromDataReaderFactory<IHistoryItem> _historyItemFactory;
+		private const string ReadStoredProcedure = "History_Select";
+
+		private readonly IApplicationDataProxy _dataProxy;
+		private readonly IFromDataReaderFactory<IHistoryItem> _historyItemFactory;
 
 		/// <summary>
 		/// Gets all the history for a user
@@ -17,13 +19,17 @@ namespace TaskHistory.Impl.History
 		/// <param name="userId">User identifier.</param>
 		public IEnumerable<IHistoryItem> ReadHistoryForUser(int userId)
 		{
-			var parameters = new List<ISqlDataParameter> ();
-			var paramFactory = _dataProxy.ParamFactory;
+			ISqlParameterFactory paramFactory = _dataProxy.ParamFactory;
+			ISqlDataParameter parameter = paramFactory.CreateParameter ("pUserId", userId);
 
-			parameters.Add (paramFactory.CreateParameter ("pUserId", userId));
+			IEnumerable<IHistoryItem> returnVal = _dataProxy.DataReaderProvider
+				.ExecuteReaderForTypeCollection<IHistoryItem>(_historyItemFactory, 
+					ReadStoredProcedure, 
+					parameter);
+			if (returnVal == null)
+				throw new NullReferenceException ("Null returned from dataProxy");
 
-
-			throw new NotImplementedException ("Not implemented");
+			return returnVal;
 		}
 
 		/// <summary>

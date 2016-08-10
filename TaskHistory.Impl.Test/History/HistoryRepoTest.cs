@@ -32,17 +32,17 @@ namespace TaskHistory.Impl.Test
 
 			var anyHistoryItemFactory = It.IsAny<IFromDataReaderFactory<IHistoryItem>>();
 			string historySelectStoredProcedureName = "History_Select";
-			var anyListOfDataPrams = It.IsAny<List<ISqlDataParameter>> ();
+			// var anyListOfDataPrams = It.IsAny<List<ISqlDataParameter>> ();
 
 			Mock<ISqlDataParameter> SqlDataParamOfValue5 = new Mock<ISqlDataParameter> ();
 			SqlDataParamOfValue5.SetupGet (x => x.ParamName == "pUserId");
-			SqlDataParamOfValue5.SetupGet (x => x.Value == 5);
+			SqlDataParamOfValue5.SetupGet (x => Convert.ToInt16(x.Value) == 5);
 
 			Mock<IApplicationDataProxy> mockAppDataProxy = new Mock<IApplicationDataProxy> ();
 			mockAppDataProxy
 				.Setup (dataProxy => dataProxy
 				.DataReaderProvider
-				.ExecuteReaderForSingleType<IHistoryItem> (anyHistoryItemFactory, 
+					.ExecuteReaderForTypeCollection<IHistoryItem> (anyHistoryItemFactory, 
 						historySelectStoredProcedureName, 
 						SqlDataParamOfValue5.Object))
 				.Returns(new List<IHistoryItem>());
