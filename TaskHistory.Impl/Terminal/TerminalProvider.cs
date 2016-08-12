@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using TaskHistory.Api.Users;
 
-namespace TaskHistory.Impl.TerminalProvider
+namespace TaskHistory.Impl.Terminal
 {
 	public class TerminalProvider : ITerminalInterpreter
 	{
@@ -18,17 +18,17 @@ namespace TaskHistory.Impl.TerminalProvider
 				return TerminalCommandResponse.ErrorResponse;
 
 			// 2. Determine the Action
-			TerminalCommandAction commandAction = DetermineTerminalCommandAction(tokenizedString[0]);
+			TerminalCommandAction commandAction = TerminalProviderHelper.DetermineTerminalCommandAction(tokenizedString[0]);
 			if (commandAction == TerminalCommandAction.Error)
 				return TerminalCommandResponse.ErrorResponse;
 
 			// 3. Determine the Object
-			TerminalRegisteredObject registeredObject = DetermineTerminalRegisteredObject(tokenizedString[1]);
+			TerminalRegisteredObject registeredObject = TerminalProviderHelper.DetermineTerminalRegisteredObject(tokenizedString[1]);
 			if (registeredObject == TerminalRegisteredObject.Error)
 				return TerminalCommandResponse.ErrorResponse;
 		
 			// 4. Determine the Option
-			TerminalCommandOption commandOption = DetermineTerminalCommandOption(tokenizedString[2]);
+			TerminalCommandOption commandOption = TerminalProviderHelper.DetermineTerminalCommandOption(tokenizedString[2]);
 
 			// 5. Still here? Then let's construct a TerminalCommandResponse
 			// TODO factory me for unit testing
@@ -38,7 +38,7 @@ namespace TaskHistory.Impl.TerminalProvider
 		}
 
 		// Translate TerminalCommandResponse to IEnumerable of TerminalObjects
-		public IEnumerable<TerminalObject> TranslateTerminalCommandResponse(TerminalCommandResponse commandResponse)
+		public IEnumerable<ITerminalObject> TranslateTerminalCommandResponse(TerminalCommandResponse commandResponse)
 		{
 			if (commandResponse == null)
 				throw new ArgumentNullException ("commandResponse");
@@ -46,15 +46,21 @@ namespace TaskHistory.Impl.TerminalProvider
 			if (commandResponse == TerminalCommandResponse.ErrorResponse)
 				throw new ArgumentOutOfRangeException ("commandResponse", "ErrorResponse detected");
 
-			var returnVal = new List<TerminalObject> ();
+			var returnVal = new List<ITerminalObject> ();
+
+			// IRepo repo = null;
 
 			switch (commandResponse.TheObject) 
 			{
 			case TerminalRegisteredObject.Task:
+				//IRepo repo = taskRepo;
 				break;
 			case TerminalRegisteredObject.User:
+				//IRepo repo = userRepo
 				break;
 			}
+
+
 
 			return returnVal;
 		}
@@ -73,7 +79,7 @@ namespace TaskHistory.Impl.TerminalProvider
 			return null;
 		}
 
-		public void Test()
+		/*public void Test()
 		{
 			var t = DetermineType (1);
 
@@ -97,40 +103,9 @@ namespace TaskHistory.Impl.TerminalProvider
 			var thing = Test ();
 
 			thing.Invoke (5);
-		}
+		}*/
 
-		private static TerminalCommandAction DetermineTerminalCommandAction(string commandActionString)
-		{
-			if (string.IsNullOrEmpty (commandActionString))
-				return TerminalCommandAction.Error;
-			
-			TerminalCommandAction requestCommand = TerminalCommandAction.Error;
-			Enum.TryParse (commandActionString, out requestCommand);
 
-			return requestCommand;
-		}
-
-		private static TerminalRegisteredObject DetermineTerminalRegisteredObject(string registeredObjectString)
-		{
-			if (string.IsNullOrEmpty (registeredObjectString))
-				return TerminalRegisteredObject.Error;
-
-			TerminalRegisteredObject registeredObject = TerminalRegisteredObject.Error;
-			Enum.TryParse (registeredObjectString, out registeredObject);
-
-			return registeredObject;
-		}
-
-		private static TerminalCommandOption DetermineTerminalCommandOption(string commandOptionString)
-		{
-			if (string.IsNullOrEmpty (commandOptionString))
-				return TerminalCommandOption.None;
-
-			TerminalCommandOption commandOption = TerminalCommandOption.None;
-			Enum.TryParse (commandOptionString, out commandOption);
-
-			return commandOption;
-		}
 
 
 		public TerminalProvider ()

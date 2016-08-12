@@ -2,10 +2,11 @@
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
 using TaskHistory.Api.Terminal;
+using System.Collections.Generic;
 
 namespace TaskHistory.Impl.Terminal
 {
-	public class ITerminalProxyRepo
+	public class TerminalProxyRepo : ITerminalProxyRepo
 	{
 		private ITaskRepo _taskRepo;
 		private IUserRepo _userRepo;
@@ -15,17 +16,22 @@ namespace TaskHistory.Impl.Terminal
 			if (commandResponse == null)
 				throw new ArgumentNullException ("commandResponse");
 
-			switch (commandResponse.TerminalRequest) 
-			{
+			//switch (commandResponse.TerminalRequest) 
+			//{
 
 			/*case TerminalCommandAction.Delete:
 			case TerminalCommandAction.Delete:
 			case TerminalCommandAction.Delete:			
 			case TerminalCommandAction.Delete:*/
-			}
+			//}
 		}
 
-		public ITerminalProxyRepo (ITaskRepo taskRepo, IUserRepo userRepo)
+		public IEnumerable<ITerminalObject> ReadTerminalObjects()
+		{
+			return null;
+		}
+
+		public TerminalProxyRepo (ITaskRepo taskRepo, IUserRepo userRepo)
 		{
 			_taskRepo = taskRepo;
 			_userRepo = userRepo;
