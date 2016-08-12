@@ -10,6 +10,9 @@ namespace TaskHistory.Api.Labels
 		IEnumerable<ILabel> ReadAllLabelsForUser(IUser user);
 		void UpdateLabel (ILabel labelDto);
 		void DeleteLabel(int labelId);
+
+		//TODO refactor this method into an AdminRepo
+		IEnumerable<ILabel> ReadAllLabels (int limit);
 	}
 
 	public interface ILabelRepoAdvanced : ILabelRepo

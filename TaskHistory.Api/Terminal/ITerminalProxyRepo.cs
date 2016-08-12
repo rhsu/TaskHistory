@@ -7,6 +7,7 @@ namespace TaskHistory.Api.Terminal
 	{
 		void PerformActionForResponse(TerminalCommandResponse commandResponse);
 
-		IEnumerable<ITerminalObject> ReadTerminalObjects();
+		// TODO: demystify this magic string
+		IEnumerable<ITerminalObject> ReadTerminalObjects(string magicString);
 	}
 }

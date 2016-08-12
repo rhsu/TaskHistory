@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TaskHistory.Api.Users
 {
@@ -13,5 +14,8 @@ namespace TaskHistory.Api.Users
 		IUser ValidateUsernameAndPassword (string username, string password);
 
 		IUser RegisterUser (UserRegistrationParameters userParams);
+
+		//TODO: refactor to admin repo
+		IEnumerable<IUser> ReadAllUsers(int limit);
 	}
 }

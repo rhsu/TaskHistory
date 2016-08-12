@@ -78,6 +78,18 @@ namespace TaskHistory.Impl.Labels
 			_applicationDataProxy.NonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 
+		public IEnumerable<ILabel> ReadAllLabels(int limit)
+		{
+			var label1 = new Label (1, "test1");
+			var label2 = new Label (2, "test2");
+
+			var returnVal = new List<ILabel> ();
+			returnVal.Add (label1);
+			returnVal.Add (label2);
+
+			return returnVal;
+		}
+
 		public LabelRepo (LabelFactory labelFactory, 
 			ApplicationDataProxy applicationDataProxy)
 		{

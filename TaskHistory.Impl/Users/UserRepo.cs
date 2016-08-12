@@ -53,6 +53,22 @@ namespace TaskHistoryImpl.Users
 			return registeredUser;
 		}
 
+		public IEnumerable<IUser> ReadAllUsers(int limit)
+		{
+			var returnVal = new List<IUser> ();
+
+			for (var i = 0; i < 3; i++) 
+			{
+				string userName = string.Format ("UserName{0}", i);
+				string firstName = string.Format ("FirstName{0}", i);
+				string lastName = string.Format ("LastName{0}", i);
+
+				returnVal.Add (new User (i, userName, firstName, lastName, "@yahoo.com"));
+			}
+
+			return returnVal;
+		}
+
 		public static IEnumerable<ISqlDataParameter> CreateDataParameterCollectionFromUserParams(
 			UserRegistrationParameters userParams,
 			SqlParameterFactory paramFactory)

@@ -3,13 +3,15 @@ using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
 using TaskHistory.Api.Terminal;
 using System.Collections.Generic;
+using TaskHistory.Api.Labels;
 
 namespace TaskHistory.Impl.Terminal
 {
 	public class TerminalProxyRepo : ITerminalProxyRepo
 	{
-		private ITaskRepo _taskRepo;
-		private IUserRepo _userRepo;
+		private readonly ITaskRepo _taskRepo;
+		private readonly IUserRepo _userRepo;
+		private readonly ILabelRepo _labelRepo;
 
 		public void PerformActionForResponse(TerminalCommandResponse commandResponse)
 		{
@@ -26,15 +28,28 @@ namespace TaskHistory.Impl.Terminal
 			//}
 		}
 
-		public IEnumerable<ITerminalObject> ReadTerminalObjects()
+		public IEnumerable<ITerminalObject> ReadTerminalObjects(string magicString)
 		{
-			return null;
+			switch (magicString) 
+			{
+			case "user":
+				// var things = _userRepo.ReadSomeUsers ();
+				// convert things = list of ITerminalObject
+			case "tasks":
+				// var otherThings = _taskRepo.ReadSomeTasks ();
+				// convert theseThings to list of ItermianlObjects
+			default:
+				break;
+			}
+
+			return new List<ITerminalObject>();
 		}
 
-		public TerminalProxyRepo (ITaskRepo taskRepo, IUserRepo userRepo)
+		public TerminalProxyRepo (ITaskRepo taskRepo, IUserRepo userRepo, ILabelRepo labelRepo)
 		{
 			_taskRepo = taskRepo;
 			_userRepo = userRepo;
+			_labelRepo = labelRepo;
 		}
 	}
 }
