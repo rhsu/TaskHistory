@@ -5,7 +5,7 @@ using TaskHistory.Api.Sql;
 using System.Collections.Generic;
 using TaskHistory.Impl.Users;
 
-namespace TaskHistoryImpl.Users
+namespace TaskHistory.Impl.Users
 {
 	public class UserRepo : IUserRepo
 	{

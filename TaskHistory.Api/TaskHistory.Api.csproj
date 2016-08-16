@@ -49,6 +49,7 @@
     <Compile Include="Users\DTOs\UserRegistrationParameters.cs" />
     <Compile Include="Tasks\DTOs\TaskUpdatingParameters.cs" />
     <Compile Include="Sql\IDataReaderProvider.cs" />
+    <Compile Include="Application\IApplicationContext.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -61,5 +62,6 @@
     <Folder Include="Configuration\" />
     <Folder Include="Users\DTOs\" />
     <Folder Include="Tasks\DTOs\" />
+    <Folder Include="Application\" />
   </ItemGroup>
 </Project>
