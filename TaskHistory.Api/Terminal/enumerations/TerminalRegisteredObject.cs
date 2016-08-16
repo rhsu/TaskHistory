@@ -4,6 +4,8 @@
 	{
 		Error,
 		Task,
+		Label,
+		//TODO: Figure out this later
 		User
 	}
 }

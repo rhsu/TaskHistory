@@ -55,12 +55,10 @@ namespace TaskHistory.Impl.Terminal
 			case TerminalRegisteredObject.Task:
 				//IRepo repo = taskRepo;
 				break;
-			case TerminalRegisteredObject.User:
+			case TerminalRegisteredObject.Label:
 				//IRepo repo = userRepo
 				break;
 			}
-
-
 
 			return returnVal;
 		}
@@ -78,35 +76,6 @@ namespace TaskHistory.Impl.Terminal
 
 			return null;
 		}
-
-		/*public void Test()
-		{
-			var t = DetermineType (1);
-
-			IEnumerable<t> stuff = new List<t> ();
-		}
-
-		public static IEnumerable<int> TestFunction(int i)
-		{
-			return null;
-		}
-
-
-		public static Func<int, IEnumerable<int>> Test()
-		{
-
-			return TestFunction;
-		}
-
-		public static void Bench()
-		{
-			var thing = Test ();
-
-			thing.Invoke (5);
-		}*/
-
-
-
 
 		public TerminalProvider ()
 		{

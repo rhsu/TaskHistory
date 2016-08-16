@@ -82,18 +82,6 @@ namespace TaskHistory.Impl.Tasks
 			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 
-		public IEnumerable<ITask> ReadAllTasks(int limit)
-		{
-			var returnVal = new List<ITask> ();
-
-			for (var i = 0; i < 3; i++) 
-			{
-				returnVal.Add(new Task(i, string.Format("content {0}", i), false));
-			}
-
-			return returnVal;
-		}
-
 		public TaskRepo (TaskFactory taskFactory, 
 			ApplicationDataProxy applicationDataProxy)
 		{

@@ -7,12 +7,12 @@ namespace TaskHistory.Api.Labels
 	public interface ILabelRepo
 	{
 		ILabel CreateNewLabel (string content);
-		IEnumerable<ILabel> ReadAllLabelsForUser(IUser user);
-		void UpdateLabel (ILabel labelDto);
-		void DeleteLabel(int labelId);
 
-		//TODO refactor this method into an AdminRepo
-		IEnumerable<ILabel> ReadAllLabels (int limit);
+		IEnumerable<ILabel> ReadAllLabelsForUser(IUser user);
+
+		void UpdateLabel (ILabel labelDto);
+
+		void DeleteLabel(int labelId);
 	}
 
 	public interface ILabelRepoAdvanced : ILabelRepo
