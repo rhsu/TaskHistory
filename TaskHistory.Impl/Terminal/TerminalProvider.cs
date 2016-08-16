@@ -2,11 +2,14 @@
 using System;
 using System.Collections.Generic;
 using TaskHistory.Api.Users;
+using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Terminal
 {
 	public class TerminalProvider : ITerminalInterpreter
 	{
+		private readonly ITerminalProxyRepo _proxyRepo;
+
 		public TerminalCommandResponse InterpretStringCommand (string requestInput)
 		{
 			if (string.IsNullOrEmpty (requestInput))
@@ -36,6 +39,28 @@ namespace TaskHistory.Impl.Terminal
 
 			return returnVal;
 		}
+			
+		IEnumerable<ITerminalObject> PerformReadOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
+		{
+			if (registeredObject == TerminalRegisteredObject.Error)
+				throw new ArgumentOutOfRangeException ("registeredObject", "The registered object is of type Error");
+			
+		}
+
+		public int PerformInsertOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
+		{
+			return -1;
+		}
+
+		int PerformUpdateOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
+		{
+			return -1;
+		}
+
+		int PerformDeleteOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
+		{
+			return -1;
+		}
 
 		// Translate TerminalCommandResponse to IEnumerable of TerminalObjects
 		public IEnumerable<ITerminalObject> TranslateTerminalCommandResponse(TerminalCommandResponse commandResponse)
@@ -62,23 +87,10 @@ namespace TaskHistory.Impl.Terminal
 
 			return returnVal;
 		}
-
-
-		public Type DetermineType(int testNum)
+			
+		public TerminalProvider (ITerminalProxyRepo proxyRepo)
 		{
-			switch (testNum) 
-			{
-			case 1:
-				return typeof(IUser);
-			case 2:
-				break;
-			}
-
-			return null;
-		}
-
-		public TerminalProvider ()
-		{
+			_proxyRepo = proxyRepo;
 		}
 	}
 }

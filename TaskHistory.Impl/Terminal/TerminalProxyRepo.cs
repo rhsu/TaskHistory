@@ -45,6 +45,37 @@ namespace TaskHistory.Impl.Terminal
 			return new List<ITerminalObject>();
 		}
 
+		IEnumerable<ITerminalObject> PerformReadOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
+		{
+			if (registeredObject == TerminalRegisteredObject.Error)
+				throw new ArgumentOutOfRangeException ("registeredObject", "The registered object is of type Error");
+
+			switch (registeredObject) 
+			{
+			case TerminalRegisteredObject.Label:
+				var labels = _labelRepo.ReadAllLabelsForUser (null);
+
+				break;
+			case TerminalRegisteredObject.Task:
+				break;
+			}
+		}
+
+		public int PerformInsertOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
+		{
+			return -1;
+		}
+
+		int PerformUpdateOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
+		{
+			return -1;
+		}
+
+		int PerformDeleteOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
+		{
+			return -1;
+		}
+
 		public TerminalProxyRepo (ITaskRepo taskRepo, IUserRepo userRepo, ILabelRepo labelRepo)
 		{
 			_taskRepo = taskRepo;
