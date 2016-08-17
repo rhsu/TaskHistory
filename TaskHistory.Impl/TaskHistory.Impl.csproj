@@ -69,6 +69,10 @@
     <Compile Include="Terminal\TerminalProvider.cs" />
     <Compile Include="Terminal\TerminalProxyRepo.cs" />
     <Compile Include="Terminal\TerminalProviderHelper.cs" />
+    <Compile Include="Terminal\TerminalObjectMapper.cs" />
+    <Compile Include="Terminal\TerminalObjectFactory.cs" />
+    <Compile Include="Terminal\TerminalObject.cs" />
+    <Compile Include="Terminal\ITerminalObjectFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

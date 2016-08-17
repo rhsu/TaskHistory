@@ -113,7 +113,7 @@ namespace TaskHistory.Impl.Terminal
 			return -1;
 		}
 
-		public TerminalProxyRepo (ITaskRepo taskRepo, IUserRepo userRepo, ILabelRepo labelRepo)
+		public TerminalProxyRepo (ITaskRepo taskRepo, IUserRepo userRepo, ILabelRepo labelRepo, ITerminalObjectMapper terminalObjectMapper)
 		{
 			_taskRepo = taskRepo;
 			_userRepo = userRepo;
