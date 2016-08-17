@@ -9,43 +9,38 @@ namespace TaskHistory.Impl.Terminal
 {
 	public class TerminalProxyRepo : ITerminalProxyRepo
 	{
-		private readonly ITaskRepo _taskRepo;
-		private readonly IUserRepo _userRepo;
-		private readonly ILabelRepo _labelRepo;
+		private readonly IRegisteredObjectRepoProxy _registeredObjProxy;
+		private readonly ITerminalObjectMapper _terminalObjectMapper;
 
-		public void PerformActionForResponse(TerminalCommandResponse commandResponse)
+		public int PerformCreateOperation(TerminalCommandOption commandOption, 
+			TerminalRegisteredObject registeredObject, 
+			IUser user)
 		{
-			if (commandResponse == null)
-				throw new ArgumentNullException ("commandResponse");
+			if (user == null)
+				throw new ArgumentNullException ("user");
 
-			//switch (commandResponse.TerminalRequest) 
-			//{
+			if (registeredObject == TerminalRegisteredObject.Error)
+				throw new ArgumentOutOfRangeException ("registeredObject", "The registered object is of type Error");
 
-			/*case TerminalCommandAction.Delete:
-			case TerminalCommandAction.Delete:
-			case TerminalCommandAction.Delete:			
-			case TerminalCommandAction.Delete:*/
-			//}
-		}
-
-		public IEnumerable<ITerminalObject> ReadTerminalObjects(string magicString)
-		{
-			switch (magicString) 
+			switch (registeredObject) 
 			{
-			case "user":
-				// var things = _userRepo.ReadSomeUsers ();
-				// convert things = list of ITerminalObject
-			case "tasks":
-				// var otherThings = _taskRepo.ReadSomeTasks ();
-				// convert theseThings to list of ItermianlObjects
-			default:
+			case TerminalRegisteredObject.Label:
+				//_labelRepo.UpdateLabel(someId)
+				//TODO permissions. For now we can just ensure that the stored procedure deletes based off of a where clause looking up UserId
+				//TODO need to pass in Id
+				break;
+			case TerminalRegisteredObject.Task:
+
+
 				break;
 			}
 
-			return new List<ITerminalObject>();
+			return -1;
 		}
 
-		IEnumerable<ITerminalObject> PerformReadOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject, IUser user)
+		public IEnumerable<ITerminalObject> PerformReadOperation(TerminalCommandOption commandOption, 
+			TerminalRegisteredObject registeredObject, 
+			IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
@@ -57,44 +52,20 @@ namespace TaskHistory.Impl.Terminal
 			switch (registeredObject) 
 			{
 			case TerminalRegisteredObject.Label:
-				var labels = _labelRepo.ReadAllLabelsForUser (user);
+				// var labels = _registeredObjProxy.LabeRepo.ReadAllLabelsForUser (user);
 				//TODO some service that converts label to ITerminalObject
 				//TODO consider adding in an attribute onto Label to denote that field x is the Id and field y is the Value
 				//TODO should that attribute be on ILabel or Label?
 
 				break;
 			case TerminalRegisteredObject.Task:
-				var tasks = _taskRepo.ReadTasksForUser (user);
+				var tasks = _registeredObjProxy.TaskRepo.ReadTasksForUser (user);
 
 				break;
 			}
 
 			var returnVal = new List<ITerminalObject> ();
 			return returnVal;
-		}
-
-		public int PerformInsertOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject, IUser user)
-		{
-			if (user == null)
-				throw new ArgumentNullException ("user");
-
-			if (registeredObject == TerminalRegisteredObject.Error)
-				throw new ArgumentOutOfRangeException ("registeredObject", "The registered object is of type Error");
-			
-			switch (registeredObject) 
-			{
-			case TerminalRegisteredObject.Label:
-				//_labelRepo.UpdateLabel(someId)
-				//TODO permissions. For now we can just ensure that the stored procedure deletes based off of a where clause looking up UserId
-				//TODO need to pass in Id
-				break;
-			case TerminalRegisteredObject.Task:
-				
-
-				break;
-			}
-
-			return -1;
 		}
 
 		int PerformUpdateOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
@@ -113,11 +84,11 @@ namespace TaskHistory.Impl.Terminal
 			return -1;
 		}
 
-		public TerminalProxyRepo (ITaskRepo taskRepo, IUserRepo userRepo, ILabelRepo labelRepo, ITerminalObjectMapper terminalObjectMapper)
+		public TerminalProxyRepo (IRegisteredObjectRepoProxy registeredObjectRepoProxy,
+			ITerminalObjectMapper terminalObjectMapper)
 		{
-			_taskRepo = taskRepo;
-			_userRepo = userRepo;
-			_labelRepo = labelRepo;
+			_registeredObjProxy = registeredObjectRepoProxy;
+			_terminalObjectMapper = terminalObjectMapper;
 		}
 	}
 }

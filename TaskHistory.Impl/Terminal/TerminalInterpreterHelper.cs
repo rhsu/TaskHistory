@@ -6,7 +6,7 @@ namespace TaskHistory.Impl.Terminal
 	/// <summary>
 	/// Helper Functions Available for the Terminal Provider
 	/// </summary>
-	internal static class TerminalProviderHelper
+	internal static class TerminalInterpreterHelper
 	{
 		internal static TerminalCommandAction DetermineTerminalCommandAction(string commandActionString)
 		{

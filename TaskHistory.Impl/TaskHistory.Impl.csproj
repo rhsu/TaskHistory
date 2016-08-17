@@ -66,13 +66,15 @@
     <Compile Include="Sql\Factories\SqlParameterFactory.cs" />
     <Compile Include="Sql\DataReaderProvider.cs" />
     <Compile Include="Sql\Proxies\ApplicationDataProxy.cs" />
-    <Compile Include="Terminal\TerminalProvider.cs" />
     <Compile Include="Terminal\TerminalProxyRepo.cs" />
-    <Compile Include="Terminal\TerminalProviderHelper.cs" />
     <Compile Include="Terminal\TerminalObjectMapper.cs" />
     <Compile Include="Terminal\TerminalObjectFactory.cs" />
     <Compile Include="Terminal\TerminalObject.cs" />
     <Compile Include="Terminal\ITerminalObjectFactory.cs" />
+    <Compile Include="Terminal\TerminalInterpreter.cs" />
+    <Compile Include="Terminal\TerminalInterpreterHelper.cs" />
+    <Compile Include="Terminal\IRegisteredObjectRepoProxy.cs" />
+    <Compile Include="Terminal\RegisteredObjectRepoProxy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

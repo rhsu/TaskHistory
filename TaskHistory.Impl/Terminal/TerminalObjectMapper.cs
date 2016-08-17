@@ -10,11 +10,12 @@ namespace TaskHistory.Impl.Terminal
 		{
 			if (task == null)
 				throw new ArgumentNullException ("task");
-
+			return null;
 		}
 
 		public ITerminalObject ConvertLabel ()
 		{
+			return null;
 		}
 
 		public TerminalObjectMapper ()
