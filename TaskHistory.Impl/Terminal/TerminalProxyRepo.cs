@@ -48,12 +48,14 @@ namespace TaskHistory.Impl.Terminal
 			if (registeredObject == TerminalRegisteredObject.Error)
 				throw new ArgumentOutOfRangeException ("registeredObject", "The registered object is of type Error");
 
+			var returnVal = new List<ITerminalObject> ();
+
 			//TODO refactor this switch statement into a function which transofmrs an enum + IUser into a collection of ITerminalObjects
 			switch (registeredObject) 
 			{
 			case TerminalRegisteredObject.Label:
-				// var labels = _registeredObjProxy.LabeRepo.ReadAllLabelsForUser (user);
-				//TODO some service that converts label to ITerminalObject
+				var labels = _registeredObjProxy.LabelRepo.ReadAllLabelsForUser (user);
+
 				//TODO consider adding in an attribute onto Label to denote that field x is the Id and field y is the Value
 				//TODO should that attribute be on ILabel or Label?
 
