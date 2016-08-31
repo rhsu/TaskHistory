@@ -13,9 +13,9 @@ namespace TaskHistory.Impl.Application
 			get { return _user; }
 		}	
 
-		public ApplicationContext ()
+		public ApplicationContext (IUser user)
 		{
-			
+			_user = user;
 		}
 	}
 }

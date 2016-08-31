@@ -67,6 +67,7 @@
     <Compile Include="Sql\DataReaderProvider.cs" />
     <Compile Include="Sql\Proxies\ApplicationDataProxy.cs" />
     <Compile Include="Application\ApplicationContext.cs" />
+    <Compile Include="Application\IApplicationContextFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
