@@ -8,8 +8,8 @@ namespace TaskHistory.Api.Terminal
 	public interface ITerminalObjectMapper
 	{
 		//TODO instead of doing it this way. use attributes
-		ITerminalObject ConvertTask(IEnumerable<ITask> task);
+		IEnumerable<ITerminalObject> ConvertTasks(IEnumerable<ITask> task);
 
-		ITerminalObject ConvertLabel(IEnumerable<ILabel> label);
+		IEnumerable<ITerminalObject> ConvertLabels(IEnumerable<ILabel> label);
 	}
 }

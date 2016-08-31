@@ -10,7 +10,7 @@ namespace TaskHistory.Impl.Terminal
 	{
 		private readonly ITerminalObjectFactory _terminalObjectFactory;
 
-		public ITerminalObject ConvertTasks (IEnumerable<ITask> tasks)
+		public IEnumerable<ITerminalObject> ConvertTasks (IEnumerable<ITask> tasks)
 		{
 			if (tasks == null)
 				throw new ArgumentNullException ("task");
@@ -22,6 +22,25 @@ namespace TaskHistory.Impl.Terminal
 				var terminalObj = this.ConvertTask (task);
 				if (terminalObj == null)
 					throw new NullReferenceException ("Null returned when converting task");
+
+				returnVal.Add (terminalObj);
+			}
+
+			return returnVal;
+		}
+
+		public IEnumerable<ITerminalObject> ConvertLabels (IEnumerable<ILabel> labels)
+		{
+			if (labels == null)
+				throw new ArgumentNullException ("labels");
+
+			var returnVal = new List<ITerminalObject> ();
+
+			foreach (var label in labels) 
+			{
+				var terminalObj = this.ConvertLabel (label);
+				if (terminalObj == null)
+					throw new NullReferenceException ("Null returned when converting label");
 
 				returnVal.Add (terminalObj);
 			}
@@ -55,7 +74,7 @@ namespace TaskHistory.Impl.Terminal
 
 		public TerminalObjectMapper (ITerminalObjectFactory terminalObjectFactory)
 		{
-			if (ITerminalObjectFactory == null)
+			if (terminalObjectFactory == null)
 				throw new ArgumentNullException ("terminalObjectFactory");
 
 			_terminalObjectFactory = terminalObjectFactory;

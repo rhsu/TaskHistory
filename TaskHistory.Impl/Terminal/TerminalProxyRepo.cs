@@ -66,7 +66,6 @@ namespace TaskHistory.Impl.Terminal
 				break;
 			}
 
-			var returnVal = new List<ITerminalObject> ();
 			return returnVal;
 		}
 
