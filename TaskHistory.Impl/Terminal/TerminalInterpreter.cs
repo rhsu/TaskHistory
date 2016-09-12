@@ -8,6 +8,32 @@ namespace TaskHistory.Impl.Terminal
 {
 	public class TerminalInterpreter : ITerminalInterpreter
 	{
+		/// <summary>
+		/// Interprets the string command. example create label -name "Value
+		/// </summary>
+		/// <returns>a string response.</returns>
+		/// <param name="requestCommand">Request command.</param>
+		public string TranslateResponseToString (string requestCommand)
+		{
+			if (string.IsNullOrEmpty (requestCommand))
+				throw new ArgumentNullException ("requestCommand");
+
+			//1 get the first word of the request command
+			// -- it should be create, read, update, delete, or help
+
+			//2 get the second word of the request command
+			// --it should be label, task, or user
+
+			//3 create a CommandRequestObject
+				//-- crudOperation, --objectType --auxilary options "-name 'Robert'" for example...
+				// enum, enum, string
+
+			return null;
+		}
+	}
+
+	public class TerminalInterpreter_Old //: ITerminalInterpreter
+	{
 		private TerminalCommandResponse TranslateRequestToResponseObj (string requestInput)
 		{
 			if (string.IsNullOrEmpty (requestInput))
@@ -51,7 +77,7 @@ namespace TaskHistory.Impl.Terminal
 			return string.Empty;
 		}
 			
-		public TerminalInterpreter (ITerminalProxyRepo proxyRepo)
+		public TerminalInterpreter_Old (ITerminalProxyRepo proxyRepo)
 		{
 		}
 	}

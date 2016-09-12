@@ -8,4 +8,3 @@ namespace TaskHistory.Impl.Terminal
 		ITerminalObject Create(int id, string name);
 	}
 }
-

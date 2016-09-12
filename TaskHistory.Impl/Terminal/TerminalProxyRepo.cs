@@ -25,9 +25,9 @@ namespace TaskHistory.Impl.Terminal
 			switch (registeredObject) 
 			{
 			case TerminalRegisteredObject.Label:
-				//_labelRepo.UpdateLabel(someId)
-				//TODO permissions. For now we can just ensure that the stored procedure deletes based off of a where clause looking up UserId
-				//TODO need to pass in Id
+				var labelRepo = _registeredObjProxy.LabelRepo;
+				labelRepo.CreateNewLabel(
+
 				break;
 			case TerminalRegisteredObject.Task:
 

@@ -12,4 +12,3 @@ namespace TaskHistory.Impl.Terminal
 		ILabelRepo LabelRepo { get; }
 	}
 }
-

@@ -7,7 +7,7 @@ namespace TaskHistory.Api.Terminal
 		//TerminalCommandResponse InterpretStringCommand (string requestCommand);
 
 		/// <summary>
-		/// Interprets the string command.
+		/// Interprets the string command. example create label -name "Value
 		/// </summary>
 		/// <returns>a string response.</returns>
 		/// <param name="requestCommand">Request command.</param>
