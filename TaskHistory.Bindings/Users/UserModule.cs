@@ -1,7 +1,7 @@
 ﻿using System;
 using Ninject;
 using TaskHistory.Api.Users;
-using TaskHistoryImpl.Users;
+using TaskHistory.Impl.Users;
 
 namespace TaskHistory.Bindings
 {
@@ -18,6 +18,9 @@ namespace TaskHistory.Bindings
 
 			kernel.Bind<IUserRepo> ()
 				  .To<UserRepo> ();
+
+			kernel.Bind<IUser> ()
+				  .To<User> ();
 		}
 	}
 }

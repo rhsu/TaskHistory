@@ -30,6 +30,7 @@ namespace TaskHistory.Bindings
 			_allModules.Add (new TaskModule ());
 			_allModules.Add (new UserModule ());
 			_allModules.Add (new ViewRepoModule ());
+			_allModules.Add (new ApplicationModule ());
 		}
 
 		public void DoAllBindings(IKernel kernel)

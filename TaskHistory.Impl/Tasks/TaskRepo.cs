@@ -7,6 +7,8 @@ using TaskHistory.Api.Users;
 using TaskHistory.Impl.Tasks;
 using TaskHistory.Api.Sql;
 using TaskHistory.Impl.Sql;
+using TaskHistory.Impl.Application;
+using TaskHistory.Api.Application;
 
 namespace TaskHistory.Impl.Tasks
 {
@@ -21,6 +23,7 @@ namespace TaskHistory.Impl.Tasks
 
 		private readonly TaskFactory _taskFactory;
 		private readonly ApplicationDataProxy _dataProxy;
+		private readonly IApplicationContext _appContext;
 
 		public ITask CreateNewTaskForUser (IUser user, string taskContent)
 		{
@@ -83,10 +86,12 @@ namespace TaskHistory.Impl.Tasks
 		}
 
 		public TaskRepo (TaskFactory taskFactory, 
-			ApplicationDataProxy applicationDataProxy)
+			ApplicationDataProxy applicationDataProxy,
+			ApplicationContext appContext)
 		{
 			_taskFactory = taskFactory;
 			_dataProxy = applicationDataProxy;
+			_appContext = appContext;
 		}
 	}
 }
