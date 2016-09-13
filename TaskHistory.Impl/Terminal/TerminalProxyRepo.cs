@@ -24,7 +24,7 @@ namespace TaskHistory.Impl.Terminal
 			if (user == null)
 				throw new ArgumentNullException ("user");
 
-			if (commandResponse.CommandAction != TerminalCommandAction.List)
+			if (commandResponse.CommandAction != TerminalCommandAction.Insert)
 				throw new InvalidOperationException ($"Command action for this operation must be list instead of {commandResponse.CommandAction}");
 
 			switch (commandResponse.RegisteredObject) 
@@ -44,14 +44,41 @@ namespace TaskHistory.Impl.Terminal
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
-			
-			return new List<ITerminalObject> ();
+
+			if (commandResponse.CommandAction != TerminalCommandAction.List)
+				throw new InvalidOperationException ($"Command action for this operation must be list instead of {commandResponse.CommandAction}");
+
+			var returnVal = new List<ITerminalObject> ();
+
+			//TODO refactor this switch statement into a function which transforms an enum + IUser into a collection of ITerminalObjects
+			switch (commandResponse.RegisteredObject) 
+			{
+			case TerminalRegisteredObject.Label:
+				var labels = _registeredObjProxy.LabelRepo.ReadAllLabelsForUser (user);
+				var labelTerminalObjects = _terminalObjectMapper.ConvertLabels (labels);
+				returnVal.AddRange (labelTerminalObjects);
+				//TODO consider adding in an attribute onto Label to denote that field x is the Id and field y is the Value
+				//TODO should that attribute be on ILabel or Label?
+
+				break;
+			case TerminalRegisteredObject.Task:
+				var tasks = _registeredObjProxy.TaskRepo.ReadTasksForUser (user);
+				var taskTerminalObjects = _terminalObjectMapper.ConvertTasks (tasks);
+				returnVal.AddRange (taskTerminalObjects);
+
+				break;
+			}
+
+			return returnVal;
 		}
 
 		public int PerformUpdateOperation(TerminalCommandResponse2 commandResponse, IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
+
+			if (commandResponse.CommandAction != TerminalCommandAction.Update)
+				throw new InvalidOperationException ($"Command action for this operation must be list instead of {commandResponse.CommandAction}");
 
 			switch (commandResponse.RegisteredObject) 
 			{
@@ -60,7 +87,8 @@ namespace TaskHistory.Impl.Terminal
 				_registeredObjProxy.LabelRepo.UpdateLabel (null);
 				break;
 			case TerminalRegisteredObject.Task:
-				_registeredObjProxy.TaskRepo.CreateNewTaskForUser(user, "some content from command response's object");
+				// need to create task updating parameters
+				_registeredObjProxy.TaskRepo.UpdateTask (null);
 				break;
 			}
 
@@ -71,7 +99,10 @@ namespace TaskHistory.Impl.Terminal
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
-			
+
+			if (commandResponse.CommandAction != TerminalCommandAction.Delete)
+				throw new InvalidOperationException ($"Command action for this operation must be list instead of {commandResponse.CommandAction}");
+
 			return -1;
 		}
 
