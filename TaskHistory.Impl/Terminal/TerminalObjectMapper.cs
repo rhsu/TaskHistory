@@ -60,7 +60,7 @@ namespace TaskHistory.Impl.Terminal
 			return returnVal;
 		}
 
-		public ITerminalObject ConvertLabel (ILabel label)
+		private ITerminalObject ConvertLabel (ILabel label)
 		{
 			if (label == null)
 				throw new ArgumentNullException ("task");
@@ -72,7 +72,7 @@ namespace TaskHistory.Impl.Terminal
 			return returnVal;
 		}
 
-		public TerminalObjectMapper (ITerminalObjectFactory terminalObjectFactory)
+		private TerminalObjectMapper (ITerminalObjectFactory terminalObjectFactory)
 		{
 			if (terminalObjectFactory == null)
 				throw new ArgumentNullException ("terminalObjectFactory");

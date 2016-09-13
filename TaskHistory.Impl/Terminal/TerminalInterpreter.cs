@@ -11,10 +11,6 @@ namespace TaskHistory.Impl.Terminal
 	{
 		private readonly ITerminalProxyRepo _terminalProxyRepo;
 
-		/// <summary>
-		/// Interprets the string command. example create label -name "Value
-		/// </summary>
-		/// <returns>a string response.</returns>
 		/// <param name="requestCommand">Request command.</param>
 		public string TranslateResponseToString (string requestCommand, IUser user)
 		{
@@ -51,7 +47,7 @@ namespace TaskHistory.Impl.Terminal
 			//4 figure out the option string
 			string optionString = TerminalInterpreterHelper.ParseOptionText (tokenizedString);
 
-			var commandResponse = new TerminalCommandResponse2(commandAction, registeredObject, optionString);
+			var commandResponse = new TerminalCommandResponse(commandAction, registeredObject, optionString);
 
 			var returnVal = InterpretCommandResponse (commandResponse, user);
 			if (string.IsNullOrEmpty (returnVal))
@@ -60,7 +56,7 @@ namespace TaskHistory.Impl.Terminal
 			return returnVal;
 		}
 
-		private string InterpretCommandResponse(TerminalCommandResponse2 commandResponse, IUser user)
+		private string InterpretCommandResponse(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");

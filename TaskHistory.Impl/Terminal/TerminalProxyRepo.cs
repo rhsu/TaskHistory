@@ -16,7 +16,7 @@ namespace TaskHistory.Impl.Terminal
 		// DetermineRepoToUse() function
 
 		// TODO IUser should come from a context object
-		public int PerformCreateOperation(TerminalCommandResponse2 commandResponse, IUser user)
+		public int PerformCreateOperation(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
@@ -37,7 +37,7 @@ namespace TaskHistory.Impl.Terminal
 			return 1;
 		}
 
-		public IEnumerable<ITerminalObject> PerformReadOperation(TerminalCommandResponse2 commandResponse, IUser user)
+		public IEnumerable<ITerminalObject> PerformReadOperation(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
@@ -69,7 +69,7 @@ namespace TaskHistory.Impl.Terminal
 			return returnVal;
 		}
 
-		public int PerformUpdateOperation(TerminalCommandResponse2 commandResponse, IUser user)
+		public int PerformUpdateOperation(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
@@ -92,7 +92,7 @@ namespace TaskHistory.Impl.Terminal
 			return -1;
 		}
 
-		public int PerformDeleteOperation(TerminalCommandResponse2 commandResponse, IUser user)
+		public int PerformDeleteOperation(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException ("user");
@@ -110,90 +110,3 @@ namespace TaskHistory.Impl.Terminal
 		}
 	}
 }
-
-	/*public class TerminalProxyRepo : ITerminalProxyRepo
-	{
-		private readonly IRegisteredObjectRepoProxy _registeredObjProxy;
-		private readonly ITerminalObjectMapper _terminalObjectMapper;
-
-		public int PerformCreateOperation(TerminalCommandOption commandOption, 
-			TerminalRegisteredObject registeredObject, 
-			IUser user)
-		{
-			if (user == null)
-				throw new ArgumentNullException ("user");
-
-			if (registeredObject == TerminalRegisteredObject.Error)
-				throw new ArgumentOutOfRangeException ("registeredObject", "The registered object is of type Error");
-
-			switch (registeredObject) 
-			{
-			case TerminalRegisteredObject.Label:
-				var labelRepo = _registeredObjProxy.LabelRepo;
-				labelRepo.CreateNewLabel(
-
-				break;
-			case TerminalRegisteredObject.Task:
-
-
-				break;
-			}
-
-			return -1;
-		}
-
-		public IEnumerable<ITerminalObject> PerformReadOperation(TerminalCommandOption commandOption, 
-			TerminalRegisteredObject registeredObject, 
-			IUser user)
-		{
-			if (user == null)
-				throw new ArgumentNullException ("user");
-
-			if (registeredObject == TerminalRegisteredObject.Error)
-				throw new ArgumentOutOfRangeException ("registeredObject", "The registered object is of type Error");
-
-			var returnVal = new List<ITerminalObject> ();
-
-			//TODO refactor this switch statement into a function which transofmrs an enum + IUser into a collection of ITerminalObjects
-			switch (registeredObject) 
-			{
-			case TerminalRegisteredObject.Label:
-				var labels = _registeredObjProxy.LabelRepo.ReadAllLabelsForUser (user);
-
-				//TODO consider adding in an attribute onto Label to denote that field x is the Id and field y is the Value
-				//TODO should that attribute be on ILabel or Label?
-
-				break;
-			case TerminalRegisteredObject.Task:
-				var tasks = _registeredObjProxy.TaskRepo.ReadTasksForUser (user);
-
-				break;
-			}
-
-			return returnVal;
-		}
-
-		int PerformUpdateOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
-		{
-			if (registeredObject == TerminalRegisteredObject.Error)
-				throw new ArgumentOutOfRangeException ("registeredObject", "The registered object is of type Error");
-
-			return -1;
-		}
-
-		int PerformDeleteOperation(TerminalCommandOption commandOption, TerminalRegisteredObject registeredObject)
-		{
-			if (registeredObject == TerminalRegisteredObject.Error)
-				throw new ArgumentOutOfRangeException ("registeredObject", "The registered object is of type Error");
-
-			return -1;
-		}
-
-		public TerminalProxyRepo (IRegisteredObjectRepoProxy registeredObjectRepoProxy,
-			ITerminalObjectMapper terminalObjectMapper)
-		{
-			_registeredObjProxy = registeredObjectRepoProxy;
-			_terminalObjectMapper = terminalObjectMapper;
-		}
-	}
-}*/
