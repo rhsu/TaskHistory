@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TaskHistory.Api.Users;
 
 namespace TaskHistory.Api.Terminal
 {
@@ -11,6 +12,6 @@ namespace TaskHistory.Api.Terminal
 		/// </summary>
 		/// <returns>a string response.</returns>
 		/// <param name="requestCommand">Request command.</param>
-		string TranslateResponseToString (string requestCommand);
+		string TranslateResponseToString (string requestCommand, IUser user);
 	}
 }

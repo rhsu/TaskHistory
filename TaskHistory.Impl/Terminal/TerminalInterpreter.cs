@@ -9,13 +9,18 @@ namespace TaskHistory.Impl.Terminal
 {
 	public class TerminalInterpreter : ITerminalInterpreter
 	{
+		private readonly ITerminalProxyRepo _terminalProxyRepo;
+
 		/// <summary>
 		/// Interprets the string command. example create label -name "Value
 		/// </summary>
 		/// <returns>a string response.</returns>
 		/// <param name="requestCommand">Request command.</param>
-		public string TranslateResponseToString (string requestCommand)
+		public string TranslateResponseToString (string requestCommand, IUser user)
 		{
+			if (user == null)
+				throw new ArgumentNullException ("user");
+
 			//TODO Test me if null or empty is given, then returns "No Command Received"
 			if (string.IsNullOrEmpty (requestCommand))
 				return "No Command Received";
@@ -48,68 +53,49 @@ namespace TaskHistory.Impl.Terminal
 
 			var commandResponse = new TerminalCommandResponse2(commandAction, registeredObject, optionString);
 
-			var returnVal = InterpretCommandResponse (commandResponse);
+			var returnVal = InterpretCommandResponse (commandResponse, user);
 			if (string.IsNullOrEmpty (returnVal))
 				throw new NullReferenceException ("Null returned from Interpreting CommandResponse");
 
 			return returnVal;
 		}
 
-		private string InterpretCommandResponse(TerminalCommandResponse2 commandResponse)
+		private string InterpretCommandResponse(TerminalCommandResponse2 commandResponse, IUser user)
 		{
+			if (user == null)
+				throw new ArgumentNullException ("user");
 			
-			return null;
-		}
+			switch (commandResponse.CommandAction) 
+			{
+			case TerminalCommandAction.Delete:
+				int numDeleted = _terminalProxyRepo.PerformDeleteOperation (commandResponse, user);
+				return $"{numDeleted} records were deleted.";
 
-	}
+			case TerminalCommandAction.List:
+				IEnumerable<ITerminalObject> objectsRead = _terminalProxyRepo.PerformReadOperation (commandResponse, user);
+				var builder = new StringBuilder ();
 
-	public class TerminalInterpreter_Old //: ITerminalInterpreter
-	{
-		private TerminalCommandResponse TranslateRequestToResponseObj (string requestInput)
-		{
-			if (string.IsNullOrEmpty (requestInput))
-				return TerminalCommandResponse.ErrorResponse;
+				foreach (var obj in objectsRead) {
+					builder.Append ($"{obj.ObjectId}: {obj.ObjectName} \n");
+				}
 
-			// 1. Tokenize the string
-			string[] tokenizedString = requestInput.ToUpper().Trim().Split (' ');
-			if (tokenizedString.Length < 2)
-				return TerminalCommandResponse.ErrorResponse;
+				return builder.ToString ().TrimEnd ('\n');
 
-			// 2. Determine the Action
-			TerminalCommandAction commandAction = TerminalInterpreterHelper.DetermineTerminalCommandAction(tokenizedString[0]);
-			if (commandAction == TerminalCommandAction.Error)
-				return TerminalCommandResponse.ErrorResponse;
+			case TerminalCommandAction.Update:
+				int numUpdated = _terminalProxyRepo.PerformUpdateOperation (commandResponse, user);
+				return $"{numUpdated} records were deleted.";
 
-			// 3. Determine the Object
-			TerminalRegisteredObject registeredObject = TerminalInterpreterHelper.DetermineTerminalRegisteredObject(tokenizedString[1]);
-			if (registeredObject == TerminalRegisteredObject.Error)
-				return TerminalCommandResponse.ErrorResponse;
-		
-			// 4. Determine the Option
-			TerminalCommandOption commandOption = TerminalInterpreterHelper.DetermineTerminalCommandOption(tokenizedString[2]);
-
-			// 5. Still here? Then let's construct a TerminalCommandResponse
-			// TODO factory me for unit testing
-			var returnVal = new TerminalCommandResponse(commandAction, registeredObject, commandOption);
-
-			return returnVal;
-		}
-
-
-		public string TranslateResponseToString(string requestInput)
-		{
-			//1. translate
-			TerminalCommandResponse commandResponse = TranslateRequestToResponseObj (requestInput);
-			if (commandResponse == null)
-				throw new NullReferenceException ("Null returned when translating the request input");
-
-			//2. Determine the repo operation
+			case TerminalCommandAction.Insert:
+				int numInserted = _terminalProxyRepo.PerformCreateOperation (commandResponse, user);
+				return $"{numInserted} records were inserted.";
+			}
 
 			return string.Empty;
 		}
-			
-		public TerminalInterpreter_Old (ITerminalProxyRepo proxyRepo)
+
+		public TerminalInterpreter(ITerminalProxyRepo proxyRepo)
 		{
+			_terminalProxyRepo = proxyRepo;
 		}
 	}
 }
