@@ -7,13 +7,10 @@ using TaskHistory.Api.Labels;
 
 namespace TaskHistory.Impl.Terminal
 {
-	public class TerminalProxyRepo
+	public class TerminalProxyRepo : ITerminalProxyRepo
 	{
 		private readonly IRegisteredObjectRepoProxy _registeredObjProxy;
 		private readonly ITerminalObjectMapper _terminalObjectMapper;
-
-		private ITaskRepo _taskRepo;
-		private ILabelRepo _labelRepo;
 
 		// TODO Register the repos with an attribute
 		// DetermineRepoToUse() function

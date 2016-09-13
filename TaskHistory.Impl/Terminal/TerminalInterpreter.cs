@@ -57,9 +57,7 @@ namespace TaskHistory.Impl.Terminal
 
 		private string InterpretCommandResponse(TerminalCommandResponse2 commandResponse)
 		{
-			if (commandResponse == null)
-				throw new ArgumentNullException ("commandResponse");
-
+			
 			return null;
 		}
 
