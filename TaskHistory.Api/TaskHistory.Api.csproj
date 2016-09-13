@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>TaskHistoryApi</RootNamespace>
+    <RootNamespace>TaskHistory.Api</RootNamespace>
     <AssemblyName>TaskHistoryApi</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -49,6 +49,14 @@
     <Compile Include="Users\DTOs\UserRegistrationParameters.cs" />
     <Compile Include="Tasks\DTOs\TaskUpdatingParameters.cs" />
     <Compile Include="Sql\IDataReaderProvider.cs" />
+    <Compile Include="Terminal\TerminalCommandResponse.cs" />
+    <Compile Include="Terminal\enumerations\TerminalCommandAction.cs" />
+    <Compile Include="Terminal\enumerations\TerminalCommandOption.cs" />
+    <Compile Include="Terminal\enumerations\TerminalRegisteredObject.cs" />
+    <Compile Include="Terminal\ITerminalInterpreter.cs" />
+    <Compile Include="Terminal\ITerminalProxyRepo.cs" />
+    <Compile Include="Terminal\ITerminalObject.cs" />
+    <Compile Include="Terminal\ITerminalObjectMapper.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -61,5 +69,7 @@
     <Folder Include="Configuration\" />
     <Folder Include="Users\DTOs\" />
     <Folder Include="Tasks\DTOs\" />
+    <Folder Include="Terminal\" />
+    <Folder Include="Terminal\enumerations\" />
   </ItemGroup>
 </Project>

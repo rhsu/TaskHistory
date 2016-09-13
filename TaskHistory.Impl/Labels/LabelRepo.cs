@@ -77,7 +77,7 @@ namespace TaskHistory.Impl.Labels
 
 			_applicationDataProxy.NonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
-
+			
 		public LabelRepo (LabelFactory labelFactory, 
 			ApplicationDataProxy applicationDataProxy)
 		{
