@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.Sql;
+using System.Text;
 
 namespace TaskHistory.Impl.Terminal
 {
@@ -15,21 +16,53 @@ namespace TaskHistory.Impl.Terminal
 		/// <param name="requestCommand">Request command.</param>
 		public string TranslateResponseToString (string requestCommand)
 		{
+			//TODO Test me if null or empty is given, then returns "No Command Received"
 			if (string.IsNullOrEmpty (requestCommand))
-				throw new ArgumentNullException ("requestCommand");
+				return "No Command Received";
 
-			//1 get the first word of the request command
+			// 1. Tokenize the string
+			//TODO Test me if tokenizedString is less than 2 words, then ...
+			string[] tokenizedString = requestCommand.ToUpper ().Trim ().Split (' ');
+			if (tokenizedString.Length < 2)
+				return $"{requestCommand} is invalid";
+
+			//2. Get the first word of the request command
+			string firstWord = tokenizedString[0];
 			// -- it should be create, read, update, delete, or help
+			// TODO Test all the possible strings and one thing that is not valid
+			TerminalCommandAction commandAction = TerminalInterpreterHelper.DetermineTerminalCommandAction(firstWord);
+			if (commandAction == TerminalCommandAction.Error)
+				return $"{commandAction} is invalid";
 
-			//2 get the second word of the request command
+			//3 get the second word of the request command
+			string secondWord = tokenizedString[1];
 			// --it should be label, task, or user
+			TerminalRegisteredObject registeredObject = TerminalInterpreterHelper.DetermineTerminalRegisteredObject(secondWord);
+			if (registeredObject == TerminalRegisteredObject.Error)
+				return $"{registeredObject} is invalid";
 
-			//3 create a CommandRequestObject
-				//-- crudOperation, --objectType --auxilary options "-name 'Robert'" for example...
-				// enum, enum, string
+			//TODO Integrate the two checks. For example "Pig Latin" will return Pig is not a valid action. Latin is not a valid object
+
+			//4 figure out the option string
+			string optionString = TerminalInterpreterHelper.ParseOptionText (tokenizedString);
+
+			var commandResponse = new TerminalCommandResponse2(commandAction, registeredObject, optionString);
+
+			var returnVal = InterpretCommandResponse (commandResponse);
+			if (string.IsNullOrEmpty (returnVal))
+				throw new NullReferenceException ("Null returned from Interpreting CommandResponse");
+
+			return returnVal;
+		}
+
+		private string InterpretCommandResponse(TerminalCommandResponse2 commandResponse)
+		{
+			if (commandResponse == null)
+				throw new ArgumentNullException ("commandResponse");
 
 			return null;
 		}
+
 	}
 
 	public class TerminalInterpreter_Old //: ITerminalInterpreter

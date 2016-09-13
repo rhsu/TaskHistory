@@ -7,7 +7,83 @@ using TaskHistory.Api.Labels;
 
 namespace TaskHistory.Impl.Terminal
 {
-	public class TerminalProxyRepo : ITerminalProxyRepo
+	public class TerminalProxyRepo
+	{
+		private readonly IRegisteredObjectRepoProxy _registeredObjProxy;
+		private readonly ITerminalObjectMapper _terminalObjectMapper;
+
+		private ITaskRepo _taskRepo;
+		private ILabelRepo _labelRepo;
+
+		// TODO Register the repos with an attribute
+		// DetermineRepoToUse() function
+
+		// TODO IUser should come from a context object
+		public int PerformCreateOperation(TerminalCommandResponse2 commandResponse, IUser user)
+		{
+			if (user == null)
+				throw new ArgumentNullException ("user");
+
+			if (commandResponse.CommandAction != TerminalCommandAction.List)
+				throw new InvalidOperationException ($"Command action for this operation must be list instead of {commandResponse.CommandAction}");
+
+			switch (commandResponse.RegisteredObject) 
+			{
+			case TerminalRegisteredObject.Label:
+				_registeredObjProxy.LabelRepo.CreateNewLabel ("some content from command response's option");
+				break;
+			case TerminalRegisteredObject.Task:
+				_registeredObjProxy.TaskRepo.CreateNewTaskForUser(user, "some content from command response's object");
+				break;
+			}
+
+			return 1;
+		}
+
+		public IEnumerable<ITerminalObject> PerformReadOperation(TerminalCommandResponse2 commandResponse, IUser user)
+		{
+			if (user == null)
+				throw new ArgumentNullException ("user");
+			
+			return new List<ITerminalObject> ();
+		}
+
+		public int PerformUpdateOperation(TerminalCommandResponse2 commandResponse, IUser user)
+		{
+			if (user == null)
+				throw new ArgumentNullException ("user");
+
+			switch (commandResponse.RegisteredObject) 
+			{
+			case TerminalRegisteredObject.Label:
+				// Need to create a label from commandReponse's 
+				_registeredObjProxy.LabelRepo.UpdateLabel (null);
+				break;
+			case TerminalRegisteredObject.Task:
+				_registeredObjProxy.TaskRepo.CreateNewTaskForUser(user, "some content from command response's object");
+				break;
+			}
+
+			return -1;
+		}
+
+		public int PerformDeleteOperation(TerminalCommandResponse2 commandResponse, IUser user)
+		{
+			if (user == null)
+				throw new ArgumentNullException ("user");
+			
+			return -1;
+		}
+
+		public TerminalProxyRepo(IRegisteredObjectRepoProxy objProxy, ITerminalObjectMapper objMapper)
+		{
+			_registeredObjProxy = objProxy;
+			_terminalObjectMapper = objMapper;
+		}
+	}
+}
+
+	/*public class TerminalProxyRepo : ITerminalProxyRepo
 	{
 		private readonly IRegisteredObjectRepoProxy _registeredObjProxy;
 		private readonly ITerminalObjectMapper _terminalObjectMapper;
@@ -92,4 +168,4 @@ namespace TaskHistory.Impl.Terminal
 			_terminalObjectMapper = terminalObjectMapper;
 		}
 	}
-}
+}*/
