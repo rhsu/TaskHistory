@@ -30,7 +30,7 @@ namespace TaskHistory.Impl.Test
 		{
 			DoBindings ();
 
-			var anyHistoryItemFactory = It.IsAny<IFromDataReaderFactory<IHistoryItem>>();
+			var anyHistoryItemFactory = It.IsAny<IFromDataReaderFactory<IHistoryDisplayItem>>();
 			string historySelectStoredProcedureName = "History_Select";
 			// var anyListOfDataPrams = It.IsAny<List<ISqlDataParameter>> ();
 
@@ -42,10 +42,10 @@ namespace TaskHistory.Impl.Test
 			mockAppDataProxy
 				.Setup (dataProxy => dataProxy
 				.DataReaderProvider
-					.ExecuteReaderForTypeCollection<IHistoryItem> (anyHistoryItemFactory, 
+					.ExecuteReaderForTypeCollection<IHistoryDisplayItem> (anyHistoryItemFactory, 
 						historySelectStoredProcedureName, 
 						SqlDataParamOfValue5.Object))
-				.Returns(new List<IHistoryItem>());
+				.Returns(new List<IHistoryDisplayItem>());
 
 			/*mockAppDataProxy.Setup (dataProxy => dataProxy
 				.ParamFactory

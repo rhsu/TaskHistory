@@ -49,7 +49,6 @@
     <Compile Include="Users\DTOs\UserRegistrationParameters.cs" />
     <Compile Include="Tasks\DTOs\TaskUpdatingParameters.cs" />
     <Compile Include="Sql\IDataReaderProvider.cs" />
-    <Compile Include="History\IHistoryItem.cs" />
     <Compile Include="History\IHistoryRepo.cs" />
     <Compile Include="History\enumerations\ActionType.cs" />
     <Compile Include="History\enumerations\BusinessObjectType.cs" />
@@ -62,6 +61,8 @@
     <Compile Include="Terminal\ITerminalProxyRepo.cs" />
     <Compile Include="Terminal\ITerminalObject.cs" />
     <Compile Include="Terminal\ITerminalObjectMapper.cs" />
+    <Compile Include="History\IHistoryDisplayItem.cs" />
+    <Compile Include="History\IHistoryDBDto.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -14,19 +14,19 @@ namespace TaskHistory.Impl.History
 		private const string DeleteStoredProcedure = "History_Delete";
 
 		private readonly IApplicationDataProxy _dataProxy;
-		private readonly IFromDataReaderFactory<IHistoryItem> _historyItemFactory;
+		private readonly IFromDataReaderFactory<IHistoryDisplayItem> _historyItemFactory;
 
 		/// <summary>
 		/// Gets all the history for a user
 		/// </summary>
 		/// <param name="userId">User identifier.</param>
-		public IEnumerable<IHistoryItem> ReadHistoryForUser(int userId)
+		public IEnumerable<IHistoryDisplayItem> ReadHistoryForUser(int userId)
 		{
 			ISqlParameterFactory paramFactory = _dataProxy.ParamFactory;
 			ISqlDataParameter parameter = paramFactory.CreateParameter ("pUserId", userId);
 
-			IEnumerable<IHistoryItem> returnVal = _dataProxy.DataReaderProvider
-				.ExecuteReaderForTypeCollection<IHistoryItem>(_historyItemFactory, 
+			IEnumerable<IHistoryDisplayItem> returnVal = _dataProxy.DataReaderProvider
+				.ExecuteReaderForTypeCollection<IHistoryDisplayItem>(_historyItemFactory, 
 					ReadStoredProcedure, 
 					parameter);
 			if (returnVal == null)
@@ -39,7 +39,35 @@ namespace TaskHistory.Impl.History
 		/// Records history in the database
 		/// </summary>
 		/// <param name="history">the history to record</param>
-		public void CreateHistory (IHistoryItem history)
+		public void CreateHistory (IHistoryDBDto history)
+		{
+			if (history == null)
+				throw new ArgumentNullException ("history");
+
+			ISqlParameterFactory paramFactory = _dataProxy.ParamFactory;
+
+			var parameters = new List<ISqlDataParameter> ();
+
+			var actionDateParam = paramFactory.CreateParameter ("pActionDate", history.ActionDate);
+			parameters.Add (actionDateParam);
+
+			var actionDoneParam = paramFactory.CreateParameter ("pActionDone", history.ActionDone);
+			parameters.Add (actionDoneParam);
+
+			var businessObjectParam = paramFactory.CreateParameter ("pBusinessObj", history.BusinessObject);
+			parameters.Add (businessObjectParam);
+
+			var userIdParam = paramFactory.CreateParameter ("pUserId", history.UserId);
+			parameters.Add (userIdParam);
+
+			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (CreateStoredProcedure, parameters);
+		}
+
+		/// <summary>
+		/// Edits history in the database
+		/// </summary>
+		/// <param name="history">history to update.</param>
+		public void UpdateHistory (IHistoryDBDto history)
 		{
 			if (history == null)
 				throw new ArgumentNullException ("history");
@@ -64,15 +92,6 @@ namespace TaskHistory.Impl.History
 		}
 
 		/// <summary>
-		/// Edits history in the database
-		/// </summary>
-		/// <param name="someDto">Some dto.</param>
-		public void UpdateHistory (object someDto)
-		{
-			throw new NotImplementedException ("Not implemented");
-		}
-
-		/// <summary>
 		/// Deletes the specific history item
 		/// </summary>
 		/// <param name="historyId">The id of the history to delete</param>
@@ -84,7 +103,7 @@ namespace TaskHistory.Impl.History
 			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 
-		public HistoryRepo (IApplicationDataProxy dataProxy, IFromDataReaderFactory<IHistoryItem> historyItemFactory)
+		public HistoryRepo (IApplicationDataProxy dataProxy, IFromDataReaderFactory<IHistoryDisplayItem> historyItemFactory)
 		{
 			_dataProxy = dataProxy;
 			_historyItemFactory = historyItemFactory;

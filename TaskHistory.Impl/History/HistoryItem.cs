@@ -3,7 +3,7 @@ using TaskHistory.Api.History;
 
 namespace TaskHistory.Impl.History
 {
-	public class HistoryItem : IHistoryItem
+	public class HistoryItem : IHistoryDisplayItem
 	{
 		public int HistoryId { get; }
 		public DateTime ActionDate { get; }
