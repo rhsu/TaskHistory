@@ -8,7 +8,10 @@ namespace TaskHistory.Impl.History
 {
 	public class HistoryRepo : IHistoryRepo
 	{
+		private const string CreateStoredProcedure = "History_Create";
 		private const string ReadStoredProcedure = "History_Select";
+		private const string UpdateStoredProcedure = "History_Update";
+		private const string DeleteStoredProcedure = "History_Delete";
 
 		private readonly IApplicationDataProxy _dataProxy;
 		private readonly IFromDataReaderFactory<IHistoryItem> _historyItemFactory;
@@ -38,7 +41,26 @@ namespace TaskHistory.Impl.History
 		/// <param name="history">the history to record</param>
 		public void CreateHistory (IHistoryItem history)
 		{
-			throw new NotImplementedException ("Not implemented");
+			if (history == null)
+				throw new ArgumentNullException ("history");
+
+			ISqlParameterFactory paramFactory = _dataProxy.ParamFactory;
+
+			var parameters = new List<ISqlDataParameter> ();
+
+			var actionDateParam = paramFactory.CreateParameter ("pActionDate", history.ActionDate);
+			parameters.Add (actionDateParam);
+
+			var actionDoneParam = paramFactory.CreateParameter ("pActionDone", history.ActionDone);
+			parameters.Add (actionDoneParam);
+
+			var businessObjectParam = paramFactory.CreateParameter ("pBusinessObj", history.BusinessObject);
+			parameters.Add (businessObjectParam);
+
+			var userIdParam = paramFactory.CreateParameter ("pUserId", history.UserId);
+			parameters.Add (userIdParam);
+
+			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);
 		}
 
 		/// <summary>
@@ -56,7 +78,10 @@ namespace TaskHistory.Impl.History
 		/// <param name="historyId">The id of the history to delete</param>
 		public void DeleteHistory (int historyId)
 		{
-			throw new NotImplementedException ("Not implemented");
+			ISqlParameterFactory paramFactory = _dataProxy.ParamFactory;
+			ISqlDataParameter parameter = paramFactory.CreateParameter ("pHistoryId", historyId);
+
+			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (DeleteStoredProcedure, parameter);
 		}
 
 		public HistoryRepo (IApplicationDataProxy dataProxy, IFromDataReaderFactory<IHistoryItem> historyItemFactory)
