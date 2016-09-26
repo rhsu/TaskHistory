@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.50, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.7.15, for Linux (x86_64)
 --
 -- Host: localhost    Database: TaskHistory
 -- ------------------------------------------------------
--- Server version	5.5.50-0ubuntu0.14.04.1
+-- Server version	5.7.15-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,25 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `History`
+--
+
+DROP TABLE IF EXISTS `History`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `History` (
+  `HistoryId` int(11) NOT NULL AUTO_INCREMENT,
+  `ActionDate` date NOT NULL,
+  `ActionDone` varchar(64) NOT NULL,
+  `BusinessObject` varchar(64) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  PRIMARY KEY (`HistoryId`),
+  KEY `UserId` (`UserId`),
+  KEY `UserId_2` (`UserId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `Labels`
@@ -71,7 +90,7 @@ CREATE TABLE `Tasks` (
   PRIMARY KEY (`TaskID`),
   KEY `UserId` (`UserId`),
   CONSTRAINT `TaskIdToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,7 +111,7 @@ CREATE TABLE `Users` (
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -394,4 +413,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-09-06  9:34:01
+-- Dump completed on 2016-09-26 13:45:11
