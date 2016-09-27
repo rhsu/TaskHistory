@@ -72,7 +72,7 @@ namespace TaskHistory.Impl.History
 			if (history == null)
 				throw new ArgumentNullException ("history");
 
-			ISqlParameterFactory paramFactory = _dataProxy.ParamFactory;
+			/*ISqlParameterFactory paramFactory = _dataProxy.ParamFactory;
 
 			var parameters = new List<ISqlDataParameter> ();
 
@@ -88,7 +88,9 @@ namespace TaskHistory.Impl.History
 			var userIdParam = paramFactory.CreateParameter ("pUserId", history.UserId);
 			parameters.Add (userIdParam);
 
-			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);
+			_dataProxy.NonQueryDataProvider.ExecuteNonQuery (UpdateStoredProcedure, parameters);*/
+
+			throw new NotImplementedException ("Need to rethink this. When will history ever be modified?");
 		}
 
 		/// <summary>
