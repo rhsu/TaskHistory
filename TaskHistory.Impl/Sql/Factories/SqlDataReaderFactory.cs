@@ -1,6 +1,6 @@
 ﻿using System;
-using TaskHistory.Api.Sql;
 using MySql.Data.MySqlClient;
+using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
@@ -13,7 +13,7 @@ namespace TaskHistory.Impl.Sql
 		public ISqlDataReader MakeDataReader (MySqlDataReader reader)
 		{
 			if (reader == null)
-				throw new ArgumentNullException ("reader");
+				throw new ArgumentNullException (nameof(reader));
 
 			return new SqlDataReader (reader);
 		}

@@ -7,11 +7,14 @@ namespace TaskHistory.Impl.Sql
 	{
 		public ISqlDataParameter CreateParameter(string paramName, object value)
 		{
-			return new SqlDataParameter(paramName, value);
-		}
+			if (paramName == null)
+				throw new ArgumentNullException(nameof(paramName));
 
-		public SqlParameterFactory ()
-		{
+			//TODO: Remove me someday if stable
+			if (value == null)
+				throw new ArgumentNullException(nameof(value), "This can be uncommented if this is causing existing issues");
+
+			return new SqlDataParameter(paramName, value);
 		}
 	}
 }

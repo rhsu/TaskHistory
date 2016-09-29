@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
-using TaskHistory.Orchestrator.Tasks;
 using TaskHistory.Api.Users;
+using TaskHistory.Orchestrator.Tasks;
 
 namespace TaskHistory.Controllers
 {

@@ -1,5 +1,4 @@
-﻿using System;
-using TaskHistory.Api.Sql;
+﻿using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
@@ -7,13 +6,7 @@ namespace TaskHistory.Impl.Sql
 	{
 		public ISqlDataParameter CreateDataParemeter(string name, object value)
 		{
-			return new DataParameter (name, value);
-		}
-
-		public DataParameterFactory ()
-		{
-			
+			return new DataParameter(name, value);
 		}
 	}
 }
-

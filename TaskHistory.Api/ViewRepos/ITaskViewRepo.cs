@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using TaskHistory.Api.Users;
+﻿using System.Collections.Generic;
 using TaskHistory.Api.Tasks;
+using TaskHistory.Api.Users;
 
 namespace TaskHistory.Api.ViewRepos
 {

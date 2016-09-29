@@ -7,10 +7,6 @@ namespace TaskHistory.Bindings
 {
 	public class UserModule : IModule
 	{
-		public UserModule ()
-		{
-		}
-
 		public void Bind (IKernel kernel)
 		{
 			if (kernel == null)
