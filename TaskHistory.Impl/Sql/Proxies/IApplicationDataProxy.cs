@@ -1,5 +1,4 @@
-﻿using System;
-using TaskHistory.Api.Sql;
+﻿using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
