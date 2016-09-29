@@ -1,7 +1,4 @@
-﻿using System;
-using MySql.Data.MySqlClient;
-using TaskHistory.Api.Sql;
-using System.Collections.Generic;
+﻿using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
