@@ -28,4 +28,3 @@ namespace TaskHistory.Impl.History
 		}
 	}
 }
-
