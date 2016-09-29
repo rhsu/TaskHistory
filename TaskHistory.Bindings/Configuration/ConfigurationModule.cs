@@ -7,14 +7,10 @@ namespace TaskHistory.Bindings
 {
 	public class ConfigurationModule : IModule
 	{
-		public ConfigurationModule ()
-		{
-		}
-
 		public void Bind(IKernel kernel)
 		{
 			if (kernel == null)
-				throw new ArgumentNullException ("kernel");
+				throw new ArgumentNullException (nameof(kernel));
 
 			kernel.Bind<IConfigurationProvider> ()
 				  .To<ConfigurationProvider> ();

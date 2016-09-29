@@ -1,5 +1,4 @@
-﻿using System;
-using TaskHistory.Api.Labels;
+﻿using TaskHistory.Api.Labels;
 
 namespace TaskHistory.Impl
 {
@@ -8,11 +7,10 @@ namespace TaskHistory.Impl
 		public int LabelId { get; }
 		public string Name { get; }
 
-		internal Label (int id, string name)
+		internal Label(int id, string name)
 		{
 			LabelId = id;
 			Name = name;
 		}
 	}
 }
-

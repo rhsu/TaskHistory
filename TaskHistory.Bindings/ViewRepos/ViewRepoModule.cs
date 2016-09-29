@@ -7,18 +7,13 @@ namespace TaskHistory.Bindings
 {
 	public class ViewRepoModule : IModule
 	{
-		public ViewRepoModule ()
-		{
-		}
-
-		public void Bind (IKernel kernel)
+		public void Bind(IKernel kernel)
 		{
 			if (kernel == null)
-				throw new ArgumentNullException ("kernel");
+				throw new ArgumentNullException(nameof(kernel));
 
-			kernel.Bind<ITaskViewRepo> ()
-				  .To<TaskViewRepo> ();
+			kernel.Bind<ITaskViewRepo>()
+				  .To<TaskViewRepo>();
 		}
 	}
 }
-

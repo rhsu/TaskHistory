@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TaskHistory.Api.Users;
+﻿using TaskHistory.Api.Users;
 
 namespace TaskHistory.Api.Terminal
 {

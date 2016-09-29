@@ -5,16 +5,16 @@ namespace TaskHistory.Impl.Configuration
 {
 	public class ConfigurationProvider : IConfigurationProvider
 	{
-		private readonly string _sqlConnectionString;
+		readonly string _sqlConnectionString;
 
-		public string SqlConnectionString 
-		{ 
+		public string SqlConnectionString
+		{
 			get { return _sqlConnectionString; }
 		}
 
-		public ConfigurationProvider ()
+		public ConfigurationProvider()
 		{
-			_sqlConnectionString = ConfigurationManager.AppSettings ["MySqlConnection"];
+			_sqlConnectionString = ConfigurationManager.AppSettings["MySqlConnection"];
 		}
 	}
 }

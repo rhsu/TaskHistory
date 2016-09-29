@@ -1,7 +1,6 @@
-﻿using System;
-using TaskHistory.Api.Tasks;
+﻿using System.Collections.Generic;
 using TaskHistory.Api.Labels;
-using System.Collections.Generic;
+using TaskHistory.Api.Tasks;
 
 namespace TaskHistory.Api.Terminal
 {

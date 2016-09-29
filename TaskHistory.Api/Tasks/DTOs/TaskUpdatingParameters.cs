@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TaskHistory.Api.Tasks
+﻿namespace TaskHistory.Api.Tasks
 {
 	public class TaskUpdatingParameters
 	{
@@ -9,12 +7,11 @@ namespace TaskHistory.Api.Tasks
 		public bool IsDeleted { get; }
 		public int TaskId { get; }
 
-		public TaskUpdatingParameters (string content, 
-			bool isCompleted, 
-			bool isDeleted, 
+		public TaskUpdatingParameters(string content,
+			bool isCompleted,
+			bool isDeleted,
 			int taskId)
 		{
 		}
 	}
 }
-

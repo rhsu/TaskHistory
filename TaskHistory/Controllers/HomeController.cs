@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Web.Security;
 using System.Web.Mvc;
+using System.Web.Security;
 using TaskHistory.Api.Users;
-using TaskHistory.ViewModel.Users;
 using TaskHistory.Orchestrator.Home;
+using TaskHistory.ViewModel.Users;
 
 namespace TaskHistory.Controllers
 {

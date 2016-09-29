@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using TaskHistory.Api.Users;
 using TaskHistory.Api.Tasks;
+using TaskHistory.Api.Users;
 
 namespace TaskHistory.Api.Labels
 {

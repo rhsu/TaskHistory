@@ -14,7 +14,7 @@ namespace TaskHistory.Bindings
 		public void Bind(IKernel kernel)
 		{
 			if (kernel == null)
-				throw new ArgumentNullException ("kernel");
+				throw new ArgumentNullException (nameof(kernel));
 
 			kernel.Bind<IDataReaderProvider> ()
 				  .To<DataReaderProvider> ();
