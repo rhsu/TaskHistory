@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.ObjectMapper", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Impl.Test", "TaskHistory.Impl.Test\TaskHistory.Impl.Test.csproj", "{8BA24FD3-EC23-4201-AB5D-6EA2E363DA83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularProto", "AngularProto\AngularProto.csproj", "{38673E33-19E3-4907-B048-3E21972D3FE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,5 +57,9 @@ Global
 		{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38673E33-19E3-4907-B048-3E21972D3FE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38673E33-19E3-4907-B048-3E21972D3FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38673E33-19E3-4907-B048-3E21972D3FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38673E33-19E3-4907-B048-3E21972D3FE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
