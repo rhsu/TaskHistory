@@ -19,7 +19,7 @@ namespace TaskHistory.Impl.Terminal
 		public int PerformCreateOperation(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
-				throw new ArgumentNullException ("user");
+				throw new ArgumentNullException (nameof(user));
 
 			if (commandResponse.CommandAction != TerminalCommandAction.Insert)
 				throw new InvalidOperationException ($"Command action for this operation must be list instead of {commandResponse.CommandAction}");
@@ -40,7 +40,7 @@ namespace TaskHistory.Impl.Terminal
 		public IEnumerable<ITerminalObject> PerformReadOperation(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
-				throw new ArgumentNullException ("user");
+				throw new ArgumentNullException (nameof(user));
 
 			if (commandResponse.CommandAction != TerminalCommandAction.List)
 				throw new InvalidOperationException ($"Command action for this operation must be list instead of {commandResponse.CommandAction}");

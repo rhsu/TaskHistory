@@ -59,7 +59,7 @@ namespace TaskHistory.Impl.Terminal
 		private string InterpretCommandResponse(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
-				throw new ArgumentNullException ("user");
+				throw new ArgumentNullException (nameof(user));
 			
 			switch (commandResponse.CommandAction) 
 			{
