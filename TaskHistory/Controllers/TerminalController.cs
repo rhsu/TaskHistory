@@ -20,13 +20,12 @@ namespace TaskHistory.Controllers
 			return View(responseObject);
 		}
 
+		[HttpPost]
 		public ActionResult SubmitCommand(string command)
 		{
-			// return View("Index");
-
 			var responseObject = new TerminalResponseObject(command);
 
-			return RedirectToAction("Index", new { responseObject });
+			return View("Index", responseObject);
 		}
     }
 }
