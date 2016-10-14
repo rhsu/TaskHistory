@@ -5,7 +5,7 @@ namespace TaskHistory
 {
 	public class UserContext
 	{
-		public IUser User
+		public IUser CurrentUser
 		{
 			get
 			{			

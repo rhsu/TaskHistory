@@ -29,7 +29,7 @@ namespace TaskHistory.Controllers
 		public TasksController(TasksOrchestrator taskOrchestrator, UserContext userContext)
 		{
 			_taskOrchestrator = taskOrchestrator;
-			_currentUser = userContext.User;
+			_currentUser = userContext.CurrentUser;
 		}
     }
 }
