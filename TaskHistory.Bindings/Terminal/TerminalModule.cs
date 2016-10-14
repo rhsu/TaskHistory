@@ -15,7 +15,11 @@ namespace TaskHistory.Bindings
 			kernel.Bind<ITerminalInterpreter>()
 				  .To<TerminalInterpreter>();
 
-			throw new NotImplementedException();
+			kernel.Bind<ITerminalProxyRepo>()
+				  .To<TerminalProxyRepo>();
+
+			kernel.Bind<IRegisteredObjectRepoProxy>()
+				  .To<RegisteredObjectRepoProxy>();
 		}
 	}
 }

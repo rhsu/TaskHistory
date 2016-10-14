@@ -7,7 +7,7 @@ namespace TaskHistory.Bindings
 	public class TaskHistoryBindings
 	{
 		private static TaskHistoryBindings _bindings;
-		private readonly List<IModule> _allModules;
+		readonly List<IModule> _allModules;
 
 		public static TaskHistoryBindings GetInstance()
 		{
@@ -30,6 +30,7 @@ namespace TaskHistory.Bindings
 			_allModules.Add (new TaskModule ());
 			_allModules.Add (new UserModule ());
 			_allModules.Add (new ViewRepoModule ());
+			_allModules.Add(new TerminalModule());
 		}
 
 		public void DoAllBindings(IKernel kernel)

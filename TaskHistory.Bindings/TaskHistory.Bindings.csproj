@@ -43,6 +43,7 @@
     <Compile Include="Tasks\TaskModule.cs" />
     <Compile Include="ViewRepos\ViewRepoModule.cs" />
     <Compile Include="Terminal\TerminalModule.cs" />
+    <Compile Include="Labels\LabelModule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
