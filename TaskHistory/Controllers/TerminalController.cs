@@ -38,7 +38,7 @@ namespace TaskHistory.Controllers
 		public TerminalController(TerminalOrchestrator terminalOrchestrator, UserContext userContext)
 		{
 			_terminalOrchestrator = terminalOrchestrator;
-			_currentUser = userContext.User;
+			_currentUser = userContext.CurrentUser;
 		}
     }
 }
