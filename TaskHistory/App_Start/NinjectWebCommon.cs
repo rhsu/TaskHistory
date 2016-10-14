@@ -67,6 +67,9 @@ namespace TaskHistory.App_Start
 			if (bindings == null)
 				throw new NullReferenceException ("Null returned from TaskHistoryBindings");
 
+			kernel.Bind<IUserContext>()
+				  .To<UserContext>();
+
 			bindings.DoAllBindings (kernel);
         }        
     }
