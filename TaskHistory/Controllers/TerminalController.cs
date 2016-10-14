@@ -28,8 +28,7 @@ namespace TaskHistory.Controllers
 		[HttpPost]
 		public ActionResult SubmitCommand(string command)
 		{
-			IUser currentUser = (IUser)Session["CurrentUser"];
-			string response = _terminalOrchestrator.ProcessCommand(command, currentUser);
+			string response = _terminalOrchestrator.ProcessCommand(command, _currentUser);
 			var responseObject = new TerminalResponseObject(response);
 
 			return View("Index", responseObject);
