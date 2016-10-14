@@ -22,7 +22,7 @@ namespace TaskHistory.Controllers
 		public ActionResult RegisterUser (UserRegistrationParametersViewModel userRegisterViewModel)
 		{
 			if (userRegisterViewModel == null)
-				throw new ArgumentNullException (nameof(userRegisterViewModel));
+				throw new ArgumentNullException ("userRegisterViewModel");
 
 			UserRegistrationStatusViewModel status = _homeOrchestrator.OrchestrateRegisterUser (userRegisterViewModel);
 			if (status == null)
@@ -46,7 +46,7 @@ namespace TaskHistory.Controllers
 		public ActionResult LoginUser(UserLoginViewModel userLoginViewModel)
 		{
 			if (userLoginViewModel == null)
-				throw new ArgumentNullException (nameof(userLoginViewModel));
+				throw new ArgumentNullException ("userLoginViewModel");
 
 			IUser user = _homeOrchestrator.OrchestrateValidateUser (userLoginViewModel);
 
