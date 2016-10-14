@@ -7,7 +7,8 @@ namespace TaskHistory.Controllers
 	[Authorize]
 	public class TerminalController : Controller
     {
-		private TerminalOrchestrator _terminalOrchestrator;
+		TerminalOrchestrator _terminalOrchestrator;
+		IUser _currentUser;
 
 		[HttpGet]
 		public ActionResult Index()
@@ -34,9 +35,10 @@ namespace TaskHistory.Controllers
 			return View("Index", responseObject);
 		}
 
-		public TerminalController(TerminalOrchestrator terminalOrchestrator)
+		public TerminalController(TerminalOrchestrator terminalOrchestrator, UserContext userContext)
 		{
 			_terminalOrchestrator = terminalOrchestrator;
+			_currentUser = userContext.User;
 		}
     }
 }
