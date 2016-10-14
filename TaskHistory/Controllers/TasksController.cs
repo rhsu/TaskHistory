@@ -26,7 +26,7 @@ namespace TaskHistory.Controllers
 			return RedirectToAction ("Index");
 		}
 
-		public TasksController(TasksOrchestrator taskOrchestrator, IUserContext userContext)
+		public TasksController(TasksOrchestrator taskOrchestrator, UserContext userContext)
 		{
 			_taskOrchestrator = taskOrchestrator;
 			_currentUser = userContext.User;

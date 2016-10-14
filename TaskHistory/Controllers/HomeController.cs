@@ -10,7 +10,6 @@ namespace TaskHistory.Controllers
 	public class HomeController : Controller
 	{
 		private HomeOrchestrator _homeOrchestrator;
-		private IUserContext _userContext;
 
 		[HttpGet]
 		public ActionResult Index ()
