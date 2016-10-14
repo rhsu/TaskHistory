@@ -7,13 +7,14 @@ namespace TaskHistory.Controllers
 	[Authorize]
     public class TasksController : Controller
     {
-		TasksOrchestrator _taskOrchestrator;
-		IUser _currentUser;
+		private TasksOrchestrator _taskOrchestrator;
 
 		[HttpGet]
         public ActionResult Index()
         {
-			var vmTasks = _taskOrchestrator.OrchestratorGetTasks (_currentUser);
+			IUser currentUser = (IUser) Session ["CurrentUser"];
+
+			var vmTasks = _taskOrchestrator.OrchestratorGetTasks (currentUser);
 
 			return View (vmTasks);
         }
@@ -21,15 +22,16 @@ namespace TaskHistory.Controllers
 		[HttpPost]
 		public ActionResult CreateTask(string content)
 		{
-			_taskOrchestrator.OrchestratorCreateTask (_currentUser, content);
+			IUser currentUser = (IUser) Session ["CurrentUser"];
+
+			_taskOrchestrator.OrchestratorCreateTask (currentUser, content);
 
 			return RedirectToAction ("Index");
 		}
 
-		public TasksController(TasksOrchestrator taskOrchestrator, UserContext userContext)
+		public TasksController(TasksOrchestrator taskOrchestrator)
 		{
 			_taskOrchestrator = taskOrchestrator;
-			_currentUser = userContext.CurrentUser;
 		}
     }
 }
