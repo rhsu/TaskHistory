@@ -92,6 +92,8 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\TerminalController.cs" />
+    <Compile Include="Models\TerminalResponseObject.cs" />
+    <Compile Include="Models\UserContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
