@@ -8,7 +8,7 @@ namespace TaskHistory.Impl.Terminal
 	/// Helper Functions Available for the Terminal Provider
 	/// </summary>
 	//TODO: This should not be a static class
-	internal static class TerminalInterpreterHelper
+	public static class TerminalInterpreterHelper
 	{
 		internal static TerminalCommandAction DetermineTerminalCommandAction(string commandActionString)
 		{
@@ -21,13 +21,13 @@ namespace TaskHistory.Impl.Terminal
 			return requestCommand;
 		}
 
-		internal static TerminalRegisteredObject DetermineTerminalRegisteredObject(string registeredObjectString)
+		public static TerminalRegisteredObject DetermineTerminalRegisteredObject(string registeredObjectString)
 		{
 			if (string.IsNullOrEmpty (registeredObjectString))
 				return TerminalRegisteredObject.Error;
 
 			TerminalRegisteredObject registeredObject = TerminalRegisteredObject.Error;
-			Enum.TryParse (registeredObjectString, out registeredObject);
+			Enum.TryParse (registeredObjectString, true, out registeredObject);
 
 			return registeredObject;
 		}
