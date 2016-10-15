@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Reflection.Emit;
 using Ninject;
 using TaskHistory.Api.Labels;
+using TaskHistory.Impl.Labels;
 
 namespace TaskHistory.Bindings
 {
@@ -13,7 +13,10 @@ namespace TaskHistory.Bindings
 				throw new ArgumentNullException(nameof(kernel));
 
 			kernel.Bind<ILabel>()
-				  .To<Label>();
+			      .To<Label>();
+
+			kernel.Bind<ILabelRepo>()
+				  .To<LabelRepo>();
 		}
 	}
 }

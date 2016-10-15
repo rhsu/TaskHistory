@@ -72,10 +72,10 @@ namespace TaskHistory.Impl.Terminal
 			return returnVal;
 		}
 
-		private TerminalObjectMapper (ITerminalObjectFactory terminalObjectFactory)
+		public TerminalObjectMapper(ITerminalObjectFactory terminalObjectFactory)
 		{
 			if (terminalObjectFactory == null)
-				throw new ArgumentNullException ("terminalObjectFactory");
+				throw new ArgumentNullException("terminalObjectFactory");
 
 			_terminalObjectFactory = terminalObjectFactory;
 		}

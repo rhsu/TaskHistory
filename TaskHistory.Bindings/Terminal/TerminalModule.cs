@@ -20,6 +20,12 @@ namespace TaskHistory.Bindings
 
 			kernel.Bind<IRegisteredObjectRepoProxy>()
 				  .To<RegisteredObjectRepoProxy>();
+
+			kernel.Bind<ITerminalObjectMapper>()
+				  .To<TerminalObjectMapper>();
+
+			kernel.Bind<ITerminalObjectFactory>()
+				  .To<TerminalObjectFactory>();
 		}
 	}
 }
