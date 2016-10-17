@@ -1,5 +1,4 @@
-﻿using System;
-using TaskHistory.Api.Terminal;
+﻿using TaskHistory.Api.Terminal;
 
 namespace TaskHistory.Impl.Terminal
 {
@@ -7,12 +6,7 @@ namespace TaskHistory.Impl.Terminal
 	{
 		public ITerminalObject Create(int id, string name)
 		{
-			return new TerminalObject (id, name);
-		}
-
-		public TerminalObjectFactory ()
-		{
+			return new TerminalObject(id, name);
 		}
 	}
 }
-

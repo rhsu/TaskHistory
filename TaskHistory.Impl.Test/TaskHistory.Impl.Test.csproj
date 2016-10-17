@@ -35,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Terminal\TerminalInterpreterHelperTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -49,5 +50,8 @@
       <Project>{72D931D2-0537-4089-A50A-D7E2622073A2}</Project>
       <Name>TaskHistory.Impl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Terminal\" />
   </ItemGroup>
 </Project>

@@ -1,14 +1,19 @@
 ﻿using System.Web.Mvc;
+using TaskHistory.Api.Users;
+using TaskHistoryOrchestrator;
 
 namespace TaskHistory.Controllers
 {
 	[Authorize]
 	public class TerminalController : Controller
     {
+		TerminalOrchestrator _terminalOrchestrator;
+		IUser _currentUser;
+
 		[HttpGet]
 		public ActionResult Index()
         {
-			var responseObj = new TerminalResponseObject("Hello World");
+			var responseObj = new TerminalResponseObject("Hello");
 
 			return View (responseObj);
         }
@@ -23,9 +28,16 @@ namespace TaskHistory.Controllers
 		[HttpPost]
 		public ActionResult SubmitCommand(string command)
 		{
-			var responseObject = new TerminalResponseObject(command);
+			string response = _terminalOrchestrator.ProcessCommand(command, _currentUser);
+			var responseObject = new TerminalResponseObject(response);
 
 			return View("Index", responseObject);
+		}
+
+		public TerminalController(TerminalOrchestrator terminalOrchestrator, UserContext userContext)
+		{
+			_terminalOrchestrator = terminalOrchestrator;
+			_currentUser = userContext.CurrentUser;
 		}
     }
 }

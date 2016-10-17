@@ -11,11 +11,10 @@ namespace TaskHistory.Impl.Terminal
 	{
 		private readonly ITerminalProxyRepo _terminalProxyRepo;
 
-		/// <param name="requestCommand">Request command.</param>
 		public string TranslateResponseToString (string requestCommand, IUser user)
 		{
 			if (user == null)
-				throw new ArgumentNullException ("user");
+				throw new ArgumentNullException (nameof(user));
 
 			//TODO Test me if null or empty is given, then returns "No Command Received"
 			if (string.IsNullOrEmpty (requestCommand))
@@ -59,7 +58,7 @@ namespace TaskHistory.Impl.Terminal
 		private string InterpretCommandResponse(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
-				throw new ArgumentNullException ("user");
+				throw new ArgumentNullException (nameof(user));
 			
 			switch (commandResponse.CommandAction) 
 			{
