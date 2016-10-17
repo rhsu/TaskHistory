@@ -3,9 +3,9 @@
 	public enum TerminalRegisteredObject
 	{
 		Error,
-		Task,
 		Label,
+		Task,
 		//TODO: Figure out this later
 		User
 	}
-}
+} 
