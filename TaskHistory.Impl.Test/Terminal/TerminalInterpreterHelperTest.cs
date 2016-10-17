@@ -36,29 +36,45 @@ namespace TaskHistory.Impl.Test
 		}
 
 		[Test]
-		public void DetermineUserEnum_Test()
+		public void DetermineUser_RegisteredObject_Test()
 		{
 			var userEnum = TerminalInterpreterHelper.DetermineTerminalRegisteredObject("USER");
 			Assert.AreEqual(TerminalRegisteredObject.User, userEnum);
 		}
 
 		[Test]
-		public void DetermineListEnum_Test()
+		public void DetermineList_CommandAction_Test()
 		{
+			var listEnum = TerminalInterpreterHelper.DetermineTerminalCommandAction("LIST");
+			Assert.AreEqual(TerminalCommandAction.List, listEnum);
 		}
 
 		[Test]
-		public void DetermineUpdateEnum_Test()
+		public void DetermineUpdate_CommandAction_Test()
 		{
+			var updateEnum = TerminalInterpreterHelper.DetermineTerminalCommandAction("UPDATE");
+			Assert.AreEqual(TerminalCommandAction.Update, updateEnum);
 		}
 
 		[Test]
-		public void DetermineDeleteEnum_Test()
+		public void DetermineDelete_CommandAction_Test()
 		{
+			var deleteEnum = TerminalInterpreterHelper.DetermineTerminalCommandAction("DELETE");
+			Assert.AreEqual(TerminalCommandAction.Delete, deleteEnum);
 		}
 
-		public void DetermineErrorEnum_Test()
+		[Test]
+		public void DetermineError_CommandAction_Test()
 		{
+			var errorEnum = TerminalInterpreterHelper.DetermineTerminalCommandAction("ERROR");
+			Assert.AreEqual(TerminalCommandAction.Error, errorEnum);
+		}
+
+		[Test]
+		public void ErrorEnum_IfNonsenseCommandAction()
+		{
+			var errorEnum = TerminalInterpreterHelper.DetermineTerminalCommandAction("NONSENSE");
+			Assert.AreEqual(TerminalCommandAction.Error, errorEnum);
 		}
 	}
 }

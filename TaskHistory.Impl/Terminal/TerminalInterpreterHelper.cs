@@ -15,7 +15,10 @@ namespace TaskHistory.Impl.Terminal
 				return TerminalCommandAction.Error;
 
 			TerminalCommandAction requestCommand = TerminalCommandAction.Error;
-			Enum.TryParse (commandActionString, out requestCommand);
+			bool isSuccessful = Enum.TryParse (commandActionString, true, out requestCommand);
+
+			if (!isSuccessful)
+				return TerminalCommandAction.Error;
 
 			return requestCommand;
 		}
@@ -26,7 +29,10 @@ namespace TaskHistory.Impl.Terminal
 				return TerminalRegisteredObject.Error;
 
 			TerminalRegisteredObject registeredObject = TerminalRegisteredObject.Error;
-			Enum.TryParse (registeredObjectString, true, out registeredObject);
+			bool isSuccessful = Enum.TryParse (registeredObjectString, true, out registeredObject);
+
+			if (!isSuccessful)
+				return TerminalRegisteredObject.Error;
 
 			return registeredObject;
 		}
