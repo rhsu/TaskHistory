@@ -11,9 +11,15 @@ namespace TaskHistory.Impl.Test
 		[Test]
 		public void DetermineTerminalRegisteredObject_Test()
 		{
-			var result = TerminalInterpreterHelper.DetermineTerminalRegisteredObject("TASK");
+			var taskEnum = TerminalInterpreterHelper.DetermineTerminalRegisteredObject("TASK");
+			var errorEnum = TerminalInterpreterHelper.DetermineTerminalRegisteredObject("ERROR");
+			var labelEnum = TerminalInterpreterHelper.DetermineTerminalRegisteredObject("LABELs");
+			var userEnum = TerminalInterpreterHelper.DetermineTerminalRegisteredObject("USER");
 
-			Assert.AreEqual(TerminalRegisteredObject.Task, result);
+			Assert.AreEqual(TerminalRegisteredObject.Task, taskEnum);
+			Assert.AreEqual(TerminalRegisteredObject.Error, errorEnum);
+			Assert.AreEqual(TerminalRegisteredObject.Label, labelEnum);
+			Assert.AreEqual(TerminalRegisteredObject.User, userEnum);
 		}
 	}
 }
