@@ -1,6 +1,6 @@
 ﻿using TaskHistory.Api.Labels;
 
-namespace TaskHistory.Impl
+namespace TaskHistory.Impl.Labels
 {
 	public class Label : ILabel
 	{

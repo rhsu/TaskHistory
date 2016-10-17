@@ -1,32 +1,31 @@
 ﻿using System;
+using TaskHistory.Api.Terminal;
+using TaskHistory.Api.Users;
 
 namespace TaskHistoryOrchestrator
 {
 	public class TerminalOrchestrator
 	{
-		public TerminalOrchestrator ()
+		private ITerminalInterpreter _terminalInterpreter;
+
+		public TerminalOrchestrator(ITerminalInterpreter terminalInterpreter)
 		{
+			_terminalInterpreter = terminalInterpreter;
 		}
 
-		public string ProcessCommand(string command)
+		public string ProcessCommand(string command, IUser user)
 		{
-			if (command == null || command == string.Empty) 
+			if (string.IsNullOrEmpty(command))
 			{
 				return "Invalid Command";
 			}
 
-			string[] parsedCommand = command.ToLower ().Trim().Split (' ');
-			switch (parsedCommand[0]) 
-			{
-			case "insert":
-				break;
-			case "update":
-				break;
-			case "delete":
-				break;
-			}
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
 
-			return "Response string";
+			var returnString = _terminalInterpreter.TranslateResponseToString(command, user);
+
+			return returnString;
 		}
 	}
 }

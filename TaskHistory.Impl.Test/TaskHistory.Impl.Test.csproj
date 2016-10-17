@@ -43,6 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="History\HistoryItemTest.cs" />
     <Compile Include="History\HistoryRepoTest.cs" />
+    <Compile Include="Terminal\TerminalInterpreterHelperTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -60,5 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="History\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Terminal\" />
   </ItemGroup>
 </Project>
