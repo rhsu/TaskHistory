@@ -8,4 +8,4 @@
 		//TODO: Figure out this later
 		User
 	}
-}
+} 
