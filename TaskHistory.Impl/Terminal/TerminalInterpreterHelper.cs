@@ -7,10 +7,9 @@ namespace TaskHistory.Impl.Terminal
 	/// <summary>
 	/// Helper Functions Available for the Terminal Provider
 	/// </summary>
-	//TODO: This should not be a static class
 	public static class TerminalInterpreterHelper
 	{
-		internal static TerminalCommandAction DetermineTerminalCommandAction(string commandActionString)
+		public static TerminalCommandAction DetermineTerminalCommandAction(string commandActionString)
 		{
 			if (string.IsNullOrEmpty (commandActionString))
 				return TerminalCommandAction.Error;
@@ -32,21 +31,10 @@ namespace TaskHistory.Impl.Terminal
 			return registeredObject;
 		}
 
-		internal static TerminalCommandOption DetermineTerminalCommandOption(string commandOptionString)
-		{
-			if (string.IsNullOrEmpty (commandOptionString))
-				return TerminalCommandOption.None;
-
-			TerminalCommandOption commandOption = TerminalCommandOption.None;
-			Enum.TryParse (commandOptionString, out commandOption);
-
-			return commandOption;
-		}
-
 		internal static string ParseOptionText(string[] requestInput)
 		{
 			if (requestInput == null)
-				throw new ArgumentNullException ("requestInput");
+				throw new ArgumentNullException (nameof(requestInput));
 
 			if (requestInput.Length < 2)
 				throw new InvalidOperationException ($"Cannot Parse Request Input: {requestInput}. Must have length 2 or greater");
