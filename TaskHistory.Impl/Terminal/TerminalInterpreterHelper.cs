@@ -7,46 +7,40 @@ namespace TaskHistory.Impl.Terminal
 	/// <summary>
 	/// Helper Functions Available for the Terminal Provider
 	/// </summary>
-	//TODO: This should not be a static class
-	internal static class TerminalInterpreterHelper
+	public static class TerminalInterpreterHelper
 	{
-		internal static TerminalCommandAction DetermineTerminalCommandAction(string commandActionString)
+		public static TerminalCommandAction DetermineTerminalCommandAction(string commandActionString)
 		{
 			if (string.IsNullOrEmpty (commandActionString))
 				return TerminalCommandAction.Error;
 
 			TerminalCommandAction requestCommand = TerminalCommandAction.Error;
-			Enum.TryParse (commandActionString, out requestCommand);
+			bool isSuccessful = Enum.TryParse (commandActionString, true, out requestCommand);
+
+			if (!isSuccessful)
+				return TerminalCommandAction.Error;
 
 			return requestCommand;
 		}
 
-		internal static TerminalRegisteredObject DetermineTerminalRegisteredObject(string registeredObjectString)
+		public static TerminalRegisteredObject DetermineTerminalRegisteredObject(string registeredObjectString)
 		{
 			if (string.IsNullOrEmpty (registeredObjectString))
 				return TerminalRegisteredObject.Error;
 
 			TerminalRegisteredObject registeredObject = TerminalRegisteredObject.Error;
-			Enum.TryParse (registeredObjectString, out registeredObject);
+			bool isSuccessful = Enum.TryParse (registeredObjectString, true, out registeredObject);
+
+			if (!isSuccessful)
+				return TerminalRegisteredObject.Error;
 
 			return registeredObject;
-		}
-
-		internal static TerminalCommandOption DetermineTerminalCommandOption(string commandOptionString)
-		{
-			if (string.IsNullOrEmpty (commandOptionString))
-				return TerminalCommandOption.None;
-
-			TerminalCommandOption commandOption = TerminalCommandOption.None;
-			Enum.TryParse (commandOptionString, out commandOption);
-
-			return commandOption;
 		}
 
 		internal static string ParseOptionText(string[] requestInput)
 		{
 			if (requestInput == null)
-				throw new ArgumentNullException ("requestInput");
+				throw new ArgumentNullException (nameof(requestInput));
 
 			if (requestInput.Length < 2)
 				throw new InvalidOperationException ($"Cannot Parse Request Input: {requestInput}. Must have length 2 or greater");

@@ -3,19 +3,14 @@
 	public enum TerminalCommandAction
 	{
 		/// <summary>
-		/// List Command
-		/// </summary>
-		List,
-
-		/// <summary>
-		/// Update Command
-		/// </summary>
-		Update,
-
-		/// <summary>
 		/// Delete Command
 		/// </summary>
 		Delete,
+
+		/// <summary>
+		/// Denotes an error command
+		/// </summary>
+		Error,
 
 		/// <summary>
 		/// Insert Command
@@ -23,8 +18,13 @@
 		Insert,
 
 		/// <summary>
-		/// Denotes an error command
+		/// List Command
 		/// </summary>
-		Error
+		List,
+
+		/// <summary>
+		/// Update Command
+		/// </summary>
+		Update
 	}
 }
