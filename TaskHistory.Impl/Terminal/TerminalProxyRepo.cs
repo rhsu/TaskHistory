@@ -36,7 +36,8 @@ namespace TaskHistory.Impl.Terminal
 					_registeredObjProxy.LabelRepo.CreateNewLabel("some content from command response's option");
 					break;
 				case TerminalRegisteredObject.Task:
-					_registeredObjProxy.TaskRepo.CreateNewTaskForUser(user, "some content from command response's object");
+					_registeredObjProxy.TaskRepo.CreateTask("some content from command response's object",
+					                                       user.UserId);
 					break;
 			}
 
@@ -65,7 +66,7 @@ namespace TaskHistory.Impl.Terminal
 
 					break;
 				case TerminalRegisteredObject.Task:
-					var tasks = _registeredObjProxy.TaskRepo.ReadTasksForUser(user);
+					var tasks = _registeredObjProxy.TaskRepo.ReadTasks(user.UserId);
 					var taskTerminalObjects = TerminalObjectMapper.ConvertTasks(tasks);
 					returnVal.AddRange(taskTerminalObjects);
 
@@ -91,7 +92,7 @@ namespace TaskHistory.Impl.Terminal
 					break;
 				case TerminalRegisteredObject.Task:
 					// need to create task updating parameters
-					_registeredObjProxy.TaskRepo.UpdateTask(null);
+					_registeredObjProxy.TaskRepo.UpdateTask(null, user.UserId);
 					break;
 			}
 
