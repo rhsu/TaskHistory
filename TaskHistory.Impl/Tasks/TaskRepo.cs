@@ -61,6 +61,7 @@ namespace TaskHistory.Impl.Tasks
 			parameters.Add(paramFactory.CreateParameter("pIsCompleted", taskParameterDto.IsCompleted));
 			parameters.Add(paramFactory.CreateParameter("pIsDeleted", taskParameterDto.IsDeleted));
 			parameters.Add(paramFactory.CreateParameter("pTaskId", taskParameterDto.TaskId));
+			parameters.Add(paramFactory.CreateParameter("pUserId", userId));
 
 			_dataProxy.NonQueryDataProvider.ExecuteNonQuery(UpdateStoredProcedure, parameters);
 		}
@@ -68,7 +69,6 @@ namespace TaskHistory.Impl.Tasks
 		public void DeleteTask(int taskId, int userId)
 		{
 			var parameter = _dataProxy.ParamFactory.CreateParameter("pTaskId", taskId);
-
 			_dataProxy.NonQueryDataProvider.ExecuteNonQuery(DeleteStoredProcedure, parameter);
 		}
 
