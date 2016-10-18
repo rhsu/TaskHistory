@@ -26,6 +26,14 @@ namespace TaskHistory.Controllers
 			return RedirectToAction ("Index");
 		}
 
+		[HttpPut]
+		public ActionResult DeleteTask(int taskId)
+		{
+			_taskOrchestrator.OrchestratorDeleteTask(_currentUser, taskId);
+
+			return RedirectToAction("Index");
+		}
+
 		public TasksController(TasksOrchestrator taskOrchestrator, UserContext userContext)
 		{
 			_taskOrchestrator = taskOrchestrator;
