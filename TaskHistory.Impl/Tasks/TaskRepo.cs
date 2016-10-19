@@ -69,6 +69,9 @@ namespace TaskHistory.Impl.Tasks
 		public void DeleteTask(int taskId, int userId)
 		{
 			var parameter = _dataProxy.ParamFactory.CreateParameter("pTaskId", taskId);
+			if (parameter == null)
+				throw new NullReferenceException("Null returned from dataProxy when creating parameter");
+
 			_dataProxy.NonQueryDataProvider.ExecuteNonQuery(DeleteStoredProcedure, parameter);
 		}
 

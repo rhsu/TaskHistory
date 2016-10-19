@@ -24,6 +24,7 @@
 				<th style="display: none;"><input id="task-checkbox-master" type="checkbox" /></th>
 				<th>#</th>
 				<th>Task</th>
+				<th></th>
 			</tr>
 
 			@for (int i = 0; i < Model.Count(); i++)
@@ -34,6 +35,13 @@
 				</td>
 				<td>@(i+1)</td>	
 				<td>@Model.ElementAt(i).Content</td>
+				<td>
+					@using(Html.BeginForm("DeleteTask", "Tasks", FormMethod.Post, new { @class = "form-inline" }))
+					{
+						@Html.Hidden("taskId", @Model.ElementAt(i).TaskId)
+						<button>Delete</button>
+					}
+				</td>
 			</tr>
 			}
 
