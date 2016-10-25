@@ -46,7 +46,6 @@ namespace TaskHistory.Impl.Sql
 			using (var command = new MySqlCommand(storedProcedureName, connection))
 			{
 				command.CommandType = CommandType.StoredProcedure;
-				command.Connection.Open();
 
 				var mySqlParams = BaseDataProvider.CreateMySqlParametersFromSqlDataParams(parameters);
 				if (mySqlParams == null)
@@ -57,6 +56,7 @@ namespace TaskHistory.Impl.Sql
 					command.Parameters.Add(p);
 				}
 
+				command.Connection.Open();
 				command.ExecuteNonQuery();
 			}
 		}
