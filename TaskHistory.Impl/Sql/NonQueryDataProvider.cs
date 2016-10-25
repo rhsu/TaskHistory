@@ -15,10 +15,10 @@ namespace TaskHistory.Impl.Sql
 	{
 		private readonly IConfigurationProvider _configurationProvider;
 
-		public void ExecuteNonQuery (string storedProcedureName)
+		public void ExecuteNonQuery(string storedProcedureName)
 		{
 			if (storedProcedureName == null || storedProcedureName == string.Empty)
-				throw new ArgumentNullException ("storedProcedureName");
+				throw new ArgumentNullException(nameof(storedProcedureName));
 
 			this.ExecuteNonQuery(storedProcedureName, new List<ISqlDataParameter>());
 		}
@@ -26,44 +26,43 @@ namespace TaskHistory.Impl.Sql
 		public void ExecuteNonQuery(string storedProcedureName, ISqlDataParameter parameter)
 		{
 			if (storedProcedureName == null || storedProcedureName == string.Empty)
-				throw new ArgumentNullException ("storedProcedureName");
+				throw new ArgumentNullException(nameof(storedProcedureName));
 
 			if (parameter == null)
-				throw new ArgumentNullException ("parameter");
+				throw new ArgumentNullException(nameof(parameter));
 
-			this.ExecuteNonQuery (storedProcedureName, new List<ISqlDataParameter> { parameter });
+			this.ExecuteNonQuery(storedProcedureName, new List<ISqlDataParameter> { parameter });
 		}
 
 		public void ExecuteNonQuery(string storedProcedureName, IEnumerable<ISqlDataParameter> parameters)
 		{
 			if (storedProcedureName == null || storedProcedureName == string.Empty)
-				throw new ArgumentNullException ("storedProcedureName");
+				throw new ArgumentNullException(nameof(storedProcedureName));
 
 			if (parameters == null)
-				throw new ArgumentNullException ("parameter");
+				throw new ArgumentNullException(nameof(parameters));
 
-			using (var connection = new MySqlConnection (_configurationProvider.SqlConnectionString))
-			using (var command = new MySqlCommand (storedProcedureName)) 
+			using (var connection = new MySqlConnection(_configurationProvider.SqlConnectionString))
+			using (var command = new MySqlCommand(storedProcedureName))
 			{
 				command.CommandType = CommandType.StoredProcedure;
 
-				var mySqlParams = BaseDataProvider.CreateMySqlParametersFromSqlDataParams (parameters);
+				var mySqlParams = BaseDataProvider.CreateMySqlParametersFromSqlDataParams(parameters);
 
 				if (mySqlParams == null)
-					throw new NullReferenceException ("Null returned from CreateMySqlParametersFromSqlDataParams in base class");
+					throw new NullReferenceException("Null returned from CreateMySqlParametersFromSqlDataParams in base class");
 
-				foreach (var p in mySqlParams) 
+				foreach (var p in mySqlParams)
 				{
-					command.Parameters.Add (p);
+					command.Parameters.Add(p);
 				}
 
-				command.Connection.Open ();
-				command.ExecuteNonQuery ();
+				command.Connection.Open();
+				command.ExecuteNonQuery();
 			}
 		}
 
-		public NonQueryDataProvider (IConfigurationProvider configurationProvider) :
-			base()
+		public NonQueryDataProvider(IConfigurationProvider configurationProvider)
 		{
 			_configurationProvider = configurationProvider;
 		}
