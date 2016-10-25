@@ -43,12 +43,12 @@ namespace TaskHistory.Impl.Sql
 				throw new ArgumentNullException(nameof(parameters));
 
 			using (var connection = new MySqlConnection(_configurationProvider.SqlConnectionString))
-			using (var command = new MySqlCommand(storedProcedureName))
+			using (var command = new MySqlCommand(storedProcedureName, connection))
 			{
 				command.CommandType = CommandType.StoredProcedure;
+				command.Connection.Open();
 
 				var mySqlParams = BaseDataProvider.CreateMySqlParametersFromSqlDataParams(parameters);
-
 				if (mySqlParams == null)
 					throw new NullReferenceException("Null returned from CreateMySqlParametersFromSqlDataParams in base class");
 
@@ -57,7 +57,6 @@ namespace TaskHistory.Impl.Sql
 					command.Parameters.Add(p);
 				}
 
-				command.Connection.Open();
 				command.ExecuteNonQuery();
 			}
 		}
