@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using TaskHistory.Api.Users;
 using TaskHistory.Orchestrator.Tasks;
 
@@ -14,6 +15,8 @@ namespace TaskHistory.Controllers
         public ActionResult Index()
         {
 			var vmTasks = _taskOrchestrator.OrchestratorGetTasks (_currentUser);
+			if (vmTasks == null)
+				throw new NullReferenceException("null returned from orchestrator");
 
 			return View (vmTasks);
         }
@@ -24,6 +27,14 @@ namespace TaskHistory.Controllers
 			_taskOrchestrator.OrchestratorCreateTask (_currentUser, content);
 
 			return RedirectToAction ("Index");
+		}
+
+		[HttpPost]
+		public ActionResult DeleteTask(int taskId)
+		{
+			_taskOrchestrator.OrchestratorDeleteTask(_currentUser, taskId);
+
+			return RedirectToAction("Index");
 		}
 
 		public TasksController(TasksOrchestrator taskOrchestrator, UserContext userContext)

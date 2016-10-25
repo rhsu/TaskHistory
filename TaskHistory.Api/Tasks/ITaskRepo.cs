@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
-using TaskHistory.Api.Users;
 
 namespace TaskHistory.Api.Tasks
 {
-	//TODO: IUser user should come from a context object
+	//TODO: Can UserId come from a context object?
 	public interface ITaskRepo
 	{
-		ITask CreateNewTaskForUser (IUser user, string taskContent);
+		ITask CreateTask(string taskContent, int userId);
 
-		IEnumerable<ITask> ReadTasksForUser(IUser user);
+		IEnumerable<ITask> ReadTasks(int userId);
 
-		void UpdateTask (TaskUpdatingParameters taskUpdatingParameters);
+		void UpdateTask(TaskUpdatingParameters taskUpdatingParameters, int userId);
 
-		void DeleteTask (int taskId);
+		void DeleteTask(int taskId, int userId);
 	}
 }
