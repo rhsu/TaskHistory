@@ -1,10 +1,7 @@
-﻿using System;
-using TaskHistory.Api.Sql;
-using System.Collections.Generic;
+﻿using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
-	// RH [TODO] Wrap DataReaderProvider, NonQueryDataProvider, and ParamFactory together since they are always used together
 	public class ApplicationDataProxy
 	{
 		public IDataReaderProvider DataReaderProvider { get; }

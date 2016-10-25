@@ -68,8 +68,12 @@ namespace TaskHistory.Impl.Tasks
 
 		public void DeleteTask(int taskId, int userId)
 		{
-			var parameter = _dataProxy.ParamFactory.CreateParameter("pTaskId", taskId);
-			_dataProxy.NonQueryDataProvider.ExecuteNonQuery(DeleteStoredProcedure, parameter);
+			var paramFactory = _dataProxy.ParamFactory;
+			var parameters = new List<ISqlDataParameter>();
+			parameters.Add(paramFactory.CreateParameter("pTaskId", taskId));
+			parameters.Add(paramFactory.CreateParameter("pUserId", userId));
+
+			_dataProxy.NonQueryDataProvider.ExecuteNonQuery(DeleteStoredProcedure, parameters);
 		}
 
 		public TaskRepo(TaskFactory taskFactory,
