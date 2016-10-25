@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.15, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.16, for Linux (x86_64)
 --
 -- Host: localhost    Database: TaskHistory
 -- ------------------------------------------------------
--- Server version	5.7.15-0ubuntu0.16.04.1
+-- Server version	5.7.16-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -90,7 +90,7 @@ CREATE TABLE `Tasks` (
   PRIMARY KEY (`TaskID`),
   KEY `UserId` (`UserId`),
   CONSTRAINT `TaskIdToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +111,7 @@ CREATE TABLE `Users` (
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,7 +290,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Delete`(IN `pTaskId` INT, IN 
     NO SQL
 UPDATE `Tasks` 
 SET 
-    `IsActive` = '0' 
+    `IsDeleted` = 1 
     ,`ModifiedDate` = NOW()
 WHERE
 	`TaskId` = `pTaskID`
@@ -469,4 +469,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-18 10:02:45
+-- Dump completed on 2016-10-25 14:47:47
