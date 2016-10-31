@@ -9,19 +9,18 @@ namespace TaskHistory.Controllers
     {
 		TerminalOrchestrator _terminalOrchestrator;
 		IUser _currentUser;
+		const string _default_display_message = "Please Enter a Command. (Type HELP for more options)";
 
 		[HttpGet]
 		public ActionResult Index()
         {
-			var responseObj = new TerminalResponseObject("Hello");
-
+			var responseObj = new TerminalResponseObject(_default_display_message);
 			return View (responseObj);
         }
 
 		[HttpPost]
 		public ActionResult Index(TerminalResponseObject responseObject)
 		{
-
 			return View(responseObject);
 		}
 

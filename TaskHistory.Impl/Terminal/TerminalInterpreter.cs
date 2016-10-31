@@ -1,9 +1,9 @@
-﻿using TaskHistory.Api.Terminal;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using TaskHistory.Api.Users;
-using TaskHistory.Impl.Sql;
+using System.Linq;
 using System.Text;
+using TaskHistory.Api.Terminal;
+using TaskHistory.Api.Users;
 
 namespace TaskHistory.Impl.Terminal
 {
@@ -68,13 +68,19 @@ namespace TaskHistory.Impl.Terminal
 
 			case TerminalCommandAction.List:
 				IEnumerable<ITerminalObject> objectsRead = _terminalProxyRepo.PerformReadOperation (commandResponse, user);
+				if (objectsRead == null)
+					throw new NullReferenceException("Null returned from ProxyRepo");
+				if (objectsRead.Count() == 0)
+				{
+					return $"No {commandResponse.RegisteredObject}s found";
+				}
 				var builder = new StringBuilder ();
 
 				foreach (var obj in objectsRead) {
-					builder.Append ($"{obj.ObjectId}: {obj.ObjectName} \n");
+					builder.Append ($"{obj.ObjectId}: {obj.ObjectName} <br />");
 				}
 
-				return builder.ToString ().TrimEnd ('\n');
+				return builder.ToString ();
 
 			case TerminalCommandAction.Update:
 				int numUpdated = _terminalProxyRepo.PerformUpdateOperation (commandResponse, user);
