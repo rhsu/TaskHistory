@@ -2,19 +2,13 @@
 <html ng-app="app">
 	<head></head>
 
-	<body ng-controller="MyController">
-		<div>
+	<body>
+		<div ng-controller="AppController">
 			{{ test }}
 		</div>
 
 		<script src='/bower_components/angular/angular.js'></script>
 		<script src='/bower_components/angular-route/angular-route.js'></script>
-		<script>
-			var app = angular.module('app', ['ngRoute']);
-
-			app.controller('MyController', function ($scope) {
-				$scope.test = 'Hello Worsld';
-			});
-		</script>
+		@Scripts.Render("~/bundles/App")
 	</body>
 </html>
