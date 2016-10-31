@@ -8,6 +8,16 @@
 
 <div class="container" style="padding-top: 10px">
 	<div>@Model.ResponseSummary</div>
+
+	@foreach(var s in Model.ResponseSummary)
+	{
+		<div>Hi</div>
+	}
+
+	@for (int i = 0; i < Model.ResponseSummary.Count(); i++)
+	{
+		<div>World</div>
+	}
 	
 	@using(Html.BeginForm("SubmitCommand", "Terminal", FormMethod.Post, new { @class = "form-inline", 
 		@style = "padding-top: 25px; padding-bottom: 25px;"}))

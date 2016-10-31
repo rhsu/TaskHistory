@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TaskHistory.Api.Terminal;
 using TaskHistory.Api.Users;
 
@@ -18,11 +19,11 @@ namespace TaskHistoryOrchestrator
 			return _terminalInterpreter.GetDefaultDisplayMessage();
 		}
 
-		public string ProcessCommand(string command, IUser user)
+		public IEnumerable<string> ProcessCommand(string command, IUser user)
 		{
 			if (string.IsNullOrEmpty(command))
 			{
-				return "Invalid Command: " + _terminalInterpreter.GetDefaultDisplayMessage();
+				return new List<string> { "Invalid Command: " + _terminalInterpreter.GetDefaultDisplayMessage()};
 			}
 
 			if (user == null)

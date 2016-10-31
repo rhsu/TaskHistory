@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using TaskHistory.Api.Users;
 using TaskHistoryOrchestrator;
 
@@ -13,7 +14,9 @@ namespace TaskHistory.Controllers
 		[HttpGet]
 		public ActionResult Index()
         {
-			var responseObj = new TerminalResponseObject(_terminalOrchestrator.GetDefaultDisplayMessage());
+			var responseObj = new TerminalResponseObject(
+				// TODO make a construct that takes in a single string
+				new List<string> { _terminalOrchestrator.GetDefaultDisplayMessage()});
 			return View (responseObj);
         }
 
@@ -26,7 +29,7 @@ namespace TaskHistory.Controllers
 		[HttpPost]
 		public ActionResult SubmitCommand(string command)
 		{
-			string response = _terminalOrchestrator.ProcessCommand(command, _currentUser);
+			IEnumerable<string> response = _terminalOrchestrator.ProcessCommand(command, _currentUser);
 			var responseObject = new TerminalResponseObject(response);
 
 			return View("Index", responseObject);
