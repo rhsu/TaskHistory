@@ -46,13 +46,72 @@ namespace TaskHistory.Impl.Sql
 																  parameters);
 		}
 
-		/*public IEnumerable<T> ExecuteReaderForTypeCollection<T>(IFromDataReaderFactory<T> factory,
+		public IEnumerable<T> ExecuteReaderForTypeCollection<T>(IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
-			ISqlDataParameter parameter);
+			ISqlDataParameter parameter)
+		{
+			if (factory == null)
+				throw new ArgumentNullException(nameof(factory));
+
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
+
+			if (parameter == null)
+				throw new ArgumentNullException(nameof(parameter));
+
+			return _dataReaderProvider.ExecuteReaderForTypeCollection(factory,
+																	  storedProcedureName,
+																	  parameter);
+
+		}
 
 		public IEnumerable<T> ExecuteReaderForTypeCollection<T>(IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
-			IEnumerable<ISqlDataParameter> parameters);*/
+			IEnumerable<ISqlDataParameter> parameters)
+		{
+			if (factory == null)
+				throw new ArgumentNullException(nameof(factory));
+
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
+
+			if (parameters == null)
+				throw new ArgumentNullException(nameof(parameters));
+
+			return _dataReaderProvider.ExecuteReaderForTypeCollection(factory,
+																	  storedProcedureName,
+																	  parameters);
+		}
+
+		public void ExecuteNonQuery(string storedProcedureName)
+		{
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
+			
+			_nonQueryDataProvider.ExecuteNonQuery(storedProcedureName);
+		}
+
+		public void ExecuteNonQuery(string storedProcedureName, ISqlDataParameter parameter)
+		{
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
+
+			if (parameter == null)
+				throw new ArgumentNullException(nameof(parameter));
+
+			_nonQueryDataProvider.ExecuteNonQuery(storedProcedureName, parameter);
+		}
+
+		public void ExecuteNonQuery(string storedProcedureName, IEnumerable<ISqlDataParameter> parameters)
+		{
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
+
+			if (parameters == null)
+				throw new ArgumentNullException(nameof(parameters));
+
+			_nonQueryDataProvider.ExecuteNonQuery(storedProcedureName, parameters);
+		}
 
 		public ApplicationDataProxy (IDataReaderProvider dataReaderProvider, 
 			SqlParameterFactory paramFactory,
