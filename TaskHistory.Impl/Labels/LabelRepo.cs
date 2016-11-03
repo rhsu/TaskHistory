@@ -10,7 +10,7 @@ namespace TaskHistory.Impl.Labels
 	public class LabelRepo : ILabelRepo
 	{
 		readonly LabelFactory _labelFactory;
-		readonly ApplicationDataProxy _applicationDataProxy;
+		readonly ApplicationDataProxy _dataProxy;
 
 		const string CreateStoredProcedure = "Labels_Insert";
 		const string ReadStoredProcedure = "Labels_For_User_Select";
@@ -29,9 +29,9 @@ namespace TaskHistory.Impl.Labels
 
 		public ILabel CreateNewLabel(string content)
 		{
-			var contentParameter = _applicationDataProxy.ParamFactory.CreateParameter("pContent", content);
+			var contentParameter = _dataProxy.CreateParameter("pContent", content);
 
-			var returnVal = _applicationDataProxy.DataReaderProvider.ExecuteReaderForSingleType(LabelFactory, CreateStoredProcedure, contentParameter);
+			var returnVal = _dataProxy.ExecuteReaderForSingleType(LabelFactory, CreateStoredProcedure, contentParameter);
 			if (returnVal == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
@@ -43,11 +43,11 @@ namespace TaskHistory.Impl.Labels
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			var userIdParam = _applicationDataProxy.ParamFactory.CreateParameter("pUserId", user.UserId);
+			var userIdParam = _dataProxy.CreateParameter("pUserId", user.UserId);
 			if (userIdParam == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
-			var returnVal = _applicationDataProxy.DataReaderProvider.ExecuteReaderForTypeCollection(LabelFactory, ReadStoredProcedure, userIdParam);
+			var returnVal = _dataProxy.ExecuteReaderForTypeCollection(LabelFactory, ReadStoredProcedure, userIdParam);
 			if (returnVal == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
@@ -61,33 +61,33 @@ namespace TaskHistory.Impl.Labels
 
 			var parameters = new List<ISqlDataParameter>();
 
-			var contentParam = _applicationDataProxy.ParamFactory.CreateParameter("pContent", labelDto.Name);
+			var contentParam = _dataProxy.CreateParameter("pContent", labelDto.Name);
 			if (contentParam == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
-			var labelParam = _applicationDataProxy.ParamFactory.CreateParameter("pLabelId", labelDto.LabelId);
+			var labelParam = _dataProxy.CreateParameter("pLabelId", labelDto.LabelId);
 			if (labelParam == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			parameters.Add(contentParam);
 			parameters.Add(labelParam);
 
-			_applicationDataProxy.NonQueryDataProvider.ExecuteNonQuery(UpdateStoredProcedure, parameters);
+			_dataProxy.ExecuteNonQuery(UpdateStoredProcedure, parameters);
 		}
 
 		public void DeleteLabel(int labelId)
 		{
-			var parameter = _applicationDataProxy.ParamFactory.CreateParameter("pLabelId", labelId);
+			var parameter = _dataProxy.CreateParameter("pLabelId", labelId);
 			if (parameter == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
-			_applicationDataProxy.NonQueryDataProvider.ExecuteNonQuery(DeleteStoredProcedure, parameter);
+			_dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameter);
 		}
 
 		public LabelRepo(LabelFactory labelFactory,
-			ApplicationDataProxy applicationDataProxy)
+		                 ApplicationDataProxy dataProxy)
 		{
-			_applicationDataProxy = applicationDataProxy;
+			_dataProxy = dataProxy;
 			_labelFactory = labelFactory;
 		}
 	}
