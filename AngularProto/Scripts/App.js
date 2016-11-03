@@ -5,8 +5,10 @@
 		$routeProvider.when('/routeOne', {
             templateUrl: 'RoutesDemo/One'
         })
-        .when('/routeTwo', {
-            templateUrl: 'RoutesDemo/Two'
+        .when('/routeTwo/:donuts', {
+            templateUrl: function (params) {
+            	return '/RoutesDemo/Two?donuts=' + params.donuts;
+            }
         })
         .when('/routeThree', {
             templateUrl: 'RoutesDemo/Three'
