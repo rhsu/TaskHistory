@@ -8,26 +8,26 @@ namespace TaskHistory.Impl.Users
 {
 	public class UserRepo : IUserRepo
 	{
-		private const string UserRegisterStoredProcedure = "Users_Insert";
-		private const string UserValidateStoredProcedure = "User_Validate";
+		const string UserRegisterStoredProcedure = "Users_Insert";
+		const string UserValidateStoredProcedure = "User_Validate";
 
-		private readonly UserFactory _userFactory;
-		private readonly IApplicationDataProxy _dataProxy;
+		readonly UserFactory _userFactory;
+		readonly ApplicationDataProxy _dataProxy;
 
 		public IUser ValidateUsernameAndPassword(string username, string password)
 		{
-			if (username == null || username == string.Empty)
-				throw new ArgumentNullException("username");
+			if (string.IsNullOrEmpty(username))
+				throw new ArgumentNullException(nameof(username));
 
-			if (username == null || password == string.Empty)
-				throw new ArgumentNullException("password");
+			if (string.IsNullOrEmpty(password))
+				throw new ArgumentNullException(nameof(password));
 
 			var parameters = new List<ISqlDataParameter>();
 
-			parameters.Add(_dataProxy.ParamFactory.CreateParameter("pUsername", username));
-			parameters.Add(_dataProxy.ParamFactory.CreateParameter("pPassword", password));
+			parameters.Add(_dataProxy.CreateParameter("pUsername", username));
+			parameters.Add(_dataProxy.CreateParameter("pPassword", password));
 
-			var validatedUser = _dataProxy.DataReaderProvider.ExecuteReaderForSingleType(_userFactory,
+			var validatedUser = _dataProxy.ExecuteReaderForSingleType(_userFactory,
 									UserValidateStoredProcedure,
 									parameters);
 			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
@@ -40,11 +40,11 @@ namespace TaskHistory.Impl.Users
 			if (userParams == null)
 				throw new NullReferenceException("userParams");
 
-			var parameters = CreateDataParameterCollectionFromUserParams(userParams, _dataProxy.ParamFactory);
+			var parameters = CreateDataParameterCollectionFromUserParams(userParams);
 			if (parameters == null)
 				throw new NullReferenceException("Null returned from CreatingDataParameterCollectionFromUserParams");
 
-			var registeredUser = _dataProxy.DataReaderProvider.ExecuteReaderForSingleType(_userFactory,
+			var registeredUser = _dataProxy.ExecuteReaderForSingleType(_userFactory,
 									UserRegisterStoredProcedure,
 									 parameters);
 			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
@@ -68,28 +68,24 @@ namespace TaskHistory.Impl.Users
 			return returnVal;
 		}
 
-		public static IEnumerable<ISqlDataParameter> CreateDataParameterCollectionFromUserParams(
-			UserRegistrationParameters userParams,
-			ISqlParameterFactory paramFactory)
+		IEnumerable<ISqlDataParameter> CreateDataParameterCollectionFromUserParams(
+			UserRegistrationParameters userParams)
 		{
 			if (userParams == null)
-				throw new ArgumentNullException("userParams");
-
-			if (paramFactory == null)
-				throw new ArgumentNullException("paramFactory");
+				throw new ArgumentNullException(nameof(userParams));
 
 			var returnVal = new List<ISqlDataParameter>();
 
-			returnVal.Add(paramFactory.CreateParameter("pUsername", userParams.Username));
-			returnVal.Add(paramFactory.CreateParameter("pPassword", userParams.Password));
-			returnVal.Add(paramFactory.CreateParameter("pEmail", userParams.Email));
-			returnVal.Add(paramFactory.CreateParameter("pFirstName", userParams.FirstName));
-			returnVal.Add(paramFactory.CreateParameter("pLastName", userParams.LastName));
+			returnVal.Add(_dataProxy.CreateParameter("pUsername", userParams.Username));
+			returnVal.Add(_dataProxy.CreateParameter("pPassword", userParams.Password));
+			returnVal.Add(_dataProxy.CreateParameter("pEmail", userParams.Email));
+			returnVal.Add(_dataProxy.CreateParameter("pFirstName", userParams.FirstName));
+			returnVal.Add(_dataProxy.CreateParameter("pLastName", userParams.LastName));
 
 			return returnVal;
 		}
 
-		public UserRepo (UserFactory userFactory, IApplicationDataProxy dataProxy)
+		public UserRepo (UserFactory userFactory, ApplicationDataProxy dataProxy)
 		{
 			_userFactory = userFactory;
 			_dataProxy = dataProxy;

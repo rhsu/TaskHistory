@@ -24,13 +24,11 @@ namespace TaskHistory.Impl.Tasks
 				throw new ArgumentNullException(nameof(taskContent));
 
 			var parameters = new List<ISqlDataParameter>();
-			var paramFactory = _dataProxy.ParamFactory;
 
-			parameters.Add(paramFactory.CreateParameter("pTaskContent", taskContent));
-			parameters.Add(paramFactory.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pTaskContent", taskContent));
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 
 			var returnVal = _dataProxy
-				.DataReaderProvider
 				.ExecuteReaderForSingleType(_taskFactory, CreateStoredProcedure, parameters);
 			if (returnVal == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
@@ -40,9 +38,9 @@ namespace TaskHistory.Impl.Tasks
 
 		public IEnumerable<ITask> ReadTasks(int userId)
 		{
-			var parameter = _dataProxy.ParamFactory.CreateParameter("pUserId", userId);
+			var parameter = _dataProxy.CreateParameter("pUserId", userId);
 
-			var returnVal = _dataProxy.DataReaderProvider.ExecuteReaderForTypeCollection(_taskFactory, ReadStoredProcedure, parameter);
+			var returnVal = _dataProxy.ExecuteReaderForTypeCollection(_taskFactory, ReadStoredProcedure, parameter);
 			if (returnVal == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
@@ -55,25 +53,22 @@ namespace TaskHistory.Impl.Tasks
 				throw new ArgumentNullException(nameof(taskParameterDto));
 
 			var parameters = new List<ISqlDataParameter>();
-			var paramFactory = _dataProxy.ParamFactory;
 
-			parameters.Add(paramFactory.CreateParameter("pContent", taskParameterDto.Content));
-			parameters.Add(paramFactory.CreateParameter("pIsCompleted", taskParameterDto.IsCompleted));
-			parameters.Add(paramFactory.CreateParameter("pIsDeleted", taskParameterDto.IsDeleted));
-			parameters.Add(paramFactory.CreateParameter("pTaskId", taskParameterDto.TaskId));
-			parameters.Add(paramFactory.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pContent", taskParameterDto.Content));
+			parameters.Add(_dataProxy.CreateParameter("pIsCompleted", taskParameterDto.IsCompleted));
+			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", taskParameterDto.IsDeleted));
+			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskParameterDto.TaskId));
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 
-			_dataProxy.NonQueryDataProvider.ExecuteNonQuery(UpdateStoredProcedure, parameters);
+			_dataProxy.ExecuteNonQuery(UpdateStoredProcedure, parameters);
 		}
 
 		public void DeleteTask(int taskId, int userId)
 		{
-			var paramFactory = _dataProxy.ParamFactory;
 			var parameters = new List<ISqlDataParameter>();
-			parameters.Add(paramFactory.CreateParameter("pTaskId", taskId));
-			parameters.Add(paramFactory.CreateParameter("pUserId", userId));
-
-			_dataProxy.NonQueryDataProvider.ExecuteNonQuery(DeleteStoredProcedure, parameters);
+			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			_dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameters);
 		}
 
 		public TaskRepo (TaskFactory taskFactory, 
