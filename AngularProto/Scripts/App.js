@@ -3,13 +3,13 @@
 
 	app.config(function ($routeProvider) {
 		$routeProvider.when('/routeOne', {
-            templateUrl: 'routesDemo/one'
+            templateUrl: 'RoutesDemo/One'
         })
         .when('/routeTwo', {
-            templateUrl: 'routesDemo/two'
+            templateUrl: 'RoutesDemo/Two'
         })
         .when('/routeThree', {
-            templateUrl: 'routesDemo/three'
+            templateUrl: 'RoutesDemo/Three'
         });
 	});
 })();

@@ -3,5 +3,4 @@
 	app.controller('AppController', function ($scope) {
 		$scope.test = 'Hello World';
 	});
-
 })();

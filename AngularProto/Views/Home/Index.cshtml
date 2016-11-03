@@ -2,8 +2,8 @@
 <html ng-app="app">
 	<head></head>
 
-	<body>
-		<div ng-controller="AppController">
+	<body ng-controller="AppController">
+		<div>
 			{{ test }}
 		</div>
 
@@ -12,6 +12,8 @@
 			<li><a href="/#/routeTwo">Route Two</a></li>			
 			<li><a href="/#/routeThree">Route Three</a></li>
 		</ul>
+
+		<ng-view />
 
 		<script src='/bower_components/angular/angular.js'></script>
 		<script src='/bower_components/angular-route/angular-route.js'></script>
