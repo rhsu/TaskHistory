@@ -113,6 +113,18 @@ namespace TaskHistory.Impl.Sql
 			_nonQueryDataProvider.ExecuteNonQuery(storedProcedureName, parameters);
 		}
 
+		public ISqlDataParameter CreateParameter(string paramName, object value)
+		{
+			if (paramName == null)
+				throw new ArgumentNullException(nameof(paramName));
+
+			//TODO: Remove me someday if stable
+			if (value == null)
+				throw new ArgumentNullException(nameof(value), "This can be uncommented if this is causing existing issues");
+
+			return _parameterFactory.CreateParameter(paramName, value);
+		}
+
 		public ApplicationDataProxy (IDataReaderProvider dataReaderProvider, 
 			SqlParameterFactory paramFactory,
 			NonQueryDataProvider nonQueryDataProvider)
