@@ -77,6 +77,7 @@
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
     <Folder Include="Scripts\Controllers\" />
+    <Folder Include="Scripts\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\RoutesDemoController.cs" />
+    <Compile Include="Models\TestModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -101,6 +103,7 @@
     <Content Include="Views\RoutesDemo\One.cshtml" />
     <Content Include="Views\RoutesDemo\Two.cshtml" />
     <Content Include="Views\RoutesDemo\Three.cshtml" />
+    <Content Include="Scripts\Services\DummyService.js" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

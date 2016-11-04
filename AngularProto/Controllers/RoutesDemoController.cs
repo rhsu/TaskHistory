@@ -15,6 +15,16 @@ namespace AngularProto.Controllers
 			return View();
 		}
 
+		public ActionResult Hello()
+		{
+			return Json(5);
+		}
+
+		public ActionResult PostData(TestModel model)
+		{
+			return Json(model);
+		}
+
 		[Authorize]
 		public ActionResult Three()
 		{
