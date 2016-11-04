@@ -1,29 +1,11 @@
 ﻿<!DOCTYPE html>
-<html ng-app="app">
-	<head>
-		<link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />		
-		<link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap-theme.css' />
-		
-	</head>
-
-	<body ng-controller="AppController">
-		<div>
-			{{ test }}
-		</div>
-
-		<ul>
-			<li><a href="/#/routeOne">Route One</a></li>
-			<li><a href="/#/routeTwo/6">Route Two</a></li>			
-			<li><a href="/#/routeThree">Route Three</a></li>
-		</ul>
-
-		<button ng-click="clickMe()">Click Me For Data</button> <br /><br />
-		<button ng-click="postMe()">Click Me for Post</button>
-		
-		<ng-view />
-
-		<script src='/bower_components/angular/angular.js'></script>
-		<script src='/bower_components/angular-route/angular-route.js'></script>
-		@Scripts.Render("~/bundles/App")
-	</body>
+<html>
+	<link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css' />		
+	<link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap-theme.css' />
+<head>
+    <title>Index</title>
+</head>
+<body>
+	<div>It Worked</div>
+</body>
 </html>
