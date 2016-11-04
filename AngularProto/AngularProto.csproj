@@ -117,6 +117,24 @@
     <Content Include="Views\RoutesDemo\Three.cshtml" />
     <Content Include="Scripts\Services\DummyService.js" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
+      <Project>{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}</Project>
+      <Name>TaskHistory.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskHistory.Bindings\TaskHistory.Bindings.csproj">
+      <Project>{513BEE59-6C11-49FE-9B3B-72CFBC501AF9}</Project>
+      <Name>TaskHistory.Bindings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskHistory.Orchestrator\TaskHistory.Orchestrator.csproj">
+      <Project>{9B92E6DC-65A8-4CE9-B093-4A64556FFCED}</Project>
+      <Name>TaskHistory.Orchestrator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskHistory.ViewModel\TaskHistory.ViewModel.csproj">
+      <Project>{012C3866-D51D-4917-AFC6-1B7AD7DD6FC7}</Project>
+      <Name>TaskHistory.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
