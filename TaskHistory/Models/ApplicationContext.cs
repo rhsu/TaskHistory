@@ -8,7 +8,7 @@ namespace TaskHistory
 		public IUser CurrentUser
 		{
 			get
-			{			
+			{
 				return HttpContext.Current.Session["CurrentUser"] as IUser;
 			}
 		}

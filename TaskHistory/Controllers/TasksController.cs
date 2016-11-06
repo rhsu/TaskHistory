@@ -37,7 +37,6 @@ namespace TaskHistory.Controllers
 
 		public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)
 			: base(appContext)
-
 		{
 			_taskOrchestrator = taskOrchestrator;
 		}
