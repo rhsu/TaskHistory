@@ -3,7 +3,7 @@
 
 	app.config(function ($routeProvider) {
 		$routeProvider.when('/routeOne', {
-            templateUrl: 'RoutesDemo/One'
+            templateUrl: '/RoutesDemo/One'
         })
         .when('/routeTwo/:donuts', {
             templateUrl: function (params) {

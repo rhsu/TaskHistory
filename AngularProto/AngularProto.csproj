@@ -88,8 +88,9 @@
     <Folder Include="Content\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Scripts\Controllers\" />
-    <Folder Include="Scripts\Services\" />
+    <Folder Include="Scripts\Demo\" />
+    <Folder Include="Scripts\Demo\Controllers\" />
+    <Folder Include="Scripts\Demo\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -109,13 +110,13 @@
     <Content Include="Web.config" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
-    <Content Include="Scripts\App.js" />
-    <Content Include="Scripts\Controllers\AppController.js" />
     <Content Include="Views\RoutesDemo\One.cshtml" />
     <Content Include="Views\RoutesDemo\Two.cshtml" />
     <Content Include="Views\RoutesDemo\Three.cshtml" />
-    <Content Include="Scripts\Services\DummyService.js" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Scripts\Demo\Controllers\AppController.js" />
+    <Content Include="Scripts\Demo\Services\DummyService.js" />
+    <Content Include="Scripts\Demo\App.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
