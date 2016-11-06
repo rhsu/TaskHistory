@@ -1,32 +1,30 @@
 ﻿using System;
 using System.Web.Mvc;
-using TaskHistory.Api.Users;
 using TaskHistory.Orchestrator.Tasks;
 
 namespace TaskHistory.Controllers
 {
 	[Authorize]
-    public class TasksController : Controller
-    {
-		TasksOrchestrator _taskOrchestrator;
-		IUser _currentUser;
+	public class TasksController : ApplicationController
+	{
+		readonly TasksOrchestrator _taskOrchestrator;
 
 		[HttpGet]
-        public ActionResult Index()
-        {
-			var vmTasks = _taskOrchestrator.OrchestratorGetTasks (_currentUser);
+		public ActionResult Index()
+		{
+			var vmTasks = _taskOrchestrator.OrchestratorGetTasks(_currentUser);
 			if (vmTasks == null)
 				throw new NullReferenceException("null returned from orchestrator");
 
-			return View (vmTasks);
-        }
+			return View(vmTasks);
+		}
 
 		[HttpPost]
 		public ActionResult CreateTask(string content)
 		{
-			_taskOrchestrator.OrchestratorCreateTask (_currentUser, content);
+			_taskOrchestrator.OrchestratorCreateTask(_currentUser, content);
 
-			return RedirectToAction ("Index");
+			return RedirectToAction("Index");
 		}
 
 		[HttpPost]
@@ -37,10 +35,11 @@ namespace TaskHistory.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public TasksController(TasksOrchestrator taskOrchestrator, UserContext userContext)
+		public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)
+			: base(appContext)
+
 		{
 			_taskOrchestrator = taskOrchestrator;
-			_currentUser = userContext.CurrentUser;
 		}
-    }
+	}
 }
