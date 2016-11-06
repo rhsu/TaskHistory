@@ -3,7 +3,7 @@ using TaskHistory.Api.Users;
 
 namespace TaskHistory
 {
-	public class UserContext
+	public class ApplicationContext
 	{
 		public IUser CurrentUser
 		{
