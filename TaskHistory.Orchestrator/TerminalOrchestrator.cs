@@ -6,7 +6,7 @@ namespace TaskHistoryOrchestrator
 {
 	public class TerminalOrchestrator
 	{
-		ITerminalInterpreter _terminalInterpreter;
+		readonly ITerminalInterpreter _terminalInterpreter;
 
 		public TerminalOrchestrator(ITerminalInterpreter terminalInterpreter)
 		{
