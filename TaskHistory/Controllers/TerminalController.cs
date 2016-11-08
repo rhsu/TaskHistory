@@ -10,16 +10,14 @@ namespace TaskHistory.Controllers
 
 		[HttpGet]
 		public ActionResult Index()
-		{
-			var responseObj = new TerminalResponseObject("Hello");
-
-			return View(responseObj);
-		}
+        {
+			var responseObj = new TerminalResponseObject(_terminalOrchestrator.GetDefaultDisplayMessage());
+			return View (responseObj);
+        }
 
 		[HttpPost]
 		public ActionResult Index(TerminalResponseObject responseObject)
 		{
-
 			return View(responseObject);
 		}
 
