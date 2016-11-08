@@ -91,6 +91,8 @@
     <Folder Include="Scripts\Demo\" />
     <Folder Include="Scripts\Demo\Controllers\" />
     <Folder Include="Scripts\Demo\Services\" />
+    <Folder Include="Scripts\Services\" />
+    <Folder Include="Scripts\Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -117,6 +119,7 @@
     <Content Include="Scripts\Demo\Controllers\AppController.js" />
     <Content Include="Scripts\Demo\Services\DummyService.js" />
     <Content Include="Scripts\Demo\App.js" />
+    <Content Include="Scripts\app.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
