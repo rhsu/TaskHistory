@@ -1,14 +1,12 @@
 ﻿using System.Web.Mvc;
-using TaskHistory.Api.Users;
 using TaskHistoryOrchestrator;
 
 namespace TaskHistory.Controllers
 {
 	[Authorize]
-	public class TerminalController : Controller
-    {
-		TerminalOrchestrator _terminalOrchestrator;
-		IUser _currentUser;
+	public class TerminalController : ApplicationController
+	{
+		readonly TerminalOrchestrator _terminalOrchestrator;
 
 		[HttpGet]
 		public ActionResult Index()
@@ -32,10 +30,10 @@ namespace TaskHistory.Controllers
 			return View("Index", responseObject);
 		}
 
-		public TerminalController(TerminalOrchestrator terminalOrchestrator, UserContext userContext)
+		public TerminalController(TerminalOrchestrator terminalOrchestrator, ApplicationContext appContext)
+			:base(appContext)
 		{
 			_terminalOrchestrator = terminalOrchestrator;
-			_currentUser = userContext.CurrentUser;
 		}
-    }
+	}
 }

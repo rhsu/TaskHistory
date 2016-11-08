@@ -1,14 +1,10 @@
 ﻿using System;
-using TaskHistory.Impl.Tasks;
 using System.Collections.Generic;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
-using MySql.Data.MySqlClient;
-using System.Configuration;
-using System.Data;
 using TaskHistory.Api.ViewRepos;
 using TaskHistory.Impl.Sql;
-using TaskHistory.Api.Sql;
+using TaskHistory.Impl.Tasks;
 
 namespace TaskHistory.Impl.ViewRepos
 {
@@ -30,13 +26,13 @@ namespace TaskHistory.Impl.ViewRepos
 		public IEnumerable<ITask> ReadTasksForUser (IUser user)
 		{
 			if (user == null)
-				throw new ArgumentNullException ("user");
+				throw new ArgumentNullException (nameof(user));
 
-			var parameter = _dataProxy.ParamFactory.CreateParameter("pUserId", user.UserId);
+			var parameter = _dataProxy.CreateParameter("pUserId", user.UserId);
 
-			var returnVal = _dataProxy.DataReaderProvider.ExecuteReaderForTypeCollection (_taskFactory, ReadStoredProcedure, parameter);
+			var returnVal = _dataProxy.ExecuteReaderForTypeCollection (_taskFactory, ReadStoredProcedure, parameter);
 			if (returnVal == null)
-				throw new NullReferenceException ("Null returned from dataLayer");
+				throw new NullReferenceException ("Null returned from dataProxy");
 
 			return returnVal;
 		}
