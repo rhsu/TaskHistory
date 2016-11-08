@@ -9,7 +9,7 @@ namespace TaskHistory.Controllers
 {
 	public class HomeController : Controller
 	{
-		private HomeOrchestrator _homeOrchestrator;
+		readonly HomeOrchestrator _homeOrchestrator;
 
 		[HttpGet]
 		public ActionResult Index ()

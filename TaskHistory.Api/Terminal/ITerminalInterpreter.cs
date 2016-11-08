@@ -11,5 +11,11 @@ namespace TaskHistory.Api.Terminal
 		/// <param name="user">the user making the request</param>
 		/// <param name="requestCommand">Request command.</param>
 		string TranslateResponseToString (string requestCommand, IUser user);
+
+		/// <summary>
+		/// Returns the default message to display to the user
+		/// </summary>
+		/// <returns>The default display message.</returns>
+		string GetDefaultDisplayMessage();
 	}
 }

@@ -6,18 +6,23 @@ namespace TaskHistoryOrchestrator
 {
 	public class TerminalOrchestrator
 	{
-		private ITerminalInterpreter _terminalInterpreter;
+		readonly ITerminalInterpreter _terminalInterpreter;
 
 		public TerminalOrchestrator(ITerminalInterpreter terminalInterpreter)
 		{
 			_terminalInterpreter = terminalInterpreter;
 		}
 
+		public string GetDefaultDisplayMessage()
+		{
+			return _terminalInterpreter.GetDefaultDisplayMessage();
+		}
+
 		public string ProcessCommand(string command, IUser user)
 		{
 			if (string.IsNullOrEmpty(command))
 			{
-				return "Invalid Command";
+				return "Invalid Command: " + _terminalInterpreter.GetDefaultDisplayMessage();
 			}
 
 			if (user == null)

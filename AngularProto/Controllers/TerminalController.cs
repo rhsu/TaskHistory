@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using TaskHistoryOrchestrator;
 
-namespace TaskHistory.Controllers
+namespace AngularProto.Controllers
 {
 	[Authorize]
 	public class TerminalController : ApplicationController
@@ -10,14 +10,16 @@ namespace TaskHistory.Controllers
 
 		[HttpGet]
 		public ActionResult Index()
-        {
-			var responseObj = new TerminalResponseObject(_terminalOrchestrator.GetDefaultDisplayMessage());
-			return View (responseObj);
-        }
+		{
+			var responseObj = new TerminalResponseObject("Hello");
+
+			return View(responseObj);
+		}
 
 		[HttpPost]
 		public ActionResult Index(TerminalResponseObject responseObject)
 		{
+
 			return View(responseObject);
 		}
 
