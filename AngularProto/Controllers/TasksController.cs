@@ -4,19 +4,23 @@ using TaskHistory.Orchestrator.Tasks;
 
 namespace AngularProto.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	public class TasksController : ApplicationController
 	{
 		readonly TasksOrchestrator _taskOrchestrator;
 
-		[HttpGet]
-		public ActionResult Index()
+		//[HttpGet]
+		/*public ActionResult Index()
 		{
 			var vmTasks = _taskOrchestrator.OrchestratorGetTasks(_currentUser);
 			if (vmTasks == null)
 				throw new NullReferenceException("null returned from orchestrator");
 
 			return View(vmTasks);
+		}*/
+		public ActionResult Index()
+		{
+			return View();
 		}
 
 		[HttpPost]
