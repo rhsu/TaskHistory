@@ -93,7 +93,8 @@
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\TerminalController.cs" />
     <Compile Include="Models\TerminalResponseObject.cs" />
-    <Compile Include="Models\UserContext.cs" />
+    <Compile Include="Models\ApplicationContext.cs" />
+    <Compile Include="Controllers\ApplicationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

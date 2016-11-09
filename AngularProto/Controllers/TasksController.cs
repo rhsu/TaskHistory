@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using TaskHistory.Orchestrator.Tasks;
 
-namespace TaskHistory.Controllers
+namespace AngularProto.Controllers
 {
 	[Authorize]
 	public class TasksController : ApplicationController

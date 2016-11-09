@@ -7,37 +7,37 @@ namespace TaskHistory.Orchestrator.Home
 {
 	public class HomeOrchestrator
 	{
-		private readonly IUserRepo _userRepo;
-		private readonly ObjectMapperUsers _userObjectMapper;
+		readonly IUserRepo _userRepo;
+		readonly ObjectMapperUsers _userObjectMapper;
 
-		public UserRegistrationStatusViewModel OrchestrateRegisterUser (UserRegistrationParametersViewModel vmUserRegister)
+		public UserRegistrationStatusViewModel OrchestrateRegisterUser(UserRegistrationParametersViewModel vmUserRegister)
 		{
 			if (vmUserRegister == null)
-				throw new ArgumentNullException ("userParamsViewModel");
+				throw new ArgumentNullException("userParamsViewModel");
 
-			UserRegistrationParameters userParams = _userObjectMapper.Map (vmUserRegister);
+			UserRegistrationParameters userParams = _userObjectMapper.Map(vmUserRegister);
 			if (userParams == null)
-				throw new NullReferenceException ("Null returned from ObjectMapperUser");
+				throw new NullReferenceException("Null returned from ObjectMapperUser");
 
-			IUser newUser = _userRepo.RegisterUser (userParams);
+			IUser newUser = _userRepo.RegisterUser(userParams);
 			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
 			// user repo returning null is not an exception. Indicates that the user exists already. 
 			// Probably should be a better way to indicate this
 
-			UserRegistrationStatusViewModel registrationStatus = _userObjectMapper.Map (newUser, vmUserRegister);
+			UserRegistrationStatusViewModel registrationStatus = _userObjectMapper.Map(newUser, vmUserRegister);
 			if (registrationStatus == null)
-				throw new NullReferenceException ("Null returned from ObjectMapperUser");
+				throw new NullReferenceException("Null returned from ObjectMapperUser");
 
 
 			return registrationStatus;
 		}
 
-		public IUser OrchestrateValidateUser (UserLoginViewModel userLoginViewModel)
+		public IUser OrchestrateValidateUser(UserLoginViewModel userLoginViewModel)
 		{
 			if (userLoginViewModel == null)
-				throw new ArgumentNullException ("userLoginViewModel");
+				throw new ArgumentNullException("userLoginViewModel");
 
-			IUser user = _userRepo.ValidateUsernameAndPassword (userLoginViewModel.Username, userLoginViewModel.Password);
+			IUser user = _userRepo.ValidateUsernameAndPassword(userLoginViewModel.Username, userLoginViewModel.Password);
 			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
 			// user repo returning null is not an exception. Indicates that the username/password combination is not correct.
 			// Probably should be a better way to indicate this
@@ -45,12 +45,10 @@ namespace TaskHistory.Orchestrator.Home
 			return user;
 		}
 
-		public HomeOrchestrator (IUserRepo userRepo, ObjectMapperUsers userObjectMapper)
+		public HomeOrchestrator(IUserRepo userRepo, ObjectMapperUsers userObjectMapper)
 		{
 			_userRepo = userRepo;
 			_userObjectMapper = userObjectMapper;
 		}
-
 	}
 }
-

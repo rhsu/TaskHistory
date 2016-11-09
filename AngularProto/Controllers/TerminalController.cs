@@ -1,8 +1,7 @@
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TaskHistoryOrchestrator;
 
-namespace TaskHistory.Controllers
+namespace AngularProto.Controllers
 {
 	[Authorize]
 	public class TerminalController : ApplicationController
@@ -11,23 +10,23 @@ namespace TaskHistory.Controllers
 
 		[HttpGet]
 		public ActionResult Index()
-        {
-			var responseObj = new TerminalResponseObject(
-				// TODO make a construct that takes in a single string
-				new List<string> { _terminalOrchestrator.GetDefaultDisplayMessage()});
-			return View (responseObj);
-        }
+		{
+			var responseObj = new TerminalResponseObject("Hello");
+
+			return View(responseObj);
+		}
 
 		[HttpPost]
 		public ActionResult Index(TerminalResponseObject responseObject)
 		{
+
 			return View(responseObject);
 		}
 
 		[HttpPost]
 		public ActionResult SubmitCommand(string command)
 		{
-			IEnumerable<string> response = _terminalOrchestrator.ProcessCommand(command, _currentUser);
+			string response = _terminalOrchestrator.ProcessCommand(command, _currentUser);
 			var responseObject = new TerminalResponseObject(response);
 
 			return View("Index", responseObject);
