@@ -3,14 +3,13 @@
 
 	app.config(function ($routeProvider) {
 		$routeProvider.when('/Home', {
-			templateUrl: ''
+			templateUrl: '/Tasks/Index'
 		})
 		.when('/Tasks', {
-			templateUrl: ''
+			templateUrl: '/Tasks/Index'
 		})
 		.when('/Terminal', {
-			templateUrl: ''
+			templateUrl: '/Tasks/Index'
 		});
 	});
-
 })();
