@@ -7,7 +7,14 @@ namespace AngularProto.Controllers
 	{
 		readonly HomeOrchestrator _homeOrchestrator;
 
+		[HttpGet]
 		public ActionResult Index ()
+		{
+			return View ();
+		}
+
+		[HttpGet]
+		public ActionResult Login()
 		{
 			return View ();
 		}
