@@ -1,5 +1,4 @@
 ﻿(function () {
-	console.log('this is registered');
 	var app = angular.module('app');
 
 	app.controller('LoginController', function ($scope, UserLoginService) {
@@ -8,15 +7,9 @@
 		$scope.formData.user = '';
 		$scope.formData.password = '';
 
-		UserLoginService.test();
-
-		/*$scope.fns.login = function () {
-			/*UserLoginService.login($scope.formData).then(function (response) {
-				
-			}, function (reason) {
-				
-			});
-		};*/
+		$scope.fns = {};
+		$scope.fns.login = function () {
+			UserLoginService.promiseLoginUser();
+		};
 	});
-
 })();

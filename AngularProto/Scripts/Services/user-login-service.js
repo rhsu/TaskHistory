@@ -7,14 +7,13 @@
 				console.log('worked');
 			},
 
-			loginUser(loginVM) {
-				/*$http.post('').then(function (response) {
-					
+			promiseLoginUser(loginViewModel) {
+				return $http.post('/Home/Login').then(function (response) {
+					console.log(response);
 				}), function (reason) {
-
-				});*/
+					// placeholder here in the future for error handling
+				});
 			}
 		}
-
-	}); 
+	}; 
 })();
