@@ -8,12 +8,12 @@
 			},
 
 			promiseLoginUser(loginViewModel) {
-				return $http.post('/Home/Login').then(function (response) {
+				return $http.post('/Authentication/Login').then(function (response) {
 					console.log(response);
-				}), function (reason) {
+				}, function (reason) {
 					// placeholder here in the future for error handling
 				});
 			}
 		}
-	}; 
+	}); 
 })();
