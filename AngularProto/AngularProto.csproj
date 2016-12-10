@@ -111,6 +111,7 @@
     <Compile Include="Controllers\TerminalController.cs" />
     <Compile Include="Models\ApplicationContext.cs" />
     <Compile Include="Models\TerminalResponseObject.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />

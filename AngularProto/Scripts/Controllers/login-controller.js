@@ -9,7 +9,7 @@
 
 		$scope.fns = {};
 		$scope.fns.login = function () {
-			UserLoginService.promiseLoginUser();
+			UserLoginService.promiseLoginUser($scope.formData);
 		};
 	});
 })();
