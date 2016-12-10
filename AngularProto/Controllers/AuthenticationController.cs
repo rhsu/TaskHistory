@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using TaskHistory.Orchestrator.Home;
+using TaskHistory.ViewModel.Users;
 
 namespace AngularProto.Controllers
 {
@@ -9,9 +10,9 @@ namespace AngularProto.Controllers
 		readonly HomeOrchestrator _homeOrchestrator;
 		
 		[HttpPost]
-        public JsonResult Login()
-        {
-			return Json("hello world");
+        public JsonResult Login(UserLoginViewModel userLoginViewModel)
+		{
+			return Json(_homeOrchestrator.OrchestrateValidateUser(userLoginViewModel));
         }
 
 		public AuthenticationController(HomeOrchestrator homeOrchestrator)

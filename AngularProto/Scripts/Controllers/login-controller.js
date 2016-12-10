@@ -4,7 +4,7 @@
 	app.controller('LoginController', function ($scope, UserLoginService) {
 
 		$scope.formData = {};
-		$scope.formData.user = '';
+		$scope.formData.username = '';
 		$scope.formData.password = '';
 
 		$scope.fns = {};

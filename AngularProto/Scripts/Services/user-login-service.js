@@ -8,7 +8,9 @@
 			},
 
 			promiseLoginUser(loginViewModel) {
-				return $http.post('/Authentication/Login', { loginViewModel: loginViewModel }).then(function (response) {
+				console.log(loginViewModel);
+
+				return $http.post('/Authentication/Login', { userLoginViewModel: loginViewModel }).then(function (response) {
 					console.log(response);
 				}, function (reason) {
 					// placeholder here in the future for error handling
