@@ -111,6 +111,7 @@
     <Compile Include="Controllers\TerminalController.cs" />
     <Compile Include="Models\ApplicationContext.cs" />
     <Compile Include="Models\TerminalResponseObject.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -129,6 +130,9 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Content\StarterTemplate.css" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Scripts\Controllers\login-controller.js" />
+    <Content Include="Scripts\Services\user-login-service.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">

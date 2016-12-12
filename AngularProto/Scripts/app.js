@@ -2,7 +2,10 @@
 	var app = angular.module('app', ['ngRoute']);
 
 	app.config(function ($routeProvider) {
-		$routeProvider.when('/Home', {
+		$routeProvider.when('/', {
+			templateUrl: '/Home/Login'
+		})
+		.when('/Home', {
 			templateUrl: '/Tasks/Index'
 		})
 		.when('/Tasks', {

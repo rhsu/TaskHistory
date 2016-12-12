@@ -5,7 +5,7 @@ using TaskHistory.ObjectMapper.Users;
 
 namespace TaskHistory.Orchestrator.Home
 {
-	public class HomeOrchestrator
+	public class AuthenticationOrchestrator
 	{
 		readonly IUserRepo _userRepo;
 		readonly ObjectMapperUsers _userObjectMapper;
@@ -13,7 +13,7 @@ namespace TaskHistory.Orchestrator.Home
 		public UserRegistrationStatusViewModel OrchestrateRegisterUser(UserRegistrationParametersViewModel vmUserRegister)
 		{
 			if (vmUserRegister == null)
-				throw new ArgumentNullException("userParamsViewModel");
+				throw new ArgumentNullException(nameof(vmUserRegister));
 
 			UserRegistrationParameters userParams = _userObjectMapper.Map(vmUserRegister);
 			if (userParams == null)
@@ -35,7 +35,7 @@ namespace TaskHistory.Orchestrator.Home
 		public IUser OrchestrateValidateUser(UserLoginViewModel userLoginViewModel)
 		{
 			if (userLoginViewModel == null)
-				throw new ArgumentNullException("userLoginViewModel");
+				throw new ArgumentNullException(nameof(userLoginViewModel));
 
 			IUser user = _userRepo.ValidateUsernameAndPassword(userLoginViewModel.Username, userLoginViewModel.Password);
 			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
@@ -45,7 +45,7 @@ namespace TaskHistory.Orchestrator.Home
 			return user;
 		}
 
-		public HomeOrchestrator(IUserRepo userRepo, ObjectMapperUsers userObjectMapper)
+		public AuthenticationOrchestrator(IUserRepo userRepo, ObjectMapperUsers userObjectMapper)
 		{
 			_userRepo = userRepo;
 			_userObjectMapper = userObjectMapper;
