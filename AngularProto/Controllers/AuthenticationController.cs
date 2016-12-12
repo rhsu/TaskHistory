@@ -12,7 +12,7 @@ namespace AngularProto.Controllers
 		readonly AuthenticationOrchestrator _homeOrchestrator;
 		
 		[HttpPost]
-        public JsonResult Login(UserLoginViewModel userLoginViewModel)
+		public JsonResult Login(UserLoginViewModel userLoginViewModel)
 		{
 			IUser user = _homeOrchestrator.OrchestrateValidateUser(userLoginViewModel);
 			bool isSuccessful = false;
@@ -26,7 +26,7 @@ namespace AngularProto.Controllers
 			}
 
 			return Json(isSuccessful);
-        }
+		}
 
 		public AuthenticationController(AuthenticationOrchestrator homeOrchestrator)
 		{
