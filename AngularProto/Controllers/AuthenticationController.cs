@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using System.Web.Security;
+using TaskHistory.Api.Users;
 using TaskHistory.Orchestrator.Home;
 using TaskHistory.ViewModel.Users;
 
@@ -12,7 +14,18 @@ namespace AngularProto.Controllers
 		[HttpPost]
         public JsonResult Login(UserLoginViewModel userLoginViewModel)
 		{
-			return Json(_homeOrchestrator.OrchestrateValidateUser(userLoginViewModel));
+			IUser user = _homeOrchestrator.OrchestrateValidateUser(userLoginViewModel));
+			bool isSuccessful = false;
+
+			if (user != null))
+			{
+				FormsAuthentication.SetAuthCookie(user.Username, false);
+				Session["CurrentUser"] = user;
+
+				isSuccessful = true;
+			}
+
+			return Json(isSuccessful);
         }
 
 		public AuthenticationController(HomeOrchestrator homeOrchestrator)

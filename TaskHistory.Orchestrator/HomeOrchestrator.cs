@@ -13,7 +13,7 @@ namespace TaskHistory.Orchestrator.Home
 		public UserRegistrationStatusViewModel OrchestrateRegisterUser(UserRegistrationParametersViewModel vmUserRegister)
 		{
 			if (vmUserRegister == null)
-				throw new ArgumentNullException("userParamsViewModel");
+				throw new ArgumentNullException(nameof(vmUserRegister));
 
 			UserRegistrationParameters userParams = _userObjectMapper.Map(vmUserRegister);
 			if (userParams == null)
@@ -35,7 +35,7 @@ namespace TaskHistory.Orchestrator.Home
 		public IUser OrchestrateValidateUser(UserLoginViewModel userLoginViewModel)
 		{
 			if (userLoginViewModel == null)
-				throw new ArgumentNullException("userLoginViewModel");
+				throw new ArgumentNullException(nameof(userLoginViewModel));
 
 			IUser user = _userRepo.ValidateUsernameAndPassword(userLoginViewModel.Username, userLoginViewModel.Password);
 			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
