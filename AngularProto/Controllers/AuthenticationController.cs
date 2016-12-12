@@ -8,13 +8,12 @@ namespace AngularProto.Controllers
 {
     public class AuthenticationController : Controller
     {
-		//TODO refator this to Authentication Orchestrator
-		readonly AuthenticationOrchestrator _homeOrchestrator;
+		readonly AuthenticationOrchestrator _authenticationOrchestrator;
 		
 		[HttpPost]
 		public JsonResult Login(UserLoginViewModel userLoginViewModel)
 		{
-			IUser user = _homeOrchestrator.OrchestrateValidateUser(userLoginViewModel);
+			IUser user = _authenticationOrchestrator.OrchestrateValidateUser(userLoginViewModel);
 			bool isSuccessful = false;
 
 			if (user != null)
@@ -24,13 +23,14 @@ namespace AngularProto.Controllers
 
 				isSuccessful = true;
 			}
+			//TODO should user be authenticated and session cleared if Login failed?
 
 			return Json(isSuccessful);
 		}
 
 		public AuthenticationController(AuthenticationOrchestrator homeOrchestrator)
 		{
-			_homeOrchestrator = homeOrchestrator;
+			_authenticationOrchestrator = homeOrchestrator;
 		}
     }
 }
