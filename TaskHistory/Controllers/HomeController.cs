@@ -9,7 +9,7 @@ namespace TaskHistory.Controllers
 {
 	public class HomeController : Controller
 	{
-		readonly HomeOrchestrator _homeOrchestrator;
+		readonly AuthenticationOrchestrator _homeOrchestrator;
 
 		[HttpGet]
 		public ActionResult Index ()
@@ -71,7 +71,7 @@ namespace TaskHistory.Controllers
 			return RedirectToAction ("Index");
 		}
 
-		public HomeController(HomeOrchestrator homeOrchestrator)
+		public HomeController(AuthenticationOrchestrator homeOrchestrator)
 		{
 			_homeOrchestrator = homeOrchestrator;
 		}

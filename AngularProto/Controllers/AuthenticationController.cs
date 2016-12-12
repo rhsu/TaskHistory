@@ -9,15 +9,15 @@ namespace AngularProto.Controllers
     public class AuthenticationController : Controller
     {
 		//TODO refator this to Authentication Orchestrator
-		readonly HomeOrchestrator _homeOrchestrator;
+		readonly AuthenticationOrchestrator _homeOrchestrator;
 		
 		[HttpPost]
         public JsonResult Login(UserLoginViewModel userLoginViewModel)
 		{
-			IUser user = _homeOrchestrator.OrchestrateValidateUser(userLoginViewModel));
+			IUser user = _homeOrchestrator.OrchestrateValidateUser(userLoginViewModel);
 			bool isSuccessful = false;
 
-			if (user != null))
+			if (user != null)
 			{
 				FormsAuthentication.SetAuthCookie(user.Username, false);
 				Session["CurrentUser"] = user;
@@ -28,7 +28,7 @@ namespace AngularProto.Controllers
 			return Json(isSuccessful);
         }
 
-		public AuthenticationController(HomeOrchestrator homeOrchestrator)
+		public AuthenticationController(AuthenticationOrchestrator homeOrchestrator)
 		{
 			_homeOrchestrator = homeOrchestrator;
 		}

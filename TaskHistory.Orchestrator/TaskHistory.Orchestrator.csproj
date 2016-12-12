@@ -32,10 +32,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HomeOrchestrator.cs" />
+    <Compile Include="AuthenticationOrchestrator.cs" />
     <Compile Include="TasksOrchestrator.cs" />
     <Compile Include="TerminalOrchestrator.cs" />
-    <Compile Include="AuthenticationOrchestrator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
