@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TaskHistory.Orchestrator.Tasks;
 
 namespace AngularProto.Controllers
@@ -15,7 +14,7 @@ namespace AngularProto.Controllers
 			return View();
 		}
 
-		[HttpGet]
+		[HttpPost]
 		public JsonResult GetTasks()
 		{
 			return Json(_taskOrchestrator.OrchestratorGetTasks(_currentUser));

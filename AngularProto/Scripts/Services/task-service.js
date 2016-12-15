@@ -1,15 +1,42 @@
 ﻿(function () {
 	const app = angular.module('app');
 
+	console.log("task service is registered");
+
 	app.factory('TaskService', function ($http) {
-		return {
-			const tasks = [];
+		var tasks = [];
+		var returnObj = {}
+
+		/*returnObj.initTasks = returnObj.refreshTasks().then(function () {
+			return tasks;
+		}, function (reason) {
+			//placeholder here for error handling...
+		});*/
+
+		returnObj.getTasks = function () {
+			return $http.post('/Tasks/GetTasks/');
+			/*then (function (response) {
+				//console.log(response);
+				//tasks = response.data;
+				return response.data;
+			}, function (reason) {
+				//placeholder here for error handling...
+			});*/
+		};
+
+		/*returnObj.getTasks = function () { return tasks; };
+
+		returnObj.initTasks = returnObj.refreshTasks();*/
+
+
+		return returnObj;
+		/*return {
 
 			initTasks = refreshTasks().then(function () {
 				return tasks;
 			}, function (reason) {
 				//placeholder here for error handling...
-			});
+			}),
 
 			refreshTasks() {
 				return $http.post('/Tasks/GetTasks/')
@@ -19,7 +46,7 @@
 					//placeholder here for error handling...
 				});
 			}
-		}
+		}*/
 	});
 
 })();

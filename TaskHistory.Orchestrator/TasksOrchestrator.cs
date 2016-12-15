@@ -16,6 +16,8 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
+			//TODO Lets make a TaskViewModel and display that to the user
+			// I think that's what ObjectMapperTask was suppose to Do
 			return _taskViewRepo.ReadTasksForUser(user);
 		}
 
