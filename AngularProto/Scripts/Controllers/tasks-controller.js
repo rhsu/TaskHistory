@@ -32,7 +32,7 @@
 						refreshTasks();
 					}
 				}, function (reason) {
-
+					// placeholder for error handling
 				});
 		};
 	});
