@@ -3,8 +3,7 @@
 
 	app.factory('UserLoginService', function ($http) {
 		return {
-
-			//logins the user
+			
 			promiseLoginUser(loginViewModel) {
 				return $http.post('/Authentication/Login', { userLoginViewModel: loginViewModel })
 				.then(function (response) {
