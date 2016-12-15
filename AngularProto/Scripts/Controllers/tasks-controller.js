@@ -18,13 +18,17 @@
 			});
 		};
 
+		var resetForm = function () {
+			$scope.formData.taskContent = '';
+		};
+
 		refreshTasks();
 
 		$scope.pageFns.insertTask = function () {
 			TaskService.insertTask($scope.formData.taskContent)
 				.then(function (response) {
 					if (response.data) {
-						$scope.formData.taskContent = '';
+						resetForm();
 						refreshTasks();
 					}
 				}, function (reason) {
