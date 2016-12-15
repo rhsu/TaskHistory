@@ -9,18 +9,16 @@ namespace AngularProto.Controllers
 	{
 		readonly TasksOrchestrator _taskOrchestrator;
 
-		//[HttpGet]
-		/*public ActionResult Index()
-		{
-			var vmTasks = _taskOrchestrator.OrchestratorGetTasks(_currentUser);
-			if (vmTasks == null)
-				throw new NullReferenceException("null returned from orchestrator");
-
-			return View(vmTasks);
-		}*/
+		[HttpGet]
 		public ActionResult Index()
 		{
 			return View();
+		}
+
+		[HttpGet]
+		public JsonResult GetTasks()
+		{
+			return Json(_taskOrchestrator.OrchestratorGetTasks(_currentUser));
 		}
 
 		[HttpPost]
