@@ -11,7 +11,7 @@ namespace TaskHistory.Orchestrator.Tasks
 		readonly ITaskRepo _taskRepo;
 		readonly ITaskViewRepo _taskViewRepo;
 
-		public IEnumerable<ITask> OrchestratorGetTasks(IUser user)
+		public IEnumerable<ITask> OrchestratorGetTasks_OLD(IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
@@ -21,7 +21,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			return _taskViewRepo.ReadTasksForUser(user);
 		}
 
-		public ITask OrchestratorCreateTask(IUser user, string content)
+		public ITask OrchestratorCreateTask_OLD(IUser user, string content)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));

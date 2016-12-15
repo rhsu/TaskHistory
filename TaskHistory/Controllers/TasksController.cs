@@ -12,7 +12,7 @@ namespace TaskHistory.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
-			var vmTasks = _taskOrchestrator.OrchestratorGetTasks(_currentUser);
+			var vmTasks = _taskOrchestrator.OrchestratorGetTasks_OLD(_currentUser);
 			if (vmTasks == null)
 				throw new NullReferenceException("null returned from orchestrator");
 
@@ -22,7 +22,7 @@ namespace TaskHistory.Controllers
 		[HttpPost]
 		public ActionResult CreateTask(string content)
 		{
-			_taskOrchestrator.OrchestratorCreateTask(_currentUser, content);
+			_taskOrchestrator.OrchestratorCreate_OLDTask(_currentUser, content);
 
 			return RedirectToAction("Index");
 		}
