@@ -17,8 +17,8 @@ namespace AngularProto
 
 			bundles.Add(new ScriptBundle("~/bundles/App")
 			            .Include("~/Scripts/app.js")
-						.IncludeDirectory("~/Scripts/Services", "*.js")
-						.IncludeDirectory("~/Scripts/Controllers", "*.js"));
+			            .IncludeDirectory("~/Scripts/Services", "*.js")
+			            .IncludeDirectory("~/Scripts/Controllers", "*.js"));
 
 			//BundleTable.EnableOptimizations = true;
 		}

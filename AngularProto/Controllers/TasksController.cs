@@ -1,10 +1,9 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using TaskHistory.Orchestrator.Tasks;
 
 namespace AngularProto.Controllers
 {
-	[Authorize]
+	//[Authorize]
 	public class TasksController : ApplicationController
 	{
 		readonly TasksOrchestrator _taskOrchestrator;
@@ -12,19 +11,19 @@ namespace AngularProto.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
-			var vmTasks = _taskOrchestrator.OrchestratorGetTasks(_currentUser);
-			if (vmTasks == null)
-				throw new NullReferenceException("null returned from orchestrator");
-
-			return View(vmTasks);
+			return View();
 		}
 
 		[HttpPost]
-		public ActionResult CreateTask(string content)
+		public JsonResult GetTasks()
 		{
-			_taskOrchestrator.OrchestratorCreateTask(_currentUser, content);
+			return Json(_taskOrchestrator.OrchestrateGetTasks(_currentUser));
+		}
 
-			return RedirectToAction("Index");
+		[HttpPost]
+		public JsonResult CreateTask(string content)
+		{
+			return Json(_taskOrchestrator.OrchestrateCreateTask(_currentUser, content));
 		}
 
 		[HttpPost]
