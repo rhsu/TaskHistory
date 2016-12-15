@@ -21,11 +21,9 @@ namespace AngularProto.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult CreateTask(string content)
+		public JsonResult CreateTask(string content)
 		{
-			_taskOrchestrator.OrchestratorCreateTask(_currentUser, content);
-
-			return RedirectToAction("Index");
+			return Json(_taskOrchestrator.OrchestratorCreateTask(_currentUser, content));
 		}
 
 		[HttpPost]

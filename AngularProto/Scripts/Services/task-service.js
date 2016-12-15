@@ -6,6 +6,10 @@
 		return {
 			getTasks() {
 				return $http.post('/Tasks/GetTasks/');
+			},
+
+			insertTask(content) {
+				return $http.post('/Tasks/CreateTask/', { content: content });
 			}
 		}
 	});
