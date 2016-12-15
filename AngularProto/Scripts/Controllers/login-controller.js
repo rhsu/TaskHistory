@@ -1,5 +1,5 @@
 ﻿(function () {
-	var app = angular.module('app');
+	const app = angular.module('app');
 
 	app.controller('LoginController', function ($scope, UserLoginService) {
 
