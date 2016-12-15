@@ -1,22 +1,36 @@
-﻿using System.Collections.Generic;
-using TaskHistory.ViewModel.Tasks;
+﻿using System;
+using System.Collections.Generic;
 using TaskHistory.Api.Tasks;
-using System;
+using TaskHistory.ViewModel.Tasks;
 
 namespace TaskHistoryObjectMapper
 {
 	public class ObjectMapperTasks
 	{
-		public IEnumerable<TaskDisplayForGridViewViewModel> Map (IEnumerable<ITask> tasks)
+		public IEnumerable<TaskGridViewModel> Map (IEnumerable<ITask> tasks)
 		{
 			if (tasks == null)
-				throw new ArgumentNullException ("tasks");
+				throw new ArgumentNullException (nameof(tasks));
 
-			return null;
+			var returnVal = new List<TaskGridViewModel>();
+
+			foreach (var task in tasks)
+			{
+				var taskVM = Map(task);
+				returnVal.Add(taskVM);
+			}
+
+			return returnVal;
 		}
 
-		public ObjectMapperTasks ()
+		public TaskGridViewModel Map(ITask task)
 		{
+			if (task == null)
+				throw new ArgumentNullException(nameof(task));
+
+			var returnVal = new TaskGridViewModel(task.TaskId, task.Content);
+
+			return returnVal;
 		}
 	}
 }
