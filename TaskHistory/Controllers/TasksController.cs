@@ -22,7 +22,7 @@ namespace TaskHistory.Controllers
 		[HttpPost]
 		public ActionResult CreateTask(string content)
 		{
-			_taskOrchestrator.OrchestratorCreate_OLDTask(_currentUser, content);
+			_taskOrchestrator.OrchestratorCreateTask_OLD(_currentUser, content);
 
 			return RedirectToAction("Index");
 		}

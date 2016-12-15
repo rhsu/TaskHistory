@@ -17,13 +17,13 @@ namespace AngularProto.Controllers
 		[HttpPost]
 		public JsonResult GetTasks()
 		{
-			return Json(_taskOrchestrator.OrchestratorGetTasks(_currentUser));
+			return Json(_taskOrchestrator.OrchestratorGetTasks_OLD(_currentUser));
 		}
 
 		[HttpPost]
 		public JsonResult CreateTask(string content)
 		{
-			return Json(_taskOrchestrator.OrchestratorCreateTask(_currentUser, content));
+			return Json(_taskOrchestrator.OrchestratorCreateTask_OLD(_currentUser, content));
 		}
 
 		[HttpPost]
