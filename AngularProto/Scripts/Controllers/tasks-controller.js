@@ -24,6 +24,7 @@
 			TaskService.insertTask($scope.formData.taskContent)
 				.then(function (response) {
 					if (response.data) {
+						$scope.formData.taskContent = '';
 						refreshTasks();
 					}
 				}, function (reason) {
