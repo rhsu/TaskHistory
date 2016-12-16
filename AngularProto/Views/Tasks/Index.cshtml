@@ -10,6 +10,19 @@
 		<button class='btn btn-default' 
 			ng-click='pageFns.insertTask()'>Create Task</button>
 	</form>
-
-	<p>{{pageData.tasks}}</p>
+	
+	<div style='padding-top: 25px'>
+		<table class="table table-striped table-hover table-bordered">
+			<tr>
+				<th>#</th>
+				<th>Task</th>
+				<th></th>
+			</tr>
+			<tr ng-repeat="task in pageData.tasks">
+				<th>1</th>
+				<th>{{task.TaskContent}}</th>
+				<th><button class='btn btn-default'>Delete</button></th>
+			</tr>
+		</table>
+	</div>
 </div>
