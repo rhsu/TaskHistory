@@ -52,7 +52,7 @@ namespace TaskHistory.Orchestrator.Tasks
 				throw new ArgumentNullException(nameof(user));
 
 			if (string.IsNullOrEmpty(content))
-				throw new ArgumentNullException(nameof(user));
+				throw new ArgumentNullException(nameof(content));
 
 			ITask task = _taskRepo.CreateTask(content, user.UserId);
 			if (task == null)

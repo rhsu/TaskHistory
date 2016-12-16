@@ -25,7 +25,7 @@
 		refreshTasks();
 
 		$scope.pageFns.insertTask = function () {
-			TaskService.insertTask($scope.formData.taskContent)
+			TaskService.insertTask($scope.formData)
 				.then(function (response) {
 					if (response.data) {
 						resetForm();

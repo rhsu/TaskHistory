@@ -8,8 +8,9 @@
 				return $http.post('/Tasks/GetTasks/');
 			},
 
-			insertTask(content) {
-				return $http.post('/Tasks/CreateTask/', { content: content });
+			insertTask(formData) {
+				console.log(formData);
+				return $http.post('/Tasks/CreateTask/', { content: formData.taskContent });
 			}
 		}
 	});
