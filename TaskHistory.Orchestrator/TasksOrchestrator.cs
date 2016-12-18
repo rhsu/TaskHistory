@@ -65,12 +65,14 @@ namespace TaskHistory.Orchestrator.Tasks
 			return vmTask;
 		}
 
-		public void OrchestratorDeleteTask(IUser user, int taskId)
+		public bool OrchestratorDeleteTask(IUser user, int taskId)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
 			_taskRepo.DeleteTask(taskId, user.UserId);
+
+			return true;
 		}
 
 		public TasksOrchestrator(ITaskRepo taskRepo, ITaskViewRepo taskViewRepo, ObjectMapperTasks taskPresenter)

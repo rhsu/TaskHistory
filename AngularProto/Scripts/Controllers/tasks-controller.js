@@ -37,7 +37,12 @@
 		};
 
 		$scope.pageFns.deleteTask = function (id) {
-
+			TaskService.deleteTask(id)
+				.then(function (resonse) {
+					refreshTasks();
+				}, function(reason) {
+					// placeholder for error handling
+				});
 		};
 	});
 })();
