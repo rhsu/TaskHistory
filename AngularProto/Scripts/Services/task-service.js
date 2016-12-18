@@ -14,7 +14,6 @@
 			},
 
 			deleteTask(taskId) {
-				console.log(taskId);
 				return $http.post('/Tasks/DeleteTask/', { taskId: taskId });
 			}
 		}
