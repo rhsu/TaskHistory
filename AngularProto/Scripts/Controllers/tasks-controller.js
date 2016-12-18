@@ -35,5 +35,9 @@
 					// placeholder for error handling
 				});
 		};
+
+		$scope.pageFns.deleteTask = function (id) {
+
+		};
 	});
 })();

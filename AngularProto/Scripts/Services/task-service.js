@@ -8,9 +8,13 @@
 				return $http.post('/Tasks/GetTasks/');
 			},
 
+			// TODO I don't like passing the whole object. Should just pass what is necessary at min.
 			insertTask(formData) {
-				console.log(formData);
 				return $http.post('/Tasks/CreateTask/', { content: formData.taskContent });
+			},
+
+			deleteTask(taskId) {
+				return $http.post('/Tasks/DeleteTask/', { id: taskId });
 			}
 		}
 	});
