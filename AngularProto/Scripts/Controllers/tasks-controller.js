@@ -25,13 +25,22 @@
 		refreshTasks();
 
 		$scope.pageFns.insertTask = function () {
-			TaskService.insertTask($scope.formData.taskContent)
+			TaskService.insertTask($scope.formData)
 				.then(function (response) {
 					if (response.data) {
 						resetForm();
 						refreshTasks();
 					}
 				}, function (reason) {
+					// placeholder for error handling
+				});
+		};
+
+		$scope.pageFns.deleteTask = function (id) {
+			TaskService.deleteTask(id)
+				.then(function (resonse) {
+					refreshTasks();
+				}, function(reason) {
 					// placeholder for error handling
 				});
 		};
