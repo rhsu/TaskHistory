@@ -16,7 +16,7 @@
 
 						// TODO what is the ECMASCRIPT 6 way of doing this
 						for (var i = 0; i < response.data.length; i++) {
-							
+							retVal.push(new 
 						}
 					}
 				}, function (reason) {
