@@ -1,7 +1,7 @@
 ﻿(function () {
 	const app = angular.module('app');
 
-	app.controller('TasksController', function ($scope, TaskService, TaskViewService) {
+	app.controller('TasksController', function ($scope, TaskViewService, TaskService) {
 		$scope.pageData = {};
 		$scope.pageData.tasks = [];
 
@@ -11,17 +11,17 @@
 		$scope.pageFns = {};
 
 		// invoke random promise as test
-		TaskViewService.getTasksForTableView()
+		/*TaskViewService.getTasksForTableView()
 			.then(function (response) {
 				console.log("In the invokation of promise");
 				console.log(response);
 			}, function (reason) {
 
-			});
+			});*/
 
 		var refreshTasks = function () {
-			TaskService.getTasks().then(function (response) {
-				$scope.pageData.tasks = response.data;
+			TaskViewService.getTasksForTableView().then(function (tasks) {
+				$scope.pageData.tasks = tasks;
 			}, function (reason) {
 				// placeholder for error handling...
 			});

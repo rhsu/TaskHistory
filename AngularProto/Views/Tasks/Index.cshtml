@@ -31,8 +31,9 @@
 				<td><input type='checkbox' /></td>
 				<td>{{ $index+1 }}</td>
 				<td>
-					<div>{{task.TaskContent}}</div>
-					<div style='text-decoration: line-through'>{{task.TaskContent}}</div>
+					<div>{{task}}</div>
+					<div>{{task.taskContent}}</div>
+					<div style='text-decoration: line-through'>{{task.taskContent}}</div>
 				</td>
 				<td>
 					<button class='btn btn-default'
@@ -40,7 +41,7 @@
 					<button class='btn btn-default'
 						ng-click=''>Delete</button>
 					<button class='btn btn-danger'
-						ng-click='pageFns.deleteTask(task.TaskId)'>Are you sure?</button>
+						ng-click='pageFns.deleteTask(task.taskId)'>Are you sure?</button>
 					<button class='btn btn-primary'>Undo</button>
 				</td>
 			</tr>
