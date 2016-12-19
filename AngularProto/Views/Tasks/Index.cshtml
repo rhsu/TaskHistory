@@ -10,7 +10,11 @@
 		<button class='btn btn-default' 
 			ng-click='pageFns.insertTask()'>Create Task</button>
 	</form>
-	
+
+	<div style='padding-top: 25px'>
+	<button class='btn btn-info'>Refresh</button>
+	</div>
+		
 	<div style='padding-top: 25px'>
 		<div ng-hide="pageData.tasks.length">There are not tasks.</div>
 		<table class="table table-striped table-hover table-bordered" 
@@ -26,10 +30,18 @@
 			<tr ng-repeat="task in pageData.tasks">
 				<td><input type='checkbox' /></td>
 				<td>{{ $index+1 }}</td>
-				<td>{{task.TaskContent}}</td>
+				<td>
+					<div>{{task.TaskContent}}</div>
+					<div style='text-decoration: line-through'>{{task.TaskContent}}</div>
+				</td>
 				<td>
 					<button class='btn btn-default'
-						ng-click='pageFns.deleteTask(task.TaskId)'>Delete</button>
+						ng-click=''>Edit</button>
+					<button class='btn btn-default'
+						ng-click=''>Delete</button>
+					<button class='btn btn-danger'
+						ng-click='pageFns.deleteTask(task.TaskId)'>Are you sure?</button>
+					<button class='btn btn-primary'>Undo</button>
 				</td>
 			</tr>
 		</table>
