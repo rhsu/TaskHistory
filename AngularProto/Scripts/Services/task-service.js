@@ -15,6 +15,10 @@
 
 			deleteTask(taskId) {
 				return $http.post('/Tasks/DeleteTask/', { taskId: taskId });
+			},
+
+			undeleteTask(taskId) {
+				return $http.post('/Tasks/ReactivateTask/', { taskId: taskId });
 			}
 		}
 	});

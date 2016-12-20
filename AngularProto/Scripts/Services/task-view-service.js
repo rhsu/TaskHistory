@@ -4,7 +4,7 @@
 	function TaskTableView(taskId, 
 		taskContent) {
 		this.taskId = taskId,
-		this.taskContent = taskContent,
+		this.taskContent = taskContent
 
 		// valid editor states are:
 		// 'initial' : indicates loaded from the database
@@ -40,19 +40,56 @@
 		return {
 			getTasksForTableView() {
 				return TaskService.getTasks().then(function (response) {
+					jsonObject = response.data;
+
+					const tasks = [];
+
+					for (let jsonObject of response.data) {
+						const task = new TaskTableView(jsonObject.TaskId,
+							jsonObject.TaskContent);
+
+						tasks.push(task);
+					}
+
+					return tasks;
+				}, function (reason) {
+					// TODO placeholder for error handling
+				});
+			},
+
+			insertTaskForTableView(taskData) {
+				return TaskService.insertTask(taskData).then(function (response) {
+					jsonObject = response.data;
+
+					return new TaskTableView(jsonObject.TaskId,
+						jsonObject.TaskContent);
+				}, function (reason) {
+					// TODO placeholder for error handling
+				});
+			},
+
+			deleteTaskForTableView(task) {
+				console.log(task);
+				console.log(task.taskId);
+
+				return TaskService.deleteTask(task.taskId).then(function (response) {
 					if (response.data) {
-						jsonObject = response.data;
+						task.setDeletedState();
 
-						const tasks = [];
+						return task;
+					}
 
-						for (let jsonObject of response.data) {
-							const task = new TaskTableView(jsonObject.TaskId,
-								jsonObject.TaskContent);
+				}, function (reason) {
+					// TODO placeholder for error handling
+				});
+			},
 
-							tasks.push(task);
-						}
+			undeleteTaskForTableView(task) {
+				return TaskService.undeleteTask(task.taskId).then(function (response) {
+					if (resopnse.data) {
+						task.setInitialState();
 
-						return tasks;
+						return task;
 					}
 				}, function (reason) {
 					// TODO placeholder for error handling

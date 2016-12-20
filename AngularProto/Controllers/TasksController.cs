@@ -32,6 +32,12 @@ namespace AngularProto.Controllers
 			return Json(_taskOrchestrator.OrchestratorDeleteTask(_currentUser, taskId));
 		}
 
+		[HttpPost]
+		public JsonResult ReactivateTask(int taskId)
+		{
+			return Json(_taskOrchestrator.OrchestrateReactivateTask(_currentUser, taskId));
+		}
+
 		public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)
 			: base(appContext)
 		{

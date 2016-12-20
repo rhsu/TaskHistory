@@ -34,11 +34,11 @@
 				<td><input type='checkbox' /></td>
 				<td>{{ $index+1 }}</td>
 				<td>
-					<div ng-hide="task.isDeleted">
+					<div ng-hide='task.editorState === "deleted"'>
 						{{task.taskContent}}
 					</div>
 					<div style='text-decoration: line-through'
-						 ng-show='task.isDeleted'>
+						 ng-show='task.editorState === "deleted"'>
 						{{task.taskContent}}
 					</div>
 				</td>
@@ -50,7 +50,7 @@
 						ng-click='task.setConfirmDeleteState()'>Delete</button>
 					<button class='btn btn-danger'
 						ng-show='task.editorState === "confirmDelete"'
-						ng-click='pageFns.deleteTask(task.taskId)'>Are you sure?</button>
+						ng-click='pageFns.deleteTask(task)'>Are you sure?</button>
 					<button
 						ng-show='task.editorState ==="deleted"'
 						class='btn btn-primary'>Undo</button>
