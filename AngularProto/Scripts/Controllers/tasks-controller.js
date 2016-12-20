@@ -10,15 +10,6 @@
 
 		$scope.pageFns = {};
 
-		// invoke random promise as test
-		/*TaskViewService.getTasksForTableView()
-			.then(function (response) {
-				console.log("In the invokation of promise");
-				console.log(response);
-			}, function (reason) {
-
-			});*/
-
 		var refreshTasks = function () {
 			TaskViewService.getTasksForTableView().then(function (tasks) {
 				$scope.pageData.tasks = tasks;

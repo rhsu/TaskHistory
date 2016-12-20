@@ -3,17 +3,23 @@
 
 	function TaskTableView(taskId, 
 		taskContent, 
-		isDeleted, 
-		isEditing) {
+		isDeleted) {
 		this.taskId = taskId,
 		this.taskContent = taskContent,
 		this.isDeleted = isDeleted,
-		this.isEditing = isEditing
-	}
 
-	function Test(foo, bar) {
-		this.foo;
-		this.bar;
+		// editor states
+		this.isEditing = false,
+		this.isConfirmDelete = false,
+
+		// accessor functions
+		this.setDeleted = function (flag) {
+			this.isDeleted = flag;
+		},
+
+		this.setConfirmDelete = function (flag) {
+			this.isConfirmDelete = flag;
+		}
 	}
 
 	//TODO: I would like to refactor this to something that indicates that it
@@ -32,10 +38,9 @@
 						const retVal = [];
 
 						// TODO what is the ECMASCRIPT 6 way of doing this
-						for (let i = 0; i < response.data.length; i++) {
-							//retVal.push(new Test("foo", "bar"));
-							var task = new TaskTableView(jsonObject.TaskId,
-								jsonObject.TaskContent,
+						for (let i = 0; i < jsonObject.length; i++) {
+							const task = new TaskTableView(jsonObject[i].TaskId,
+								jsonObject[i].TaskContent,
 								false, //this is correct. should be false, 
 								// but let's see if we can enforce this from the service
 								false);

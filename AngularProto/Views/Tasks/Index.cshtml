@@ -31,16 +31,22 @@
 				<td><input type='checkbox' /></td>
 				<td>{{ $index+1 }}</td>
 				<td>
-					<div>{{task}}</div>
-					<div>{{task.taskContent}}</div>
-					<div style='text-decoration: line-through'>{{task.taskContent}}</div>
+					<div ng-hide="task.isDeleted">
+						{{task.taskContent}}
+					</div>
+					<div style='text-decoration: line-through'
+						 ng-show='task.isDeleted'>
+						{{task.taskContent}}
+					</div>
 				</td>
 				<td>
 					<button class='btn btn-default'
 						ng-click=''>Edit</button>
 					<button class='btn btn-default'
-						ng-click=''>Delete</button>
+						ng-hide='task.isDeleted'
+						ng-click='task.setConfirmDelete(true)'>Delete</button>
 					<button class='btn btn-danger'
+						ng-show='task.isConfirmDelete'
 						ng-click='pageFns.deleteTask(task.taskId)'>Are you sure?</button>
 					<button class='btn btn-primary'>Undo</button>
 				</td>
