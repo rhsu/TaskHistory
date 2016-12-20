@@ -11,5 +11,51 @@
 			ng-click='pageFns.insertTask()'>Create Task</button>
 	</form>
 
-	<p>{{pageData.tasks}}</p>
+	<div style='padding-top: 25px'>
+		<button class='btn btn-info'
+				ng-click='pageFns.refreshTasks();'>
+			Refresh
+		</button>
+	</div>
+		
+	<div style='padding-top: 25px'>
+		<div ng-hide="pageData.tasks.length">There are no tasks.</div>
+		<table class="table table-striped table-hover table-bordered" 
+				ng-show="pageData.tasks.length">
+			<tr>
+				<th>
+					<input type='checkbox' />
+				</th>
+				<th>#</th>
+				<th>Task</th>
+				<th></th>
+			</tr>
+			<tr ng-repeat="task in pageData.tasks">
+				<td><input type='checkbox' /></td>
+				<td>{{ $index+1 }}</td>
+				<td>
+					<div ng-hide="task.isDeleted">
+						{{task.taskContent}}
+					</div>
+					<div style='text-decoration: line-through'
+						 ng-show='task.isDeleted'>
+						{{task.taskContent}}
+					</div>
+				</td>
+				<td>
+					<button class='btn btn-default'
+						ng-click=''>Edit</button>
+					<button class='btn btn-default'
+						ng-show='task.editorState === "initial"'
+						ng-click='task.setConfirmDeleteState()'>Delete</button>
+					<button class='btn btn-danger'
+						ng-show='task.editorState === "confirmDelete"'
+						ng-click='pageFns.deleteTask(task.taskId)'>Are you sure?</button>
+					<button
+						ng-show='task.editorState ==="deleted"'
+						class='btn btn-primary'>Undo</button>
+				</td>
+			</tr>
+		</table>
+	</div>
 </div>
