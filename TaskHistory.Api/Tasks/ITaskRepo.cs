@@ -13,6 +13,6 @@ namespace TaskHistory.Api.Tasks
 
 		void DeleteTask(int taskId, int userId);
 
-		bool SetTaskStatus(int taskId, int userId, bool status);
+		bool UpdateIsDeleted(int taskId, int userId, bool isDeleted);
 	}
 }

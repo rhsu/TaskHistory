@@ -13,7 +13,8 @@ namespace TaskHistory.Impl.Tasks
 		const string UpdateStoredProcedure = "Tasks_Update";
 		const string DeleteStoredProcedure = "Tasks_Delete";
 
-		const string UpdateStatusStoredProcedure = "Tasks_IsDeleted_Update";
+		const string UpdateIsDeletedStoredProcedure = "Tasks_IsDeleted_Update";
+		const string UpdateIsCompletedStoredProcedure = "Tasks_IsCompleted_Update";
 
 		const string NullFromApplicationDataProxy = "Null returned from DataProvider";
 
@@ -73,12 +74,12 @@ namespace TaskHistory.Impl.Tasks
 			_dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameters);
 		}
 
-		public bool SetTaskStatus(int taskId, int userId, bool status)
+		public bool UpdateIsDeleted(int taskId, int userId, bool isDeleted)
 		{
 			var parameters = new List<ISqlDataParameter>();
 			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_dataProxy.CreateParameter("pStatus", status));
+			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", isDeleted));
 
 			// TODO this should come back from ExecuteNonQuery (either true, if record actually was updated).
 			// for example wasDeleted => stillDeleted is false
@@ -86,7 +87,7 @@ namespace TaskHistory.Impl.Tasks
 
 			// TODO in order for that to make sense. ExecuteNonQuery has to return something...
 			// TODO also TODO implement this in SQL
-			_dataProxy.ExecuteNonQuery(UpdateStatusStoredProcedure, parameters);
+			_dataProxy.ExecuteNonQuery(UpdateIsDeletedStoredProcedure, parameters);
 
 			return isSuccessful;
 		}
