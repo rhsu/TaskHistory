@@ -1,20 +1,22 @@
 ﻿<div class='container' ng-controller='TasksController' style='padding-top: 25px'>
 	<form class='form-inline'>
 		<div class='form-group'>
-			<label>Task:</label>
+			<label>Name:</label>
 			<input class='form-control' 
 				ng-model='formData.taskContent' 
 				type='text'
 				required='true'>
 		</div>
-		<button class='btn btn-default' 
-			ng-click='pageFns.insertTask()'>Create Task</button>
+		<button class='btn btn-success' 
+			ng-click='pageFns.insertTask()'>
+			<span class='glyphicon glyphicon-plus'></span>
+		</button>
 	</form>
 
 	<div style='padding-top: 25px'>
 		<button class='btn btn-info'
 				ng-click='pageFns.refreshTasks();'>
-			Refresh
+			<span class='glyphicon glyphicon-refresh'></span>
 		</button>
 	</div>
 		
@@ -44,10 +46,14 @@
 				</td>
 				<td>
 					<button class='btn btn-default'
-						ng-click=''>Edit</button>
-					<button class='btn btn-default'
+						ng-click=''>
+						<span class='glyphicon glyphicon-pencil'></span>
+					</button>
+					<button class='btn btn-danger'
 						ng-show='task.editorState === "initial"'
-						ng-click='task.setConfirmDeleteState()'>Delete</button>
+						ng-click='task.setConfirmDeleteState()'>
+						<span class='glyphicon glyphicon-remove'></span>
+					</button>
 					<button class='btn btn-danger'
 						ng-show='task.editorState === "confirmDelete"'
 						ng-click='pageFns.deleteTask(task)'>Are you sure?</button>
