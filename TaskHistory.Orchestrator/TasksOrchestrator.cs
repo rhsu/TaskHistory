@@ -1,6 +1,6 @@
 ﻿using System;
-using TaskHistory.Api.Tasks;
 using System.Collections.Generic;
+using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
 using TaskHistory.Api.ViewRepos;
 using TaskHistory.ViewModel.Tasks;
@@ -70,7 +70,17 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			_taskRepo.DeleteTask(taskId, user.UserId);
+			_taskRepo.DeleteTask_OLD(taskId, user.UserId);
+
+			return true;
+		}
+
+		public bool OrchestrateSetTaskIsDeleted(IUser user, int taskId, bool status)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+			
+			_taskRepo.UpdateIsDeleted(taskId, user.UserId, status);
 
 			return true;
 		}

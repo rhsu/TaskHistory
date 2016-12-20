@@ -4,7 +4,7 @@
 	function TaskTableView(taskId, 
 		taskContent) {
 		this.taskId = taskId,
-		this.taskContent = taskContent,
+		this.taskContent = taskContent
 
 		// valid editor states are:
 		// 'initial' : indicates loaded from the database
@@ -40,19 +40,61 @@
 		return {
 			getTasksForTableView() {
 				return TaskService.getTasks().then(function (response) {
+					jsonObject = response.data;
+
+					const tasks = [];
+
+					for (let jsonObject of response.data) {
+						const task = new TaskTableView(jsonObject.TaskId,
+							jsonObject.TaskContent);
+
+						tasks.push(task);
+					}
+
+					return tasks;
+				}, function (reason) {
+					// TODO placeholder for error handling
+				});
+			},
+
+			insertTaskForTableView(taskData) {
+				return TaskService.insertTask(taskData).then(function (response) {
+					jsonObject = response.data;
+
+					return new TaskTableView(jsonObject.TaskId,
+						jsonObject.TaskContent);
+				}, function (reason) {
+					// TODO placeholder for error handling
+				});
+			},
+
+			deleteTaskForTableView(task) {
+				return TaskService.updateTaskIsDeleted(task.taskId, true).then(function (response) {
 					if (response.data) {
-						jsonObject = response.data;
+						// TODO maybe the endpoint returns the entire task as is in the database
+						// then the client does something like 
+							// 1. makeTaskModelFromResponse
+							// 2. set task = the object from step 1
+						task.setDeletedState();
 
-						const tasks = [];
+						return task;
+					}
 
-						for (let jsonObject of response.data) {
-							const task = new TaskTableView(jsonObject.TaskId,
-								jsonObject.TaskContent);
+				}, function (reason) {
+					// TODO placeholder for error handling
+				});
+			},
 
-							tasks.push(task);
-						}
+			undeleteTaskForTableView(task) {
+				return TaskService.updateTaskIsDeleted(task.taskId, false).then(function (response) {
+					if (response.data) {
+						// TODO maybe the endpoint returns the entire task as is in the database
+						// then the client does something like 
+							// 1. makeTaskModelFromResponse
+							// 2. set task = the object from step 1
+						task.setInitialState();
 
-						return tasks;
+						return task;
 					}
 				}, function (reason) {
 					// TODO placeholder for error handling
