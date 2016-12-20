@@ -3,7 +3,7 @@ using TaskHistory.Orchestrator.Tasks;
 
 namespace AngularProto.Controllers
 {
-	//[Authorize]
+	[Authorize]
 	public class TasksController : ApplicationController
 	{
 		readonly TasksOrchestrator _taskOrchestrator;
@@ -27,11 +27,9 @@ namespace AngularProto.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult DeleteTask(int taskId)
+		public JsonResult DeleteTask(int taskId)
 		{
-			_taskOrchestrator.OrchestratorDeleteTask(_currentUser, taskId);
-
-			return RedirectToAction("Index");
+			return Json(_taskOrchestrator.OrchestratorDeleteTask(_currentUser, taskId));
 		}
 
 		public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)
