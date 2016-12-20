@@ -48,5 +48,9 @@
 					// placeholder for error handling
 				});
 		};
+
+		$scope.pageFns.undoDeleteTask = function (task) {
+			TaskViewService.undeleteTaskForTableView(task);
+		};
 	});
 })();

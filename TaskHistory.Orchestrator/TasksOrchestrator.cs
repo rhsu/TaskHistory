@@ -81,7 +81,7 @@ namespace TaskHistory.Orchestrator.Tasks
 				throw new ArgumentNullException(nameof(user));
 
 			// TODO uncomment once implemented
-			// _taskRepo.SetTaskStatus(taskId, user.UserId, true);
+			_taskRepo.UpdateIsDeleted(taskId, user.UserId, status);
 
 			return true;
 		}

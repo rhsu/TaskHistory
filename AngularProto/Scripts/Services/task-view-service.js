@@ -69,11 +69,12 @@
 			},
 
 			deleteTaskForTableView(task) {
-				console.log(task);
-				console.log(task.taskId);
-
-				return TaskService.deleteTask(task.taskId).then(function (response) {
+				return TaskService.updateTaskIsDeleted(task.taskId, true).then(function (response) {
 					if (response.data) {
+						// TODO maybe the endpoint returns the entire task as is in the database
+						// then the client does something like 
+							// 1. makeTaskModelFromResponse
+							// 2. set task = the object from step 1
 						task.setDeletedState();
 
 						return task;
@@ -85,8 +86,12 @@
 			},
 
 			undeleteTaskForTableView(task) {
-				return TaskService.undeleteTask(task.taskId).then(function (response) {
-					if (resopnse.data) {
+				return TaskService.updateTaskIsDeleted(task.taskId, false).then(function (response) {
+					if (response.data) {
+						// TODO maybe the endpoint returns the entire task as is in the database
+						// then the client does something like 
+							// 1. makeTaskModelFromResponse
+							// 2. set task = the object from step 1
 						task.setInitialState();
 
 						return task;

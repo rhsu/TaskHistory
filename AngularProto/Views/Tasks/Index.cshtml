@@ -46,6 +46,7 @@
 				</td>
 				<td>
 					<button class='btn btn-default'
+						ng-show='task.editorState !== "confirmDelete"'
 						ng-click=''>
 						<span class='glyphicon glyphicon-pencil'></span>
 					</button>
@@ -54,12 +55,17 @@
 						ng-click='task.setConfirmDeleteState()'>
 						<span class='glyphicon glyphicon-remove'></span>
 					</button>
+					<button class='btn btn-primary'
+						ng-show='task.editorState === "confirmDelete"'
+						ng-click='task.setInitialState()'>
+						<span class='glyphicon glyphicon-arrow-left'></span>
+					</button>
 					<button class='btn btn-danger'
 						ng-show='task.editorState === "confirmDelete"'
 						ng-click='pageFns.deleteTask(task)'>Are you sure?</button>
-					<button
+					<button class='btn btn-primary'
 						ng-show='task.editorState ==="deleted"'
-						class='btn btn-primary'>Undo</button>
+						ng-click='pageFns.undoDeleteTask(task)'>Undo</button>
 				</td>
 			</tr>
 		</table>

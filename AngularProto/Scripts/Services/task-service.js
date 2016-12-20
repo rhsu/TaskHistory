@@ -13,12 +13,8 @@
 				return $http.post('/Tasks/CreateTask/', { content: formData.taskContent });
 			},
 
-			deleteTask(taskId) {
-				return $http.post('/Tasks/DeleteTask/', { taskId: taskId });
-			},
-
-			undeleteTask(taskId) {
-				return $http.post('/Tasks/ReactivateTask/', { taskId: taskId });
+			updateTaskIsDeleted(taskId, status) {
+				return $http.post('/Tasks/SetTaskIsDeleted/', { taskId: taskId, status: status });
 			}
 		}
 	});
