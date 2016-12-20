@@ -28,8 +28,6 @@
 			refreshTasks();
 		};
 
-		$scope.pageFns.refreshTasks();
-
 		$scope.pageFns.insertTask = function () {
 			TaskService.insertTask($scope.formData)
 				.then(function (response) {
