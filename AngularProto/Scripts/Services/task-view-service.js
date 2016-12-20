@@ -2,24 +2,28 @@
 	const app = angular.module('app');	
 
 	function TaskTableView(taskId, 
-		taskContent, 
-		isDeleted) {
+		taskContent) {
 		this.taskId = taskId,
 		this.taskContent = taskContent,
-		this.isDeleted = isDeleted,
 
-		// editor states
-		this.isEditing = false,
-		this.isConfirmDelete = false,
+		// valid editor states are:
+		// 'initial' : indicates loaded from the database
+		// 'confirmDelete' : indicates that user about to delete it
+		// 'deleted' : indicates passed the confirmDelete state
+		this.editorState = 'initial',
 
-		// accessor functions
-		this.setDeleted = function (flag) {
-			this.isDeleted = flag;
+		// state change functions
+		this.setInitialState = function () {
+			this.editorState = 'initial';
 		},
 
-		this.setConfirmDelete = function (flag) {
-			this.isConfirmDelete = flag;
-		}
+		this.setConfirmDeleteState = function () {
+			this.editorState = 'confirmDelete';
+		},
+
+		this.setDeletedState = function () {
+			this.editorState = 'deleted';
+		} 
 	}
 
 	//TODO: I would like to refactor this to something that indicates that it
@@ -40,10 +44,7 @@
 						// TODO what is the ECMASCRIPT 6 way of doing this
 						for (let i = 0; i < jsonObject.length; i++) {
 							const task = new TaskTableView(jsonObject[i].TaskId,
-								jsonObject[i].TaskContent,
-								false, //this is correct. should be false, 
-								// but let's see if we can enforce this from the service
-								false);
+								jsonObject[i].TaskContent);
 
 							retVal.push(task);
 						}

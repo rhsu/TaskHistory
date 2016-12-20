@@ -43,12 +43,14 @@
 					<button class='btn btn-default'
 						ng-click=''>Edit</button>
 					<button class='btn btn-default'
-						ng-hide='task.isDeleted'
-						ng-click='task.setConfirmDelete(true)'>Delete</button>
+						ng-show='task.editorState === "initial"'
+						ng-click='task.setConfirmDeleteState()'>Delete</button>
 					<button class='btn btn-danger'
-						ng-show='task.isConfirmDelete'
+						ng-show='task.editorState === "confirmDelete"'
 						ng-click='pageFns.deleteTask(task.taskId)'>Are you sure?</button>
-					<button class='btn btn-primary'>Undo</button>
+					<button
+						ng-show='task.editorState ==="deleted"'
+						class='btn btn-primary'>Undo</button>
 				</td>
 			</tr>
 		</table>
