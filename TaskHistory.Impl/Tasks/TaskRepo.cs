@@ -50,7 +50,7 @@ namespace TaskHistory.Impl.Tasks
 			return returnVal;
 		}
 
-		public void UpdateTask(TaskUpdatingParameters taskParameterDto, int userId)
+		public void UpdateTask(TaskUpdatingParameters taskParameterDto, int userId, int taskId)
 		{
 			if (taskParameterDto == null)
 				throw new ArgumentNullException(nameof(taskParameterDto));
@@ -60,7 +60,8 @@ namespace TaskHistory.Impl.Tasks
 			parameters.Add(_dataProxy.CreateParameter("pContent", taskParameterDto.Content));
 			parameters.Add(_dataProxy.CreateParameter("pIsCompleted", taskParameterDto.IsCompleted));
 			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", taskParameterDto.IsDeleted));
-			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskParameterDto.TaskId));
+
+			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 
 			_dataProxy.ExecuteNonQuery(UpdateStoredProcedure, parameters);

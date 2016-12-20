@@ -65,6 +65,17 @@ namespace TaskHistory.Orchestrator.Tasks
 			return vmTask;
 		}
 
+		public TaskGridViewModel OrchestrateEditTask(IUser user, TaskEditViewModel taskEditViewModel)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+
+			if (taskEditViewModel == null)
+				throw new ArgumentNullException(nameof(taskEditViewModel));
+
+			return null;
+		}
+
 		public bool OrchestratorDeleteTask(IUser user, int taskId)
 		{
 			if (user == null)
