@@ -13,6 +13,8 @@ namespace TaskHistory.Impl.Tasks
 		const string UpdateStoredProcedure = "Tasks_Update";
 		const string DeleteStoredProcedure = "Tasks_Delete";
 
+		const string UpdateStatusStoredProcedure = "Tasks_IsDeleted_Update";
+
 		const string NullFromApplicationDataProxy = "Null returned from DataProvider";
 
 		readonly TaskFactory _taskFactory;
@@ -84,7 +86,7 @@ namespace TaskHistory.Impl.Tasks
 
 			// TODO in order for that to make sense. ExecuteNonQuery has to return something...
 			// TODO also TODO implement this in SQL
-			_dataProxy.ExecuteNonQuery("TaskStatusSetStoredProcedure", parameters);
+			_dataProxy.ExecuteNonQuery(UpdateStatusStoredProcedure, parameters);
 
 			return isSuccessful;
 		}
