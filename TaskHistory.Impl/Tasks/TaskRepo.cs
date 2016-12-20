@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Sql;
+using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Tasks

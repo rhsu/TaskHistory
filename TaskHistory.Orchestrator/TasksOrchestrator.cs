@@ -1,6 +1,6 @@
 ﻿using System;
-using TaskHistory.Api.Tasks;
 using System.Collections.Generic;
+using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
 using TaskHistory.Api.ViewRepos;
 using TaskHistory.ViewModel.Tasks;
@@ -79,8 +79,7 @@ namespace TaskHistory.Orchestrator.Tasks
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
-
-			// TODO uncomment once implemented
+			
 			_taskRepo.UpdateIsDeleted(taskId, user.UserId, status);
 
 			return true;
