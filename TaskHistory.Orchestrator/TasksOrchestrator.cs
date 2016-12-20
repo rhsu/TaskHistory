@@ -80,7 +80,8 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			_taskRepo.ReactivateTask(taskId, user.UserId);
+			// TODO uncomment once implemented
+			// _taskRepo.SetTaskStatus(taskId, user.UserId, true);
 
 			return true;
 		}
