@@ -71,6 +71,24 @@ namespace TaskHistory.Impl.Tasks
 			_dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameters);
 		}
 
+		public bool SetTaskStatus(int taskId, int userId, bool status)
+		{
+			var parameters = new List<ISqlDataParameter>();
+			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pStatus", status));
+
+			// TODO this should come back from ExecuteNonQuery (either true, if record actually was updated).
+			// for example wasDeleted => stillDeleted is false
+			bool isSuccessful = true;
+
+			// TODO in order for that to make sense. ExecuteNonQuery has to return something...
+			// TODO also TODO implement this in SQL
+			_dataProxy.ExecuteNonQuery("TaskStatusSetStoredProcedure", parameters);
+
+			return isSuccessful;
+		}
+
 		public TaskRepo(TaskFactory taskFactory,
 			ApplicationDataProxy applicationDataProxy)
 		{
