@@ -70,12 +70,12 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			_taskRepo.DeleteTask(taskId, user.UserId);
+			_taskRepo.DeleteTask_OLD(taskId, user.UserId);
 
 			return true;
 		}
 
-		public bool OrchestrateReactivateTask(IUser user, int taskId)
+		public bool OrchestrateSetTaskIsDeleted(IUser user, int taskId, bool status)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));

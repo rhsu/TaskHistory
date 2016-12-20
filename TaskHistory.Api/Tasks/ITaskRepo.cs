@@ -11,7 +11,7 @@ namespace TaskHistory.Api.Tasks
 
 		void UpdateTask(TaskUpdatingParameters taskUpdatingParameters, int userId);
 
-		void DeleteTask(int taskId, int userId);
+		void DeleteTask_OLD(int taskId, int userId);
 
 		bool UpdateIsDeleted(int taskId, int userId, bool isDeleted);
 	}
