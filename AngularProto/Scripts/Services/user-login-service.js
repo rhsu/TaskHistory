@@ -8,9 +8,7 @@
 				return $http.post('/Authentication/Login', { userLoginViewModel: loginViewModel })
 				.then(function (response) {
 					success = response.data;
-					if (success) {
-						//redirect to ....
-					}
+					return success;
 				}, function (reason) {
 					// placeholder here in the future for error handling
 				});
