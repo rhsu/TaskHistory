@@ -10,7 +10,7 @@
 
 		$scope.pageFns = {};
 
-		var refreshTasks = function () {
+		$scope.pageFns.refreshTasks = function () {
 			TaskViewService.getTasksForTableView().then(function (tasks) {
 				$scope.pageData.tasks = tasks;
 			}, function (reason) {
@@ -22,14 +22,14 @@
 			$scope.formData.taskContent = '';
 		};
 
-		refreshTasks();
+		$scope.pageFns.refreshTasks();
 
 		$scope.pageFns.insertTask = function () {
 			TaskService.insertTask($scope.formData)
 				.then(function (response) {
 					if (response.data) {
 						resetForm();
-						refreshTasks();
+						$scope.pageFns.refreshTasks();
 					}
 				}, function (reason) {
 					// placeholder for error handling
@@ -38,8 +38,8 @@
 
 		$scope.pageFns.deleteTask = function (id) {
 			TaskService.deleteTask(id)
-				.then(function (resonse) {
-					refreshTasks();
+				.then(function (response) {
+					//refreshTasks();
 				}, function(reason) {
 					// placeholder for error handling
 				});

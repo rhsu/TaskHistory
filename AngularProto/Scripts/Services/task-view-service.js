@@ -12,7 +12,11 @@
 		// 'deleted' : indicates passed the confirmDelete state
 		this.editorState = 'initial',
 
-		// state change functions
+		///////////////////////////////
+		//							//
+		// state change functions	//
+		//							//
+		//////////////////////////////
 		this.setInitialState = function () {
 			this.editorState = 'initial';
 		},
@@ -39,17 +43,16 @@
 					if (response.data) {
 						jsonObject = response.data;
 
-						const retVal = [];
+						const tasks = [];
 
-						// TODO what is the ECMASCRIPT 6 way of doing this
-						for (let i = 0; i < jsonObject.length; i++) {
-							const task = new TaskTableView(jsonObject[i].TaskId,
-								jsonObject[i].TaskContent);
+						for (let jsonObject of response.data) {
+							const task = new TaskTableView(jsonObject.TaskId,
+								jsonObject.TaskContent);
 
-							retVal.push(task);
+							tasks.push(task);
 						}
 
-						return retVal;
+						return tasks;
 					}
 				}, function (reason) {
 					// TODO placeholder for error handling
