@@ -1,21 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using Moq;
+using Ninject;
 using NUnit.Framework;
 using TaskHistory.Api.History;
-using TaskHistory.Impl.History;
-using System.Linq;
-using TaskHistory.Impl.Sql;
-using Moq;
 using TaskHistory.Api.Sql;
-using System.Collections.Generic;
-using Ninject;
+using TaskHistory.Impl.History;
+using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Test
 {
 	[TestFixture]
 	public class HistoryRepoTest
 	{
-		private IHistoryRepo _objectUnderTest;
-		private IKernel _ninjectKernel;
+		IHistoryRepo _objectUnderTest;
+		IKernel _ninjectKernel;
 
 		private void DoBindings()
 		{	
