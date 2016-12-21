@@ -43,10 +43,10 @@
 	//		What is an appropriate name for task-service to indicate
 	//		that is talks to the server via $http (like a repo).
 	//		Another thing we can do is simply differentiate these by folder structure
-	app.factory('TaskViewService', function (TaskService) {
+	app.factory('TaskTableViewService', function (TaskService) {
 
 		return {
-			getTasksForTableView() {
+			getTasks() {
 				return TaskService.getTasks().then(function (response) {
 					jsonObject = response.data;
 
@@ -65,7 +65,7 @@
 				});
 			},
 
-			insertTaskForTableView(taskData) {
+			createTask(taskData) {
 				return TaskService.insertTask(taskData.taskContent).then(function (response) {
 					jsonObject = response.data;
 
@@ -76,7 +76,7 @@
 				});
 			},
 
-			deleteTaskForTableView(task) {
+			deleteTask(task) {
 				return TaskService.updateTaskIsDeleted(task.taskId, true).then(function (response) {
 					if (response.data) {
 						// TODO maybe the endpoint returns the entire task as is in the database
@@ -93,7 +93,7 @@
 				});
 			},
 
-			undeleteTaskForTableView(task) {
+			undoDeleteTask(task) {
 				return TaskService.updateTaskIsDeleted(task.taskId, false).then(function (response) {
 					if (response.data) {
 						// TODO maybe the endpoint returns the entire task as is in the database
