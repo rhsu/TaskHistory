@@ -1,7 +1,7 @@
 ﻿(function () {
 	const app = angular.module('app');
 
-	app.controller('TasksController', function ($scope, TaskViewService) {
+	app.controller('TasksController', function ($scope, TaskTableViewService) {
 		$scope.pageData = {};
 		$scope.pageData.tasks = [];
 
@@ -11,7 +11,7 @@
 		$scope.pageFns = {};
 
 		var refreshTasks = function () {
-			TaskViewService.getTasksForTableView().then(function (tasks) {
+			TaskTableViewService.getTasks().then(function (tasks) {
 				$scope.pageData.tasks = tasks;
 			}, function (reason) {
 				// placeholder for error handling...
@@ -29,7 +29,7 @@
 		};
 
 		$scope.pageFns.insertTask = function () {
-			TaskViewService.insertTaskForTableView($scope.formData)
+			TaskTableViewService.createTask($scope.formData)
 				.then(function (response) {
 					if (response) {
 						resetForm();
@@ -41,7 +41,7 @@
 		};
 
 		$scope.pageFns.deleteTask = function (task) {
-			TaskViewService.deleteTaskForTableView(task)
+			TaskTableViewService.deleteTask(task)
 				.then(function (response) {
 					// TODO this should only refresh the newly created task
 				}, function(reason) {
@@ -50,7 +50,15 @@
 		};
 
 		$scope.pageFns.undoDeleteTask = function (task) {
-			TaskViewService.undeleteTaskForTableView(task);
+			TaskTableViewService.undoDeleteTask(task);
+		};
+
+		$scope.pageFns.displayBackButton = function (task) {
+			return (task.editorState === 'confirmDelete' || task.editorState === 'editing');
+		};
+
+		$scope.pageFns.displayReadonlyMode = function (task) {
+			return (task.editorState !== 'deleted' && task.editorState !== 'editing');
 		};
 	});
 })();

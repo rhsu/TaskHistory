@@ -4,12 +4,15 @@
 	function TaskTableView(taskId, 
 		taskContent) {
 		this.taskId = taskId,
-		this.taskContent = taskContent
+		this.taskContent = taskContent,
+
+		this.editorTaskContent = taskContent
 
 		// valid editor states are:
 		// 'initial' : indicates loaded from the database
-		// 'confirmDelete' : indicates that user about to delete it
+		// 'confirmDelete' : indicates that user is about to delete it
 		// 'deleted' : indicates passed the confirmDelete state
+		// 'editing' : indicates that the task is in inline-editing mode
 		this.editorState = 'initial',
 
 		///////////////////////////////
@@ -18,6 +21,7 @@
 		//							//
 		//////////////////////////////
 		this.setInitialState = function () {
+			this.editorTaskContent = taskContent;
 			this.editorState = 'initial';
 		},
 
@@ -27,7 +31,11 @@
 
 		this.setDeletedState = function () {
 			this.editorState = 'deleted';
-		} 
+		},
+
+		this.setEditingState = function () {
+			this.editorState = 'editing';
+		}
 	}
 
 	//TODO: I would like to refactor this to something that indicates that it
@@ -35,10 +43,10 @@
 	//		What is an appropriate name for task-service to indicate
 	//		that is talks to the server via $http (like a repo).
 	//		Another thing we can do is simply differentiate these by folder structure
-	app.factory('TaskViewService', function (TaskService) {
+	app.factory('TaskTableViewService', function (TaskService) {
 
 		return {
-			getTasksForTableView() {
+			getTasks() {
 				return TaskService.getTasks().then(function (response) {
 					jsonObject = response.data;
 
@@ -57,8 +65,8 @@
 				});
 			},
 
-			insertTaskForTableView(taskData) {
-				return TaskService.insertTask(taskData).then(function (response) {
+			createTask(taskData) {
+				return TaskService.createTask(taskData.taskContent).then(function (response) {
 					jsonObject = response.data;
 
 					return new TaskTableView(jsonObject.TaskId,
@@ -68,7 +76,7 @@
 				});
 			},
 
-			deleteTaskForTableView(task) {
+			deleteTask(task) {
 				return TaskService.updateTaskIsDeleted(task.taskId, true).then(function (response) {
 					if (response.data) {
 						// TODO maybe the endpoint returns the entire task as is in the database
@@ -85,7 +93,7 @@
 				});
 			},
 
-			undeleteTaskForTableView(task) {
+			undoDeleteTask(task) {
 				return TaskService.updateTaskIsDeleted(task.taskId, false).then(function (response) {
 					if (response.data) {
 						// TODO maybe the endpoint returns the entire task as is in the database
