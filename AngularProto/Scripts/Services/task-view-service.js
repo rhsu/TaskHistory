@@ -4,7 +4,9 @@
 	function TaskTableView(taskId, 
 		taskContent) {
 		this.taskId = taskId,
-		this.taskContent = taskContent
+		this.taskContent = taskContent,
+
+		this.editorTaskContent = taskContent
 
 		// valid editor states are:
 		// 'initial' : indicates loaded from the database
@@ -19,6 +21,7 @@
 		//							//
 		//////////////////////////////
 		this.setInitialState = function () {
+			this.editorTaskContent = taskContent;
 			this.editorState = 'initial';
 		},
 
