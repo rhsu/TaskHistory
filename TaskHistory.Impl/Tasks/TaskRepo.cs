@@ -50,20 +50,27 @@ namespace TaskHistory.Impl.Tasks
 			return returnVal;
 		}
 
-		public void UpdateTask(TaskUpdatingParameters taskParameterDto, int userId)
+		public ITask UpdateTask(TaskUpdatingParameters taskParameterDto, int userId, int taskId)
 		{
 			if (taskParameterDto == null)
 				throw new ArgumentNullException(nameof(taskParameterDto));
 
 			var parameters = new List<ISqlDataParameter>();
 
+			// task update fields
 			parameters.Add(_dataProxy.CreateParameter("pContent", taskParameterDto.Content));
 			parameters.Add(_dataProxy.CreateParameter("pIsCompleted", taskParameterDto.IsCompleted));
 			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", taskParameterDto.IsDeleted));
-			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskParameterDto.TaskId));
+
+			// "where" clause fields
+			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 
-			_dataProxy.ExecuteNonQuery(UpdateStoredProcedure, parameters);
+			ITask task = _dataProxy.ExecuteReaderForSingleType(_taskFactory, UpdateStoredProcedure, parameters);
+			if (task == null)
+				throw new NullReferenceException(NullFromApplicationDataProxy);
+
+			return task;
 		}
 
 		public void DeleteTask_OLD(int taskId, int userId)

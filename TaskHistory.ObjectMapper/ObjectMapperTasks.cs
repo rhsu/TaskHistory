@@ -32,5 +32,17 @@ namespace TaskHistoryObjectMapper
 
 			return returnVal;
 		}
+
+		public TaskUpdatingParameters Map(TaskEditViewModel taskEditViewModel)
+		{
+			if (taskEditViewModel == null)
+				throw new ArgumentNullException(nameof(taskEditViewModel));
+
+			var returnVal = new TaskUpdatingParameters(taskEditViewModel.TaskContent,
+													   taskEditViewModel.IsCompleted,
+													   taskEditViewModel.IsDeleted);
+
+			return returnVal;
+		}
 	}
 }

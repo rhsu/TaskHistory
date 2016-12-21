@@ -5,13 +5,12 @@
 		public string Content { get; }
 		public bool IsCompleted { get; }
 		public bool IsDeleted { get; }
-		public int TaskId { get; }
 
-		public TaskUpdatingParameters(string content,
-			bool isCompleted,
-			bool isDeleted,
-			int taskId)
+		public TaskUpdatingParameters(string content, bool isCompleted,bool isDeleted)
 		{
+			this.Content = content;
+			this.IsCompleted = isCompleted;
+			this.IsDeleted = isDeleted;
 		}
 	}
 }

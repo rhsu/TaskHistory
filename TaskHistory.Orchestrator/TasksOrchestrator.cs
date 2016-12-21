@@ -12,7 +12,7 @@ namespace TaskHistory.Orchestrator.Tasks
 	{
 		readonly ITaskRepo _taskRepo;
 		readonly ITaskViewRepo _taskViewRepo;
-		readonly ObjectMapperTasks _taskPresenter;
+		readonly ObjectMapperTasks _taskObjectMapper;
 
 		public IEnumerable<ITask> OrchestratorGetTasks_OLD(IUser user)
 		{
@@ -31,7 +31,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (tasks == null)
 				throw new NullReferenceException($"null returned from TaskViewRepo when reading {user.UserId}");
 
-			IEnumerable<TaskGridViewModel> tasksVM = _taskPresenter.Map(tasks);
+			IEnumerable<TaskGridViewModel> tasksVM = _taskObjectMapper.Map(tasks);
 			if (tasksVM == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
@@ -58,11 +58,36 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (task == null)
 				throw new NullReferenceException("Null returned from task repo");
 
-			TaskGridViewModel vmTask = _taskPresenter.Map(task);
+			TaskGridViewModel vmTask = _taskObjectMapper.Map(task);
 			if (vmTask == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
 			return vmTask;
+		}
+
+		public TaskGridViewModel OrchestrateEditTask(IUser user, 
+		                                             int taskId, 
+		                                             TaskEditViewModel taskEditViewModel)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+
+			if (taskEditViewModel == null)
+				throw new ArgumentNullException(nameof(taskEditViewModel));
+
+			TaskUpdatingParameters updateParams = _taskObjectMapper.Map(taskEditViewModel);
+			if (updateParams == null)
+				throw new NullReferenceException("null returned from TaskObjectMapper");
+
+			ITask updatedTask = _taskRepo.UpdateTask(updateParams, taskId, user.UserId);
+			if (updatedTask == null)
+				throw new NullReferenceException("null returned from TaskRepo");
+
+			TaskGridViewModel retVal = _taskObjectMapper.Map(updatedTask);
+			if (retVal == null)
+				throw new NullReferenceException("null returned from TaskObjectMapper");
+
+			return retVal;
 		}
 
 		public bool OrchestratorDeleteTask(IUser user, int taskId)
@@ -89,7 +114,7 @@ namespace TaskHistory.Orchestrator.Tasks
 		{
 			_taskRepo = taskRepo;
 			_taskViewRepo = taskViewRepo;
-			_taskPresenter = taskPresenter;
+			_taskObjectMapper = taskPresenter;
 		}
 	}
 }
