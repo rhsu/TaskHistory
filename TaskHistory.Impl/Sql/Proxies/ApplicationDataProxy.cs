@@ -7,7 +7,7 @@ namespace TaskHistory.Impl.Sql
 	/// <summary>
 	/// Proxy responsible for communicating with the database including Reading and Writing to the Database
 	/// </summary>
-	public class ApplicationDataProxy //: IApplicationDataProxy
+	public class ApplicationDataProxy : IApplicationDataProxy
 	{
 		readonly IDataReaderProvider _dataReaderProvider;
 		readonly ISqlParameterFactory _parameterFactory;
