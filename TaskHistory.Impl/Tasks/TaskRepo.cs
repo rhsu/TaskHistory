@@ -19,7 +19,7 @@ namespace TaskHistory.Impl.Tasks
 		const string NullFromApplicationDataProxy = "Null returned from DataProvider";
 
 		readonly TaskFactory _taskFactory;
-		readonly IApplicationDataProxy _dataProxy;
+		readonly ApplicationDataProxy _dataProxy;
 
 		public ITask CreateTask(string taskContent, int userId)
 		{
@@ -89,7 +89,7 @@ namespace TaskHistory.Impl.Tasks
 		}
 
 		public TaskRepo(TaskFactory taskFactory,
-			IApplicationDataProxy applicationDataProxy)
+			ApplicationDataProxy applicationDataProxy)
 		{
 			_taskFactory = taskFactory;
 			_dataProxy = applicationDataProxy;

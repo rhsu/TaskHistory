@@ -25,8 +25,8 @@ namespace TaskHistory.Bindings
 			kernel.Bind<ISqlParameterFactory> ()
 				  .To<SqlParameterFactory> ();
 
-			kernel.Bind<IApplicationDataProxy>()
-				  .To<ApplicationDataProxy>();
+			//kernel.Bind<IApplicationDataProxy>()
+			//	  .To<ApplicationDataProxy>();
 		}
 	}
 }
