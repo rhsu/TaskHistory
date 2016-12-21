@@ -8,8 +8,9 @@
 
 		// valid editor states are:
 		// 'initial' : indicates loaded from the database
-		// 'confirmDelete' : indicates that user about to delete it
+		// 'confirmDelete' : indicates that user is about to delete it
 		// 'deleted' : indicates passed the confirmDelete state
+		// 'editing' : indicates that the task is in inline-editing mode
 		this.editorState = 'initial',
 
 		///////////////////////////////
@@ -27,7 +28,11 @@
 
 		this.setDeletedState = function () {
 			this.editorState = 'deleted';
-		} 
+		},
+
+		this.setEditingState = function () {
+			this.editorState = 'editing';
+		}
 	}
 
 	//TODO: I would like to refactor this to something that indicates that it

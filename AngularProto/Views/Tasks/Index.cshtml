@@ -36,36 +36,60 @@
 				<td><input type='checkbox' /></td>
 				<td>{{ $index+1 }}</td>
 				<td>
-					<div ng-hide='task.editorState === "deleted"'>
+					<!-- normal display mode -->
+					<div ng-show='pageFns.displayReadonlyMode()'>
 						{{task.taskContent}}
 					</div>
+
+					<!-- deleted mode -->
 					<div style='text-decoration: line-through'
 						 ng-show='task.editorState === "deleted"'>
 						{{task.taskContent}}
 					</div>
+
+					<!-- editing mode -->
+					<div>
+
+					</div>
 				</td>
 				<td>
+					<!-- Pencil Icon -->
 					<button class='btn btn-default'
-						ng-show='task.editorState !== "confirmDelete"'
-						ng-click=''>
+						ng-show='task.editorState === "initial"'
+						ng-click='task.setEditingState()'>
 						<span class='glyphicon glyphicon-pencil'></span>
 					</button>
+
+					<!-- Delete X icon-->
 					<button class='btn btn-danger'
 						ng-show='task.editorState === "initial"'
 						ng-click='task.setConfirmDeleteState()'>
 						<span class='glyphicon glyphicon-remove'></span>
 					</button>
+
+					<!-- Back Icon-->
 					<button class='btn btn-primary'
-						ng-show='task.editorState === "confirmDelete"'
+						ng-show='pageFns.displayBackButton(task)'
 						ng-click='task.setInitialState()'>
 						<span class='glyphicon glyphicon-arrow-left'></span>
 					</button>
+
+					<!-- Are you sure mode-->
 					<button class='btn btn-danger'
 						ng-show='task.editorState === "confirmDelete"'
 						ng-click='pageFns.deleteTask(task)'>Are you sure?</button>
+
+					<!-- Undo-->
 					<button class='btn btn-primary'
 						ng-show='task.editorState ==="deleted"'
 						ng-click='pageFns.undoDeleteTask(task)'>Undo</button>
+
+					<!-- Submit Edit (OK Icon)-->
+					<button class='btn btn-success'
+							ng-show='task.editorState ==="editing"'
+							ng-click='pageFns.editTask(task)'>
+						<span class='glyphicon glyphicon-ok'></span>
+					</button>
 				</td>
 			</tr>
 		</table>

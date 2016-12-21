@@ -52,5 +52,13 @@
 		$scope.pageFns.undoDeleteTask = function (task) {
 			TaskViewService.undeleteTaskForTableView(task);
 		};
+
+		$scope.pageFns.displayBackButton = function (task) {
+			return (task.editorState === 'confirmDelete' || task.editorState === 'editing');
+		};
+
+		$scope.pageFns.displayReadonlyMode = function (task) {
+			return (task.editorState !== 'deleted' || task.editorState !== 'editing');
+		};
 	});
 })();
