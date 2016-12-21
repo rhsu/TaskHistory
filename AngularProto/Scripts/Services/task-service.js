@@ -9,8 +9,8 @@
 			},
 
 			// TODO I don't like passing the whole object. Should just pass what is necessary at min.
-			insertTask(formData) {
-				return $http.post('/Tasks/CreateTask/', { content: formData.taskContent });
+			insertTask(content) {
+				return $http.post('/Tasks/CreateTask/', { content: content });
 			},
 
 			updateTaskIsDeleted(taskId, status) {
