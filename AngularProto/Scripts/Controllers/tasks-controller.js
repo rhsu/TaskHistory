@@ -58,7 +58,6 @@
 		};
 
 		$scope.pageFns.displayReadonlyMode = function (task) {
-			console.log(task.editorState);
 			return (task.editorState !== 'deleted' && task.editorState !== 'editing');
 		};
 	});
