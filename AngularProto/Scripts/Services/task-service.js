@@ -8,7 +8,7 @@
 				return $http.post('/Tasks/GetTasks/');
 			},
 
-			insertTask(content) {
+			createTask(content) {
 				return $http.post('/Tasks/CreateTask/', { content: content });
 			},
 

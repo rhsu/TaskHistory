@@ -66,7 +66,7 @@
 			},
 
 			createTask(taskData) {
-				return TaskService.insertTask(taskData.taskContent).then(function (response) {
+				return TaskService.createTask(taskData.taskContent).then(function (response) {
 					jsonObject = response.data;
 
 					return new TaskTableView(jsonObject.TaskId,
