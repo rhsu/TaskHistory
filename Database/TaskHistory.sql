@@ -391,16 +391,6 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Update`(IN `pContent` VARCHAR(128), IN `pIsCompleted` BOOLEAN, IN `pIsDeleted` BOOLEAN, IN `pTaskID` INT, IN `pUserId` INT)
     NO SQL
     DETERMINISTIC
-<<<<<<< HEAD
-UPDATE `Tasks`
-SET
-	`Content` = `pContent`
-    ,`IsCompleted` = `pIsCompleted`
-    ,`Deleted` = `pIsDeleted`
-    ,`ModifiedDate` = NOW()
-WHERE
-	`TaskID` = `pTaskID` ;;
-=======
 BEGIN
     UPDATE `Tasks`
     SET
@@ -415,7 +405,6 @@ BEGIN
     WHERE
     	`TaskID` = `pTaskID`;
 END ;;
->>>>>>> master
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -509,8 +498,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
-<<<<<<< HEAD
--- Dump completed on 2016-10-25 14:52:26
-=======
--- Dump completed on 2016-12-21  8:43:22
->>>>>>> master
+-- Dump completed on 2016-12-21 14:29:15
