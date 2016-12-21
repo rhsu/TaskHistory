@@ -57,10 +57,12 @@ namespace TaskHistory.Impl.Tasks
 
 			var parameters = new List<ISqlDataParameter>();
 
+			// task update fields
 			parameters.Add(_dataProxy.CreateParameter("pContent", taskParameterDto.Content));
 			parameters.Add(_dataProxy.CreateParameter("pIsCompleted", taskParameterDto.IsCompleted));
 			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", taskParameterDto.IsDeleted));
 
+			// "where" clause fields
 			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 
