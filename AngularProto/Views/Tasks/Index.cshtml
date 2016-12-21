@@ -37,7 +37,7 @@
 				<td>{{ $index+1 }}</td>
 				<td>
 					<!-- normal display mode -->
-					<div ng-show='pageFns.displayReadonlyMode()'>
+					<div ng-show='pageFns.displayReadonlyMode(task)'>
 						{{task.taskContent}}
 					</div>
 
@@ -48,8 +48,11 @@
 					</div>
 
 					<!-- editing mode -->
-					<div>
-
+					<div ng-show='task.editorState === "editing"'>
+						<input ng-model='task.newTaskContent' 
+							placeholder='{{task.taskContent}}' 
+							class='form-control' 
+							type='text' />		
 					</div>
 				</td>
 				<td>

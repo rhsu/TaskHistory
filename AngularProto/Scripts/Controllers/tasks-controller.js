@@ -58,7 +58,8 @@
 		};
 
 		$scope.pageFns.displayReadonlyMode = function (task) {
-			return (task.editorState !== 'deleted' || task.editorState !== 'editing');
+			console.log(task.editorState);
+			return (task.editorState !== 'deleted' && task.editorState !== 'editing');
 		};
 	});
 })();
