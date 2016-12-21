@@ -65,7 +65,9 @@ namespace TaskHistory.Orchestrator.Tasks
 			return vmTask;
 		}
 
-		public TaskGridViewModel OrchestrateEditTask(IUser user, int taskId, TaskEditViewModel taskEditViewModel)
+		public TaskGridViewModel OrchestrateEditTask(IUser user, 
+		                                             int taskId, 
+		                                             TaskEditViewModel taskEditViewModel)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
@@ -77,10 +79,15 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (updateParams == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
-			_taskRepo.UpdateTask(updateParams, taskId, user.UserId);
+			ITask updatedTask = _taskRepo.UpdateTask(updateParams, taskId, user.UserId);
+			if (updatedTask == null)
+				throw new NullReferenceException("null returned from TaskRepo");
 
-			//TaskGridViewModel retVal = _taskObjectMapper.Map(
-			return null;
+			TaskGridViewModel retVal = _taskObjectMapper.Map(updatedTask);
+			if (retVal == null)
+				throw new NullReferenceException("null returned from TaskObjectMapper");
+
+			return retVal;
 		}
 
 		public bool OrchestratorDeleteTask(IUser user, int taskId)
