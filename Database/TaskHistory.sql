@@ -90,7 +90,7 @@ CREATE TABLE `Tasks` (
   PRIMARY KEY (`TaskID`),
   KEY `UserId` (`UserId`),
   CONSTRAINT `TaskIdToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,7 +111,7 @@ CREATE TABLE `Users` (
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -304,11 +304,11 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Insert`(IN `pTaskContent` VARCHAR(64), IN `pUserId` INT)
 BEGIN 
@@ -388,9 +388,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Update`(IN `pContent` VARCHAR(128), IN `pIsCompleted` BIT(1), IN `pIsDeleted` BIT(1), IN `pTaskID` INT, IN `pUserId` INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Update`(IN `pContent` VARCHAR(128), IN `pIsCompleted` BOOLEAN, IN `pIsDeleted` BOOLEAN, IN `pTaskID` INT, IN `pUserId` INT)
     NO SQL
     DETERMINISTIC
+<<<<<<< HEAD
 UPDATE `Tasks`
 SET
 	`Content` = `pContent`
@@ -399,6 +400,22 @@ SET
     ,`ModifiedDate` = NOW()
 WHERE
 	`TaskID` = `pTaskID` ;;
+=======
+BEGIN
+    UPDATE `Tasks`
+    SET
+        `Content` = `pContent`
+        ,`IsCompleted` = `pIsCompleted`
+        ,`Deleted` = `pIsDeleted`
+        ,`ModifiedDate` = NOW()
+    WHERE
+        `TaskID` = `pTaskID`;
+
+    SELECT * FROM `Tasks`
+    WHERE
+    	`TaskID` = `pTaskID`;
+END ;;
+>>>>>>> master
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -492,4 +509,8 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
 -- Dump completed on 2016-10-25 14:52:26
+=======
+-- Dump completed on 2016-12-21  8:43:22
+>>>>>>> master
