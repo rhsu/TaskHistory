@@ -9,7 +9,7 @@ namespace TaskHistory.Api.Tasks
 
 		IEnumerable<ITask> ReadTasks(int userId);
 
-		void UpdateTask(TaskUpdatingParameters taskUpdatingParameters, int userId);
+		ITask UpdateTask(TaskUpdatingParameters taskUpdatingParameters, int userId, int taskId);
 
 		void DeleteTask_OLD(int taskId, int userId);
 

@@ -92,7 +92,8 @@ namespace TaskHistory.Impl.Terminal
 					break;
 				case TerminalRegisteredObject.Task:
 					// need to create task updating parameters
-					_registeredObjProxy.TaskRepo.UpdateTask(null, user.UserId);
+					// TODO: Where does this come from?
+					_registeredObjProxy.TaskRepo.UpdateTask(null, user.UserId, -1);
 					break;
 			}
 
