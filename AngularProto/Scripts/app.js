@@ -4,6 +4,8 @@
 	app.config(function ($routeProvider) {
 		$routeProvider.when('/', {
 			templateUrl: '/Home/Login'
+		}).when('/Register', {
+			templateUrl: '/Home/Register'
 		})
 		.when('/Home', {
 			templateUrl: '/Tasks/Index'

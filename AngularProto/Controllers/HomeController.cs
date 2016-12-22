@@ -17,6 +17,12 @@ namespace AngularProto.Controllers
 			return View ();
 		}
 
+		[HttpGet]
+		public ActionResult Register()
+		{
+			return View();
+		}
+
 		public ActionResult Demo ()
 		{
 			return View ();

@@ -1,0 +1,24 @@
+﻿<div class='container' style='padding-top: 10px' ng-controller='LoginController'>
+	<form name='loginForm'>
+		<div class='form-group'>
+			<label>Username</label>
+			<input class='form-control' 
+				ng-model='formData.username'
+				name='user'
+				type='text'
+				required=true
+				placeholder='Enter Username'/>
+		</div>
+		<div class='form-group'>
+			<label>Password</label>
+			<input class='form-control' 
+				ng-model='formData.password' 
+				type='password' 
+				required=true
+				placeholder='Enter Password'/ >
+		</div>
+		<div class='form-group'>
+			<button class='btn btn-default' ng-click='fns.login()'>Login</button>
+		</div>
+	</form>
+</div>
