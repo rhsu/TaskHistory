@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using TaskHistory.Orchestrator.Tasks;
+using TaskHistory.ViewModel.Tasks;
 
 namespace AngularProto.Controllers
 {
@@ -24,6 +25,14 @@ namespace AngularProto.Controllers
 		public JsonResult CreateTask(string content)
 		{
 			return Json(_taskOrchestrator.OrchestrateCreateTask(_currentUser, content));
+		}
+
+		[HttpPost]
+		public JsonResult EditTask(TaskEditViewModel taskEditViewModel, int taskId)
+		{
+			return Json(_taskOrchestrator.OrchestrateEditTask(_currentUser,
+			                                                 taskId,
+			                                                  taskEditViewModel));
 		}
 
 		[HttpPost]
