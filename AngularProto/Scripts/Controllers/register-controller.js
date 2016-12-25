@@ -6,8 +6,8 @@
 
 		$scope.pageFns = {};
 
-		/*$scope.pageFns.registerUser = function () {
-			return UserRe
-		}*/
+		$scope.pageFns.register = function () {
+			
+		}
 	});
 })();
