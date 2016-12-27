@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace TaskHistory.Api
+namespace TaskHistory.Api.Lists
 {
 	public interface IListRepo
 	{
 		IEnumerable<IList> ReadLists(int userId);
 
-		bool UpdateList(int userId, int listId);
+		IList UpdateList(int userId, int listId);
 	}
 }
