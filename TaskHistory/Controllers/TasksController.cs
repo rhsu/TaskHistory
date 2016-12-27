@@ -12,27 +12,19 @@ namespace TaskHistory.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
-			var vmTasks = _taskOrchestrator.OrchestratorGetTasks_OLD(_currentUser);
-			if (vmTasks == null)
-				throw new NullReferenceException("null returned from orchestrator");
-
-			return View(vmTasks);
+			throw new NotSupportedException("This is no longer supported");
 		}
 
 		[HttpPost]
 		public ActionResult CreateTask(string content)
 		{
-			_taskOrchestrator.OrchestratorCreateTask_OLD(_currentUser, content);
-
-			return RedirectToAction("Index");
+			throw new NotSupportedException("This is no longer supported");
 		}
 
 		[HttpPost]
 		public ActionResult DeleteTask(int taskId)
 		{
-			_taskOrchestrator.OrchestratorDeleteTask(_currentUser, taskId);
-
-			return RedirectToAction("Index");
+			throw new NotSupportedException("This is no longer supported");
 		}
 
 		public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)

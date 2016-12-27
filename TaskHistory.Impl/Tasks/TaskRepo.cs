@@ -21,7 +21,7 @@ namespace TaskHistory.Impl.Tasks
 		readonly TaskFactory _taskFactory;
 		readonly ApplicationDataProxy _dataProxy;
 
-		public ITask CreateTask(string taskContent, int userId)
+		/*public ITask CreateTask(string taskContent, int userId)
 		{
 			if (taskContent == null)
 				throw new ArgumentNullException(nameof(taskContent));
@@ -37,9 +37,9 @@ namespace TaskHistory.Impl.Tasks
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			return returnVal;
-		}
+		}*/
 
-		public IEnumerable<ITask> ReadTasks(int userId)
+		/*public IEnumerable<ITask> ReadTasks(int userId)
 		{
 			var parameter = _dataProxy.CreateParameter("pUserId", userId);
 
@@ -48,9 +48,9 @@ namespace TaskHistory.Impl.Tasks
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			return returnVal;
-		}
+		}*/
 
-		public ITask UpdateTask(TaskUpdatingParameters taskParameterDto, int userId, int taskId)
+		/*public ITask UpdateTask(TaskUpdatingParameters taskParameterDto, int userId, int taskId)
 		{
 			if (taskParameterDto == null)
 				throw new ArgumentNullException(nameof(taskParameterDto));
@@ -71,32 +71,10 @@ namespace TaskHistory.Impl.Tasks
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			return task;
-		}
-
-		public void DeleteTask_OLD(int taskId, int userId)
-		{
-			var parameters = new List<ISqlDataParameter>();
-			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
-			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
-			_dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameters);
-		}
-
-		public bool UpdateIsDeleted(int taskId, int userId, bool isDeleted)
-		{
-			var parameters = new List<ISqlDataParameter>();
-			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
-			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", isDeleted));
-
-			_dataProxy.ExecuteNonQuery(UpdateIsDeletedStoredProcedure, parameters);
-
-			// TODO this should come back from ExecuteNonQuery (either true, if record actually was updated).
-			// for example wasDeleted => stillDeleted is false
-			return true;
-		}
+		}*/
 
 		// TODO do not attemp to call.
-		public ITask CreateTask(int userId, int taskId, string content)
+		public ITask CreateTask(int userId, int listId, string content)
 		{
 			if (string.IsNullOrEmpty(content))
 				throw new ArgumentNullException(nameof(content));
@@ -104,7 +82,7 @@ namespace TaskHistory.Impl.Tasks
 			var parameters = new List<ISqlDataParameter>();
 
 			parameters.Add(_dataProxy.CreateParameter("pContent", content));
-			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
+			parameters.Add(_dataProxy.CreateParameter("pTaskId", listId));
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 
 			var returnVal = _dataProxy

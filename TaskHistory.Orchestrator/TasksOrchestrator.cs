@@ -14,14 +14,6 @@ namespace TaskHistory.Orchestrator.Tasks
 		readonly ITaskViewRepo _taskViewRepo;
 		readonly ObjectMapperTasks _taskObjectMapper;
 
-		public IEnumerable<ITask> OrchestratorGetTasks_OLD(IUser user)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-			
-			return _taskViewRepo.ReadTasksForUser(user);
-		}
-
 		public IEnumerable<TaskGridViewModel> OrchestrateGetTasks(IUser user)
 		{
 			if (user == null)
@@ -38,23 +30,15 @@ namespace TaskHistory.Orchestrator.Tasks
 			return tasksVM;
 		}
 
-		public ITask OrchestratorCreateTask_OLD(IUser user, string content)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-
-			return _taskRepo.CreateTask(content, user.UserId);
-		}
-
-		public TaskGridViewModel OrchestrateCreateTask(IUser user, string content)
+		public TaskGridViewModel OrchestrateCreateTask(IUser user, int listId, string content)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
 			if (string.IsNullOrEmpty(content))
 				throw new ArgumentNullException(nameof(content));
-
-			ITask task = _taskRepo.CreateTask(content, user.UserId);
+			
+			ITask task = _taskRepo.CreateTask(user.UserId, listId, content);
 			if (task == null)
 				throw new NullReferenceException("Null returned from task repo");
 
@@ -78,8 +62,8 @@ namespace TaskHistory.Orchestrator.Tasks
 			TaskUpdatingParameters updateParams = _taskObjectMapper.Map(taskEditViewModel);
 			if (updateParams == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
-
-			ITask updatedTask = _taskRepo.UpdateTask(updateParams, taskId, user.UserId);
+			
+			ITask updatedTask = _taskRepo.UpdateTask(user.UserId, taskId, updateParams);
 			if (updatedTask == null)
 				throw new NullReferenceException("null returned from TaskRepo");
 
@@ -88,26 +72,6 @@ namespace TaskHistory.Orchestrator.Tasks
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
 			return retVal;
-		}
-
-		public bool OrchestratorDeleteTask(IUser user, int taskId)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-
-			_taskRepo.DeleteTask_OLD(taskId, user.UserId);
-
-			return true;
-		}
-
-		public bool OrchestrateSetTaskIsDeleted(IUser user, int taskId, bool status)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-			
-			_taskRepo.UpdateIsDeleted(taskId, user.UserId, status);
-
-			return true;
 		}
 
 		public TasksOrchestrator(ITaskRepo taskRepo, ITaskViewRepo taskViewRepo, ObjectMapperTasks taskPresenter)
