@@ -15,11 +15,11 @@ namespace TaskHistory.Api.Sql
 		/// <param name="storedProcedureName">Stored procedure name.</param>
 		/// <param name="parameter">Parameter.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory,
+		T ExecuteReader<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			ISqlDataParameter parameter);
 
-		T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory, 
+		T ExecuteReader<T> (IFromDataReaderFactory<T> factory, 
 			string storedProcedureName, 
 			IEnumerable<ISqlDataParameter> parameters);
 

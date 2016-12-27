@@ -19,7 +19,7 @@ namespace TaskHistory.Impl.Sql
 
 		const string NullFromExecuteReaderForTypeCollection = "Null returned from ExceuteReaderForTypeCollection";
 
-		public T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory,
+		public T ExecuteReader<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			ISqlDataParameter parameter)
 		{
@@ -39,7 +39,7 @@ namespace TaskHistory.Impl.Sql
 			return collection.FirstOrDefault ();
 		}
 
-		public T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory, 
+		public T ExecuteReader<T> (IFromDataReaderFactory<T> factory, 
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
