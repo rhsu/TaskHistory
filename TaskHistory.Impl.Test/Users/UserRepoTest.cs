@@ -20,7 +20,7 @@ namespace TaskHistory.Impl.Test
 		[Test]
 		public void test_register_user()
 		{
-			// TODO: make username a GUID of length 32?
+			// TODO: make username a GUID of length 32 so test won't flap when ran multiple times?
 			var userParams = new UserRegistrationParameters("username",
 															"password",
 															"first",
