@@ -21,8 +21,7 @@
 		$scope.pageFns = {};
 
 		$scope.pageFns.logout = function () {
-			console.log("this was called");
-
+		
 			UserLogoutService.logout().then(function (isSuccessful) {
 				if (isSuccessful) {
 					$location.path('/');
@@ -31,6 +30,7 @@
 			}, function (reason) {
 				//TODO placeholder for error handling
 			});	
+
 		}
 	});
 })();
