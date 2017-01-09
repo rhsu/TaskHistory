@@ -36,6 +36,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Terminal\TerminalInterpreterHelperTest.cs" />
+    <Compile Include="Users\UserRepoTest.cs" />
+    <Compile Include="AppDataProxyFactory\ApplicationDataProxyFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -54,5 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Terminal\" />
+    <Folder Include="Users\" />
+    <Folder Include="AppDataProxyFactory\" />
   </ItemGroup>
 </Project>
