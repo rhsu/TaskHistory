@@ -137,6 +137,7 @@
     <Content Include="Scripts\Services\task-service.js" />
     <Content Include="Scripts\Controllers\tasks-controller.js" />
     <Content Include="Scripts\Services\task-table-view-service.js" />
+    <Content Include="Scripts\Services\user-logout-service.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">

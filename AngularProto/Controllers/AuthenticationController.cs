@@ -28,6 +28,13 @@ namespace AngularProto.Controllers
 			return Json(isSuccessful);
 		}
 
+		[HttpPost]
+		public JsonResult Logout()
+		{
+			FormsAuthentication.SignOut();
+			return Json(true);
+		}
+
 		public AuthenticationController(AuthenticationOrchestrator homeOrchestrator)
 		{
 			_authenticationOrchestrator = homeOrchestrator;

@@ -44,10 +44,13 @@
     <Compile Include="History\HistoryItemTest.cs" />
     <Compile Include="History\HistoryRepoTest.cs" />
     <Compile Include="Terminal\TerminalInterpreterHelperTest.cs" />
+    <Compile Include="Users\UserRepoTest.cs" />
+    <Compile Include="AppDataProxyFactory\ApplicationDataProxyFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
@@ -64,5 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Terminal\" />
+    <Folder Include="Users\" />
+    <Folder Include="AppDataProxyFactory\" />
   </ItemGroup>
 </Project>

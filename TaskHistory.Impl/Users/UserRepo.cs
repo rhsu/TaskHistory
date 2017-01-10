@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using TaskHistory.Api.Sql;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.Sql;
-using TaskHistory.Api.Sql;
-using System.Collections.Generic;
 
 namespace TaskHistory.Impl.Users
 {
@@ -92,4 +92,3 @@ namespace TaskHistory.Impl.Users
 		}
 	}
 }
-
