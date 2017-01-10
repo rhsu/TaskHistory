@@ -21,47 +21,23 @@ namespace TaskHistory.Impl.Test.Users
 		[Test]
 		public void RegisterUser_Works()
 		{
-			var time = DateTime.UtcNow.ToString("yyyyMMddHHmmssffff");
-
-			var username = $"u{time}";
-			var password = "password";
-			var firstName = "first";
-			var lastName = "last";
-			var email = "email@email.com";
-
-			var userParams = new UserRegistrationParameters(username, 
-			                                                password, 
-			                                                firstName, 
-			                                                lastName, 
-			                                                email);
+			var userParams = GetUserRegistrationParams();
 
 			IUser newUser = _userRepo.RegisterUser(userParams);
 
 			Assert.NotNull(newUser);
-			Assert.AreEqual(newUser.Username, username);
+			Assert.AreEqual(newUser.Username, userParams.Username);
 			// TODO: Once I can execute select queries against the database, 
 			//       then, do the below assert
 			// Assert.AreEqual(newUser.Password, password);
-			Assert.AreEqual(newUser.FirstName, firstName);
-			Assert.AreEqual(newUser.LastName, lastName);
-			Assert.AreEqual(newUser.Email, email);
+			Assert.AreEqual(newUser.FirstName, userParams.FirstName);
+			Assert.AreEqual(newUser.LastName, userParams.LastName);
+			Assert.AreEqual(newUser.Email, userParams.Email);
 		}
 
 		public void RegisterUser_Fails()
 		{
-			var time = DateTime.UtcNow.ToString("yyyyMMddHHmmssffff");
-
-			var username = $"u{time}";
-			var password = "password";
-			var firstName = "first";
-			var lastName = "last";
-			var email = "email@email.com";
-
-			var userParams = new UserRegistrationParameters(username,
-															password,
-															firstName,
-															lastName,
-															email);
+			var userParams = GetUserRegistrationParams();
 
 			_userRepo.RegisterUser(userParams);
 
@@ -71,22 +47,11 @@ namespace TaskHistory.Impl.Test.Users
 
 		public void ValidateUsernameAndPassword_Works()
 		{
-			var time = DateTime.UtcNow.ToString("yyyyMMddHHmmssffff");
-
-			var username = $"u{time}";
-			var password = "password";
-			var firstName = "first";
-			var lastName = "last";
-			var email = "email@email.com";
-
-			var userParams = new UserRegistrationParameters(username,
-															password,
-															firstName,
-															lastName,
-															email);
+			var userParams = GetUserRegistrationParams();
 
 			IUser registeredUser = _userRepo.RegisterUser(userParams);
-			IUser validatedUser = _userRepo.ValidateUsernameAndPassword(username, password);
+			IUser validatedUser = _userRepo.ValidateUsernameAndPassword(userParams.Username, 
+			                                                            userParams.Password);
 
 			Assert.NotNull(validatedUser);
 			Assert.AreEqual(registeredUser.UserId, validatedUser.UserId);
@@ -99,6 +64,23 @@ namespace TaskHistory.Impl.Test.Users
 		{
 			IUser registeredUser = _userRepo.ValidateUsernameAndPassword("nonsense", "nonsense");
 			Assert.Null(registeredUser);
+		}
+
+		static UserRegistrationParameters GetUserRegistrationParams()
+		{
+			var time = DateTime.UtcNow.ToString("yyyyMMddHHmmssffff");
+
+			var username = $"u{time}";
+			var password = "password";
+			var firstName = "first";
+			var lastName = "last";
+			var email = "email@email.com";
+
+			return new UserRegistrationParameters(username,
+			                                      password,
+			                                      firstName,
+			                                      lastName,
+			                                      email);
 		}
 	}
 }
