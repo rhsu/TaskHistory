@@ -3,7 +3,7 @@ using NUnit.Framework;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.Users;
 
-namespace TaskHistory.Impl.Test
+namespace TaskHistory.Impl.Test.Users
 {
 	[TestFixture]
 	public class UserRepoTest
