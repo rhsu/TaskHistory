@@ -23,7 +23,7 @@ namespace TaskHistory.Impl.Sql
 			if (parameter == null)
 				throw new ArgumentNullException(nameof(parameter));
 
-			return _dataReaderProvider.ExecuteReaderForSingleType(factory,
+			return _dataReaderProvider.ExecuteReader(factory,
 																  storedProcedureName,
 																  parameter);
 		}
@@ -41,7 +41,7 @@ namespace TaskHistory.Impl.Sql
 			if (parameters == null)
 				throw new ArgumentNullException(nameof(parameters));
 
-			return _dataReaderProvider.ExecuteReaderForSingleType(factory,
+			return _dataReaderProvider.ExecuteReader(factory,
 																  storedProcedureName,
 																  parameters);
 		}

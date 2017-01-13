@@ -140,6 +140,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Scripts\Controllers\register-controller.js" />
     <Content Include="Scripts\Services\user-register-service.js" />
+    <Content Include="Scripts\Services\user-logout-service.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
