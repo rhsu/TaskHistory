@@ -10,6 +10,7 @@ namespace TaskHistory.Orchestrator.Home
 		readonly IUserRepo _userRepo;
 		readonly ObjectMapperUsers _userObjectMapper;
 
+		// TODO This has been moved. Do not call this anymore
 		public UserRegistrationStatusViewModel OrchestrateRegisterUser(UserRegistrationParametersViewModel vmUserRegister)
 		{
 			if (vmUserRegister == null)
