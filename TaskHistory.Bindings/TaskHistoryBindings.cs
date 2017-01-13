@@ -37,7 +37,7 @@ namespace TaskHistory.Bindings
 		public void DoAllBindings(IKernel kernel)
 		{
 			if (kernel == null)
-				throw new ArgumentNullException ("kernel");
+				throw new ArgumentNullException (nameof(kernel));
 
 			foreach (var module in _allModules) 
 			{
