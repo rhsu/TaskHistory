@@ -5,16 +5,13 @@ using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
+	// TODO not sure I like this anymore
 	public abstract class BaseDataProvider
 	{
-		public BaseDataProvider ()
-		{
-		}
-
 		protected static List<MySqlParameter> CreateMySqlParametersFromSqlDataParams(IEnumerable<ISqlDataParameter> parameters)
 		{
 			if (parameters == null)
-				throw new ArgumentNullException ("parameters");
+				throw new ArgumentNullException (nameof(parameters));
 
 			var returnVal = new List<MySqlParameter> ();
 
