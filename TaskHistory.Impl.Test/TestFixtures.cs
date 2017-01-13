@@ -8,9 +8,30 @@ namespace TaskHistory.Impl.Test
 	{
 		readonly IUserRepo _userRepo;
 
-		public IUser CreateUser1()
+		IUser _user;
+
+		public IUser User
 		{
-			return _userRepo.RegisterUser(null);
+			get { return _user; }
+		}
+
+		void CreateUser()
+		{
+			var time = DateTime.UtcNow.ToString("yyyyMMddHHmmssffff");
+
+			var username = $"u{time}";
+			var password = "password";
+			var firstName = "first";
+			var lastName = "last";
+			var email = "email@email.com";
+
+			var userParms = new UserRegistrationParameters(username, 
+			                                               password,
+			                                               firstName,
+			                                               lastName,
+			                                               email);
+
+			_user = _userRepo.RegisterUser(userParms);
 		}
 
 		public TestFixtures()
@@ -19,6 +40,8 @@ namespace TaskHistory.Impl.Test
 			var appDataProxyFactory = new ApplicationDataProxyFactory();
 
 			_userRepo = new UserRepo(userFactory, appDataProxyFactory.Build());
+
+			CreateUser();
 		}
 	}
 }
