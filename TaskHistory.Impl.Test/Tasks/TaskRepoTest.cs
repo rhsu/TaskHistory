@@ -11,7 +11,7 @@ namespace TaskHistory.Impl.Test
 	{
 		TestFixtures _testFixtures;
 		ITaskRepo _taskRepo;
-		IUser _user1;
+		IUser _user;
 
 		public Tasks()
 		{
@@ -21,14 +21,14 @@ namespace TaskHistory.Impl.Test
 			_testFixtures = new TestFixtures();
 			_taskRepo = new TaskRepo(taskFactory, appDataProxyFactory.Build());
 
-			_user1 = _testFixtures.User;
+			_user = _testFixtures.User;
 		}
 
 		[Test]
 		public void CreateTask()
 		{
 			string taskContent = "Content of my task";
-			int userId = _user1.UserId;
+			int userId = _user.UserId;
 
 			var newtask = _taskRepo.CreateTask(taskContent, userId);
 
