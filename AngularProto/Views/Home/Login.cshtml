@@ -1,4 +1,7 @@
 ﻿<div class='container' style='padding-top: 10px' ng-controller='LoginController'>
+	<div ng-show='pageState.isRegisterSuccessful'>
+		Your username has been successfully registered!
+	</div>
 	<form name='loginForm'>
 		<div class='form-group'>
 			<label>Username</label>
@@ -21,4 +24,6 @@
 			<button class='btn btn-default' ng-click='fns.login()'>Login</button>
 		</div>
 	</form>
+
+	<a href='#/Register/'>Register</a>
 </div>

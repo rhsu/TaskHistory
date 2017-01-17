@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using NUnit.Framework;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
