@@ -10,6 +10,7 @@ namespace TaskHistory.Impl.TaskLists
 	{
 		const string CreateStoredProcedure = "TaskList_Create";
 		const string ReadStoredProcedure = "TaskList_Read";
+		const string UpdatedStoredProceudre = "TaskList_Update";
 
 		TaskListFactory _factory;
 		ApplicationDataProxy _appDataProxy;
@@ -50,9 +51,25 @@ namespace TaskHistory.Impl.TaskLists
 			return tasksLists;
 		}
 
-		public ITaskList Update(int userId, string name)
+		public ITaskList Update(int userId, int listId, string name)
 		{
-			throw new NotImplementedException();
+			if (string.IsNullOrEmpty(name))
+				throw new ArgumentNullException(nameof(name));
+
+			var parameters = new List<ISqlDataParameter>();
+
+			parameters.Add(_appDataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_appDataProxy.CreateParameter("pListId", userId));			
+			parameters.Add(_appDataProxy.CreateParameter("pName", userId));
+
+			var retVal = _appDataProxy.Execute(_factory,
+								  UpdatedStoredProceudre,
+								  parameters);
+
+			if (retVal == null)
+				throw new NullReferenceException("Null returned from appDataProxy");
+
+			return retVal;
 		}
 
 		public TaskListRepo(TaskListFactory taskListFactory, ApplicationDataProxy appDataProxy)

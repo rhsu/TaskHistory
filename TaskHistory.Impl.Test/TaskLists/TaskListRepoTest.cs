@@ -4,7 +4,6 @@ using NUnit.Framework;
 using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.TaskLists;
-using TaskHistory.Impl.Users;
 
 namespace TaskHistory.Impl.Test
 {
@@ -62,7 +61,13 @@ namespace TaskHistory.Impl.Test
 
 		public void Update()
 		{
-			
+			var taskList = _testFixtures.TaskList;
+			var newName = "Some New Name 123456";
+
+			var updated = _taskListRepo.Update(_testFixtures.User.UserId, taskList.Id, "Some New Name");
+
+			Assert.AreSame(taskList.Id, updated.Id);
+			Assert.AreEqual(newName, updated.Name);
 		}
 	}
 }

@@ -23,6 +23,16 @@ namespace TaskHistory.Impl.Test
 			get { return _user; }
 		}
 
+		public ITaskList TaskList
+		{
+			get { return _taskList; }
+		}
+
+		public ITask Task
+		{
+			get { return _task; }
+		}
+
 		public TestFixtures()
 		{
 			var userFactory = new UserFactory();
@@ -38,6 +48,7 @@ namespace TaskHistory.Impl.Test
 
 			CreateUser();
 			CreateTask();
+			CreateTaskList();
 		}
 
 		void CreateUser()
@@ -66,7 +77,7 @@ namespace TaskHistory.Impl.Test
 
 		void CreateTaskList()
 		{
-			_taskListRepo.Create(_user.UserId, "My First Task List");
+			_taskList = _taskListRepo.Create(_user.UserId, "My First Task List");
 		}
 	}
 }

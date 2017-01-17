@@ -8,7 +8,7 @@ namespace TaskHistory.Api.TaskLists
 
 		ITaskList Create(int userId, string name);
 
-		ITaskList Update(int userId, string name);
+		ITaskList Update(int userId, int listId, string name);
 
 		bool AssociateTasksToList(int userId, int listId, IEnumerable<int> taskIds);
 	}

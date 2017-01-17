@@ -74,17 +74,16 @@ namespace TaskHistory.Impl.Test
 		[Test]
 		public void UpdateTasksContent()
 		{
-			string oldText = "oldText";
-			string newText = "newText";
-			//1. create a specific task with Content == "test content"
-			var task =_taskRepo.CreateTask(oldText, _user.UserId);
+			string newText = "New Text 123345";
 
-			//2. perform an update
 			var updateParams = new TaskUpdatingParameters(newText, false, false);
-			var updated = _taskRepo.UpdateTask(updateParams, _user.UserId, task.TaskId);
+			var taskId = _testFixtures.Task.TaskId;
+			var userId = _testFixtures.User.UserId;
 
-			//3. check that the content is updated
+			var updated = _taskRepo.UpdateTask(updateParams, userId, taskId);
+
 			Assert.AreEqual(newText, updated.Content);
+			Assert.AreEqual(taskId, updated.TaskId);
 		}
 
 		[Test]
