@@ -1,6 +1,8 @@
-﻿namespace TaskHistory.Impl
+﻿using TaskHistory.Api.TaskLists;
+
+namespace TaskHistory.Impl.TaskLists
 {
-	public class TaskList
+	public class TaskList : ITaskList
 	{
 		public int Id { get; }
 		public string Name { get; }

@@ -9,7 +9,13 @@ namespace TaskHistory.Impl.TaskLists
 	{
 		public override ITaskList Build(ISqlDataReader reader)
 		{
-			throw new NotImplementedException();
+			if (reader == null)
+				throw new ArgumentNullException(nameof(reader));
+
+			int id = reader.GetInt("Id");
+			string name = reader.GetString("Name");
+
+			return new TaskList(id, name);
 		}
 	}
 }
