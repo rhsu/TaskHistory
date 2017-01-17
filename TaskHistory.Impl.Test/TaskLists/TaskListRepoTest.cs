@@ -10,12 +10,14 @@ namespace TaskHistory.Impl.Test
 	public class TaskListRepoTest
 	{
 		ITaskListRepo _taskListRepo;
+		TestFixtures _testFixtures;
 
 		public TaskListRepoTest()
 		{
 			var factory = new TaskListFactory();
 			var appDataProxy = new ApplicationDataProxyFactory().Build();
 
+			_testFixtures = new TestFixtures();
 			_taskListRepo = new TaskListRepo(factory, appDataProxy);
 		}
 
@@ -23,24 +25,25 @@ namespace TaskHistory.Impl.Test
 		{
 		}*/
 
+		[Test]
 		public void Create()
 		{
-			var userFactory = new UserFactory();
-			var appDataProxy = new ApplicationDataProxyFactory().Build();
+			IUser user = _testFixtures.User;
+			string listName = "My List";
 
-			IUserRepo _userRepo = new UserRepo(userFactory, appDataProxy);
+			ITaskList taskList = _taskListRepo.Create(user.UserId, listName);
 
-			// IUser user = _userRepo.RegisterUser
+			Assert.AreEqual(listName, taskList.Name);
 		}
 
 		/*public void Read()
 		{
 			
-		}
+		}*/
 
 		public void Update()
 		{
 			
-		}*/
+		}
 	}
 }
