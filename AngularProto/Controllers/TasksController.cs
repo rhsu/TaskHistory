@@ -22,9 +22,9 @@ namespace AngularProto.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult CreateTask(string content)
+		public JsonResult CreateTask(string content, int listId)
 		{
-			return Json(_taskOrchestrator.OrchestrateCreateTask(_currentUser, content));
+			return Json(_taskOrchestrator.OrchestrateCreateTask(_currentUser, listId, content));
 		}
 
 		[HttpPost]
@@ -33,18 +33,6 @@ namespace AngularProto.Controllers
 			return Json(_taskOrchestrator.OrchestrateEditTask(_currentUser,
 			                                                 taskId,
 			                                                  taskEditViewModel));
-		}
-
-		[HttpPost]
-		public JsonResult DeleteTask(int taskId)
-		{
-			return Json(_taskOrchestrator.OrchestratorDeleteTask(_currentUser, taskId));
-		}
-
-		[HttpPost]
-		public JsonResult SetTaskIsDeleted(int taskId, bool status)
-		{
-			return Json(_taskOrchestrator.OrchestrateSetTaskIsDeleted(_currentUser, taskId, status));
 		}
 
 		public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)

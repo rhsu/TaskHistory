@@ -57,6 +57,7 @@
     <Compile Include="Terminal\ITerminalProxyRepo.cs" />
     <Compile Include="Terminal\ITerminalObject.cs" />
     <Compile Include="Terminal\ITerminalObjectMapper.cs" />
+    <Compile Include="Tasks\ITaskListRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -71,5 +72,6 @@
     <Folder Include="Tasks\DTOs\" />
     <Folder Include="Terminal\" />
     <Folder Include="Terminal\enumerations\" />
+    <Folder Include="TasksLists\" />
   </ItemGroup>
 </Project>

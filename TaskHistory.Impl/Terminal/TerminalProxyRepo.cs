@@ -36,9 +36,10 @@ namespace TaskHistory.Impl.Terminal
 					_registeredObjProxy.LabelRepo.CreateNewLabel("some content from command response's option");
 					break;
 				case TerminalRegisteredObject.Task:
-					_registeredObjProxy.TaskRepo.CreateTask("some content from command response's object",
-					                                       user.UserId);
-					break;
+					//_registeredObjProxy.TaskRepo.CreateTask("some content from command response's object",
+					//                                       user.UserId);
+					// TODO: this is all messed up
+					throw new NotSupportedException("Not supported anymore");
 			}
 
 			return 1;
@@ -66,11 +67,10 @@ namespace TaskHistory.Impl.Terminal
 
 					break;
 				case TerminalRegisteredObject.Task:
-					var tasks = _registeredObjProxy.TaskRepo.ReadTasks(user.UserId);
+					/*var tasks = _registeredObjProxy.TaskRepo.ReadTasks(user.UserId);
 					var taskTerminalObjects = TerminalObjectMapper.ConvertTasks(tasks);
-					returnVal.AddRange(taskTerminalObjects);
-
-					break;
+					returnVal.AddRange(taskTerminalObjects);*/
+					throw new NotSupportedException("This is not supported anymore");
 			}
 
 			return returnVal;
@@ -79,7 +79,7 @@ namespace TaskHistory.Impl.Terminal
 		public int PerformUpdateOperation(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
-				throw new ArgumentNullException("user");
+				throw new ArgumentNullException(nameof(user));
 
 			if (commandResponse.CommandAction != TerminalCommandAction.Update)
 				throw new InvalidOperationException($"Command action for this operation must be list instead of {commandResponse.CommandAction}");
@@ -93,8 +93,8 @@ namespace TaskHistory.Impl.Terminal
 				case TerminalRegisteredObject.Task:
 					// need to create task updating parameters
 					// TODO: Where does this come from?
-					_registeredObjProxy.TaskRepo.UpdateTask(null, user.UserId, -1);
-					break;
+					//_registeredObjProxy.TaskRepo.UpdateTask(null, user.UserId, -1);
+					throw new NotSupportedException("This is not supporeted anymore");
 			}
 
 			return -1;
@@ -103,7 +103,7 @@ namespace TaskHistory.Impl.Terminal
 		public int PerformDeleteOperation(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
-				throw new ArgumentNullException("user");
+				throw new ArgumentNullException(nameof(user));
 
 			if (commandResponse.CommandAction != TerminalCommandAction.Delete)
 				throw new InvalidOperationException($"Command action for this operation must be list instead of {commandResponse.CommandAction}");
