@@ -28,7 +28,7 @@ namespace TaskHistory.Impl.Sql
 																  parameter);
 		}
 
-		public T ExecuteReaderForSingleType<T>(IFromDataReaderFactory<T> factory,
+		public T Execute<T>(IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
@@ -42,8 +42,8 @@ namespace TaskHistory.Impl.Sql
 				throw new ArgumentNullException(nameof(parameters));
 
 			return _dataReaderProvider.ExecuteReader(factory,
-																  storedProcedureName,
-																  parameters);
+													 storedProcedureName,
+													 parameters);
 		}
 
 		public IEnumerable<T> ExecuteReaderForTypeCollection<T>(IFromDataReaderFactory<T> factory,
