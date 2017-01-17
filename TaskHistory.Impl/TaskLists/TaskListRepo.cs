@@ -9,6 +9,7 @@ namespace TaskHistory.Impl.TaskLists
 	public class TaskListRepo : ITaskListRepo
 	{
 		const string CreateStoredProcedure = "TaskList_Create";
+		const string ReadStoredProcedure = "TaskList_Read";
 
 		TaskListFactory _factory;
 		ApplicationDataProxy _appDataProxy;
@@ -37,7 +38,16 @@ namespace TaskHistory.Impl.TaskLists
 
 		public IEnumerable<ITaskList> Read(int userId)
 		{
-			throw new NotImplementedException();
+			var pUserId = _appDataProxy.CreateParameter("pUserId", userId);
+
+			var tasksLists = _appDataProxy.ExecuteReaderForTypeCollection(_factory,
+																		  ReadStoredProcedure,
+																		  pUserId);
+
+			if (tasksLists == null)
+				throw new NullReferenceException("null returned from appDataProxy");
+
+			return tasksLists;
 		}
 
 		public ITaskList Update(int userId, string name)
