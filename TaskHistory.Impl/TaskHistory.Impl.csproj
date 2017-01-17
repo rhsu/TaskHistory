@@ -75,6 +75,8 @@
     <Compile Include="Terminal\TerminalInterpreterHelper.cs" />
     <Compile Include="Terminal\IRegisteredObjectRepoProxy.cs" />
     <Compile Include="Terminal\RegisteredObjectRepoProxy.cs" />
+    <Compile Include="TaskLists\TaskList.cs" />
+    <Compile Include="TaskLists\TaskListRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -88,6 +90,7 @@
     <Folder Include="Sql\Factories\" />
     <Folder Include="Sql\Proxies\" />
     <Folder Include="Terminal\" />
+    <Folder Include="TaskLists\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
