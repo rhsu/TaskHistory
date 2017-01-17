@@ -39,6 +39,8 @@
     <Compile Include="Users\UserRepoTest.cs" />
     <Compile Include="AppDataProxyFactory\ApplicationDataProxyFactory.cs" />
     <Compile Include="TaskLists\TaskListRepoTest.cs" />
+    <Compile Include="TestFixtures.cs" />
+    <Compile Include="Tasks\TaskRepoTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -60,5 +62,6 @@
     <Folder Include="Users\" />
     <Folder Include="AppDataProxyFactory\" />
     <Folder Include="TaskLists\" />
+    <Folder Include="Tasks\" />
   </ItemGroup>
 </Project>
