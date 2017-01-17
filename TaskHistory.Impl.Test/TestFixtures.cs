@@ -18,6 +18,8 @@ namespace TaskHistory.Impl.Test
 		ITask _task;
 		ITaskList _taskList;
 
+		IUser _user;
+
 		public IUser User
 		{
 			get { return _user; }
@@ -50,11 +52,11 @@ namespace TaskHistory.Impl.Test
 			var lastName = "last";
 			var email = "email@email.com";
 
-			var userParms = new UserRegistrationParameters(username,
-														   password,
-														   firstName,
-														   lastName,
-														   email);
+			var userParms = new UserRegistrationParameters(username, 
+			                                               password,
+			                                               firstName,
+			                                               lastName,
+			                                               email);
 
 			_user = _userRepo.RegisterUser(userParms);
 		}
@@ -67,6 +69,16 @@ namespace TaskHistory.Impl.Test
 		void CreateTaskList()
 		{
 			_taskListRepo.Create(_user.UserId, "My First Task List");
+		}
+
+		public TestFixtures()
+		{
+			var userFactory = new UserFactory();
+			var appDataProxyFactory = new ApplicationDataProxyFactory();
+
+			_userRepo = new UserRepo(userFactory, appDataProxyFactory.Build());
+
+			CreateUser();
 		}
 	}
 }
