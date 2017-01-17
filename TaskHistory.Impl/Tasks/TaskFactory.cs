@@ -1,19 +1,12 @@
-﻿using TaskHistory.Api.Tasks;
-using TaskHistory.Impl.Tasks;
-using MySql.Data.MySqlClient;
-using System;
-using TaskHistory.Impl.Sql;
+﻿using System;
 using TaskHistory.Api.Sql;
+using TaskHistory.Api.Tasks;
+using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Tasks
 {
 	public class TaskFactory : BaseFromDataReaderFactory<ITask>
 	{
-		public TaskFactory ()
-			: base ()
-		{
-		}
-
 		public override ITask CreateTypeFromDataReader(ISqlDataReader reader)
 		{
 			if (reader == null)
