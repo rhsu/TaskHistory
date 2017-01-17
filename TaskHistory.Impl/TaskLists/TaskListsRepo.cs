@@ -4,19 +4,16 @@ using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Lists
 {
-	public class ListRepo : IListRepo
+	public class TaskListsRepo : ITaskListsRepo
 	{
-		public IEnumerable<IList> ReadLists(int userId)
+		public IEnumerable<ITaskLists> ReadLists(int userId)
 		{
 			return null;
 		}
 
-		public IList UpdateList(int userId, int listId)
-		{
-			return null;
-		}
 
-		public ListRepo(ListFactory listFactory,
+
+		public TaskListsRepo(ListFactory listFactory,
 		               ApplicationDataProxy appDataProxy)
 		{
 		}
