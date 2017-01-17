@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using NUnit.Framework;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
@@ -72,13 +72,13 @@ namespace TaskHistory.Impl.Test
 			string oldText = "oldText";
 			string newText = "newText";
 			//1. create a specific task with Content == "test content"
-			var newTask =_taskRepo.CreateTask(oldText, _user.UserId);
+			var task = _taskRepo.CreateTask(oldText, _user.UserId);
 			//2. perform an update
 			var updateParams = new TaskUpdatingParameters(newText, false, false);
-			_taskRepo.UpdateTask(updateParams, _user.UserId, newTask.TaskId);
+			var updated = _taskRepo.UpdateTask(updateParams, _user.UserId, task.TaskId);
 
 			//3. check that the content is updated
-			// Assert.Equals(oldText, newTask.Content);
+			Assert.AreEqual(newText, updated.Content);
 		}
 
 		[Test]
