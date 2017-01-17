@@ -35,6 +35,7 @@
     <Compile Include="AuthenticationOrchestrator.cs" />
     <Compile Include="TasksOrchestrator.cs" />
     <Compile Include="TerminalOrchestrator.cs" />
+    <Compile Include="ActivationOrchestrator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
