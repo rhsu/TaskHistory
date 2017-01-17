@@ -9,19 +9,18 @@
 
 		$scope.pageFns = {};
 		$scope.pageFns.register = function () {
-			console.log($scope.formData);
 
 			UserRegisterService.promiseRegisterUser($scope.formData)
 			.then(function (response) {
 
 				if (response) {
-					//TODO: how does $location do query strings?
-					$location.path('/');
+					$location.path('/').search({isRegisterSuccessful: true});
 				} else {
 					$scope.pageState.invalidUsername = true;
 				}
 			}, function (reason) {
 			});
+
 		}
 	});
 })();
