@@ -12,7 +12,7 @@ namespace TaskHistory.Impl.Users
 		{
 		}
 
-		public override IUser CreateTypeFromDataReader(ISqlDataReader reader)
+		public override IUser Build(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");

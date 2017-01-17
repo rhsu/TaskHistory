@@ -7,7 +7,7 @@ namespace TaskHistory.Impl.TaskLists
 {
 	public class TaskListFactory : BaseFromDataReaderFactory<ITaskList>
 	{
-		public override ITaskList CreateTypeFromDataReader(ISqlDataReader reader)
+		public override ITaskList Build(ISqlDataReader reader)
 		{
 			throw new NotImplementedException();
 		}

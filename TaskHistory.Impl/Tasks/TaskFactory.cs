@@ -7,7 +7,7 @@ namespace TaskHistory.Impl.Tasks
 {
 	public class TaskFactory : BaseFromDataReaderFactory<ITask>
 	{
-		public override ITask CreateTypeFromDataReader(ISqlDataReader reader)
+		public override ITask Build(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException ("reader");

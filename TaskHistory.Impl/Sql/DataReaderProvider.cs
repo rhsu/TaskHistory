@@ -120,7 +120,7 @@ namespace TaskHistory.Impl.Sql
 
 				while (reader.Read ()) 
 				{
-					T currentItem = factory.CreateTypeFromDataReader (sqlReader);
+					T currentItem = factory.Build (sqlReader);
 					returnVal.Add (currentItem);
 				}
 				return returnVal;
