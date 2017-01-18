@@ -82,7 +82,8 @@ DROP TABLE IF EXISTS `TaskLists`;
 CREATE TABLE `TaskLists` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) NOT NULL,
-  `UserId` int(11) DEFAULT NULL,
+  `UserId` int(11) NOT NULL,
+  `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`Id`),
   KEY `fk_tasklists_user_idx` (`UserId`),
   CONSTRAINT `fk_tasklists_user` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -344,7 +345,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_Read`(
 BEGIN
 	SELECT * 
     FROM `TaskLists`
-    WHERE `UserId` = `pUserId`;
+    WHERE `UserId` = `pUserId`
+	AND `IsDeleted` = 0;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -604,4 +606,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-17 20:51:26
+-- Dump completed on 2017-01-17 21:24:55

@@ -67,7 +67,7 @@ namespace TaskHistory.Impl.Test
 
 			ITaskList updated = _taskListRepo.Update(_testFixtures.User.UserId, taskList.Id, newName);
 
-			// Assert.AreEqual(taskList.Id, updated.Id);
+			Assert.AreEqual(taskList.Id, updated.Id);
 			Assert.AreEqual(newName, updated.Name);
 		}
 	}
