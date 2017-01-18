@@ -32,7 +32,7 @@ namespace TaskHistory.Impl.Tasks
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 
 			var returnVal = _dataProxy
-				.ExecuteReaderForSingleType(_taskFactory, CreateStoredProcedure, parameters);
+				.Execute(_taskFactory, CreateStoredProcedure, parameters);
 			if (returnVal == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
@@ -43,7 +43,7 @@ namespace TaskHistory.Impl.Tasks
 		{
 			var parameter = _dataProxy.CreateParameter("pUserId", userId);
 
-			var returnVal = _dataProxy.ExecuteReaderForTypeCollection(_taskFactory, ReadStoredProcedure, parameter);
+			var returnVal = _dataProxy.ExecuteOnCollection(_taskFactory, ReadStoredProcedure, parameter);
 			if (returnVal == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
@@ -66,7 +66,7 @@ namespace TaskHistory.Impl.Tasks
 			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 
-			ITask task = _dataProxy.ExecuteReaderForSingleType(_taskFactory, UpdateStoredProcedure, parameters);
+			ITask task = _dataProxy.Execute(_taskFactory, UpdateStoredProcedure, parameters);
 			if (task == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 

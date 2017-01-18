@@ -82,7 +82,8 @@ DROP TABLE IF EXISTS `TaskLists`;
 CREATE TABLE `TaskLists` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) NOT NULL,
-  `UserId` int(11) DEFAULT NULL,
+  `UserId` int(11) NOT NULL,
+  `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`Id`),
   KEY `fk_tasklists_user_idx` (`UserId`),
   CONSTRAINT `fk_tasklists_user` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -293,7 +294,7 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `TaskList_Create` */;
+/*!50003 DROP PROCEDURE IF EXISTS `TaskLists_Create` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -303,7 +304,7 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskList_Create`(
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_Create`(
 	 IN `pName` VARCHAR(64)
     ,IN `pUserId` INT
 )
@@ -322,6 +323,61 @@ BEGIN
     SELECT * FROM `TaskLists`
     WHERE `Id` = last_insert_id();
     
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TaskLists_Read` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_Read`(
+	IN `pUserId` int
+)
+BEGIN
+	SELECT * 
+    FROM `TaskLists`
+    WHERE `UserId` = `pUserId`
+	AND `IsDeleted` = 0;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TaskLists_Update` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_Update`(
+	 IN `pUserId` int
+    ,IN `pListId` int
+    ,IN `pName` varchar(64)
+)
+BEGIN
+	UPDATE `TaskLists`
+    SET
+		`Name` = `pName`
+	WHERE
+		`UserId` = `pUserId`
+        AND `Id` = `pListId`;
+        
+	SELECT * FROM `TaskLists`
+    WHERE `Id` = `pListId`;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -550,4 +606,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-17 13:04:41
+-- Dump completed on 2017-01-17 21:24:55

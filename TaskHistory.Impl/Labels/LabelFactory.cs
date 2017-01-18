@@ -7,7 +7,7 @@ namespace TaskHistory.Impl.Labels
 {
 	public class LabelFactory : BaseFromDataReaderFactory<ILabel>
 	{
-		public override ILabel CreateTypeFromDataReader(ISqlDataReader reader)
+		public override ILabel Build(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException(nameof(reader));

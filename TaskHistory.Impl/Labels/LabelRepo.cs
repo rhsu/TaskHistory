@@ -31,7 +31,7 @@ namespace TaskHistory.Impl.Labels
 		{
 			var contentParameter = _dataProxy.CreateParameter("pContent", content);
 
-			var returnVal = _dataProxy.ExecuteReaderForSingleType(LabelFactory, CreateStoredProcedure, contentParameter);
+			var returnVal = _dataProxy.Execute(LabelFactory, CreateStoredProcedure, contentParameter);
 			if (returnVal == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
@@ -47,7 +47,7 @@ namespace TaskHistory.Impl.Labels
 			if (userIdParam == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
-			var returnVal = _dataProxy.ExecuteReaderForTypeCollection(LabelFactory, ReadStoredProcedure, userIdParam);
+			var returnVal = _dataProxy.ExecuteOnCollection(LabelFactory, ReadStoredProcedure, userIdParam);
 			if (returnVal == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 

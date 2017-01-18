@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using TaskHistory.Api.Tasks;
@@ -48,37 +49,41 @@ namespace TaskHistory.Impl.Test
 			//      The temporary solution is just to create a new TestFixture
 			//      and go from there.
 			var readTestFixture = new TestFixtures();
-
 			var user = readTestFixture.User;
 
+			var lookup = new Dictionary<int, string>();
+
 			for (var i = 0; i < 5; i++)
 			{
-				_taskRepo.CreateTask($"task{i}", user.UserId);
+				var taskContent = $"task{i}";
+				var newTask = _taskRepo.CreateTask(taskContent, user.UserId);
+				lookup.Add(newTask.TaskId, taskContent);
 			}
 
-			var tasks = _taskRepo.ReadTasks(user.UserId); //.ToList();
-
-			Assert.AreEqual(5, tasks.Count());
+			var tasks = _taskRepo.ReadTasks(user.UserId);
 
 			for (var i = 0; i < 5; i++)
 			{
-				Assert.True(tasks.Any(t => t.Content == $"task{i}"));
+				var taskContent = $"task{i}";
+				var foundTask = tasks.Where(t => t.Content == $"task{i}").First();
+
+				Assert.AreEqual(taskContent, lookup[foundTask.TaskId]);
 			}
 		}
 
 		[Test]
 		public void UpdateTasksContent()
 		{
-			string oldText = "oldText";
-			string newText = "newText";
-			//1. create a specific task with Content == "test content"
-			var task = _taskRepo.CreateTask(oldText, _user.UserId);
-			//2. perform an update
-			var updateParams = new TaskUpdatingParameters(newText, false, false);
-			var updated = _taskRepo.UpdateTask(updateParams, _user.UserId, task.TaskId);
+			string newText = "New Text 123345";
 
-			//3. check that the content is updated
+			var updateParams = new TaskUpdatingParameters(newText, false, false);
+			var taskId = _testFixtures.Task.TaskId;
+			var userId = _testFixtures.User.UserId;
+
+			var updated = _taskRepo.UpdateTask(updateParams, userId, taskId);
+
 			Assert.AreEqual(newText, updated.Content);
+			Assert.AreEqual(taskId, updated.TaskId);
 		}
 
 		[Test]

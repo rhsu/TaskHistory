@@ -30,7 +30,7 @@ namespace TaskHistory.Impl.ViewRepos
 
 			var parameter = _dataProxy.CreateParameter("pUserId", user.UserId);
 
-			var returnVal = _dataProxy.ExecuteReaderForTypeCollection (_taskFactory, ReadStoredProcedure, parameter);
+			var returnVal = _dataProxy.ExecuteOnCollection (_taskFactory, ReadStoredProcedure, parameter);
 			if (returnVal == null)
 				throw new NullReferenceException ("Null returned from dataProxy");
 

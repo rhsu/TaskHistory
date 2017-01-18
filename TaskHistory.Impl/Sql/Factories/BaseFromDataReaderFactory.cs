@@ -4,6 +4,6 @@ namespace TaskHistory.Impl.Sql
 {
 	public abstract class BaseFromDataReaderFactory<T> : IFromDataReaderFactory<T>
 	{
-		public abstract T CreateTypeFromDataReader(ISqlDataReader reader);
+		public abstract T Build(ISqlDataReader reader);
 	}
 }

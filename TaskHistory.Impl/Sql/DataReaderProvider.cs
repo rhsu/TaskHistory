@@ -52,7 +52,9 @@ namespace TaskHistory.Impl.Sql
 			if (parameters == null)
 				throw new ArgumentNullException (nameof(parameters));
 
-			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameters);
+			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, 
+			                                                                    storedProcedureName, 
+			                                                                    parameters);
 			if (collection == null)
 				throw new NullReferenceException (NullFromExecuteReaderForTypeCollection);
 
@@ -60,17 +62,17 @@ namespace TaskHistory.Impl.Sql
 		}
 
 		public IEnumerable<T> ExecuteReaderForTypeCollection<T> (IFromDataReaderFactory<T> factory,
-			string storedProcedureName,
-			ISqlDataParameter parameter)
+		                                                         string storedProcedureName,
+		                                                         ISqlDataParameter parameter)
 		{
 			if (factory == null)
-				throw new ArgumentNullException ("factory");
+				throw new ArgumentNullException (nameof(factory));
 
 			if ((storedProcedureName == null) || (storedProcedureName == string.Empty))
-				throw new ArgumentNullException ("storedProcedureName");
+				throw new ArgumentNullException (nameof(storedProcedureName));
 
 			if (parameter == null)
-				throw new ArgumentNullException ("parameter");
+				throw new ArgumentNullException (nameof(parameter));
 
 			var returnVal = ExecuteReaderForTypeCollection<T> (factory, 
 				storedProcedureName, 
@@ -87,13 +89,13 @@ namespace TaskHistory.Impl.Sql
 			IEnumerable<ISqlDataParameter> parameters)
 		{
 			if (factory == null)
-				throw new ArgumentNullException ("factory");
+				throw new ArgumentNullException (nameof(factory));
 
 			if ((storedProcedureName == null) || (storedProcedureName == string.Empty))
-				throw new ArgumentNullException ("storedProcedureName");
+				throw new ArgumentNullException (nameof(storedProcedureName));
 
 			if (parameters == null)
-				throw new ArgumentNullException ("parameters");
+				throw new ArgumentNullException (nameof(parameters));
 
 			using (var connection = new MySqlConnection (_connectionString))
 			using (var command = new MySqlCommand (storedProcedureName, connection)) 
@@ -120,7 +122,7 @@ namespace TaskHistory.Impl.Sql
 
 				while (reader.Read ()) 
 				{
-					T currentItem = factory.CreateTypeFromDataReader (sqlReader);
+					T currentItem = factory.Build (sqlReader);
 					returnVal.Add (currentItem);
 				}
 				return returnVal;
