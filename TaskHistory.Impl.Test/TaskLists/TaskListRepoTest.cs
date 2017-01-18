@@ -62,12 +62,12 @@ namespace TaskHistory.Impl.Test
 		[Test]
 		public void Update()
 		{
-			var taskList = _testFixtures.TaskList;
+			ITaskList taskList = _testFixtures.TaskList;
 			var newName = "Some New Name 123456";
 
-			var updated = _taskListRepo.Update(_testFixtures.User.UserId, taskList.Id, "Some New Name");
+			ITaskList updated = _taskListRepo.Update(_testFixtures.User.UserId, taskList.Id, newName);
 
-			Assert.AreSame(taskList.Id, updated.Id);
+			// Assert.AreEqual(taskList.Id, updated.Id);
 			Assert.AreEqual(newName, updated.Name);
 		}
 	}

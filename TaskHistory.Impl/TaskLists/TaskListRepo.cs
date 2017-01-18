@@ -59,8 +59,8 @@ namespace TaskHistory.Impl.TaskLists
 			var parameters = new List<ISqlDataParameter>();
 
 			parameters.Add(_appDataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_appDataProxy.CreateParameter("pListId", userId));			
-			parameters.Add(_appDataProxy.CreateParameter("pName", userId));
+			parameters.Add(_appDataProxy.CreateParameter("pListId", listId));			
+			parameters.Add(_appDataProxy.CreateParameter("pName", name));
 
 			var retVal = _appDataProxy.Execute(_factory,
 								  UpdatedStoredProceudre,

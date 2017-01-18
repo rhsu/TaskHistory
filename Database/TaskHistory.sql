@@ -364,12 +364,12 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_Update`(
 	 IN `pUserId` int
     ,IN `pListId` int
-    ,IN `pTaskName` varchar(64)
+    ,IN `pName` varchar(64)
 )
 BEGIN
 	UPDATE `TaskLists`
     SET
-		`Name` = `pTaskName`
+		`Name` = `pName`
 	WHERE
 		`UserId` = `pUserId`
         AND `Id` = `pListId`;
@@ -604,4 +604,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-17 20:17:19
+-- Dump completed on 2017-01-17 20:51:26
