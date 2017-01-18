@@ -12,13 +12,8 @@ namespace TaskHistory.Impl.TaskLists
 		const string ReadStoredProcedure = "TaskLists_Read";
 		const string UpdatedStoredProceudre = "TaskLists_Update";
 
-		TaskListFactory _factory;
-		ApplicationDataProxy _appDataProxy;
-
-		public bool AssociateTasksToList(int userId, int listId, IEnumerable<int> taskIds)
-		{
-			throw new NotImplementedException();
-		}
+		readonly TaskListFactory _factory;
+		readonly ApplicationDataProxy _appDataProxy;
 
 		public ITaskList Create(int userId, string name)
 		{
