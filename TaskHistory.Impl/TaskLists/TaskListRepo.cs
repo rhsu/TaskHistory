@@ -8,9 +8,9 @@ namespace TaskHistory.Impl.TaskLists
 {
 	public class TaskListRepo : ITaskListRepo
 	{
-		const string CreateStoredProcedure = "TaskList_Create";
-		const string ReadStoredProcedure = "TaskList_Read";
-		const string UpdatedStoredProceudre = "TaskList_Update";
+		const string CreateStoredProcedure = "TaskLists_Create";
+		const string ReadStoredProcedure = "TaskLists_Read";
+		const string UpdatedStoredProceudre = "TaskLists_Update";
 
 		TaskListFactory _factory;
 		ApplicationDataProxy _appDataProxy;

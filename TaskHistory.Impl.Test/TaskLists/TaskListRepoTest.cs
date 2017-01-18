@@ -59,6 +59,7 @@ namespace TaskHistory.Impl.Test
 			}
 		}
 
+		[Test]
 		public void Update()
 		{
 			var taskList = _testFixtures.TaskList;
