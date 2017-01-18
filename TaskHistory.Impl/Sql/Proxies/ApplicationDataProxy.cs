@@ -10,9 +10,9 @@ namespace TaskHistory.Impl.Sql
 		readonly SqlParameterFactory _parameterFactory;
 		readonly INonQueryDataProvider _nonQueryDataProvider;
 
-		public T ExecuteReaderForSingleType<T>(IFromDataReaderFactory<T> factory,
-			string storedProcedureName,
-			ISqlDataParameter parameter)
+		public T Execute<T>(IFromDataReaderFactory<T> factory,
+		                    string storedProcedureName,
+		                    ISqlDataParameter parameter)
 		{
 			if (factory == null)
 				throw new ArgumentNullException(nameof(factory));
@@ -46,9 +46,9 @@ namespace TaskHistory.Impl.Sql
 													 parameters);
 		}
 
-		public IEnumerable<T> ExecuteReaderForTypeCollection<T>(IFromDataReaderFactory<T> factory,
-			string storedProcedureName,
-			ISqlDataParameter parameter)
+		public IEnumerable<T> ExecuteOnCollection<T>(IFromDataReaderFactory<T> factory,
+		                                             string storedProcedureName,
+		                                             ISqlDataParameter parameter)
 		{
 			if (factory == null)
 				throw new ArgumentNullException(nameof(factory));
@@ -65,9 +65,9 @@ namespace TaskHistory.Impl.Sql
 
 		}
 
-		public IEnumerable<T> ExecuteReaderForTypeCollection<T>(IFromDataReaderFactory<T> factory,
-			string storedProcedureName,
-			IEnumerable<ISqlDataParameter> parameters)
+		public IEnumerable<T> ExecuteOnCollection<T>(IFromDataReaderFactory<T> factory,
+		                                             string storedProcedureName,
+		                                             IEnumerable<ISqlDataParameter> parameters)
 		{
 			if (factory == null)
 				throw new ArgumentNullException(nameof(factory));
@@ -78,9 +78,7 @@ namespace TaskHistory.Impl.Sql
 			if (parameters == null)
 				throw new ArgumentNullException(nameof(parameters));
 
-			return _dataReaderProvider.ExecuteReaderForTypeCollection(factory,
-																	  storedProcedureName,
-																	  parameters);
+			return _dataReaderProvider.ExecuteReaderForTypeCollection(factory, storedProcedureName, parameters);
 		}
 
 		public void ExecuteNonQuery(string storedProcedureName)
@@ -88,7 +86,7 @@ namespace TaskHistory.Impl.Sql
 			if (string.IsNullOrEmpty(storedProcedureName))
 				throw new ArgumentNullException(nameof(storedProcedureName));
 			
-			_nonQueryDataProvider.ExecuteNonQuery(storedProcedureName);
+			_nonQueryDataProvider.Execute(storedProcedureName);
 		}
 
 		public void ExecuteNonQuery(string storedProcedureName, ISqlDataParameter parameter)
@@ -99,7 +97,7 @@ namespace TaskHistory.Impl.Sql
 			if (parameter == null)
 				throw new ArgumentNullException(nameof(parameter));
 
-			_nonQueryDataProvider.ExecuteNonQuery(storedProcedureName, parameter);
+			_nonQueryDataProvider.Execute(storedProcedureName, parameter);
 		}
 
 		public void ExecuteNonQuery(string storedProcedureName, IEnumerable<ISqlDataParameter> parameters)
@@ -110,7 +108,7 @@ namespace TaskHistory.Impl.Sql
 			if (parameters == null)
 				throw new ArgumentNullException(nameof(parameters));
 
-			_nonQueryDataProvider.ExecuteNonQuery(storedProcedureName, parameters);
+			_nonQueryDataProvider.Execute(storedProcedureName, parameters);
 		}
 
 		public ISqlDataParameter CreateParameter(string paramName, object value)

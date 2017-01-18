@@ -15,15 +15,15 @@ namespace TaskHistory.Impl.Sql
 	{
 		private readonly IConfigurationProvider _configurationProvider;
 
-		public void ExecuteNonQuery(string storedProcedureName)
+		public void Execute(string storedProcedureName)
 		{
 			if (storedProcedureName == null || storedProcedureName == string.Empty)
 				throw new ArgumentNullException(nameof(storedProcedureName));
 
-			this.ExecuteNonQuery(storedProcedureName, new List<ISqlDataParameter>());
+			this.Execute(storedProcedureName, new List<ISqlDataParameter>());
 		}
 
-		public void ExecuteNonQuery(string storedProcedureName, ISqlDataParameter parameter)
+		public void Execute(string storedProcedureName, ISqlDataParameter parameter)
 		{
 			if (storedProcedureName == null || storedProcedureName == string.Empty)
 				throw new ArgumentNullException(nameof(storedProcedureName));
@@ -31,10 +31,10 @@ namespace TaskHistory.Impl.Sql
 			if (parameter == null)
 				throw new ArgumentNullException(nameof(parameter));
 
-			this.ExecuteNonQuery(storedProcedureName, new List<ISqlDataParameter> { parameter });
+			this.Execute(storedProcedureName, new List<ISqlDataParameter> { parameter });
 		}
 
-		public void ExecuteNonQuery(string storedProcedureName, IEnumerable<ISqlDataParameter> parameters)
+		public void Execute(string storedProcedureName, IEnumerable<ISqlDataParameter> parameters)
 		{
 			if (storedProcedureName == null || storedProcedureName == string.Empty)
 				throw new ArgumentNullException(nameof(storedProcedureName));

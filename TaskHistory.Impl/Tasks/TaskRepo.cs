@@ -43,7 +43,7 @@ namespace TaskHistory.Impl.Tasks
 		{
 			var parameter = _dataProxy.CreateParameter("pUserId", userId);
 
-			var returnVal = _dataProxy.ExecuteReaderForTypeCollection(_taskFactory, ReadStoredProcedure, parameter);
+			var returnVal = _dataProxy.ExecuteOnCollection(_taskFactory, ReadStoredProcedure, parameter);
 			if (returnVal == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
