@@ -487,7 +487,7 @@ BEGIN
     
     SET @taskId = last_insert_id();
     
-    INSERT INTO `TaskToTaskListAssocations`
+    INSERT INTO `TaskToTaskListAssociations`
     (
 		 `TaskId`
         ,`TaskListId`
@@ -673,4 +673,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-18 16:32:29
+-- Dump completed on 2017-01-19  9:59:09

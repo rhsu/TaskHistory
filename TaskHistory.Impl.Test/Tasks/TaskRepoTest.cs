@@ -99,5 +99,17 @@ namespace TaskHistory.Impl.Test
 
 			//also assert that the ReadWillNot retrieve deleted tasks
 		}
+
+		[Test]
+		public void CreateTaskOnList()
+		{
+			// Hmm what if the task already exists on that same list.
+
+			var userId = _testFixtures.User.UserId;
+			var listId = _testFixtures.TaskList.Id;
+			var content = "test content here";
+
+			/*ITask task =*/ _taskRepo.CreateTaskOnList(userId, listId, content);
+		}
 	}
 }

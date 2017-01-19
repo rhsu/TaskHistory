@@ -41,7 +41,7 @@ namespace TaskHistory.Impl.Tasks
 			return returnVal;
 		}
 
-		public ITask CreateTaskOnList(int userId, string content, int listId)
+		public ITask CreateTaskOnList(int userId, int listId, string content)
 		{
 			if (string.IsNullOrEmpty(content))
 				throw new ArgumentNullException(nameof(content));
