@@ -10,9 +10,9 @@ namespace TaskHistory.Impl.Sql
 		readonly SqlParameterFactory _parameterFactory;
 		readonly INonQueryDataProvider _nonQueryDataProvider;
 
-		public T Execute<T>(IFromDataReaderFactory<T> factory,
-		                    string storedProcedureName,
-		                    ISqlDataParameter parameter)
+		public T ExecuteReader<T>(IFromDataReaderFactory<T> factory,
+		                          string storedProcedureName,
+		                          ISqlDataParameter parameter)
 		{
 			if (factory == null)
 				throw new ArgumentNullException(nameof(factory));
@@ -28,7 +28,7 @@ namespace TaskHistory.Impl.Sql
 																  parameter);
 		}
 
-		public T Execute<T>(IFromDataReaderFactory<T> factory,
+		public T ExecuteReader<T>(IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{

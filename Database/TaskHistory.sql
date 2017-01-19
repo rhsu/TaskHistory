@@ -91,6 +91,25 @@ CREATE TABLE `TaskLists` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `TaskToTaskListAssociations`
+--
+
+DROP TABLE IF EXISTS `TaskToTaskListAssociations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `TaskToTaskListAssociations` (
+  `Id` int(11) NOT NULL,
+  `TaskId` int(11) NOT NULL,
+  `TaskListId` int(11) NOT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `fk_taskId_to_task_idx` (`TaskId`),
+  KEY `fk_listId_to_list_idx` (`TaskListId`),
+  CONSTRAINT `fk_listId_to_list` FOREIGN KEY (`TaskListId`) REFERENCES `TaskLists` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_taskId_to_task` FOREIGN KEY (`TaskId`) REFERENCES `Tasks` (`TaskID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `Tasks`
 --
 
@@ -439,6 +458,54 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Tasks_Insert_List_Associate` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Insert_List_Associate`(
+	 IN `pUserId` INT
+    ,IN `pContent` VARCHAR(64)
+    ,IN `pListId` INT
+)
+BEGIN
+	INSERT INTO `Tasks`
+    (
+		 `UserId`
+        ,`Content`
+    )
+    VALUES
+    (
+		 `pUserId`
+        ,`pContent`
+    );
+    
+    SET @taskId = last_insert_id();
+    
+    INSERT INTO `TaskToTaskListAssocations`
+    (
+		 `TaskId`
+        ,`TaskListId`
+    )
+    VALUES
+    (
+		 @taskId
+        ,`pListId`
+    );
+    
+    SELECT * FROM `Task` 
+    WHERE `TaskId` = @taskId;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Tasks_IsDeleted_Update` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -606,4 +673,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-17 21:24:55
+-- Dump completed on 2017-01-18 16:32:29
