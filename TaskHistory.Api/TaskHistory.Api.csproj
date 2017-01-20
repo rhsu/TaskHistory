@@ -61,6 +61,7 @@
     <Compile Include="TaskLists\ITaskListRepo.cs" />
     <Compile Include="FeatureFlags\IFeatureFlag.cs" />
     <Compile Include="FeatureFlags\IFeatureFlagRepo.cs" />
+    <Compile Include="FrameworkSqlRepo\ISqlRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -77,5 +78,6 @@
     <Folder Include="Terminal\enumerations\" />
     <Folder Include="TaskLists\" />
     <Folder Include="FeatureFlags\" />
+    <Folder Include="FrameworkSqlRepo\" />
   </ItemGroup>
 </Project>
