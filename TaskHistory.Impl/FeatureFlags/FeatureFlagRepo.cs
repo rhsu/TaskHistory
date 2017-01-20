@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaskHistory.Api.FeatureFlags;
+using TaskHistory.Api.Sql;
 using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.FeatureFlags
@@ -15,25 +16,82 @@ namespace TaskHistory.Impl.FeatureFlags
 		const string UpdatedStoredProcedure = "FeatureFlags_Update";		
 		const string DeleteStoredProcedure = "FeatureFlags_Delete";
 
-		public IFeatureFlag Create()
+		public IFeatureFlag Create(int userId, string name, string value)
 		{
+			if (string.IsNullOrEmpty(name))
+				throw new ArgumentNullException(nameof(name));
+
+			if (string.IsNullOrEmpty(value))
+				throw new ArgumentNullException(nameof(value));
+
+			var parameters = new List<ISqlDataParameter>();
+
+			parameters.Add(_dataProxy.CreateParameter("pName", name));
+			parameters.Add(_dataProxy.CreateParameter("pValue", value));
+
+			var returnVal = _dataProxy.Execute(_factory, 
+			                                   CreateStoredProcedure, 
+			                                   parameters);
 			
-			throw new NotImplementedException();
+			if (returnVal == null)
+				throw new NullReferenceException("Null returned from DataProvider");
+
+			return returnVal;
 		}
 
-		public IFeatureFlag Delete()
+		public IFeatureFlag Delete(int userId, int id)
 		{
-			throw new NotImplementedException();
+			var parameters = new List<ISqlDataParameter>();
+
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pId", id));
+
+			var returnVal = _dataProxy.Execute(_factory,
+											   DeleteStoredProcedure,
+											   parameters);
+			
+			if (returnVal == null)
+				throw new NullReferenceException("Null returned from DataProvider");
+
+			return returnVal;
 		}
 
-		public IEnumerable<IFeatureFlag> Read()
+		public IEnumerable<IFeatureFlag> Read(int userId)
 		{
-			throw new NotImplementedException();
+			var parameter = _dataProxy.CreateParameter("pUserId", userId);
+
+			var returnVal = _dataProxy.ExecuteOnCollection(_factory,
+											   DeleteStoredProcedure,
+											   parameter);
+
+			if (returnVal == null)
+				throw new NullReferenceException("Null returned from DataProvider");
+
+			return returnVal;
 		}
 
-		public IFeatureFlag Update()
+		public IFeatureFlag Update(int userId, string name, string value)
 		{
-			throw new NotImplementedException();
+			if (string.IsNullOrEmpty(name))
+				throw new ArgumentNullException(nameof(name));
+
+			if (string.IsNullOrEmpty(value))
+				throw new ArgumentNullException(nameof(value));
+
+			var parameters = new List<ISqlDataParameter>();
+
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pName", name));
+			parameters.Add(_dataProxy.CreateParameter("pValue", value));
+
+			var returnVal = _dataProxy.Execute(_factory,
+			                                   UpdatedStoredProcedure,
+											   parameters);
+
+			if (returnVal == null)
+				throw new NullReferenceException("Null returned from DataProvider");
+
+			return returnVal;
 		}
 
 		public FeatureFlagRepo(FeatureFlagFactory factory,

@@ -4,12 +4,12 @@ namespace TaskHistory.Api.FeatureFlags
 {
 	public interface IFeatureFlagRepo
 	{
-		IFeatureFlag Create();
+		IFeatureFlag Create(int userId, string name, string value);
 
-		IEnumerable<IFeatureFlag> Read();
+		IEnumerable<IFeatureFlag> Read(int userId);
 
-		IFeatureFlag Update();
+		IFeatureFlag Update(int userId, string name, string value);
 
-		IFeatureFlag Delete();
+		IFeatureFlag Delete(int userId, int id);
 	}
 }
