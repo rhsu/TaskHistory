@@ -8,7 +8,14 @@ namespace TaskHistory.Impl.FeatureFlags
 	{
 		public IFeatureFlag Build(ISqlDataReader reader)
 		{
-			throw new NotImplementedException();
+			if (reader == null)
+				throw new ArgumentNullException(nameof(reader));
+
+			var id = reader.GetInt("Id");
+			var name = reader.GetString("Name");
+			var value = reader.GetString("Value");
+
+			return new FeatureFlag(id, name, value);
 		}
 	}
 }

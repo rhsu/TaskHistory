@@ -10,13 +10,14 @@ namespace TaskHistory.Impl.FeatureFlags
 		ApplicationDataProxy _dataProxy;
 		FeatureFlagFactory _factory;
 
-		const string CreateStoredProcedure = "";
-		const string ReadStoredProcedure = "";
-		const string UpdatedStoredProcedure = "";		
-		const string DeleteStoredProcedure = "";
+		const string CreateStoredProcedure = "FeatureFlags_Create";
+		const string ReadStoredProcedure = "FeatureFlags_Read";
+		const string UpdatedStoredProcedure = "FeatureFlags_Update";		
+		const string DeleteStoredProcedure = "FeatureFlags_Delete";
 
 		public IFeatureFlag Create()
 		{
+			
 			throw new NotImplementedException();
 		}
 
