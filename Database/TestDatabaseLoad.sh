@@ -1,2 +1,2 @@
 #!/bin/bash
-mysql -u root -p TaskHistoryTest < TaskHistory.sql
+mysql -u root -ppassword TaskHistoryTest < TaskHistory.sql
