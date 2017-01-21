@@ -30,6 +30,15 @@ namespace TaskHistory.Impl.Test
 		}
 
 		[Test]
+		public void Read()
+		{
+			for (var i = 0; i < 5; i++)
+			{
+				
+			}
+		}
+
+		[Test]
 		public void Delete()
 		{
 			var name = "Feature Flag Name";
