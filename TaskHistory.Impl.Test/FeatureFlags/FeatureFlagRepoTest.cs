@@ -32,10 +32,12 @@ namespace TaskHistory.Impl.Test
 		[Test]
 		public void Read()
 		{
-			for (var i = 0; i < 5; i++)
+			// TODO can't test this until I have the ability
+			//      to delete all feature flags
+			/*for (var i = 0; i < 5; i++)
 			{
 				
-			}
+			}*/
 		}
 
 		[Test]
