@@ -9,5 +9,17 @@ namespace AngularProto.Controllers
 		{
 			return View();
 		}
+
+		[HttpPost]
+		public ActionResult Create()
+		{
+			return Json(true);
+		}
+
+		[HttpPost]
+		public ActionResult Read()
+		{
+			return Json(true);
+		}
 	}
 }

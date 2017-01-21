@@ -38,6 +38,7 @@
     <Compile Include="UserRegistrationParametersViewModel.cs" />
     <Compile Include="UserRegistrationStatusViewModel.cs" />
     <Compile Include="TaskEditViewModel.cs" />
+    <Compile Include="FeaturFlagEditViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
