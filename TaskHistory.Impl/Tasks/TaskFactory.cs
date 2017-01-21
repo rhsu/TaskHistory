@@ -5,12 +5,12 @@ using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Tasks
 {
-	public class TaskFactory : BaseFromDataReaderFactory<ITask>
+	public class TaskFactory : IFromDataReaderFactory<ITask>
 	{
-		public override ITask Build(ISqlDataReader reader)
+		public ITask Build(ISqlDataReader reader)
 		{
 			if (reader == null)
-				throw new ArgumentNullException ("reader");
+				throw new ArgumentNullException (nameof(reader));
 			
 			int taskId = reader.GetInt ("TaskId");
 			string content = reader.GetString ("Content");

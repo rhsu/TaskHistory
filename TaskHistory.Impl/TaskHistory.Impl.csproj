@@ -60,7 +60,6 @@
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="Sql\BaseDataProvider.cs" />
     <Compile Include="Sql\NonQueryDataProvider.cs" />
-    <Compile Include="Sql\Factories\BaseFromDataReaderFactory.cs" />
     <Compile Include="Sql\Factories\DataParameterFactory.cs" />
     <Compile Include="Sql\Factories\SqlDataReaderFactory.cs" />
     <Compile Include="Sql\Factories\SqlParameterFactory.cs" />
