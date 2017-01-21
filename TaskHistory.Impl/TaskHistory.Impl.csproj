@@ -60,7 +60,6 @@
     <Compile Include="Configuration\ConfigurationProvider.cs" />
     <Compile Include="Sql\BaseDataProvider.cs" />
     <Compile Include="Sql\NonQueryDataProvider.cs" />
-    <Compile Include="Sql\Factories\BaseFromDataReaderFactory.cs" />
     <Compile Include="Sql\Factories\DataParameterFactory.cs" />
     <Compile Include="Sql\Factories\SqlDataReaderFactory.cs" />
     <Compile Include="Sql\Factories\SqlParameterFactory.cs" />
@@ -78,6 +77,9 @@
     <Compile Include="TaskLists\TaskList.cs" />
     <Compile Include="TaskLists\TaskListRepo.cs" />
     <Compile Include="TaskLists\TaskListFactory.cs" />
+    <Compile Include="FeatureFlags\FeatureFlag.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagRepo.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -92,6 +94,7 @@
     <Folder Include="Sql\Proxies\" />
     <Folder Include="Terminal\" />
     <Folder Include="TaskLists\" />
+    <Folder Include="FeatureFlags\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
