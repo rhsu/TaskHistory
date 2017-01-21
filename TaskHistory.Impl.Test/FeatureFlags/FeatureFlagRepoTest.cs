@@ -8,21 +8,39 @@ namespace TaskHistory.Impl.Test
 	public class FeatureFlagRepoTest
 	{
 		IFeatureFlagRepo _repo;
-		TestFixtures _testFixtures;
 
 		public FeatureFlagRepoTest()
 		{
 			var factory = new FeatureFlagFactory();
-			var dataProxy = new ApplicationDataProxyFactory();
+			var dataProxy = new ApplicationDataProxyFactory().Build();
 
 			_repo = new FeatureFlagRepo(factory, dataProxy);
-			_testFixtures = new TestFixtures();
 		}
 
 		[Test]
 		public void Create()
 		{
-			
+			var name = "Feature Flag Name";
+			var value = "this is a value";
+			IFeatureFlag feature = _repo.Create(name,
+												value);
+
+			Assert.AreEqual(name, feature.Name);
+			Assert.AreEqual(value, feature.Value);	                                    
+		}
+
+		[Test]
+		public void Delete()
+		{
+			var name = "Feature Flag Name";
+			var value = "this is a value";
+
+			IFeatureFlag feature = _repo.Create(name,
+												value);
+
+			int numDeleted = _repo.Delete(feature.Id);
+
+			Assert.AreEqual(1, numDeleted);
 		}
 	}
 }

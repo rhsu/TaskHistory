@@ -16,7 +16,7 @@ namespace TaskHistory.Impl.FeatureFlags
 		const string UpdatedStoredProcedure = "FeatureFlags_Update";		
 		const string DeleteStoredProcedure = "FeatureFlags_Delete";
 
-		public IFeatureFlag Create(int userId, string name, string value)
+		public IFeatureFlag Create(string name, string value)
 		{
 			if (string.IsNullOrEmpty(name))
 				throw new ArgumentNullException(nameof(name));
@@ -39,30 +39,23 @@ namespace TaskHistory.Impl.FeatureFlags
 			return returnVal;
 		}
 
-		public IFeatureFlag Delete(int userId, int id)
+		// TODO No way to actually test this yet
+		public int Delete(int id)
 		{
 			var parameters = new List<ISqlDataParameter>();
 
-			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 			parameters.Add(_dataProxy.CreateParameter("pId", id));
 
-			var returnVal = _dataProxy.Execute(_factory,
-											   DeleteStoredProcedure,
-											   parameters);
-			
-			if (returnVal == null)
-				throw new NullReferenceException("Null returned from DataProvider");
+			 _dataProxy.ExecuteNonQuery(DeleteStoredProcedure,
+			                            parameters);
 
-			return returnVal;
+			return 1;
 		}
 
-		public IEnumerable<IFeatureFlag> Read(int userId)
+		public IEnumerable<IFeatureFlag> Read()
 		{
-			var parameter = _dataProxy.CreateParameter("pUserId", userId);
-
 			var returnVal = _dataProxy.ExecuteOnCollection(_factory,
-											   DeleteStoredProcedure,
-											   parameter);
+														   ReadStoredProcedure);
 
 			if (returnVal == null)
 				throw new NullReferenceException("Null returned from DataProvider");
@@ -70,7 +63,7 @@ namespace TaskHistory.Impl.FeatureFlags
 			return returnVal;
 		}
 
-		public IFeatureFlag Update(int userId, string name, string value)
+		public IFeatureFlag Update(string name, string value)
 		{
 			if (string.IsNullOrEmpty(name))
 				throw new ArgumentNullException(nameof(name));
@@ -80,7 +73,6 @@ namespace TaskHistory.Impl.FeatureFlags
 
 			var parameters = new List<ISqlDataParameter>();
 
-			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 			parameters.Add(_dataProxy.CreateParameter("pName", name));
 			parameters.Add(_dataProxy.CreateParameter("pValue", value));
 

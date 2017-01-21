@@ -19,6 +19,9 @@ namespace TaskHistory.Api.Sql
 			string storedProcedureName,
 			ISqlDataParameter parameter);
 
+		T ExecuteReader<T>(IFromDataReaderFactory<T> factory,
+						  string storedProcedureName);
+
 		T ExecuteReader<T> (IFromDataReaderFactory<T> factory, 
 			string storedProcedureName, 
 			IEnumerable<ISqlDataParameter> parameters);
@@ -30,5 +33,8 @@ namespace TaskHistory.Api.Sql
 		IEnumerable<T> ExecuteReaderForTypeCollection<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters);
+
+		IEnumerable<T> ExecuteReaderForTypeCollection<T>(IFromDataReaderFactory<T> factory,
+														 string storedProcedureName);
 	}
 }
