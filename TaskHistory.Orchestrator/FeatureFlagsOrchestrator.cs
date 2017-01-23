@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaskHistory.Api.FeatureFlags;
-using TaskHistory.ViewModel;
 using TaskHistory.ViewModel.FeatureFlags;
 
 namespace TaskHistory.Orchestrator

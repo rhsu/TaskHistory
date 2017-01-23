@@ -1,5 +1,4 @@
-﻿using System;
-namespace TaskHistory.ViewModel.FeatureFlags
+﻿namespace TaskHistory.ViewModel.FeatureFlags
 {
 	public class FeaturFlagEditViewModel
 	{
