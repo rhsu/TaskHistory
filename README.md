@@ -30,12 +30,10 @@ There are two databases that this application uses. It is recommended to login t
 
 The easiest way to do this is by running
 
-`mysql -u root -ppassword`
-`CREATE DATABASE TaskHistory;`
-`CREATE DATABASE TaskHistoryTest;`
-exit out of mysql `ctrl + d`
-and run the two Database load scripts in the Database directory
-`./LoadDatabase.sh`
-`./TestDatabaseLoad.sh`
+- `mysql -u root -ppassword`
+- `CREATE DATABASE TaskHistory;`
+- `CREATE DATABASE TaskHistoryTest;`
+- exit out of mysql `ctrl + d`
+- run the two Database load scripts in the Database directory: `./LoadDatabase.sh` and `./TestDatabaseLoad.sh`
 
 All changes to the database can be ran via `./SaveDatabase.sh`. Do note that this will also automatically update the the `TaskHistoryTest` database.
