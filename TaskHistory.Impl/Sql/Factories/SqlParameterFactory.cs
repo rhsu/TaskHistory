@@ -9,6 +9,9 @@ namespace TaskHistory.Impl.Sql
 		{
 			if (paramName == null)
 				throw new ArgumentNullException(nameof(paramName));
+			
+			if (value == null)
+				throw new ArgumentNullException(nameof(value));
 
 			return new SqlDataParameter(paramName, value);
 		}
