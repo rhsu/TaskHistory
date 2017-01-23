@@ -17,7 +17,7 @@ namespace AngularProto.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Read()
+		public ActionResult Get()
 		{
 			return Json(true);
 		}
