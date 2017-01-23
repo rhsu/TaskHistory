@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaskHistory.Api.FeatureFlags;
+using TaskHistory.ObjectMapper.FeatureFlags;
 using TaskHistory.ViewModel.FeatureFlags;
 
 namespace TaskHistory.Orchestrator
@@ -8,19 +9,26 @@ namespace TaskHistory.Orchestrator
 	public class FeatureFlagsOrchestrator
 	{
 		readonly IFeatureFlagRepo _repo;
+		readonly FeatureFlagObjectMapper _mapper;
 
-		public FeatureFlagsOrchestrator(IFeatureFlagRepo repo)
+		public FeatureFlagsOrchestrator(IFeatureFlagRepo repo,
+		                                FeatureFlagObjectMapper mapper)
 		{
 			_repo = repo;
+			_mapper = mapper;
 		}
 
-		public IEnumerable<IFeatureFlag> GetFlags()
+		public IEnumerable<FeatureFlagTableViewModel> GetFlags()
 		{
-			var returnVal = _repo.Read();
-			if (returnVal == null)
+			var flags = _repo.Read();
+			if (flags == null)
 				throw new NullReferenceException("Null returned from repo");
 
-			return returnVal;
+			var retVal = _mapper.Map(flags);
+			if (retVal == null)
+				throw new NullReferenceException("Null returned from mapper");
+
+			return retVal;
 		}
 
 		public bool Delete(int featureFlagId)

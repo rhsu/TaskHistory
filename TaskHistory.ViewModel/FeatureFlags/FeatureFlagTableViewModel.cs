@@ -1,4 +1,4 @@
-﻿namespace TaskHistory.ViewModel
+﻿namespace TaskHistory.ViewModel.FeatureFlags
 {
 	public class FeatureFlagTableViewModel
 	{
@@ -12,5 +12,12 @@
 		 * 	CreateAt
 		 * And Edit wouldn't care about that property
 		 */
+
+		public FeatureFlagTableViewModel(int id, string name, string value)
+		{
+			Id = id;
+			Name = name;
+			Value = value;
+		}
 	}
 }
