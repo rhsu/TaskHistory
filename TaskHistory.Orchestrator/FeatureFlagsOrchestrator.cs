@@ -30,7 +30,7 @@ namespace TaskHistory.Orchestrator
 			return isSuccessful == 1;
 		}
 
-		public IFeatureFlag Update(FeaturFlagEditViewModel vmFeatureFlag)
+		public IFeatureFlag Update(FeatureFlagEditViewModel vmFeatureFlag)
 		{
 			if (vmFeatureFlag == null)
 				throw new ArgumentNullException(nameof(vmFeatureFlag));

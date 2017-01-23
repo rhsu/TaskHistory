@@ -1,6 +1,6 @@
 ﻿namespace TaskHistory.ViewModel.FeatureFlags
 {
-	public class FeaturFlagEditViewModel
+	public class FeatureFlagEditViewModel
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }

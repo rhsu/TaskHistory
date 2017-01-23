@@ -33,12 +33,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FeatureFlags\FeaturFlagEditViewModel.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagEditViewModel.cs" />
     <Compile Include="Tasks\TaskEditViewModel.cs" />
     <Compile Include="Tasks\TaskGridViewModel.cs" />
     <Compile Include="Users\UserLoginViewModel.cs" />
     <Compile Include="Users\UserRegistrationParametersViewModel.cs" />
     <Compile Include="Users\UserRegistrationStatusViewModel.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagTableViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tasks\" />

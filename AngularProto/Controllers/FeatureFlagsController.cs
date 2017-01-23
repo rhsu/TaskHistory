@@ -1,9 +1,12 @@
 ﻿using System.Web.Mvc;
+using TaskHistory.Orchestrator;
 
 namespace AngularProto.Controllers
 {
 	public class FeatureFlagsController : Controller
 	{
+		FeatureFlagsOrchestrator _orchestrator;
+
 		[HttpGet]
 		public ActionResult Index()
 		{
@@ -19,7 +22,12 @@ namespace AngularProto.Controllers
 		[HttpPost]
 		public ActionResult Get()
 		{
-			return Json(true);
+			return Json(_orchestrator.GetFlags());
+		}
+
+		public FeatureFlagsController(FeatureFlagsOrchestrator orchestrator)
+		{
+			_orchestrator = orchestrator;
 		}
 	}
 }
