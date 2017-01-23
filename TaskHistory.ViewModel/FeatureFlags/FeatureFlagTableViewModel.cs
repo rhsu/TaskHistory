@@ -2,9 +2,9 @@
 {
 	public class FeatureFlagTableViewModel
 	{
-		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Value { get; set; }
+		public int Id { get; }
+		public string Name { get; }
+		public string Value { get; }
 
 		/*
 		 * The existence of a view model of this specificity is in case

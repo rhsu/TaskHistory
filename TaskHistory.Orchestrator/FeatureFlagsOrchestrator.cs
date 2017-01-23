@@ -38,10 +38,22 @@ namespace TaskHistory.Orchestrator
 			return isSuccessful == 1;
 		}
 
+		public IFeatureFlag Create(FeatureFlagCreateViewModel vmFeatureFlag)
+		{
+			if (vmFeatureFlag == null)
+				throw new ArgumentNullException(nameof(vmFeatureFlag));
+
+			var retVal = _repo.Create(vmFeatureFlag.Name, vmFeatureFlag.Value);
+
+			return retVal;
+		}
+
 		public IFeatureFlag Update(FeatureFlagEditViewModel vmFeatureFlag)
 		{
 			if (vmFeatureFlag == null)
 				throw new ArgumentNullException(nameof(vmFeatureFlag));
+
+			// var retVal = _repo.Update(
 
 			return null;
 		}

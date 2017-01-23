@@ -40,6 +40,7 @@
     <Compile Include="Users\UserRegistrationParametersViewModel.cs" />
     <Compile Include="Users\UserRegistrationStatusViewModel.cs" />
     <Compile Include="FeatureFlags\FeatureFlagTableViewModel.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagCreateViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tasks\" />
