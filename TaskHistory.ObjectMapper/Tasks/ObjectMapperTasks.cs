@@ -7,12 +7,12 @@ namespace TaskHistoryObjectMapper
 {
 	public class ObjectMapperTasks
 	{
-		public IEnumerable<TaskGridViewModel> Map (IEnumerable<ITask> tasks)
+		public IEnumerable<TaskTableViewModel> Map (IEnumerable<ITask> tasks)
 		{
 			if (tasks == null)
 				throw new ArgumentNullException (nameof(tasks));
 
-			var returnVal = new List<TaskGridViewModel>();
+			var returnVal = new List<TaskTableViewModel>();
 
 			foreach (var task in tasks)
 			{
@@ -23,12 +23,12 @@ namespace TaskHistoryObjectMapper
 			return returnVal;
 		}
 
-		public TaskGridViewModel Map(ITask task)
+		public TaskTableViewModel Map(ITask task)
 		{
 			if (task == null)
 				throw new ArgumentNullException(nameof(task));
 
-			var returnVal = new TaskGridViewModel(task.TaskId, task.Content);
+			var returnVal = new TaskTableViewModel(task.TaskId, task.Content);
 
 			return returnVal;
 		}

@@ -22,7 +22,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			return _taskViewRepo.ReadTasksForUser(user);
 		}
 
-		public IEnumerable<TaskGridViewModel> OrchestrateGetTasks(IUser user)
+		public IEnumerable<TaskTableViewModel> OrchestrateGetTasks(IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
@@ -31,7 +31,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (tasks == null)
 				throw new NullReferenceException($"null returned from TaskViewRepo when reading {user.UserId}");
 
-			IEnumerable<TaskGridViewModel> tasksVM = _taskObjectMapper.Map(tasks);
+			IEnumerable<TaskTableViewModel> tasksVM = _taskObjectMapper.Map(tasks);
 			if (tasksVM == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
@@ -46,7 +46,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			return _taskRepo.CreateTask(content, user.UserId);
 		}
 
-		public TaskGridViewModel OrchestrateCreateTask(IUser user, string content)
+		public TaskTableViewModel OrchestrateCreateTask(IUser user, string content)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
@@ -58,14 +58,14 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (task == null)
 				throw new NullReferenceException("Null returned from task repo");
 
-			TaskGridViewModel vmTask = _taskObjectMapper.Map(task);
+			TaskTableViewModel vmTask = _taskObjectMapper.Map(task);
 			if (vmTask == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
 			return vmTask;
 		}
 
-		public TaskGridViewModel OrchestrateEditTask(IUser user, 
+		public TaskTableViewModel OrchestrateEditTask(IUser user, 
 		                                             int taskId, 
 		                                             TaskEditViewModel taskEditViewModel)
 		{
@@ -83,7 +83,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (updatedTask == null)
 				throw new NullReferenceException("null returned from TaskRepo");
 
-			TaskGridViewModel retVal = _taskObjectMapper.Map(updatedTask);
+			TaskTableViewModel retVal = _taskObjectMapper.Map(updatedTask);
 			if (retVal == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
