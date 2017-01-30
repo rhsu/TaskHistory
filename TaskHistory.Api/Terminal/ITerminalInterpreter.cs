@@ -1,4 +1,5 @@
-﻿using TaskHistory.Api.Users;
+﻿using System.Collections.Generic;
+using TaskHistory.Api.Users;
 
 namespace TaskHistory.Api.Terminal
 {
@@ -10,7 +11,7 @@ namespace TaskHistory.Api.Terminal
 		/// <returns>a string response.</returns>
 		/// <param name="user">the user making the request</param>
 		/// <param name="requestCommand">Request command.</param>
-		string TranslateResponseToString (string requestCommand, IUser user);
+		IEnumerable<string> TranslateResponseToString (string requestCommand, IUser user);
 
 		/// <summary>
 		/// Returns the default message to display to the user

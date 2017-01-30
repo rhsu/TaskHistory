@@ -1,12 +1,14 @@
-﻿namespace TaskHistory
+﻿using System.Collections.Generic;
+
+namespace TaskHistory
 {
 	public class TerminalResponseObject
 	{
-		public string ResponseSummary { get; }
+		public IEnumerable<string> ResponseSummary { get; }
 
-		public TerminalResponseObject(string responseSummary)
+		public TerminalResponseObject(IEnumerable<string> responseSummary)
 		{
-			this.ResponseSummary = responseSummary;
+			ResponseSummary = responseSummary;
 		}
 	}
 }
