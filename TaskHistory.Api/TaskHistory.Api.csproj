@@ -59,6 +59,8 @@
     <Compile Include="Terminal\ITerminalObjectMapper.cs" />
     <Compile Include="TaskLists\ITaskList.cs" />
     <Compile Include="TaskLists\ITaskListRepo.cs" />
+    <Compile Include="FeatureFlags\IFeatureFlag.cs" />
+    <Compile Include="FeatureFlags\IFeatureFlagRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -74,5 +76,6 @@
     <Folder Include="Terminal\" />
     <Folder Include="Terminal\enumerations\" />
     <Folder Include="TaskLists\" />
+    <Folder Include="FeatureFlags\" />
   </ItemGroup>
 </Project>

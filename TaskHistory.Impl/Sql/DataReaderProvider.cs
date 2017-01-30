@@ -19,6 +19,20 @@ namespace TaskHistory.Impl.Sql
 
 		const string NullFromExecuteReaderForTypeCollection = "Null returned from ExceuteReaderForTypeCollection";
 
+		public IEnumerable<T> ExecuteReaderForTypeCollection<T>(IFromDataReaderFactory<T> factory,
+											  string storedProcedureName)
+		{
+			if (factory == null)
+				throw new ArgumentNullException(nameof(factory));
+
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
+
+			return this.ExecuteReaderForTypeCollection(factory,
+													   storedProcedureName,
+													   new List<ISqlDataParameter>());
+		}
+
 		public T ExecuteReader<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			ISqlDataParameter parameter)
@@ -129,8 +143,19 @@ namespace TaskHistory.Impl.Sql
 			}
 		}
 
-		public void ExecuteNonQuery()
+		public T ExecuteReader<T>(IFromDataReaderFactory<T> factory, 
+		                         string storedProcedureName)
 		{
+			if (factory == null)
+				throw new ArgumentNullException(nameof(factory));
+
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
+
+
+			return this.ExecuteReader(factory,
+									  storedProcedureName,
+									  new List<ISqlDataParameter>());
 		}
 
 		public DataReaderProvider (SqlDataReaderFactory sqlDataReaderFactory, 

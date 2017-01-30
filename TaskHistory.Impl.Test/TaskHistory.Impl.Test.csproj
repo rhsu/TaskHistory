@@ -41,6 +41,7 @@
     <Compile Include="TaskLists\TaskListRepoTest.cs" />
     <Compile Include="TestFixtures.cs" />
     <Compile Include="Tasks\TaskRepoTest.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagRepoTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -63,5 +64,6 @@
     <Folder Include="AppDataProxyFactory\" />
     <Folder Include="TaskLists\" />
     <Folder Include="Tasks\" />
+    <Folder Include="FeatureFlags\" />
   </ItemGroup>
 </Project>
