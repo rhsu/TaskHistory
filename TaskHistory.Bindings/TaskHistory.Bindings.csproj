@@ -44,6 +44,7 @@
     <Compile Include="ViewRepos\ViewRepoModule.cs" />
     <Compile Include="Terminal\TerminalModule.cs" />
     <Compile Include="Labels\LabelModule.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagModule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -67,5 +68,6 @@
     <Folder Include="Users\" />
     <Folder Include="ViewRepos\" />
     <Folder Include="Terminal\" />
+    <Folder Include="FeatureFlags\" />
   </ItemGroup>
 </Project>
