@@ -38,14 +38,6 @@ namespace TaskHistory.Orchestrator.Tasks
 			return tasksVM;
 		}
 
-		public ITask OrchestratorCreateTask_OLD(IUser user, string content)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-
-			return _taskRepo.CreateTask(content, user.UserId);
-		}
-
 		public TaskGridViewModel OrchestrateCreateTask(IUser user, string content)
 		{
 			if (user == null)
@@ -88,26 +80,6 @@ namespace TaskHistory.Orchestrator.Tasks
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
 			return retVal;
-		}
-
-		public bool OrchestratorDeleteTask(IUser user, int taskId)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-
-			_taskRepo.DeleteTask_OLD(taskId, user.UserId);
-
-			return true;
-		}
-
-		public bool OrchestrateSetTaskIsDeleted(IUser user, int taskId, bool status)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-			
-			_taskRepo.UpdateIsDeleted(taskId, user.UserId, status);
-
-			return true;
 		}
 
 		public TasksOrchestrator(ITaskRepo taskRepo, ITaskViewRepo taskViewRepo, ObjectMapperTasks taskPresenter)

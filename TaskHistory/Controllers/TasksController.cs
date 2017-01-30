@@ -19,22 +19,6 @@ namespace TaskHistory.Controllers
 			return View(vmTasks);
 		}
 
-		[HttpPost]
-		public ActionResult CreateTask(string content)
-		{
-			_taskOrchestrator.OrchestratorCreateTask_OLD(_currentUser, content);
-
-			return RedirectToAction("Index");
-		}
-
-		[HttpPost]
-		public ActionResult DeleteTask(int taskId)
-		{
-			_taskOrchestrator.OrchestratorDeleteTask(_currentUser, taskId);
-
-			return RedirectToAction("Index");
-		}
-
 		public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)
 			: base(appContext)
 		{
