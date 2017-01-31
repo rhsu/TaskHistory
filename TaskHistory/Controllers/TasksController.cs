@@ -1,15 +1,15 @@
-﻿using System;
-using System.Web.Mvc;
-using TaskHistory.Orchestrator.Tasks;
+﻿using System.Web.Mvc;
 
 namespace TaskHistory.Controllers
 {
+	// Still leaving this here but DO NOT USE
 	[Authorize]
-	public class TasksController : ApplicationController
+	public class TasksController : Controller
 	{
-		readonly TasksOrchestrator _taskOrchestrator;
+		/*readonly TasksOrchestrator _taskOrchestrator;*/
 
-		[HttpGet]
+		// This has been removed
+		/*[HttpGet]
 		public ActionResult Index()
 		{
 			var vmTasks = _taskOrchestrator.OrchestratorGetTasks_OLD(_currentUser);
@@ -17,12 +17,12 @@ namespace TaskHistory.Controllers
 				throw new NullReferenceException("null returned from orchestrator");
 
 			return View(vmTasks);
-		}
+		}*/
 
-		public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)
+		/*public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)
 			: base(appContext)
 		{
 			_taskOrchestrator = taskOrchestrator;
-		}
+		}*/
 	}
 }

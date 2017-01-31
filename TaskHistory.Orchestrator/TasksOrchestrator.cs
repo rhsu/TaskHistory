@@ -10,35 +10,27 @@ namespace TaskHistory.Orchestrator.Tasks
 {
 	public class TasksOrchestrator
 	{
-		readonly ITaskRepo _taskRepo;
-		readonly ITaskViewRepo _taskViewRepo;
-		readonly ObjectMapperTasks _taskObjectMapper;
+		readonly ITaskRepo _repo;
+		readonly ITaskViewRepo _viewRepo;
+		readonly ObjectMapperTasks _objectMapper;
 
-		public IEnumerable<ITask> OrchestratorGetTasks_OLD(IUser user)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-			
-			return _taskViewRepo.ReadTasksForUser(user);
-		}
-
-		public IEnumerable<TaskGridViewModel> OrchestrateGetTasks(IUser user)
+		public IEnumerable<TaskGridViewModel> Retrieve(IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			IEnumerable<ITask> tasks = _taskViewRepo.ReadTasksForUser(user);
+			IEnumerable<ITask> tasks = _viewRepo.ReadTasksForUser(user);
 			if (tasks == null)
 				throw new NullReferenceException($"null returned from TaskViewRepo when reading {user.UserId}");
 
-			IEnumerable<TaskGridViewModel> tasksVM = _taskObjectMapper.Map(tasks);
-			if (tasksVM == null)
+			IEnumerable<TaskGridViewModel> viewModel = _objectMapper.Map(tasks);
+			if (viewModel == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
-			return tasksVM;
+			return viewModel;
 		}
 
-		public TaskGridViewModel OrchestrateCreateTask(IUser user, string content)
+		public TaskGridViewModel Create(IUser user, string content)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
@@ -46,47 +38,47 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (string.IsNullOrEmpty(content))
 				throw new ArgumentNullException(nameof(content));
 
-			ITask task = _taskRepo.CreateTask(content, user.UserId);
+			ITask task = _repo.CreateTask(content, user.UserId);
 			if (task == null)
 				throw new NullReferenceException("Null returned from task repo");
 
-			TaskGridViewModel vmTask = _taskObjectMapper.Map(task);
-			if (vmTask == null)
+			TaskGridViewModel viewModel = _objectMapper.Map(task);
+			if (viewModel == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
-			return vmTask;
+			return viewModel;
 		}
 
-		public TaskGridViewModel OrchestrateEditTask(IUser user, 
-		                                             int taskId, 
-		                                             TaskEditViewModel taskEditViewModel)
+		public TaskGridViewModel Edit(IUser user, 
+		                              int taskId, 
+		                              TaskEditViewModel editViewModel)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			if (taskEditViewModel == null)
-				throw new ArgumentNullException(nameof(taskEditViewModel));
+			if (editViewModel == null)
+				throw new ArgumentNullException(nameof(editViewModel));
 
-			TaskUpdatingParameters updateParams = _taskObjectMapper.Map(taskEditViewModel);
+			TaskUpdatingParameters updateParams = _objectMapper.Map(editViewModel);
 			if (updateParams == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
-			ITask updatedTask = _taskRepo.UpdateTask(updateParams, taskId, user.UserId);
-			if (updatedTask == null)
+			ITask task = _repo.UpdateTask(updateParams, taskId, user.UserId);
+			if (task == null)
 				throw new NullReferenceException("null returned from TaskRepo");
 
-			TaskGridViewModel retVal = _taskObjectMapper.Map(updatedTask);
-			if (retVal == null)
+			TaskGridViewModel viewModel = _objectMapper.Map(task);
+			if (viewModel == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
-			return retVal;
+			return viewModel;
 		}
 
-		public TasksOrchestrator(ITaskRepo taskRepo, ITaskViewRepo taskViewRepo, ObjectMapperTasks taskPresenter)
+		public TasksOrchestrator(ITaskRepo repo, ITaskViewRepo viewRepo, ObjectMapperTasks mapper)
 		{
-			_taskRepo = taskRepo;
-			_taskViewRepo = taskViewRepo;
-			_taskObjectMapper = taskPresenter;
+			_repo = repo;
+			_viewRepo = viewRepo;
+			_objectMapper = mapper;
 		}
 	}
 }

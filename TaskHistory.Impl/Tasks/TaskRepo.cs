@@ -72,7 +72,7 @@ namespace TaskHistory.Impl.Tasks
 		}
 
 		public TaskRepo(TaskFactory taskFactory,
-			ApplicationDataProxy applicationDataProxy)
+		                ApplicationDataProxy applicationDataProxy)
 		{
 			_taskFactory = taskFactory;
 			_dataProxy = applicationDataProxy;

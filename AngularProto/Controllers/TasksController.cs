@@ -16,23 +16,23 @@ namespace AngularProto.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult GetTasks()
+		public JsonResult Retrieve()
 		{
-			return Json(_taskOrchestrator.OrchestrateGetTasks(_currentUser));
+			return Json(_taskOrchestrator.Retrieve(_currentUser));
 		}
 
 		[HttpPost]
-		public JsonResult CreateTask(string content)
+		public JsonResult Create(string content)
 		{
-			return Json(_taskOrchestrator.OrchestrateCreateTask(_currentUser, content));
+			return Json(_taskOrchestrator.Create(_currentUser, content));
 		}
 
 		[HttpPost]
-		public JsonResult EditTask(TaskEditViewModel taskEditViewModel, int taskId)
+		public JsonResult Edit(TaskEditViewModel editViewModel, int taskId)
 		{
-			return Json(_taskOrchestrator.OrchestrateEditTask(_currentUser,
-			                                                 taskId,
-			                                                  taskEditViewModel));
+			return Json(_taskOrchestrator.Edit(_currentUser,
+			                                                  taskId,
+			                                                  editViewModel));
 		}
 
 		public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)
