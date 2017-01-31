@@ -48,6 +48,8 @@ namespace TaskHistory.Impl.Tasks
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 			parameters.Add(_dataProxy.CreateParameter("pListId", listId));
 
+			// TODO can nonquery or DataReader return an int from
+			// a SELECT COUNT(*) like query?
 			/*SELECT t.* FROM Tasks t
 	INNER JOIN TaskToTaskListAssociations a
 	ON t.TaskId
