@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
 	const app = angular.module('app');
 
 	app.factory('TaskService', function ($http) {
