@@ -1,13 +1,12 @@
 ﻿using System;
 using TaskHistory.Api.Labels;
 using TaskHistory.Api.Sql;
-using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Labels
 {
-	public class LabelFactory : BaseFromDataReaderFactory<ILabel>
+	public class LabelFactory : IFromDataReaderFactory<ILabel>
 	{
-		public override ILabel CreateTypeFromDataReader(ISqlDataReader reader)
+		public ILabel Build(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new ArgumentNullException(nameof(reader));

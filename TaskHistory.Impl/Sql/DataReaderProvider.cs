@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,25 +9,39 @@ using TaskHistory.Api.Sql;
 namespace TaskHistory.Impl.Sql
 {
 	/// <summary>
-	/// Provider that communicates with a my sql database for reading data 
+	/// Provider that communicates with a MySql database for reading data 
 	/// Consider using ApplicationDataProxy instead of using this class directly
 	/// </summary>
 	public class DataReaderProvider : BaseDataProvider, IDataReaderProvider
 	{
-		private readonly SqlDataReaderFactory _sqlDataReaderFactory;
-		private readonly string _connectionString;
+		readonly SqlDataReaderFactory _sqlDataReaderFactory;
+		readonly string _connectionString;
 
-		private const string NullFromExecuteReaderForTypeCollection = "Null returned from ExceuteReaderForTypeCollection";
+		const string NullFromExecuteReaderForTypeCollection = "Null returned from ExceuteReaderForTypeCollection";
 
-		public T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory,
+		public IEnumerable<T> ExecuteReaderForTypeCollection<T>(IFromDataReaderFactory<T> factory,
+											  string storedProcedureName)
+		{
+			if (factory == null)
+				throw new ArgumentNullException(nameof(factory));
+
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
+
+			return this.ExecuteReaderForTypeCollection(factory,
+													   storedProcedureName,
+													   new List<ISqlDataParameter>());
+		}
+
+		public T ExecuteReader<T> (IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			ISqlDataParameter parameter)
 		{
 			if (factory == null)
 				throw new ArgumentNullException (nameof(factory));
 
-			if ((storedProcedureName == null) || (storedProcedureName == string.Empty))
-				throw new ArgumentNullException (nameof(storedProcedureName));
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
 
 			if (parameter == null)
 				throw new ArgumentNullException (nameof(parameter));
@@ -39,20 +53,22 @@ namespace TaskHistory.Impl.Sql
 			return collection.FirstOrDefault ();
 		}
 
-		public T ExecuteReaderForSingleType<T> (IFromDataReaderFactory<T> factory, 
+		public T ExecuteReader<T> (IFromDataReaderFactory<T> factory, 
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{
 			if (factory == null)
 				throw new ArgumentNullException (nameof(factory));
 
-			if ((storedProcedureName == null) || (storedProcedureName == string.Empty))
-				throw new ArgumentNullException (nameof(storedProcedureName));
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
 
 			if (parameters == null)
 				throw new ArgumentNullException (nameof(parameters));
 
-			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, storedProcedureName, parameters);
+			IEnumerable<T> collection = this.ExecuteReaderForTypeCollection<T> (factory, 
+			                                                                    storedProcedureName, 
+			                                                                    parameters);
 			if (collection == null)
 				throw new NullReferenceException (NullFromExecuteReaderForTypeCollection);
 
@@ -60,8 +76,8 @@ namespace TaskHistory.Impl.Sql
 		}
 
 		public IEnumerable<T> ExecuteReaderForTypeCollection<T> (IFromDataReaderFactory<T> factory,
-			string storedProcedureName,
-			ISqlDataParameter parameter)
+		                                                         string storedProcedureName,
+		                                                         ISqlDataParameter parameter)
 		{
 			if (factory == null)
 				throw new ArgumentNullException (nameof(factory));
@@ -120,14 +136,30 @@ namespace TaskHistory.Impl.Sql
 
 				while (reader.Read ()) 
 				{
-					T currentItem = factory.CreateTypeFromDataReader (sqlReader);
+					T currentItem = factory.Build (sqlReader);
 					returnVal.Add (currentItem);
 				}
 				return returnVal;
 			}
 		}
 
-		public DataReaderProvider (SqlDataReaderFactory sqlDataReaderFactory, IConfigurationProvider configurationProvider)
+		public T ExecuteReader<T>(IFromDataReaderFactory<T> factory, 
+		                         string storedProcedureName)
+		{
+			if (factory == null)
+				throw new ArgumentNullException(nameof(factory));
+
+			if (string.IsNullOrEmpty(storedProcedureName))
+				throw new ArgumentNullException(nameof(storedProcedureName));
+
+
+			return this.ExecuteReader(factory,
+									  storedProcedureName,
+									  new List<ISqlDataParameter>());
+		}
+    
+		public DataReaderProvider (SqlDataReaderFactory sqlDataReaderFactory, 
+		                           IConfigurationProvider configurationProvider)
 			: base()
 		{
 			_sqlDataReaderFactory = sqlDataReaderFactory;

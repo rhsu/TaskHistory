@@ -7,6 +7,9 @@
 		$scope.formData.username = '';
 		$scope.formData.password = '';
 
+		$scope.pageState = {};
+		$scope.pageState.isRegisterSuccessful = $location.search().isRegisterSuccessful;
+
 		$scope.fns = {};
 		$scope.fns.login = function () {
 			UserLoginService.promiseLoginUser($scope.formData)

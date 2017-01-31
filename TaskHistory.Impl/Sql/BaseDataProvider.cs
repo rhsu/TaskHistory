@@ -1,16 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
+	// TODO not sure I like this anymore
 	public abstract class BaseDataProvider
 	{
 		protected static List<MySqlParameter> CreateMySqlParametersFromSqlDataParams(IEnumerable<ISqlDataParameter> parameters)
 		{
 			if (parameters == null)
-				throw new ArgumentNullException(nameof(parameters));
+				throw new ArgumentNullException (nameof(parameters));
 
 			var returnVal = new List<MySqlParameter>();
 

@@ -46,6 +46,10 @@
     <Compile Include="Terminal\TerminalInterpreterHelperTest.cs" />
     <Compile Include="Users\UserRepoTest.cs" />
     <Compile Include="AppDataProxyFactory\ApplicationDataProxyFactory.cs" />
+    <Compile Include="TaskLists\TaskListRepoTest.cs" />
+    <Compile Include="TestFixtures.cs" />
+    <Compile Include="Tasks\TaskRepoTest.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagRepoTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -69,5 +73,8 @@
     <Folder Include="Terminal\" />
     <Folder Include="Users\" />
     <Folder Include="AppDataProxyFactory\" />
+    <Folder Include="TaskLists\" />
+    <Folder Include="Tasks\" />
+    <Folder Include="FeatureFlags\" />
   </ItemGroup>
 </Project>

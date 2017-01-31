@@ -4,10 +4,10 @@ namespace TaskHistory.Api.Sql
 {
 	public interface INonQueryDataProvider
 	{
-		void ExecuteNonQuery (string storedProcedureName);
+		int Execute (string storedProcedureName);
 
-		void ExecuteNonQuery(string storedProcedureName, ISqlDataParameter parameter);
+		int Execute(string storedProcedureName, ISqlDataParameter parameter);
 
-		void ExecuteNonQuery(string storedProcedureName, IEnumerable<ISqlDataParameter> parameters);
+		int Execute(string storedProcedureName, IEnumerable<ISqlDataParameter> parameters);
 	}
 }

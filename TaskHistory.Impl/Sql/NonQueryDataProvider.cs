@@ -13,17 +13,17 @@ namespace TaskHistory.Impl.Sql
 	/// </summary>
 	public class NonQueryDataProvider : BaseDataProvider, INonQueryDataProvider
 	{
-		private readonly IConfigurationProvider _configurationProvider;
+		readonly IConfigurationProvider _configurationProvider;
 
-		public void ExecuteNonQuery(string storedProcedureName)
+		public int Execute(string storedProcedureName)
 		{
 			if (storedProcedureName == null || storedProcedureName == string.Empty)
 				throw new ArgumentNullException(nameof(storedProcedureName));
 
-			this.ExecuteNonQuery(storedProcedureName, new List<ISqlDataParameter>());
+			return this.Execute(storedProcedureName, new List<ISqlDataParameter>());
 		}
 
-		public void ExecuteNonQuery(string storedProcedureName, ISqlDataParameter parameter)
+		public int Execute(string storedProcedureName, ISqlDataParameter parameter)
 		{
 			if (storedProcedureName == null || storedProcedureName == string.Empty)
 				throw new ArgumentNullException(nameof(storedProcedureName));
@@ -31,10 +31,10 @@ namespace TaskHistory.Impl.Sql
 			if (parameter == null)
 				throw new ArgumentNullException(nameof(parameter));
 
-			this.ExecuteNonQuery(storedProcedureName, new List<ISqlDataParameter> { parameter });
+			return this.Execute(storedProcedureName, new List<ISqlDataParameter> { parameter });
 		}
 
-		public void ExecuteNonQuery(string storedProcedureName, IEnumerable<ISqlDataParameter> parameters)
+		public int Execute(string storedProcedureName, IEnumerable<ISqlDataParameter> parameters)
 		{
 			if (storedProcedureName == null || storedProcedureName == string.Empty)
 				throw new ArgumentNullException(nameof(storedProcedureName));
@@ -57,7 +57,7 @@ namespace TaskHistory.Impl.Sql
 				}
 
 				command.Connection.Open();
-				command.ExecuteNonQuery();
+				return command.ExecuteNonQuery();
 			}
 		}
 
