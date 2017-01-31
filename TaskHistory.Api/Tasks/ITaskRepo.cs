@@ -7,8 +7,6 @@ namespace TaskHistory.Api.Tasks
 	{
 		ITask CreateTask(string taskContent, int userId);
 
-		ITask CreateTaskOnList(int userId, int listId, string content);
-
 		IEnumerable<ITask> ReadTasks(int userId);
 
 		ITask UpdateTask(TaskUpdatingParameters taskUpdatingParameters, int userId, int taskId);
@@ -16,5 +14,10 @@ namespace TaskHistory.Api.Tasks
 		void DeleteTask_OLD(int taskId, int userId);
 
 		bool UpdateIsDeleted(int taskId, int userId, bool isDeleted);
+
+
+		ITask CreateTaskOnList(int userId, int listId, string content);
+
+		bool AssociateTaskToList(int userId, int taskId, int listId);
 	}
 }

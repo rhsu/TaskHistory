@@ -41,6 +41,22 @@ namespace TaskHistory.Impl.Tasks
 			return returnVal;
 		}
 
+		public bool AssertTaskListExists(int userId, int listId)
+		{
+			var parameters = new List<ISqlDataParameter>();
+
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pListId", listId));
+
+			/*SELECT t.* FROM Tasks t
+	INNER JOIN TaskToTaskListAssociations a
+	ON t.TaskId
+    INNER JOIN TaskLists l
+    ON l.Id;*/
+
+			return true;
+		}
+
 		public ITask CreateTaskOnList(int userId, int listId, string content)
 		{
 			if (string.IsNullOrEmpty(content))
@@ -59,6 +75,11 @@ namespace TaskHistory.Impl.Tasks
 				throw new NullReferenceException("Null returned from dataProxy");
 
 			return retVal;
+		}
+
+		public bool AssociateTaskToList(int userId, int taskId, int listId)
+		{
+			return false;
 		}
 
 		public IEnumerable<ITask> ReadTasks(int userId)

@@ -103,13 +103,23 @@ namespace TaskHistory.Impl.Test
 		[Test]
 		public void CreateTaskOnList()
 		{
-			// Hmm what if the task already exists on that same list.
+			// a lot of things here can fail
+			// 1. a list does not exist with that Id
+			// 2. the list id is valid but not for that user
+			// 3. this relationship already exists
 
 			var userId = _testFixtures.User.UserId;
 			var listId = _testFixtures.TaskList.Id;
 			var content = "test content here";
 
-			/*ITask task =*/ _taskRepo.CreateTaskOnList(userId, listId, content);
+			ITask task = _taskRepo.CreateTaskOnList(userId, listId, content);
+
+			Assert.AreEqual(content, task.Content);
 		}
+
+		/*[Test]
+		public void CreateTaskOnList()
+		{
+		}*/
 	}
 }
