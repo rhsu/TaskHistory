@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory", "TaskHistory\TaskHistory.csproj", "{4C636183-7D20-466E-B2AB-E279582C5285}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Bindings", "TaskHistory.Bindings\TaskHistory.Bindings.csproj", "{513BEE59-6C11-49FE-9B3B-72CFBC501AF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Impl", "TaskHistory.Impl\TaskHistory.Impl.csproj", "{72D931D2-0537-4089-A50A-D7E2622073A2}"
@@ -33,10 +31,6 @@ Global
 		{326E57DF-28B8-49BD-977E-2463D328CAA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{326E57DF-28B8-49BD-977E-2463D328CAA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{326E57DF-28B8-49BD-977E-2463D328CAA4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C636183-7D20-466E-B2AB-E279582C5285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C636183-7D20-466E-B2AB-E279582C5285}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C636183-7D20-466E-B2AB-E279582C5285}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C636183-7D20-466E-B2AB-E279582C5285}.Release|Any CPU.Build.0 = Release|Any CPU
 		{513BEE59-6C11-49FE-9B3B-72CFBC501AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{513BEE59-6C11-49FE-9B3B-72CFBC501AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{513BEE59-6C11-49FE-9B3B-72CFBC501AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU

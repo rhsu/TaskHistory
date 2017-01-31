@@ -37,3 +37,9 @@ The easiest way to do this is by running
 - run the two Database load scripts in the Database directory: `./LoadDatabase.sh` and `./TestDatabaseLoad.sh`
 
 All changes to the database can be ran via `./SaveDatabase.sh`. Do note that this will also automatically update the the `TaskHistoryTest` database.
+
+Issues
+--------
+The bower package is very broken and may install angular 1.6.x which the current router does not support. 
+In case anything happens please clone https://github.com/rhsu/TaskHistoryBowerBackup and use that as the bower package until a fix has been made. 
+The stable angular that this project requires is 1.5.x
