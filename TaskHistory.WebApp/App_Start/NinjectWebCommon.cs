@@ -1,7 +1,7 @@
-﻿[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(AngularProto.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(AngularProto.App_Start.NinjectWebCommon), "Stop")]
+﻿[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(TaskHistory.WebApp.App_Start.NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(TaskHistory.WebApp.App_Start.NinjectWebCommon), "Stop")]
 
-namespace AngularProto.App_Start
+namespace TaskHistory.WebApp.App_Start
 {
 	using System;
 	using System.Web;

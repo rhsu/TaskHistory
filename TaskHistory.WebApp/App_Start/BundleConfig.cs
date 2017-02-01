@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Optimization;
 
-namespace AngularProto
+namespace TaskHistory.WebApp
 {
 	public class BundleConfig
 	{

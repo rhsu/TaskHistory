@@ -1,4 +1,4 @@
-﻿namespace AngularProto
+﻿namespace TaskHistory.WebApp
 {
 	public class TerminalResponseObject
 	{
