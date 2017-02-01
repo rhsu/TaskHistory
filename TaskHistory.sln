@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.ObjectMapper", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Impl.Test", "TaskHistory.Impl.Test\TaskHistory.Impl.Test.csproj", "{8BA24FD3-EC23-4201-AB5D-6EA2E363DA83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.WebApp", "TaskHistory.WebApp\TaskHistory.WebApp.csproj", "{38673E33-19E3-4907-B048-3E21972D3FE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularProto", "AngularProto\AngularProto.csproj", "{38673E33-19E3-4907-B048-3E21972D3FE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

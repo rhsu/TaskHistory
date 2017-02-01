@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace TaskHistory.WebApp
+namespace AngularProto
 {
 	public class Global : HttpApplication
 	{

@@ -6,7 +6,7 @@
     <ProjectGuid>{38673E33-19E3-4907-B048-3E21972D3FE1}</ProjectGuid>
     <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>TaskHistory.WebApp</RootNamespace>
+    <RootNamespace>AngularProto</RootNamespace>
     <AssemblyName>AngularProto</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -103,7 +103,10 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\RoutesDemoController.cs" />
+    <Compile Include="Models\TestModel.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\TerminalController.cs" />
@@ -114,10 +117,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\Demo.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
+    <Content Include="Views\RoutesDemo\One.cshtml" />
+    <Content Include="Views\RoutesDemo\Two.cshtml" />
+    <Content Include="Views\RoutesDemo\Three.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\Demo\Controllers\AppController.js" />
     <Content Include="Scripts\Demo\Services\DummyService.js" />

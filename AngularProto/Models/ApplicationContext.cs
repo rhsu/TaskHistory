@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using TaskHistory.Api.Users;
 
-namespace TaskHistory.WebApp
+namespace AngularProto
 {
 	public class ApplicationContext
 	{

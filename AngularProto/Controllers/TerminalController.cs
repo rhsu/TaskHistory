@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using TaskHistoryOrchestrator;
 
-namespace TaskHistory.WebApp.Controllers
+namespace AngularProto.Controllers
 {
 	[Authorize]
 	public class TerminalController : ApplicationController

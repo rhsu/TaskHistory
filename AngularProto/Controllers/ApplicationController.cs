@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using TaskHistory.Api.Users;
 
-namespace TaskHistory.WebApp.Controllers
+namespace AngularProto.Controllers
 {
 	public abstract class ApplicationController : Controller
 	{
