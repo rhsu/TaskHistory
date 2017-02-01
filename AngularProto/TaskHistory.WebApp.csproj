@@ -6,7 +6,7 @@
     <ProjectGuid>{38673E33-19E3-4907-B048-3E21972D3FE1}</ProjectGuid>
     <ProjectTypeGuids>{349C5851-65DF-11DA-9384-00065B846F21};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>AngularProto</RootNamespace>
+    <RootNamespace>TaskHistory.WebApp</RootNamespace>
     <AssemblyName>AngularProto</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
