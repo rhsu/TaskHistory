@@ -11,8 +11,9 @@
             
             create(featureFlag) {
                 return $http.post('/FeatureFlags/Create/', { 
-                    name: featureFlag.name,
-                    value: featureFlag.value
+                    //name: featureFlag.name,
+                    //value: featureFlag.value
+                    viewModel: featureFlag
                 });
             },
             

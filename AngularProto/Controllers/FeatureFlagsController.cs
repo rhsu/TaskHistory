@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using TaskHistory.Orchestrator;
+using TaskHistory.ViewModel.FeatureFlags;
 
 namespace AngularProto.Controllers
 {
@@ -14,9 +15,9 @@ namespace AngularProto.Controllers
 		}
 
 		[HttpPost]
-		public ActionResult Create()
+		public ActionResult Create(FeatureFlagCreateViewModel viewModel)
 		{
-			return Json(true);
+			return Json(_orchestrator.Create(viewModel));
 		}
 
 		[HttpPost]
