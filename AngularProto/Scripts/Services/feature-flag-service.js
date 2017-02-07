@@ -5,20 +5,34 @@
     
 	const app = angular.module('app');
 
-	app.factory('FeatureFlagService', function ($http) {
+	app.factory('FeatureFlagService', function ($http, 
+                                                $log,
+                                                FeatureFlagTableViewFactory) {
         
         return {
             
             create(featureFlag) {
                 return $http.post('/FeatureFlags/Create/', { 
-                    //name: featureFlag.name,
-                    //value: featureFlag.value
                     viewModel: featureFlag
                 });
             },
             
             retrieve() {
-                return $http.post('/FeatureFlags/Get/');
+                return $http.post('/FeatureFlags/Get/')
+                    .then(function (response) {
+                        if (response.data) {
+                            const flags = [];
+                            
+                            $log.debug("logging the for loop");
+                            for (let i = 0; i < response.data.length; i++) {
+                                const jsonObj = response.data[i];
+                                const flag = FeatureFlagTableViewFactory.buildFromJson(jsonObj);
+                                flags.push(flag);
+                            }
+                            
+                            return flags;
+                        }
+                    }, function (reason) {});
             },
             
             update(featureFlag) {

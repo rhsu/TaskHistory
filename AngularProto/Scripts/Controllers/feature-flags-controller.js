@@ -6,20 +6,18 @@
     
 	const app = angular.module('app');
 
-	app.controller('FeatureFlagsController', function ($scope, $log, FeatureFlagService) {
+	app.controller('FeatureFlagsController', function ($scope, 
+                                                       $log, 
+                                                       FeatureFlagService) {
         $scope.pageData = {};
         $scope.pageData.flags = [];
         
         $scope.formData = {};
         
-        for (let i = 0; i < 5; i++) {
-            $scope.pageData.flags.push({id: 1, name: 'hello', value: i});
-        }
-        
         FeatureFlagService.retrieve().then(function (response) {
-            /*$log.info(response.data);*/
-            if (response.data) {
-                ///
+            
+            for (let i = 0; i < response.length; i++) {
+                $scope.pageData.flags.push(response[i]);
             }
             
         }, function (reason) {});
