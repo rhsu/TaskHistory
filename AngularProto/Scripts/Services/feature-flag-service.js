@@ -5,9 +5,7 @@
     
 	const app = angular.module('app');
 
-	app.factory('FeatureFlagService', function ($http, 
-                                                $log,
-                                                FeatureFlagTableViewFactory) {
+	app.factory('FeatureFlagService', function ($http) {
         
         return {
             
@@ -18,25 +16,13 @@
             },
             
             retrieve() {
-                return $http.post('/FeatureFlags/Get/')
-                    .then(function (response) {
-                        if (response.data) {
-                            const flags = [];
-                            
-                            for (let i = 0; i < response.data.length; i++) {
-                                const jsonObj = response.data[i];
-                                const flag = FeatureFlagTableViewFactory.buildFromJson(jsonObj);
-                                flags.push(flag);
-                            }
-                            
-                            return flags;
-                        }
-                    }, function (reason) {});
+                return $http.post('/FeatureFlags/Get/');
             },
             
             update(featureFlag) {
+                // TODO this should take in a viewModel
                 return $http.post('/FeatureFlags/Update/', {
-                   id: featureFlag.id,
+                    id: featureFlag.id,
                     name: featureFlag.name,
                     value: featureFlag.value
                 });

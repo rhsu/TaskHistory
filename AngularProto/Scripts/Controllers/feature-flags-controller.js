@@ -25,9 +25,12 @@
         
         $scope.pageFns.refresh = function () {
             FeatureFlagService.retrieve().then(function (response) {
-
-                for (let i = 0; i < response.length; i++) {
-                    $scope.pageData.flags.push(response[i]);
+                const data = response.data;
+                if (data) {
+                    for (let i = 0; i < data.length; i++) {
+                        const newFlag = FeatureFlagTableViewFactory.buildFromJson(data[i]);
+                        $scope.pageData.flags.push(newFlag);
+                    }
                 }
 
             }, function (reason) {});
