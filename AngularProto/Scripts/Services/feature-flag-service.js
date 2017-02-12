@@ -23,7 +23,6 @@
                         if (response.data) {
                             const flags = [];
                             
-                            $log.debug("logging the for loop");
                             for (let i = 0; i < response.data.length; i++) {
                                 const jsonObj = response.data[i];
                                 const flag = FeatureFlagTableViewFactory.buildFromJson(jsonObj);
