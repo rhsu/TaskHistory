@@ -8,7 +8,7 @@ namespace TaskHistory.Api.FeatureFlags
 
 		IEnumerable<IFeatureFlag> Read();
 
-		IFeatureFlag Update(string name, string value);
+		IFeatureFlag Update(int id, string name, string value);
 
 		int Delete(int id);
 	}

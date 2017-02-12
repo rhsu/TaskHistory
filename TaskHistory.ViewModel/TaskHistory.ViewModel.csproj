@@ -33,11 +33,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TaskGridViewModel.cs" />
-    <Compile Include="UserLoginViewModel.cs" />
-    <Compile Include="UserRegistrationParametersViewModel.cs" />
-    <Compile Include="UserRegistrationStatusViewModel.cs" />
-    <Compile Include="TaskEditViewModel.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagEditViewModel.cs" />
+    <Compile Include="Tasks\TaskEditViewModel.cs" />
+    <Compile Include="Tasks\TaskTableViewModel.cs" />
+    <Compile Include="Users\UserLoginViewModel.cs" />
+    <Compile Include="Users\UserRegistrationParametersViewModel.cs" />
+    <Compile Include="Users\UserRegistrationStatusViewModel.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagTableViewModel.cs" />
+    <Compile Include="FeatureFlags\FeatureFlagCreateViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tasks\" />
+    <Folder Include="Users\" />
+    <Folder Include="FeatureFlags\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

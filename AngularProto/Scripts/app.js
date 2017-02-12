@@ -10,6 +10,9 @@
 		.when('/Home', {
 			templateUrl: '/Tasks/Index'
 		})
+		.when('/FeatureFlags', {
+			templateUrl: '/FeatureFlags/Index'
+		})
 		.when('/Tasks', {
 			templateUrl: '/Tasks/Index'
 		})

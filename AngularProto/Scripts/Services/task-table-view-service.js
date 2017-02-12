@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
 	const app = angular.module('app');	
 
 	function TaskTableView(taskId, 
