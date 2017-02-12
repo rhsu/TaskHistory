@@ -20,11 +20,8 @@
             },
             
             update(featureFlag) {
-                // TODO this should take in a viewModel
                 return $http.post('/FeatureFlags/Update/', {
-                    id: featureFlag.id,
-                    name: featureFlag.name,
-                    value: featureFlag.value
+                    viewModel: featureFlag
                 });
             },
             

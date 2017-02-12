@@ -53,9 +53,11 @@ namespace TaskHistory.Orchestrator
 			if (vmFeatureFlag == null)
 				throw new ArgumentNullException(nameof(vmFeatureFlag));
 
-			// var retVal = _repo.Update(
+			var retVal = _repo.Update(vmFeatureFlag.Id, 
+			                          vmFeatureFlag.Name, 
+			                          vmFeatureFlag.Value);
 
-			return null;
+			return retVal;
 		}
 	}
 }

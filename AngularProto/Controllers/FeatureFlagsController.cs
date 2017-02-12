@@ -26,6 +26,12 @@ namespace AngularProto.Controllers
 			return Json(_orchestrator.GetFlags());
 		}
 
+		[HttpPost]
+		public ActionResult Update(FeatureFlagEditViewModel viewModel)
+		{
+			return Json(_orchestrator.Update(viewModel));
+		}
+
 		public FeatureFlagsController(FeatureFlagsOrchestrator orchestrator)
 		{
 			_orchestrator = orchestrator;
