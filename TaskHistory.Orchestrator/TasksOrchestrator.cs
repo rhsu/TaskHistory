@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
@@ -31,7 +31,7 @@ namespace TaskHistory.Orchestrator.Tasks
 		}
 
 		public TaskGridViewModel Create(IUser user, string content)
-		{
+    {
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
@@ -43,11 +43,11 @@ namespace TaskHistory.Orchestrator.Tasks
 				throw new NullReferenceException("Null returned from task repo");
 
 			TaskGridViewModel viewModel = _objectMapper.Map(task);
-			if (viewModel == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
 			return viewModel;
 		}
+
 
 		public TaskGridViewModel Edit(IUser user, 
 		                              int taskId, 
