@@ -1,7 +1,7 @@
-﻿(function () {
+(function () {
 	var app = angular.module('app', ['ngRoute']);
-
-	app.config(function ($routeProvider) {
+    
+	app.config(function ($routeProvider, $locationProvider) {
 		$routeProvider.when('/', {
 			templateUrl: '/Home/Login'
 		}).when('/Register', {
@@ -19,6 +19,8 @@
 		.when('/Terminal', {
 			templateUrl: '/Tasks/Index'
 		});
+        
+        $locationProvider.hashPrefix('');
 	});
 
 	// TODO put me in a separate file
@@ -38,4 +40,4 @@
 
 		}
 	});
-})();
+}());
