@@ -14,7 +14,7 @@ namespace TaskHistory.Orchestrator.Tasks
 		readonly ITaskViewRepo _viewRepo;
 		readonly ObjectMapperTasks _objectMapper;
 
-		public IEnumerable<TaskGridViewModel> Retrieve(IUser user)
+		public IEnumerable<TaskTableViewModel> Retrieve(IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
@@ -23,14 +23,14 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (tasks == null)
 				throw new NullReferenceException($"null returned from TaskViewRepo when reading {user.UserId}");
 
-			IEnumerable<TaskGridViewModel> viewModel = _objectMapper.Map(tasks);
+			IEnumerable<TaskTableViewModel> viewModel = _objectMapper.Map(tasks);
 			if (viewModel == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
 			return viewModel;
 		}
 
-		public TaskGridViewModel Create(IUser user, string content)
+		public TaskTableViewModel Create(IUser user, string content)
     {
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
@@ -42,14 +42,15 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (task == null)
 				throw new NullReferenceException("Null returned from task repo");
 
-			TaskGridViewModel viewModel = _objectMapper.Map(task);
+			TaskTableViewModel viewModel = _objectMapper.Map(task);
+			if (viewModel == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
 			return viewModel;
 		}
 
 
-		public TaskGridViewModel Edit(IUser user, 
+		public TaskTableViewModel Edit(IUser user, 
 		                              int taskId, 
 		                              TaskEditViewModel editViewModel)
 		{
@@ -67,7 +68,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (task == null)
 				throw new NullReferenceException("null returned from TaskRepo");
 
-			TaskGridViewModel viewModel = _objectMapper.Map(task);
+			TaskTableViewModel viewModel = _objectMapper.Map(task);
 			if (viewModel == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
