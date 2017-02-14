@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaskHistory.Api.FeatureFlags;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
 using TaskHistory.Api.ViewRepos;
@@ -12,7 +13,10 @@ namespace TaskHistory.Orchestrator.Tasks
 	{
 		readonly ITaskRepo _taskRepo;
 		readonly ITaskViewRepo _taskViewRepo;
+		readonly IFeatureFlagRepo _featureFlagRepo;
 		readonly ObjectMapperTasks _taskObjectMapper;
+
+		readonly IFeatureFlag _productionDatabaseFlag;
 
 		public IEnumerable<ITask> OrchestratorGetTasks_OLD(IUser user)
 		{
@@ -110,11 +114,17 @@ namespace TaskHistory.Orchestrator.Tasks
 			return true;
 		}
 
-		public TasksOrchestrator(ITaskRepo taskRepo, ITaskViewRepo taskViewRepo, ObjectMapperTasks taskPresenter)
+		public TasksOrchestrator(ITaskRepo taskRepo, 
+		                         ITaskViewRepo taskViewRepo, 
+		                         ObjectMapperTasks taskPresenter,
+		                         IFeatureFlagRepo featureFlagRepo)
 		{
 			_taskRepo = taskRepo;
 			_taskViewRepo = taskViewRepo;
 			_taskObjectMapper = taskPresenter;
+			_featureFlagRepo = featureFlagRepo;
+
+			_productionDatabaseFlag = featureFlagRepo.Read("production");
 		}
 	}
 }

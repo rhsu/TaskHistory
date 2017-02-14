@@ -6,7 +6,9 @@ namespace TaskHistory.Api.FeatureFlags
 	{
 		IFeatureFlag Create(string name, string value);
 
-		IEnumerable<IFeatureFlag> Read();
+		IFeatureFlag Read(string key);
+
+		IEnumerable<IFeatureFlag> ReadAll();
 
 		IFeatureFlag Update(int id, string name, string value);
 

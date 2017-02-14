@@ -20,7 +20,7 @@ namespace TaskHistory.Orchestrator
 
 		public IEnumerable<FeatureFlagTableViewModel> GetFlags()
 		{
-			var flags = _repo.Read();
+			var flags = _repo.ReadAll();
 			if (flags == null)
 				throw new NullReferenceException("Null returned from repo");
 

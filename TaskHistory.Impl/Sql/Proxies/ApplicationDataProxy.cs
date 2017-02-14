@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaskHistory.Api.FeatureFlags;
 using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
@@ -146,8 +147,8 @@ namespace TaskHistory.Impl.Sql
 		}
 
 		public ApplicationDataProxy (IDataReaderProvider dataReaderProvider, 
-			SqlParameterFactory paramFactory,
-			NonQueryDataProvider nonQueryDataProvider)
+		                             SqlParameterFactory paramFactory,
+		                             NonQueryDataProvider nonQueryDataProvider)
 		{
 			_dataReaderProvider = dataReaderProvider;
 			_parameterFactory = paramFactory;
