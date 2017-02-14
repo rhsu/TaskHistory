@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
 	const app = angular.module('app');
 
 	app.controller('TasksController', function ($scope, TaskTableViewService) {
@@ -11,11 +11,9 @@
 		$scope.pageFns = {};
 
 		var refreshTasks = function () {
-			TaskTableViewService.getTasks().then(function (tasks) {
+			TaskTableViewService.retrieve().then(function (tasks) {
 				$scope.pageData.tasks = tasks;
-			}, function (reason) {
-				// placeholder for error handling...
-			});
+			}, function (reason) {});
 		};
 
 		var resetForm = function () {
@@ -29,7 +27,7 @@
 		};
 
 		$scope.pageFns.insertTask = function () {
-			TaskTableViewService.createTask($scope.formData)
+			TaskTableViewService.create($scope.formData)
 				.then(function (response) {
 					if (response) {
 						resetForm();

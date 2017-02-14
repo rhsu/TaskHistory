@@ -4,20 +4,16 @@
 	app.factory('TaskService', function ($http) {
 		
 		return {
-			getTasks() {
-				return $http.post('/Tasks/Retrieve/');
-			},
-
-			createTask(content) {
+            
+			create(content) {
 				return $http.post('/Tasks/Create/', { content: content });
 			},
-
-            // This has been marked for deletion
-			updateTaskIsDeleted(taskId, status) {
-				return $http.post('/Tasks/SetTaskIsDeleted/', { taskId: taskId, status: status });
+            
+			retrieve() {
+				return $http.post('/Tasks/Retrieve/');
 			},
             
-            editTask(task) {
+            update(task) {
                 return $http.post('/Tasks/Edit', { editViewModel : task});
             }
 		}

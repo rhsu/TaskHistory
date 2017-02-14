@@ -46,8 +46,8 @@
 	app.factory('TaskTableViewService', function (TaskService) {
 
 		return {
-			getTasks() {
-				return TaskService.getTasks().then(function (response) {
+			retrieve() {
+				return TaskService.retrieve().then(function (response) {
 					jsonObject = response.data;
 
 					const tasks = [];
@@ -60,20 +60,16 @@
 					}
 
 					return tasks;
-				}, function (reason) {
-					// TODO placeholder for error handling
-				});
+				}, function (reason) {});
 			},
 
-			createTask(taskData) {
-				return TaskService.createTask(taskData.taskContent).then(function (response) {
+			create(taskData) {
+				return TaskService.create(taskData.taskContent).then(function (response) {
 					jsonObject = response.data;
 
 					return new TaskTableView(jsonObject.TaskId,
 						jsonObject.TaskContent);
-				}, function (reason) {
-					// TODO placeholder for error handling
-				});
+				}, function (reason) {});
 			},
 
 			deleteTask(task) {
