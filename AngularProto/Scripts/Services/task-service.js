@@ -14,7 +14,9 @@
 			},
             
             update(task) {
-                return $http.post('/Tasks/Edit', { editViewModel : task});
+                return $http.post('/Tasks/Edit', { viewModel : task, 
+                                                   taskId : task.taskId
+                                                 });
             }
 		}
 	});

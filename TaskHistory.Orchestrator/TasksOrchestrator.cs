@@ -52,27 +52,27 @@ namespace TaskHistory.Orchestrator.Tasks
 
 		public TaskTableViewModel Edit(IUser user, 
 		                              int taskId, 
-		                              TaskEditViewModel editViewModel)
+		                              TaskEditViewModel viewModel)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			if (editViewModel == null)
-				throw new ArgumentNullException(nameof(editViewModel));
+			if (viewModel == null)
+				throw new ArgumentNullException(nameof(viewModel));
 
-			TaskUpdatingParameters updateParams = _objectMapper.Map(editViewModel);
+			TaskUpdatingParameters updateParams = _objectMapper.Map(viewModel);
 			if (updateParams == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
-			ITask task = _repo.UpdateTask(updateParams, taskId, user.UserId);
+			ITask task = _repo.UpdateTask(updateParams, user.UserId, taskId);
 			if (task == null)
 				throw new NullReferenceException("null returned from TaskRepo");
 
-			TaskTableViewModel viewModel = _objectMapper.Map(task);
-			if (viewModel == null)
+			TaskTableViewModel retVal = _objectMapper.Map(task);
+			if (retVal == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
-			return viewModel;
+			return retVal;
 		}
 
 		public TasksOrchestrator(ITaskRepo repo, ITaskViewRepo viewRepo, ObjectMapperTasks mapper)

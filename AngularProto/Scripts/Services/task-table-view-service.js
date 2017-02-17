@@ -72,8 +72,10 @@
 				}, function (reason) {});
 			},
 
-			deleteTask(task) {
-				return TaskService.updateTaskIsDeleted(task.taskId, true).then(function (response) {
+			delete(task) {
+                task.isDeleted = true;
+                
+				return TaskService.update(task).then(function (response) {
 					if (response.data) {
 						// TODO maybe the endpoint returns the entire task as is in the database
 						// then the client does something like 
@@ -84,13 +86,13 @@
 						return task;
 					}
 
-				}, function (reason) {
-					// TODO placeholder for error handling
-				});
+				}, function (reason) {});
 			},
 
-			undoDeleteTask(task) {
-				return TaskService.updateTaskIsDeleted(task.taskId, false).then(function (response) {
+			undoDelete(task) {
+                task.isDeleted = false;
+                
+				return TaskService.update(task).then(function (response) {
 					if (response.data) {
 						// TODO maybe the endpoint returns the entire task as is in the database
 						// then the client does something like 
@@ -100,9 +102,7 @@
 
 						return task;
 					}
-				}, function (reason) {
-					// TODO placeholder for error handling
-				});
+				}, function (reason) {});
 			}
 		}
 	});

@@ -28,11 +28,11 @@ namespace AngularProto.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult Edit(TaskEditViewModel editViewModel, int taskId)
+		public JsonResult Edit(TaskEditViewModel viewModel, int taskId)
 		{
 			return Json(_taskOrchestrator.Edit(_currentUser,
-			                                                  taskId,
-			                                                  editViewModel));
+			                                   taskId,
+			                                   viewModel));
 		}
 
 		public TasksController(TasksOrchestrator taskOrchestrator, ApplicationContext appContext)

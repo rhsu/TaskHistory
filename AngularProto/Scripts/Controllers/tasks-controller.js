@@ -33,22 +33,17 @@
 						resetForm();
 						$scope.pageData.tasks.push(response);
 					}
-				}, function (reason) {
-					// placeholder for error handling
-				});
+				}, function (reason) {});
 		};
 
 		$scope.pageFns.deleteTask = function (task) {
-			TaskTableViewService.deleteTask(task)
-				.then(function (response) {
-					// TODO this should only refresh the newly created task
-				}, function(reason) {
-					// placeholder for error handling
-				});
+            task.isDeleted = true;
+			TaskTableViewService.delete(task);
 		};
 
 		$scope.pageFns.undoDeleteTask = function (task) {
-			TaskTableViewService.undoDeleteTask(task);
+            task.isDeleted = false;
+			TaskTableViewService.undoDelete(task);
 		};
 
 		$scope.pageFns.displayBackButton = function (task) {
