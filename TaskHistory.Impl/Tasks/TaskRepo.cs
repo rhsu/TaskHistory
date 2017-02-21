@@ -13,9 +13,7 @@ namespace TaskHistory.Impl.Tasks
 		const string UpdateStoredProcedure = "Tasks_Update";
 		const string DeleteStoredProcedure = "Tasks_Delete";
 
-		const string UpdateIsDeletedStoredProcedure = "Tasks_IsDeleted_Update";
-		const string UpdateIsCompletedStoredProcedure = "Tasks_IsCompleted_Update";
-
+		// TODO move this to a shared base
 		const string NullFromApplicationDataProxy = "Null returned from DataProvider";
 
 		readonly TaskFactory _taskFactory;
@@ -73,30 +71,8 @@ namespace TaskHistory.Impl.Tasks
 			return task;
 		}
 
-		public void DeleteTask_OLD(int taskId, int userId)
-		{
-			var parameters = new List<ISqlDataParameter>();
-			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
-			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
-			_dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameters);
-		}
-
-		public bool UpdateIsDeleted(int taskId, int userId, bool isDeleted)
-		{
-			var parameters = new List<ISqlDataParameter>();
-			parameters.Add(_dataProxy.CreateParameter("pTaskId", taskId));
-			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", isDeleted));
-
-			_dataProxy.ExecuteNonQuery(UpdateIsDeletedStoredProcedure, parameters);
-
-			// TODO this should come back from ExecuteNonQuery (either true, if record actually was updated).
-			// for example wasDeleted => stillDeleted is false
-			return true;
-		}
-
 		public TaskRepo(TaskFactory taskFactory,
-			ApplicationDataProxy applicationDataProxy)
+		                ApplicationDataProxy applicationDataProxy)
 		{
 			_taskFactory = taskFactory;
 			_dataProxy = applicationDataProxy;
