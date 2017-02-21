@@ -3,7 +3,6 @@
 
     app.controller('TasksController', function ($scope, 
                                                 TaskService,
-                                                TaskTableViewService,
                                                 TaskTableViewFactory) {
         $scope.pageData = {};
         $scope.pageData.tasks = [];
@@ -48,12 +47,22 @@
 
         $scope.pageFns.deleteTask = function (task) {
             task.isDeleted = true;
-            TaskTableViewService.delete(task);
+            TaskService.update(task).then(function (response) {
+                const data = response.data;
+                if (data) {
+                    task.setDeletedState();
+                }
+            }, function (reason) {});
         };
 
         $scope.pageFns.undoDeleteTask = function (task) {
             task.isDeleted = false;
-            TaskTableViewService.undoDelete(task);
+            TaskService.update(task).then(function (response) {
+                const data = response.data;
+                if (data) {
+                    task.setInitialState();
+                }
+            }, function (reason) {});
         };
 
         $scope.pageFns.displayBackButton = function (task) {
