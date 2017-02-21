@@ -2,6 +2,7 @@
     const app = angular.module('app');
 
     app.controller('TasksController', function ($scope, 
+                                                TaskService,
                                                 TaskTableViewService,
                                                 TaskTableViewFactory) {
         $scope.pageData = {};
@@ -13,10 +14,14 @@
         $scope.pageFns = {};
 
         var refreshTasks = function () {
-            TaskTableViewService.retrieve().then(function (tasks) {
-              console.log(tasks);
-
-                $scope.pageData.tasks = tasks;
+            TaskService.retrieve().then(function (response) {
+                const data = response.data;
+                if (data) {
+                    for (let i = 0; i < data.length; i++) {
+                        const task = TaskTableViewFactory.buildFromJson(data[i]);
+                        $scope.pageData.tasks.push(task);
+                    }
+                }
             }, function (reason) {});
         };
 
@@ -31,13 +36,14 @@
         };
 
         $scope.pageFns.insertTask = function () {
-            TaskTableViewService.create($scope.formData)
-                .then(function (response) {
-                    if (response) {
-                        resetForm();
-                        $scope.pageData.tasks.push(response);
-                    }
-                }, function (reason) {});
+            TaskService.create($scope.formData.taskContent).then(function (response) {
+                const data = response.data;
+                if (data) {
+                    resetForm();
+                    const task = TaskTableViewFactory.buildFromJson(data);
+                    $scope.pageData.tasks.push(task);
+                }
+            }, function (reason) {});
         };
 
         $scope.pageFns.deleteTask = function (task) {
