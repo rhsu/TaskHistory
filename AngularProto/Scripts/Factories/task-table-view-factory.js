@@ -41,7 +41,6 @@
     app.factory('TaskTableViewFactory', function () {
         return {
             
-            
             buildFromJson(jsonObj) {  
                 const id = jsonObj.TaskId || -1;
                 const content = jsonObj.TaskContent || '';
