@@ -46,6 +46,14 @@
                 const content = jsonObj.TaskContent || '';
 
                 return new TaskTableView(id, content);
+            },
+            
+            updateFromJson(jsonObj, task) {
+                const id = jsonObj.TaskId || -1;
+                const content = jsonObj.TaskContent || '';
+                
+                task.taskId = id;
+                task.taskContent = content;
             }
 
         }
