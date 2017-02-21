@@ -1,7 +1,9 @@
 (function () {
     const app = angular.module('app');
 
-    app.controller('TasksController', function ($scope, TaskTableViewService) {
+    app.controller('TasksController', function ($scope, 
+                                                TaskTableViewService,
+                                                TaskTableViewFactory) {
         $scope.pageData = {};
         $scope.pageData.tasks = [];
 
@@ -12,6 +14,8 @@
 
         var refreshTasks = function () {
             TaskTableViewService.retrieve().then(function (tasks) {
+              console.log(tasks);
+
                 $scope.pageData.tasks = tasks;
             }, function (reason) {});
         };

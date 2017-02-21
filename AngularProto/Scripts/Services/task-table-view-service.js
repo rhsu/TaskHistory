@@ -1,7 +1,7 @@
 (function() {
-    const app = angular.module('app');	
+    const app = angular.module('app');
 
-    function TaskTableView(taskId, 
+    function TaskTableView(taskId,
         taskContent) {
         this.taskId = taskId,
         this.taskContent = taskContent,
@@ -78,7 +78,7 @@
                 return TaskService.update(task).then(function (response) {
                     if (response.data) {
                         // TODO maybe the endpoint returns the entire task as is in the database
-                        // then the client does something like 
+                        // then the client does something like
                             // 1. makeTaskModelFromResponse
                             // 2. set task = the object from step 1
                         task.setDeletedState();
@@ -95,7 +95,7 @@
                 return TaskService.update(task).then(function (response) {
                     if (response.data) {
                         // TODO maybe the endpoint returns the entire task as is in the database
-                        // then the client does something like 
+                        // then the client does something like
                             // 1. makeTaskModelFromResponse
                             // 2. set task = the object from step 1
                         task.setInitialState();
