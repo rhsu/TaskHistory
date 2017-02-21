@@ -13,15 +13,12 @@
         $scope.pageFns = {};
 
         var refreshTasks = function () {
+            
             TaskService.retrieve().then(function (response) {
                 const data = response.data;
-                if (data) {
-                    for (let i = 0; i < data.length; i++) {
-                        const task = TaskTableViewFactory.buildFromJson(data[i]);
-                        $scope.pageData.tasks.push(task);
-                    }
-                }
+                $scope.pageData.tasks = TaskTableViewFactory.buildFromJsonCollection(data);
             }, function (reason) {});
+            
         };
 
         var resetForm = function () {
@@ -50,6 +47,7 @@
             TaskService.update(task).then(function (response) {
                 const data = response.data;
                 if (data) {
+                    TaskTableViewFactory.updateFromJson(data, task);
                     task.setDeletedState();
                 }
             }, function (reason) {});
@@ -60,6 +58,7 @@
             TaskService.update(task).then(function (response) {
                 const data = response.data;
                 if (data) {
+                    TaskTableViewFactory.updateFromJson(data, task);
                     task.setInitialState();
                 }
             }, function (reason) {});

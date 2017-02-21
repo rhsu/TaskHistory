@@ -40,12 +40,22 @@
 
     app.factory('TaskTableViewFactory', function () {
         return {
-
+            
+            
             buildFromJson(jsonObj) {  
                 const id = jsonObj.TaskId || -1;
                 const content = jsonObj.TaskContent || '';
 
                 return new TaskTableView(id, content);
+            },
+            
+            buildFromJsonCollection(jsonObjCollection) {
+                const retVal = []
+                for (let i = 0; i < jsonObjCollection.length; i++) {
+                    const task = this.buildFromJson(jsonObjCollection[i]);
+                    retVal.push(task);
+                }
+                return retVal;
             },
             
             updateFromJson(jsonObj, task) {
