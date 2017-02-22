@@ -36,6 +36,7 @@
     <Compile Include="ActivationOrchestrator.cs" />
     <Compile Include="TasksOrchestrator.cs" />
     <Compile Include="FeatureFlagsOrchestrator.cs" />
+    <Compile Include="TaskListOrchestrator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

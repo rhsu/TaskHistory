@@ -116,6 +116,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\ActivationController.cs" />
     <Compile Include="Controllers\FeatureFlagsController.cs" />
+    <Compile Include="Controllers\TaskListController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
