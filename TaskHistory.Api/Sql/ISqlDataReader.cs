@@ -9,5 +9,7 @@
 		string GetString(string propertyName);
 
 		bool GetBool(string propertyName);
+
+		bool NextResult();
 	}
 }

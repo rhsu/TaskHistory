@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
+using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
+using TaskHistory.Impl.TaskLists;
 using TaskHistory.Impl.Tasks;
 
 namespace TaskHistory.Impl.Test
@@ -12,15 +14,20 @@ namespace TaskHistory.Impl.Test
 	{
 		TestFixtures _testFixtures;
 		ITaskRepo _taskRepo;
+		ITaskListRepo _taskListRepo;
 		IUser _user;
 
 		public Tasks()
 		{
 			var taskFactory = new TaskFactory();
+			var taskListFactory = new TaskListFactory();
+
 			var appDataProxyFactory = new ApplicationDataProxyFactory();
+			var appDataProxy = appDataProxyFactory.Build();
 
 			_testFixtures = new TestFixtures();
-			_taskRepo = new TaskRepo(taskFactory, appDataProxyFactory.Build());
+			_taskRepo = new TaskRepo(taskFactory, appDataProxy);
+			_taskListRepo = new TaskListRepo(taskListFactory, appDataProxy);
 
 			_user = _testFixtures.User;
 		}
@@ -87,20 +94,6 @@ namespace TaskHistory.Impl.Test
 		}
 
 		[Test]
-		public void UpdateTaskDeleted()
-		{
-			// TODO: once I can run adhoc select queries then
-			//       this test becomes more meaningful as I can
-			//       SELECT * FROM tasks WHERE TaskId = `@taskId`
-			//       and then assert that the content and is updated
-			//       contains correct value
-			//       but until I have that infrastructure, I will have to settle
-			//       for Lync
-
-			//also assert that the ReadWillNot retrieve deleted tasks
-		}
-
-		[Test]
 		public void CreateTaskOnList()
 		{
 			// a lot of things here can fail
@@ -108,11 +101,14 @@ namespace TaskHistory.Impl.Test
 			// 2. the list id is valid but not for that user
 			// 3. this relationship already exists
 
+			// in this test, assume that all is good
 			var userId = _testFixtures.User.UserId;
 			var listId = _testFixtures.TaskList.Id;
 			var content = "test content here";
 
 			ITask task = _taskRepo.CreateTaskOnList(userId, listId, content);
+			var taskLists = _taskListRepo.Read(userId);
+			var taskList = taskLists.Where(x => x.Id == listId).First();
 
 			Assert.AreEqual(content, task.Content);
 		}
