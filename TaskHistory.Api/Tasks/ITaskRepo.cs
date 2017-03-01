@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace TaskHistory.Api.Tasks
 {
@@ -8,6 +8,10 @@ namespace TaskHistory.Api.Tasks
 		ITask CreateTask(string taskContent, int userId);
 
 		IEnumerable<ITask> ReadTasks(int userId);
+
+		ITask CreateTaskOnList(int userId, int listId, string content);
+
+		bool AssociateTaskToList(int userId, int taskId, int listId);
 
 		ITask UpdateTask(TaskUpdatingParameters taskUpdatingParameters, 
 		                 int userId, 
