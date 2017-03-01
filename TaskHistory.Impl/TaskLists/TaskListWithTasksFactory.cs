@@ -26,7 +26,7 @@ namespace TaskHistory.Impl.TaskLists
 
 			var tasks = new List<ITask>();
 
-			while (reader.NextResult())
+			if (reader.NextResult())
 			{
 				var task = _taskFactory.Build(reader);
 				tasks.Add(task);
