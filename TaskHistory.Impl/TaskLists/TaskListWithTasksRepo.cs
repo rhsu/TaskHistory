@@ -1,18 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using TaskHistory.Api.TaskLists;
+using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.TaskLists
 {
 	public class TaskListWithTasksRepo : ITaskListWithTasksRepo
 	{
-		public TaskListWithTasksRepo()
+		TaskListWithTasksFactory _factory;
+		ApplicationDataProxy _dataProxy;
+
+		const string ReadStoredProcedure = "";
+
+		public TaskListWithTasksRepo(TaskListWithTasksFactory factory,
+		                             ApplicationDataProxy dataProxy)
 		{
+			_factory = factory;
+			_dataProxy = dataProxy;
 		}
 
-		public IEnumerable<ITaskListWithTasks> Read(int userId, int listId)
+		public ITaskListWithTasks Read(int userId, int listId)
 		{
-			throw new NotImplementedException();
+			var task = _dataProxy.ExecuteReader(_factory, ReadStoredProcedure);
+			if (task == null)
+				throw new NullReferenceException("Null returned from data reader");
+
+			return task;
 		}
 	}
 }
