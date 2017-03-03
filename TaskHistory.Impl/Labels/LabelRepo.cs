@@ -31,7 +31,7 @@ namespace TaskHistory.Impl.Labels
 		{
 			var contentParameter = _dataProxy.CreateParameter("pContent", content);
 
-			var returnVal = _dataProxy.Execute(LabelFactory, CreateStoredProcedure, contentParameter);
+			var returnVal = _dataProxy.ExecuteReader(LabelFactory, CreateStoredProcedure, contentParameter);
 			if (returnVal == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
