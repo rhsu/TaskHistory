@@ -1,4 +1,4 @@
-﻿<div class='container' ng-controller='TasksController' style='padding-top: 25px'>
+<div class='container' ng-controller='TasksController' style='padding-top: 25px'>
 	<form class='form-inline'>
 		<div class='form-group'>
 			<label>New Task:</label>
@@ -20,6 +20,32 @@
 		</button>
 	</div>
 		
+    <div style='border: 1px solid red;'>
+        <ul>
+            <li>
+                <label>List 1</label>
+                <div>
+                    <table class="table table-striped table-hover table-bordered">
+                        <tr>
+                            <th>#</th>
+                            <th>Key</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Foo</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Bar</td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+            <li><label>List 1</label></li>
+            <li><label>List 1</label></li>
+        </ul>
+    </div>
+    
 	<div style='padding-top: 25px'>
 		<div ng-hide="pageData.tasks.length">There are no tasks.</div>
 		<table class="table table-striped table-hover table-bordered" 
