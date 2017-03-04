@@ -17,7 +17,7 @@
 			templateUrl: '/Tasks/Index'
 		})
         .when('/Lists', {
-            templteUrl: '/Lists/Index'
+            templateUrl: '/Lists/Index'
         })
 		.when('/Terminal', {
 			templateUrl: '/Tasks/Index'
