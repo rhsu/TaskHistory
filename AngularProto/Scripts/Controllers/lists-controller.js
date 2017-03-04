@@ -6,6 +6,7 @@
     app.controller('ListsController', function ($scope,
                                                 ListsTableViewService){
         
-        ListsTableViewService.test();
+        const a = ListsTableViewService.test();
+        console.log(a);
     });
 })();
