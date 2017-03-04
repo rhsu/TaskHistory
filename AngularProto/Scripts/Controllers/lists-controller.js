@@ -3,7 +3,9 @@
     
     const app = angular.module('app');
     
-    app.controller('ListsController', function ($scope){
-        $scope.data = 'this worked!';
+    app.controller('ListsController', function ($scope,
+                                                ListsTableViewService){
+        
+        ListsTableViewService.test();
     });
 })();

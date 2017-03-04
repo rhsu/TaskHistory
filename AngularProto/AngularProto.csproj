@@ -151,6 +151,7 @@
     <Content Include="Views\Lists\Index.cshtml" />
     <Content Include="Content\Styles.css" />
     <Content Include="Scripts\Controllers\lists-controller.js" />
+    <Content Include="Scripts\Services\lists-table-view-service.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
