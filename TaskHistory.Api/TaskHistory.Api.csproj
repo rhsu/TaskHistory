@@ -49,6 +49,10 @@
     <Compile Include="Users\DTOs\UserRegistrationParameters.cs" />
     <Compile Include="Tasks\DTOs\TaskUpdatingParameters.cs" />
     <Compile Include="Sql\IDataReaderProvider.cs" />
+    <Compile Include="History\IHistoryRepo.cs" />
+    <Compile Include="History\enumerations\ActionType.cs" />
+    <Compile Include="History\enumerations\BusinessObjectType.cs" />
+    <Compile Include="Sql\ISqlParameterFactory.cs" />
     <Compile Include="Terminal\TerminalCommandResponse.cs" />
     <Compile Include="Terminal\enumerations\TerminalCommandAction.cs" />
     <Compile Include="Terminal\enumerations\TerminalCommandOption.cs" />
@@ -57,6 +61,8 @@
     <Compile Include="Terminal\ITerminalProxyRepo.cs" />
     <Compile Include="Terminal\ITerminalObject.cs" />
     <Compile Include="Terminal\ITerminalObjectMapper.cs" />
+    <Compile Include="History\IHistoryDisplayItem.cs" />
+    <Compile Include="History\IHistoryDBDto.cs" />
     <Compile Include="TaskLists\ITaskList.cs" />
     <Compile Include="TaskLists\ITaskListRepo.cs" />
     <Compile Include="FeatureFlags\IFeatureFlag.cs" />
@@ -75,6 +81,8 @@
     <Folder Include="Configuration\" />
     <Folder Include="Users\DTOs\" />
     <Folder Include="Tasks\DTOs\" />
+    <Folder Include="History\" />
+    <Folder Include="History\enumerations\" />
     <Folder Include="Terminal\" />
     <Folder Include="Terminal\enumerations\" />
     <Folder Include="TaskLists\" />

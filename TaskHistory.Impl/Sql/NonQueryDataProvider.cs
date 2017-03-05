@@ -1,9 +1,9 @@
 ﻿using System;
-using TaskHistory.Api.Sql;
 using System.Collections.Generic;
-using TaskHistory.Api.Configuration;
-using MySql.Data.MySqlClient;
 using System.Data;
+using MySql.Data.MySqlClient;
+using TaskHistory.Api.Configuration;
+using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
@@ -60,6 +60,7 @@ namespace TaskHistory.Impl.Sql
 				return command.ExecuteNonQuery();
 			}
 		}
+
 
 		public NonQueryDataProvider(IConfigurationProvider configurationProvider)
 		{

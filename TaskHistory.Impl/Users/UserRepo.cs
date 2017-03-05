@@ -85,8 +85,7 @@ namespace TaskHistory.Impl.Users
 			return returnVal;
 		}
 
-
-		public UserRepo(UserFactory userFactory, ApplicationDataProxy dataProxy)
+		public UserRepo (UserFactory userFactory, ApplicationDataProxy dataProxy)
 		{
 			_userFactory = userFactory;
 			_dataProxy = dataProxy;

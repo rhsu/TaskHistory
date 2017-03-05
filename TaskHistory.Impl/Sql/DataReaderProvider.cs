@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -157,7 +157,7 @@ namespace TaskHistory.Impl.Sql
 									  storedProcedureName,
 									  new List<ISqlDataParameter>());
 		}
-
+    
 		public DataReaderProvider (SqlDataReaderFactory sqlDataReaderFactory, 
 		                           IConfigurationProvider configurationProvider)
 			: base()

@@ -4,10 +4,13 @@ using TaskHistory.Api.Sql;
 
 namespace TaskHistory.Impl.Sql
 {
-	public class ApplicationDataProxy
+	/// <summary>
+	/// Proxy responsible for communicating with the database including Reading and Writing to the Database
+	/// </summary>
+	public class ApplicationDataProxy //: IApplicationDataProxy
 	{
 		readonly IDataReaderProvider _dataReaderProvider;
-		readonly SqlParameterFactory _parameterFactory;
+		readonly ISqlParameterFactory _parameterFactory;
 		readonly INonQueryDataProvider _nonQueryDataProvider;
 
 		public T ExecuteReader<T>(IFromDataReaderFactory<T> factory,
@@ -146,7 +149,7 @@ namespace TaskHistory.Impl.Sql
 		}
 
 		public ApplicationDataProxy (IDataReaderProvider dataReaderProvider, 
-			SqlParameterFactory paramFactory,
+			ISqlParameterFactory paramFactory,
 			NonQueryDataProvider nonQueryDataProvider)
 		{
 			_dataReaderProvider = dataReaderProvider;

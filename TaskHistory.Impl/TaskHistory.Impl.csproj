@@ -65,6 +65,9 @@
     <Compile Include="Sql\Factories\SqlParameterFactory.cs" />
     <Compile Include="Sql\DataReaderProvider.cs" />
     <Compile Include="Sql\Proxies\ApplicationDataProxy.cs" />
+    <Compile Include="History\HistoryItem.cs" />
+    <Compile Include="History\HistoryRepo.cs" />
+    <Compile Include="Sql\Proxies\IApplicationDataProxy.cs" />
     <Compile Include="Terminal\TerminalProxyRepo.cs" />
     <Compile Include="Terminal\TerminalObjectMapper.cs" />
     <Compile Include="Terminal\TerminalObjectFactory.cs" />
@@ -95,6 +98,7 @@
     <Folder Include="Configuration\" />
     <Folder Include="Sql\Factories\" />
     <Folder Include="Sql\Proxies\" />
+    <Folder Include="History\" />
     <Folder Include="Terminal\" />
     <Folder Include="TaskLists\" />
     <Folder Include="FeatureFlags\" />
