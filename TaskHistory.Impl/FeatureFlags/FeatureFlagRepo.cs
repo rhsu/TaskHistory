@@ -29,7 +29,7 @@ namespace TaskHistory.Impl.FeatureFlags
 			parameters.Add(_dataProxy.CreateParameter("pName", name));
 			parameters.Add(_dataProxy.CreateParameter("pValue", value));
 
-			var returnVal = _dataProxy.Execute(_factory, 
+			var returnVal = _dataProxy.ExecuteReader(_factory, 
 			                                   CreateStoredProcedure, 
 			                                   parameters);
 			
@@ -63,7 +63,7 @@ namespace TaskHistory.Impl.FeatureFlags
 			return returnVal;
 		}
 
-		public IFeatureFlag Update(string name, string value)
+		public IFeatureFlag Update(int id, string name, string value)
 		{
 			if (string.IsNullOrEmpty(name))
 				throw new ArgumentNullException(nameof(name));
@@ -75,10 +75,11 @@ namespace TaskHistory.Impl.FeatureFlags
 
 			parameters.Add(_dataProxy.CreateParameter("pName", name));
 			parameters.Add(_dataProxy.CreateParameter("pValue", value));
+			parameters.Add(_dataProxy.CreateParameter("pId", id));
 
-			var returnVal = _dataProxy.Execute(_factory,
-			                                   UpdatedStoredProcedure,
-											   parameters);
+			var returnVal = _dataProxy.ExecuteReader(_factory,
+			                                         UpdatedStoredProcedure,
+			                                         parameters);
 
 			if (returnVal == null)
 				throw new NullReferenceException("Null returned from DataProvider");

@@ -9,10 +9,9 @@ namespace TaskHistory.Impl.Sql
 		{
 			if (paramName == null)
 				throw new ArgumentNullException(nameof(paramName));
-
-			//TODO: Remove me someday if stable
+			
 			if (value == null)
-				throw new ArgumentNullException(nameof(value), "This can be uncommented if this is causing existing issues");
+				throw new ArgumentNullException(nameof(value));
 
 			return new SqlDataParameter(paramName, value);
 		}

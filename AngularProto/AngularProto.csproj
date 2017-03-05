@@ -95,6 +95,7 @@
     <Folder Include="Scripts\Controllers\" />
     <Folder Include="Views\Tasks\" />
     <Folder Include="Scripts\Models\" />
+    <Folder Include="Views\FeatureFlags\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Models\TerminalResponseObject.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\ActivationController.cs" />
+    <Compile Include="Controllers\FeatureFlagsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -142,6 +144,9 @@
     <Content Include="Scripts\Controllers\register-controller.js" />
     <Content Include="Scripts\Services\user-register-service.js" />
     <Content Include="Scripts\Services\user-logout-service.js" />
+    <Content Include="Views\FeatureFlags\Index.cshtml" />
+    <Content Include="Scripts\Controllers\feature-flags-controller.js" />
+    <Content Include="Scripts\Services\feature-flag-service.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">

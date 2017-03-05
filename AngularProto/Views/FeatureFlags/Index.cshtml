@@ -1,0 +1,45 @@
+<div class='container' style='padding-top: 25px' ng-controller='FeatureFlagsController'>
+	<form class='form-inline'>
+		<div class='form-group'>
+			<label>Name:</label>
+			<input class='form-control' 
+                   ng-model='formData.name'
+                   type='text'
+                   required='true'>
+		</div>
+		<div class='form-group'>
+			<label>Value:</label>
+			<input class='form-control'
+                   ng-model='formData.value'
+                   type='text'>
+		</div>
+		<button class='btn btn-success'
+                ng-click='pageFns.createFlag()'>
+			<span class='glyphicon glyphicon-plus'></span>
+		</button>
+	</form>
+
+	<div style='padding-top: 25px'></div>
+    
+    <div ng-hide='pageData.flags.length'>There are no flags.</div>
+	<table ng-show='pageData.flags.length'
+           class="table table-striped table-hover table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Value</th>
+            <th></th>
+			<th></th>
+        </tr>
+		<tr ng-repeat='flag in pageData.flags'>
+            <td>{{ $index + 1 }}</td>
+            <td>{{flag.id}}</td>
+			<td>{{flag.name}}</td>
+			<td>{{flag.value}}</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+
+</div>

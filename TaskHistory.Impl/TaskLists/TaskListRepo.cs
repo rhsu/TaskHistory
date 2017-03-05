@@ -25,7 +25,7 @@ namespace TaskHistory.Impl.TaskLists
 			parameters.Add(_appDataProxy.CreateParameter("pUserId", userId));
 			parameters.Add(_appDataProxy.CreateParameter("pName", name));
 
-			var newTaskList = _appDataProxy.Execute(_factory,
+			var newTaskList = _appDataProxy.ExecuteReader(_factory,
 													CreateStoredProcedure,
 													parameters);
 
@@ -57,7 +57,7 @@ namespace TaskHistory.Impl.TaskLists
 			parameters.Add(_appDataProxy.CreateParameter("pListId", listId));			
 			parameters.Add(_appDataProxy.CreateParameter("pName", name));
 
-			var retVal = _appDataProxy.Execute(_factory,
+			var retVal = _appDataProxy.ExecuteReader(_factory,
 								  UpdatedStoredProceudre,
 								  parameters);
 
