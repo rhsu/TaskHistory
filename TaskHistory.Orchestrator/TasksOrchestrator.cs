@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using TaskHistory.Api.FeatureFlags;
 using TaskHistory.Api.Tasks;
@@ -18,76 +18,61 @@ namespace TaskHistory.Orchestrator.Tasks
 
 		readonly IFeatureFlag _productionDatabaseFlag;
 
-		public IEnumerable<ITask> OrchestratorGetTasks_OLD(IUser user)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-			
-			return _taskViewRepo.ReadTasksForUser(user);
-		}
-
-		public IEnumerable<TaskTableViewModel> OrchestrateGetTasks(IUser user)
+		public IEnumerable<TaskTableViewModel> Retrieve(IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			IEnumerable<ITask> tasks = _taskViewRepo.ReadTasksForUser(user);
+			IEnumerable<ITask> tasks = _viewRepo.ReadTasksForUser(user);
 			if (tasks == null)
 				throw new NullReferenceException($"null returned from TaskViewRepo when reading {user.UserId}");
 
-			IEnumerable<TaskTableViewModel> tasksVM = _taskObjectMapper.Map(tasks);
-			if (tasksVM == null)
+			IEnumerable<TaskTableViewModel> viewModel = _objectMapper.Map(tasks);
+			if (viewModel == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
-			return tasksVM;
+			return viewModel;
 		}
 
-		public ITask OrchestratorCreateTask_OLD(IUser user, string content)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-
-			return _taskRepo.CreateTask(content, user.UserId);
-		}
-
-		public TaskTableViewModel OrchestrateCreateTask(IUser user, string content)
-		{
+		public TaskTableViewModel Create(IUser user, string content)
+    {
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
 			if (string.IsNullOrEmpty(content))
 				throw new ArgumentNullException(nameof(content));
 
-			ITask task = _taskRepo.CreateTask(content, user.UserId);
+			ITask task = _repo.CreateTask(content, user.UserId);
 			if (task == null)
 				throw new NullReferenceException("Null returned from task repo");
 
-			TaskTableViewModel vmTask = _taskObjectMapper.Map(task);
-			if (vmTask == null)
+			TaskTableViewModel viewModel = _objectMapper.Map(task);
+			if (viewModel == null)
 				throw new NullReferenceException("Null returned from task presenter");
 
-			return vmTask;
+			return viewModel;
 		}
 
-		public TaskTableViewModel OrchestrateEditTask(IUser user, 
-		                                             int taskId, 
-		                                             TaskEditViewModel taskEditViewModel)
+
+		public TaskTableViewModel Edit(IUser user, 
+		                              int taskId, 
+		                              TaskEditViewModel viewModel)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			if (taskEditViewModel == null)
-				throw new ArgumentNullException(nameof(taskEditViewModel));
+			if (viewModel == null)
+				throw new ArgumentNullException(nameof(viewModel));
 
-			TaskUpdatingParameters updateParams = _taskObjectMapper.Map(taskEditViewModel);
+			TaskUpdatingParameters updateParams = _objectMapper.Map(viewModel);
 			if (updateParams == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
-			ITask updatedTask = _taskRepo.UpdateTask(updateParams, taskId, user.UserId);
-			if (updatedTask == null)
+			ITask task = _repo.UpdateTask(updateParams, user.UserId, taskId);
+			if (task == null)
 				throw new NullReferenceException("null returned from TaskRepo");
 
-			TaskTableViewModel retVal = _taskObjectMapper.Map(updatedTask);
+			TaskTableViewModel retVal = _objectMapper.Map(task);
 			if (retVal == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
@@ -100,16 +85,6 @@ namespace TaskHistory.Orchestrator.Tasks
 				throw new ArgumentNullException(nameof(user));
 
 			_taskRepo.DeleteTask_OLD(taskId, user.UserId);
-
-			return true;
-		}
-
-		public bool OrchestrateSetTaskIsDeleted(IUser user, int taskId, bool status)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-			
-			_taskRepo.UpdateIsDeleted(taskId, user.UserId, status);
 
 			return true;
 		}

@@ -1,64 +1,75 @@
-﻿(function () {
-	const app = angular.module('app');
+(function () {
+    const app = angular.module('app');
 
-	app.controller('TasksController', function ($scope, TaskTableViewService) {
-		$scope.pageData = {};
-		$scope.pageData.tasks = [];
+    app.controller('TasksController', function ($scope, 
+                                                TaskService,
+                                                TaskTableViewFactory) {
+        $scope.pageData = {};
+        $scope.pageData.tasks = [];
 
-		$scope.formData = {};
-		$scope.formData.taskContent = '';
+        $scope.formData = {};
+        $scope.formData.taskContent = '';
 
-		$scope.pageFns = {};
+        $scope.pageFns = {};
 
-		var refreshTasks = function () {
-			TaskTableViewService.getTasks().then(function (tasks) {
-				$scope.pageData.tasks = tasks;
-			}, function (reason) {
-				// placeholder for error handling...
-			});
-		};
+        var refreshTasks = function () {
+            
+            TaskService.retrieve().then(function (response) {
+                const data = response.data;
+                $scope.pageData.tasks = TaskTableViewFactory.buildFromJsonCollection(data);
+            }, function (reason) {});
+            
+        };
 
-		var resetForm = function () {
-			$scope.formData.taskContent = '';
-		};
+        var resetForm = function () {
+            $scope.formData.taskContent = '';
+        };
 
-		refreshTasks();
+        refreshTasks();
 
-		$scope.pageFns.refreshTasks = function () {
-			refreshTasks();
-		};
+        $scope.pageFns.refreshTasks = function () {
+            refreshTasks();
+        };
 
-		$scope.pageFns.insertTask = function () {
-			TaskTableViewService.createTask($scope.formData)
-				.then(function (response) {
-					if (response) {
-						resetForm();
-						$scope.pageData.tasks.push(response);
-					}
-				}, function (reason) {
-					// placeholder for error handling
-				});
-		};
+        $scope.pageFns.insertTask = function () {
+            TaskService.create($scope.formData.taskContent).then(function (response) {
+                const data = response.data;
+                if (data) {
+                    resetForm();
+                    const task = TaskTableViewFactory.buildFromJson(data);
+                    $scope.pageData.tasks.push(task);
+                }
+            }, function (reason) {});
+        };
 
-		$scope.pageFns.deleteTask = function (task) {
-			TaskTableViewService.deleteTask(task)
-				.then(function (response) {
-					// TODO this should only refresh the newly created task
-				}, function(reason) {
-					// placeholder for error handling
-				});
-		};
+        $scope.pageFns.deleteTask = function (task) {
+            task.isDeleted = true;
+            TaskService.update(task).then(function (response) {
+                const data = response.data;
+                if (data) {
+                    TaskTableViewFactory.updateFromJson(data, task);
+                    task.setDeletedState();
+                }
+            }, function (reason) {});
+        };
 
-		$scope.pageFns.undoDeleteTask = function (task) {
-			TaskTableViewService.undoDeleteTask(task);
-		};
+        $scope.pageFns.undoDeleteTask = function (task) {
+            task.isDeleted = false;
+            TaskService.update(task).then(function (response) {
+                const data = response.data;
+                if (data) {
+                    TaskTableViewFactory.updateFromJson(data, task);
+                    task.setInitialState();
+                }
+            }, function (reason) {});
+        };
 
-		$scope.pageFns.displayBackButton = function (task) {
-			return (task.editorState === 'confirmDelete' || task.editorState === 'editing');
-		};
+        $scope.pageFns.displayBackButton = function (task) {
+            return (task.editorState === 'confirmDelete' || task.editorState === 'editing');
+        };
 
-		$scope.pageFns.displayReadonlyMode = function (task) {
-			return (task.editorState !== 'deleted' && task.editorState !== 'editing');
-		};
-	});
+        $scope.pageFns.displayReadonlyMode = function (task) {
+            return (task.editorState !== 'deleted' && task.editorState !== 'editing');
+        };
+    });
 })();

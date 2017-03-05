@@ -1,21 +1,24 @@
 (function () {
 	const app = angular.module('app');
 
-	app.factory('TaskService', function ($http) {
-		
-		return {
-			getTasks() {
-				return $http.post('/Tasks/GetTasks/');
-			},
+    app.factory('TaskService', function ($http) {
 
-			createTask(content) {
-				return $http.post('/Tasks/CreateTask/', { content: content });
-			},
+        return {
 
-			updateTaskIsDeleted(taskId, status) {
-				return $http.post('/Tasks/SetTaskIsDeleted/', { taskId: taskId, status: status });
-			}
-		}
-	});
-    
+            create(content) {
+                return $http.post('/Tasks/Create/', { content: content });
+            },
+
+            retrieve() {
+                return $http.post('/Tasks/Retrieve/');
+            },
+
+            update(task) {
+                return $http.post('/Tasks/Edit', { viewModel : task, 
+                                                   taskId : task.taskId
+                                                 });
+            }
+        }
+    });
+
 }());

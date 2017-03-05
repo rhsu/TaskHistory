@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace TaskHistory.Api.Tasks
 {
@@ -9,10 +9,12 @@ namespace TaskHistory.Api.Tasks
 
 		IEnumerable<ITask> ReadTasks(int userId);
 
-		ITask UpdateTask(TaskUpdatingParameters taskUpdatingParameters, int userId, int taskId);
+		ITask CreateTaskOnList(int userId, int listId, string content);
 
-		void DeleteTask_OLD(int taskId, int userId);
+		bool AssociateTaskToList(int userId, int taskId, int listId);
 
-		bool UpdateIsDeleted(int taskId, int userId, bool isDeleted);
+		ITask UpdateTask(TaskUpdatingParameters taskUpdatingParameters, 
+		                 int userId, 
+		                 int taskId);
 	}
 }
