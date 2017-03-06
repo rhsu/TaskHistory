@@ -7,7 +7,5 @@ namespace TaskHistory.Api.TaskLists
 	{
 		int Id { get; }
 		string Name { get; }
-
-		// public IEnumerable<ITask> Tasks { get; }
 	}
 }

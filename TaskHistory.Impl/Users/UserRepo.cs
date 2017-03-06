@@ -27,7 +27,7 @@ namespace TaskHistory.Impl.Users
 			parameters.Add(_dataProxy.CreateParameter("pUsername", username));
 			parameters.Add(_dataProxy.CreateParameter("pPassword", password));
 
-			var validatedUser = _dataProxy.Execute(_userFactory,
+			var validatedUser = _dataProxy.ExecuteReader(_userFactory,
 									UserValidateStoredProcedure,
 									parameters);
 			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
@@ -44,7 +44,7 @@ namespace TaskHistory.Impl.Users
 			if (parameters == null)
 				throw new NullReferenceException("Null returned from CreatingDataParameterCollectionFromUserParams");
 
-			var registeredUser = _dataProxy.Execute(_userFactory,
+			var registeredUser = _dataProxy.ExecuteReader(_userFactory,
 									UserRegisterStoredProcedure,
 									 parameters);
 			// [TODO] https://github.com/rhsu/TaskHistory/issues/124

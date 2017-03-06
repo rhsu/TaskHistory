@@ -10,7 +10,7 @@ namespace TaskHistory.Impl.Sql
 		readonly SqlParameterFactory _parameterFactory;
 		readonly INonQueryDataProvider _nonQueryDataProvider;
 
-		public T Execute<T>(IFromDataReaderFactory<T> factory,
+		public T ExecuteReader<T>(IFromDataReaderFactory<T> factory,
 							string storedProcedureName)
 		{
 			if (factory == null)
@@ -23,7 +23,7 @@ namespace TaskHistory.Impl.Sql
 													 storedProcedureName);
 		}
 
-		public T Execute<T>(IFromDataReaderFactory<T> factory,
+		public T ExecuteReader<T>(IFromDataReaderFactory<T> factory,
 		                    string storedProcedureName,
 		                    ISqlDataParameter parameter)
 		{
@@ -37,11 +37,11 @@ namespace TaskHistory.Impl.Sql
 				throw new ArgumentNullException(nameof(parameter));
 
 			return _dataReaderProvider.ExecuteReader(factory,
-																  storedProcedureName,
-																  parameter);
+			                                         storedProcedureName,
+			                                         parameter);
 		}
 
-		public T Execute<T>(IFromDataReaderFactory<T> factory,
+		public T ExecuteReader<T>(IFromDataReaderFactory<T> factory,
 			string storedProcedureName,
 			IEnumerable<ISqlDataParameter> parameters)
 		{

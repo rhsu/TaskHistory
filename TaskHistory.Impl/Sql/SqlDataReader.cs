@@ -32,6 +32,11 @@ namespace TaskHistory.Impl.Sql
 			return _reader.Read ();
 		}
 
+		public bool NextResult()
+		{
+			return _reader.NextResult();
+		}
+
 		public int GetInt(string propertyName)
 		{
 			var obj = GetObjectFromReader (propertyName);
