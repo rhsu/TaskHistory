@@ -29,11 +29,7 @@
     app.factory('ListsTableViewService', function (){
         return {
             
-            test() {
-                /*const p = new FakeList(5, "hello");
-                p.init();
-                return p;*/
-                
+            mock() {
                 const retVal = [];
                 
                 for (let i = 1; i <= 5; i++) {
