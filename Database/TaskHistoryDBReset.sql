@@ -1,0 +1,2 @@
+DROP DATABASE TaskHistory;
+CREATE DATABASE TaskHistory;
