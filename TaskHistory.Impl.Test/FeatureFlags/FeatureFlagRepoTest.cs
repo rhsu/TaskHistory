@@ -2,7 +2,7 @@
 using TaskHistory.Api.FeatureFlags;
 using TaskHistory.Impl.FeatureFlags;
 
-namespace TaskHistory.Impl.Test
+namespace TaskHistory.Impl.Test.FeatureFlags
 {
 	[TestFixture]
 	public class FeatureFlagRepoTest

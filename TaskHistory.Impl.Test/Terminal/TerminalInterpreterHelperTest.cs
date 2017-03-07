@@ -2,7 +2,7 @@
 using TaskHistory.Api.Terminal;
 using TaskHistory.Impl.Terminal;
 
-namespace TaskHistory.Impl.Test
+namespace TaskHistory.Impl.Test.Terminal
 {
 	[TestFixture]
 	public class TerminalInterpreterHelperTest
