@@ -1,12 +1,12 @@
 (function () {
     'use strict';
-    
+
     const app = angular.module('app');
-    
+
     app.controller('ListsController', function ($scope,
-                                                ListsTableViewService){
-        
-        const a = ListsTableViewService.mock();
+                                                FakeListsTableViewService){
+
+        const a = FakeListsTableViewService.mock();
         console.log(a);
     });
 })();
