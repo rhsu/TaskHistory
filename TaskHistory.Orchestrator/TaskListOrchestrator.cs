@@ -9,7 +9,8 @@ namespace TaskHistory.Orchestrator
 {
 	public class TaskListOrchestrator
 	{
-		readonly ITaskListRepo _repo;
+		readonly ITaskListRepo _listRepo;
+		readonly ITaskListWithTasksRepo _listWithTasksRepo;
 		readonly ObjectMapperTaskLists _mapper;
 
 		// TODO Might not need this
@@ -29,6 +30,18 @@ namespace TaskHistory.Orchestrator
 			return viewModels;
 		}*/
 
+		public IEnumerable<TaskListDetailedTableViewModel> Retrieve(IUser user)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+
+			var list = _listWithTasksRepo.Read(user.UserId);
+			if (list == null)
+				throw new NullReferenceException("Null returned from repo");
+
+			return null;
+		}
+
 		public TaskListViewModel Create(IUser user, string name)
 		{
 			if (user == null)
@@ -37,7 +50,7 @@ namespace TaskHistory.Orchestrator
 			if (string.IsNullOrEmpty(name))
 				throw new ArgumentNullException(nameof(name));
 
-			var list = _repo.Create(user.UserId, name);
+			var list = _listRepo.Create(user.UserId, name);
 			if (list == null)
 				throw new NullReferenceException("null returned from repo");
 
@@ -48,10 +61,12 @@ namespace TaskHistory.Orchestrator
 			return viewModel;
 		}
 
-		public TaskListOrchestrator(ITaskListRepo repo,
+		public TaskListOrchestrator(ITaskListRepo listRepo,
+		                            ITaskListWithTasksRepo listWithTaskRepo,
 		                            ObjectMapperTaskLists mapper)
 		{
-			_repo = repo;
+			_listRepo = listRepo;
+			_listWithTasksRepo = listWithTaskRepo;
 			_mapper = mapper;
 		}
 	}
