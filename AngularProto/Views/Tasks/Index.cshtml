@@ -1,4 +1,4 @@
-﻿<div class='container' ng-controller='TasksController' style='padding-top: 25px'>
+<div class='container app-content' ng-controller='TasksController'>
 	<form class='form-inline'>
 		<div class='form-group'>
 			<label>New Task:</label>
@@ -19,7 +19,7 @@
 			<span class='glyphicon glyphicon-refresh'></span>
 		</button>
 	</div>
-		
+    
 	<div style='padding-top: 25px'>
 		<div ng-hide="pageData.tasks.length">There are no tasks.</div>
 		<table class="table table-striped table-hover table-bordered" 

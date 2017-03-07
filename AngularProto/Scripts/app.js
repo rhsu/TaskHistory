@@ -16,6 +16,9 @@
 		.when('/Tasks', {
 			templateUrl: '/Tasks/Index'
 		})
+        .when('/Lists', {
+            templateUrl: '/Lists/Index'
+        })
 		.when('/Terminal', {
 			templateUrl: '/Tasks/Index'
 		});
