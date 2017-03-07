@@ -12,7 +12,8 @@ namespace TaskHistory.Orchestrator
 		readonly ITaskListRepo _repo;
 		readonly ObjectMapperTaskLists _mapper;
 
-		public IEnumerable<TaskListViewModel> Retrieve(IUser user)
+		// TODO Might not need this
+		/*public IEnumerable<TaskListViewModel> Retrieve(IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
@@ -26,7 +27,7 @@ namespace TaskHistory.Orchestrator
 				throw new NullReferenceException("Null return from mapper");
 
 			return viewModels;
-		}
+		}*/
 
 		public TaskListViewModel Create(IUser user, string name)
 		{

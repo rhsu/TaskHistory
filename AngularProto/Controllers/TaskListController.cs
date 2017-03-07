@@ -13,11 +13,12 @@ namespace AngularProto.Controllers
             return View ();
         }
 
-		[HttpPost]
+		// TODO Might not need this
+		/*[HttpPost]
 		public JsonResult Retrieve()
 		{
 			return Json(_orchestrator.Retrieve(_currentUser));
-		}
+		}*/
 
 		[HttpPost]
 		public JsonResult Create(string name)
