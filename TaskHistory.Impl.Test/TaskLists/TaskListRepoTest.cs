@@ -5,7 +5,7 @@ using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.TaskLists;
 
-namespace TaskHistory.Impl.Test
+namespace TaskHistory.Impl.Test.TaskLists
 {
 	[TestFixture]
 	public class TaskListRepoTest

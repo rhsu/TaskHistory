@@ -7,7 +7,7 @@ using TaskHistory.Api.Users;
 using TaskHistory.Impl.TaskLists;
 using TaskHistory.Impl.Tasks;
 
-namespace TaskHistory.Impl.Test
+namespace TaskHistory.Impl.Test.Tasks
 {
 	[TestFixture]
 	public class Tasks
