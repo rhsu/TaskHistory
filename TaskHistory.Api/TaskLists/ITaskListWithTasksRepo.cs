@@ -2,6 +2,6 @@
 {
 	public interface ITaskListWithTasksRepo
 	{
-		ITaskListWithTasks Read(int userId, int listId);
+		ITaskListWithTasks Read(int userId);
 	}
 }
