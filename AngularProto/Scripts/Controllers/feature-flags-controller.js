@@ -37,9 +37,6 @@
                 }, function (reason) {});
         }
         /***** End Page Function Declarations *****/
-
-        $rootScope.appFns.refreshFeatureFlags();
-
         var resetForm = function (newFlag) {
             $scope.formData = {};
         }

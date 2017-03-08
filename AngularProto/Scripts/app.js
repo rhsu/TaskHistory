@@ -58,6 +58,8 @@
 				}
 			}, function () {});
 		}
+
+		$rootScope.appFns.refreshFeatureFlags();
 	});
 
 }());
