@@ -12,9 +12,22 @@
 
         $scope.pageFns = {};
 
+        var refreshTasks = function () {
+          TaskService.retrieve().then(function (response) {
+            const data = response.data;
+            $scope.pageData.tasks = TaskTableViewFactory.buildFromJsonCollection(data);
+          }, function (reason) {});
+        }
+
         var resetForm = function () {
             $scope.formData.taskContent = '';
-        };
+        }
+
+        $scope.pageFns.refreshTasks = function () {
+          refreshTasks();
+        }
+
+        refreshTasks();
 
         $scope.pageFns.insertTask = function () {
             TaskService.create($scope.formData.taskContent).then(function (response) {
