@@ -1,6 +1,6 @@
 (function () {
 	var app = angular.module('app', ['ngRoute']);
-    
+
 	app.config(function ($routeProvider, $locationProvider) {
 		$routeProvider.when('/', {
 			templateUrl: '/Home/Login'
@@ -16,31 +16,50 @@
 		.when('/Tasks', {
 			templateUrl: '/Tasks/Index'
 		})
-        .when('/Lists', {
-            templateUrl: '/Lists/Index'
-        })
+    .when('/Lists', {
+        templateUrl: '/Lists/Index'
+    })
 		.when('/Terminal', {
 			templateUrl: '/Tasks/Index'
 		});
-        
-        $locationProvider.hashPrefix('');
+
+		$locationProvider.hashPrefix('');
 	});
 
-	// TODO put me in a separate file
-	app.controller('AppController', function ($scope, $location, UserLogoutService) {
-		$scope.pageFns = {};
+	app.run(function ($http,
+										$rootScope,
+										$http,
+										$location,
+										UserLogoutService,
+										FeatureFlagService,
+										FeatureFlagTableViewFactory) {
 
-		$scope.pageFns.logout = function () {
-		
+		$rootScope.appFns = {};
+		$rootScope.appData = {};
+		$rootScope.appData.flags = [];
+
+		$rootScope.appFns.logout = function () {
 			UserLogoutService.logout().then(function (isSuccessful) {
 				if (isSuccessful) {
 					$location.path('/');
 				}
 
-			}, function (reason) {
-				//TODO placeholder for error handling
-			});	
-
+			}, function (reason) {});
 		}
+
+		$rootScope.appFns.refreshFeatureFlags = function () {
+			FeatureFlagService.retrieve().then(function (response) {
+				const data = response.data;
+				if (data) {
+						for (let i = 0; i < data.length; i++) {
+								const newFlag = FeatureFlagTableViewFactory.buildFromJson(data[i]);
+								$rootScope.appData.flags.push(newFlag);
+						}
+				}
+			}, function () {});
+		}
+
+		$rootScope.appFns.refreshFeatureFlags();
 	});
+
 }());
