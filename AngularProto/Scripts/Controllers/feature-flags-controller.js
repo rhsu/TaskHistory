@@ -31,7 +31,6 @@
                     var data = response.data;
                     if (data) {
                         const newFlag = FeatureFlagTableViewFactory.buildFromJson(data);
-                        //$scope.pageData.flags.push(newFlag);
                         $rootScope.appData.flags.push(newFlag);
                         resetForm();
                     }
