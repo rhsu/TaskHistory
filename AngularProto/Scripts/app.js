@@ -1,6 +1,6 @@
 (function () {
 	var app = angular.module('app', ['ngRoute']);
-    
+
 	app.config(function ($routeProvider, $locationProvider) {
 		$routeProvider.when('/', {
 			templateUrl: '/Home/Login'
@@ -22,25 +22,31 @@
 		.when('/Terminal', {
 			templateUrl: '/Tasks/Index'
 		});
-        
-        $locationProvider.hashPrefix('');
+
+		$locationProvider.hashPrefix('');
 	});
 
 	// TODO put me in a separate file
-	app.controller('AppController', function ($scope, $location, UserLogoutService) {
-		$scope.pageFns = {};
+	app.controller('AppController', function ($rootScope,
+																						$location,
+																						$http,
+																						UserLogoutService,
+																						FeatureFlagService) {
+		$rootScope.pageFns = {};
 
-		$scope.pageFns.logout = function () {
-		
+		$rootScope.pageFns.logout = function () {
 			UserLogoutService.logout().then(function (isSuccessful) {
 				if (isSuccessful) {
 					$location.path('/');
 				}
 
-			}, function (reason) {
-				//TODO placeholder for error handling
-			});	
-
+			}, function (reason) {});
 		}
+
+		$rootScope.appData = FeatureFlagService.retrieve()
+			.then(function (response) {
+				console.log(response.data);
+			}, function () {});
+
 	});
 }());
