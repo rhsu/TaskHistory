@@ -47,16 +47,19 @@
 			}, function (reason) {});
 		}
 
-		FeatureFlagService.retrieve().then(function (response) {
-			const data = response.data;
-			if (data) {
-					for (let i = 0; i < data.length; i++) {
-							const newFlag = FeatureFlagTableViewFactory.buildFromJson(data[i]);
-							$rootScope.appData.flags.push(newFlag);
-					}
-			}
-		}, function () {});
+		$rootScope.appFns.refreshFeatureFlags = function () {
+			FeatureFlagService.retrieve().then(function (response) {
+				const data = response.data;
+				if (data) {
+						for (let i = 0; i < data.length; i++) {
+								const newFlag = FeatureFlagTableViewFactory.buildFromJson(data[i]);
+								$rootScope.appData.flags.push(newFlag);
+						}
+				}
+			}, function () {});
+		}
 
+		$rootScope.appFns.refreshFeatureFlags();
 	});
 
 }());
