@@ -26,12 +26,12 @@
 		$locationProvider.hashPrefix('');
 	});
 
-	// TODO put me in a separate file
-	app.controller('AppController', function ($rootScope,
-																						$location,
-																						$http,
-																						UserLogoutService,
-																						FeatureFlagService) {
+	app.run(function ($http,
+										$rootScope,
+										$http,
+										UserLogoutService,
+										FeatureFlagService) {
+
 		$rootScope.pageFns = {};
 
 		$rootScope.pageFns.logout = function () {
@@ -49,4 +49,5 @@
 			}, function () {});
 
 	});
+
 }());
