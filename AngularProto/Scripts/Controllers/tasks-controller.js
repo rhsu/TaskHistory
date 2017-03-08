@@ -1,7 +1,7 @@
 (function () {
     const app = angular.module('app');
 
-    app.controller('TasksController', function ($scope, 
+    app.controller('TasksController', function ($scope,
                                                 TaskService,
                                                 TaskTableViewFactory) {
         $scope.pageData = {};
@@ -13,23 +13,21 @@
         $scope.pageFns = {};
 
         var refreshTasks = function () {
-            
-            TaskService.retrieve().then(function (response) {
-                const data = response.data;
-                $scope.pageData.tasks = TaskTableViewFactory.buildFromJsonCollection(data);
-            }, function (reason) {});
-            
-        };
+          TaskService.retrieve().then(function (response) {
+            const data = response.data;
+            $scope.pageData.tasks = TaskTableViewFactory.buildFromJsonCollection(data);
+          }, function (reason) {});
+        }
 
         var resetForm = function () {
             $scope.formData.taskContent = '';
-        };
-
-        refreshTasks();
+        }
 
         $scope.pageFns.refreshTasks = function () {
-            refreshTasks();
-        };
+          refreshTasks();
+        }
+
+        refreshTasks();
 
         $scope.pageFns.insertTask = function () {
             TaskService.create($scope.formData.taskContent).then(function (response) {
