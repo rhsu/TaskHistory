@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Security;
 using TaskHistory.Api.Users;
 using TaskHistory.Orchestrator.Home;
@@ -13,7 +14,11 @@ namespace AngularProto.Controllers
 		[HttpPost]
 		public JsonResult Login(UserLoginViewModel userLoginViewModel)
 		{
+			if (userLoginViewModel == null)
+				throw new ArgumentNullException(nameof(userLoginViewModel));
+
 			IUser user = _authenticationOrchestrator.OrchestrateValidateUser(userLoginViewModel);
+
 			bool isSuccessful = false;
 
 			if (user != null)
@@ -26,6 +31,12 @@ namespace AngularProto.Controllers
 			//TODO should user be authenticated and session cleared if Login failed?
 
 			return Json(isSuccessful);
+		}
+
+		[HttpPost]
+		public JsonResult AdminLogin(UserLoginViewModel userLoginViewModel)
+		{
+			return Json(false);
 		}
 
 		[HttpPost]

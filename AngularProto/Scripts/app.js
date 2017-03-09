@@ -10,9 +10,6 @@
 		.when('/Home', {
 			templateUrl: '/Tasks/Index'
 		})
-		.when('/FeatureFlags', {
-			templateUrl: '/FeatureFlags/Index'
-		})
 		.when('/Tasks', {
 			templateUrl: '/Tasks/Index'
 		})
@@ -21,6 +18,9 @@
     })
 		.when('/Admin', {
 			templateUrl: '/Admin/Index'
+		})
+		.when('/Admin/FeatureFlags', {
+			templateUrl: '/FeatureFlags/Index'
 		})
 		.when('/Terminal', {
 			templateUrl: '/Tasks/Index'
