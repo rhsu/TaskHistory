@@ -36,6 +36,11 @@ namespace AngularProto.Controllers
 		[HttpPost]
 		public JsonResult AdminLogin(UserLoginViewModel userLoginViewModel)
 		{
+			if (userLoginViewModel == null)
+				throw new ArgumentNullException(nameof(userLoginViewModel));
+
+			IUser user = _authenticationOrchestrator.OrchestrateValidateUser(userLoginViewModel);
+
 			return Json(false);
 		}
 

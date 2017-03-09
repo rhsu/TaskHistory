@@ -5,7 +5,7 @@ namespace TaskHistory.Impl.Users
 {
 	public class User : IUser
 	{
-		private readonly string _fullName;
+		readonly string _fullName;
 
 		public int UserId { get; }
 		public string Username { get; }

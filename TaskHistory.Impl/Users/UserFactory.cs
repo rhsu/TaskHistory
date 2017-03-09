@@ -6,6 +6,11 @@ namespace TaskHistory.Impl.Users
 {
 	public class UserFactory : IFromDataReaderFactory<IUser>
 	{
+		public IUser BuildAdminUser()
+		{
+			return new User(-1, "admin", "admin", "admin", "admin");
+		}
+
 		public IUser Build(ISqlDataReader reader)
 		{
 			if (reader == null)

@@ -46,6 +46,16 @@ namespace TaskHistory.Orchestrator.Home
 			return user;
 		}
 
+		public IUser OrchestratorValidateAdminUser(UserLoginViewModel userLoginViewModel)
+		{
+			if (userLoginViewModel == null)
+				throw new ArgumentNullException(nameof(userLoginViewModel));
+
+			// IUser user 
+
+			return null;
+		}
+
 		public AuthenticationOrchestrator(IUserRepo userRepo, ObjectMapperUsers userObjectMapper)
 		{
 			_userRepo = userRepo;

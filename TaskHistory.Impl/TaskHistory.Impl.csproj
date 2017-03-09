@@ -83,6 +83,7 @@
     <Compile Include="TaskLists\TaskListWithTasks.cs" />
     <Compile Include="TaskLists\TaskListWithTasksRepo.cs" />
     <Compile Include="TaskLists\TaskListWithTasksFactory.cs" />
+    <Compile Include="Users\AdminUserProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
