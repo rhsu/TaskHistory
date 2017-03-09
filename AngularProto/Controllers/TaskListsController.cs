@@ -3,7 +3,7 @@ using TaskHistory.Orchestrator;
 
 namespace AngularProto.Controllers
 {
-	public class TaskListController : ApplicationController
+	public class TaskListsController : ApplicationController
     {
 		TaskListOrchestrator _orchestrator;
 
@@ -26,7 +26,7 @@ namespace AngularProto.Controllers
 			return Json(_orchestrator.Create(_currentUser, name));
 		}
 
-		public TaskListController(TaskListOrchestrator orchestrator, ApplicationContext appContext)
+		public TaskListsController(TaskListOrchestrator orchestrator, ApplicationContext appContext)
 			: base(appContext)
 		{
 			_orchestrator = orchestrator;

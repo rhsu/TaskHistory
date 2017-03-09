@@ -1,11 +1,30 @@
+<div class='container app-content'
+		 ng-controller='TaskListsController'>
+	<div ng-if='featureEnabled.list'>
+		<form class='form-inline'>
+			<div class='form-group'>
+				<!-- TODO Something else besides &nbsp please-->
+				<label>New List:</label>&nbsp;
+				<input class='form-control'
+							 ng-model='formData.name'
+							 type='text'>
+			</div>
+			<button class='btn btn-success'>
+				<span class='glyphicon glyphicon-plus'
+				      ng-click='pageFns.createTaskList()'></span>
+			</button>
+		</form>
+	</div>
+</div>
+
 <div class='container app-content' ng-controller='TasksController'>
 	<form class='form-inline'>
 		<div class='form-group'>
 			<label>New Task:</label>
 			<input class='form-control'
-				ng-model='formData.taskContent' 
-				type='text'
-				required='true'>
+						 ng-model='formData.taskContent'
+						 type='text'
+						 required='true'>
 		</div>
 		<button class='btn btn-success'
 			ng-click='pageFns.insertTask()'>

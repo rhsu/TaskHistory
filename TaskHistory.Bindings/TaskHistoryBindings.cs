@@ -32,7 +32,8 @@ namespace TaskHistory.Bindings
 			_allModules.Add (new ViewRepoModule ());
 			_allModules.Add (new TerminalModule());
 			_allModules.Add (new LabelModule());
-			_allModules.Add(new FeatureFlagModule());
+			_allModules.Add (new FeatureFlagModule());
+			_allModules.Add (new TaskListsModule());
 		}
 
 		public void DoAllBindings(IKernel kernel)

@@ -116,7 +116,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\ActivationController.cs" />
     <Compile Include="Controllers\FeatureFlagsController.cs" />
-    <Compile Include="Controllers\TaskListController.cs" />
+    <Compile Include="Controllers\TaskListsController.cs" />
     <Compile Include="Controllers\ListsController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +153,8 @@
     <Content Include="Content\Styles.css" />
     <Content Include="Scripts\Controllers\lists-controller.js" />
     <Content Include="Scripts\Services\fake-lists-table-view-service.js" />
+    <Content Include="Scripts\Factories\feature-flag-table-view-factory.js" />
+    <Content Include="Scripts\Factories\task-table-view-factory.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
