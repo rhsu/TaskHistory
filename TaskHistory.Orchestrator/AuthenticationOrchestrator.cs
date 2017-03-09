@@ -8,10 +8,10 @@ namespace TaskHistory.Orchestrator.Home
 	public class AuthenticationOrchestrator
 	{
 		readonly IUserRepo _userRepo;
-		readonly ObjectMapperUsers _userObjectMapper;
+		readonly IAdminUserProvider _adminUserProvider;
 
 		// TODO This has been moved. Do not call this anymore
-		public UserRegistrationStatusViewModel OrchestrateRegisterUser(UserRegistrationParametersViewModel vmUserRegister)
+		/*public UserRegistrationStatusViewModel OrchestrateRegisterUser(UserRegistrationParametersViewModel vmUserRegister)
 		{
 			if (vmUserRegister == null)
 				throw new ArgumentNullException(nameof(vmUserRegister));
@@ -31,7 +31,7 @@ namespace TaskHistory.Orchestrator.Home
 
 
 			return registrationStatus;
-		}
+		}*/
 
 		public IUser OrchestrateValidateUser(UserLoginViewModel userLoginViewModel)
 		{
@@ -51,15 +51,19 @@ namespace TaskHistory.Orchestrator.Home
 			if (userLoginViewModel == null)
 				throw new ArgumentNullException(nameof(userLoginViewModel));
 
-			// IUser user 
+			string username = userLoginViewModel.Username;
+			string password = userLoginViewModel.Password;
 
-			return null;
+			IUser user = _adminUserProvider.AuthenticateAdminUser(username, password);
+
+			return user;
 		}
 
-		public AuthenticationOrchestrator(IUserRepo userRepo, ObjectMapperUsers userObjectMapper)
+		public AuthenticationOrchestrator(IUserRepo userRepo, 
+		                                  IAdminUserProvider adminUserProvider)
 		{
+			_adminUserProvider = adminUserProvider;
 			_userRepo = userRepo;
-			_userObjectMapper = userObjectMapper;
 		}
 	}
 }

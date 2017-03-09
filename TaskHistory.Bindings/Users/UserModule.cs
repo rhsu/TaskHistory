@@ -14,6 +14,9 @@ namespace TaskHistory.Bindings
 
 			kernel.Bind<IUserRepo>()
 				  .To<UserRepo>();
+
+			kernel.Bind<IAdminUserProvider>()
+				  .To<AdminUserProvider>();
 		}
 	}
 }

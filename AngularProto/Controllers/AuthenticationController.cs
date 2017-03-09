@@ -41,7 +41,17 @@ namespace AngularProto.Controllers
 
 			IUser user = _authenticationOrchestrator.OrchestrateValidateUser(userLoginViewModel);
 
-			return Json(false);
+			bool isSuccessful = false;
+
+			if (user != null)
+			{
+				FormsAuthentication.SetAuthCookie(user.Username, false);
+				Session["CurrentUser"] = user;
+
+				isSuccessful = true;
+			}
+
+			return Json(isSuccessful);
 		}
 
 		[HttpPost]
