@@ -2,7 +2,16 @@
 
   const app = angular.module('app');
 
-  app.controller('TaskListsController', function ($scope, TaskListsService) {
+  app.controller('TaskListsController', function ($scope,
+    TaskListsService,
+    $rootScope) {
+
+    const listFeature = $rootScope.appData.flags.find(function(elem) {
+      return elem.name == 'list';
+    });
+
+    $scope.featureEnabled = {}
+    $scope.featureEnabled.list = listFeature && listFeature.value === 'enabled'
 
     $scope.formData = {};
 
