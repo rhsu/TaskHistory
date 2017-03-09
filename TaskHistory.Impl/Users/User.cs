@@ -1,5 +1,4 @@
-﻿using System;
-using TaskHistory.Api.Users;
+﻿using TaskHistory.Api.Users;
 
 namespace TaskHistory.Impl.Users
 {
@@ -14,7 +13,7 @@ namespace TaskHistory.Impl.Users
 		public string FullName { get { return _fullName; } }
 		public string Email { get; }
 
-		public User (int id, string userName, string firstName, string lastName, string email)
+		public User(int id, string userName, string firstName, string lastName, string email)
 		{
 			UserId = id;
 			Username = userName;
@@ -22,7 +21,7 @@ namespace TaskHistory.Impl.Users
 			LastName = lastName;
 			Email = email;
 
-			_fullName = string.Format ("{0} {1}", FirstName, LastName);
+			_fullName = string.Format("{0} {1}", FirstName, LastName);
 		}
 	}
 }
