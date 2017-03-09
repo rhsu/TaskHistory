@@ -96,6 +96,7 @@
     <Folder Include="Views\Tasks\" />
     <Folder Include="Scripts\Models\" />
     <Folder Include="Views\FeatureFlags\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Controllers\FeatureFlagsController.cs" />
     <Compile Include="Controllers\TaskListsController.cs" />
     <Compile Include="Controllers\ListsController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -155,6 +157,7 @@
     <Content Include="Scripts\Services\fake-lists-table-view-service.js" />
     <Content Include="Scripts\Factories\feature-flag-table-view-factory.js" />
     <Content Include="Scripts\Factories\task-table-view-factory.js" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
