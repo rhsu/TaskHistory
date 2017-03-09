@@ -16,6 +16,15 @@ namespace TaskHistory.Impl.Users
 			_userFactory = userFactory;
 		}
 
+		public IUser BuildAdminUser()
+		{
+			IUser user = _userFactory.Build(-1, "admin", "admin", "admin", "admin");
+			if (user == null)
+				throw new NullReferenceException("null user returned");
+
+			return user;
+		}
+
 		public IUser AuthenticateAdminUser(string name, string password)
 		{
 			if (string.IsNullOrEmpty(name))
@@ -30,10 +39,7 @@ namespace TaskHistory.Impl.Users
 			// Need to make sure that admin is not a valid username when registering
 			if ((name == _default_name) && (password == _default_password))
 			{
-				IUser user = _userFactory.BuildAdminUser();
-				if (user == null)
-					throw new NullReferenceException("Null returned from factory when building admin");
-				return user;
+				return BuildAdminUser();
 			}
 
 			// TODO

@@ -6,11 +6,13 @@ namespace TaskHistory.Impl.Users
 {
 	public class UserFactory : IFromDataReaderFactory<IUser>
 	{
-		// TODO is there a better way to illustrate that this is an admin user
-		// The problem here is that the Factory decides what an Admin user looks like
-		public IUser BuildAdminUser()
+		public IUser Build(int userId, 
+		                   string userName, 
+		                   string firstName, 
+		                   string lastName, 
+		                   string email)
 		{
-			return new User(-1, "admin", "admin", "admin", "admin");
+			return new User(userId, userName, firstName, lastName, email);
 		}
 
 		public IUser Build(ISqlDataReader reader)
