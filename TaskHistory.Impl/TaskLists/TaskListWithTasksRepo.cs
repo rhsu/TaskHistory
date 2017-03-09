@@ -9,7 +9,7 @@ namespace TaskHistory.Impl.TaskLists
 		TaskListWithTasksFactory _factory;
 		ApplicationDataProxy _dataProxy;
 
-		const string ReadStoredProcedure = "";
+		const string ReadStoredProcedure = "TaskListsWithTasks_Read";
 
 		public TaskListWithTasksRepo(TaskListWithTasksFactory factory,
 		                             ApplicationDataProxy dataProxy)
@@ -18,13 +18,23 @@ namespace TaskHistory.Impl.TaskLists
 			_dataProxy = dataProxy;
 		}
 
-		public ITaskListWithTasks Read(int userId, int listId)
+		public ITaskListWithTasks Read(int userId)
+		{
+			var list = _dataProxy.ExecuteReader(_factory, ReadStoredProcedure);
+			if (list == null)
+				throw new NullReferenceException("Null returned from data proxy");
+
+			return list;
+		}
+
+		// TODO Spec changed. Need a Read all but do I still need a Read single?
+		/*public ITaskListWithTasks Read(int userId, int listId)
 		{
 			var task = _dataProxy.ExecuteReader(_factory, ReadStoredProcedure);
 			if (task == null)
 				throw new NullReferenceException("Null returned from data reader");
 
 			return task;
-		}
+		}*/
 	}
 }

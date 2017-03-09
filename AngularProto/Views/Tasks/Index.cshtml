@@ -1,13 +1,32 @@
-﻿<div class='container' ng-controller='TasksController' style='padding-top: 25px'>
+<div class='container app-content'
+		 ng-controller='TaskListsController'>
+	<div ng-if='featureEnabled.list'>
+		<form class='form-inline'>
+			<div class='form-group'>
+				<!-- TODO Something else besides &nbsp please-->
+				<label>New List:</label>&nbsp;
+				<input class='form-control'
+							 ng-model='formData.name'
+							 type='text'>
+			</div>
+			<button class='btn btn-success'>
+				<span class='glyphicon glyphicon-plus'
+				      ng-click='pageFns.createTaskList()'></span>
+			</button>
+		</form>
+	</div>
+</div>
+
+<div class='container app-content' ng-controller='TasksController'>
 	<form class='form-inline'>
 		<div class='form-group'>
 			<label>New Task:</label>
-			<input class='form-control' 
-				ng-model='formData.taskContent' 
-				type='text'
-				required='true'>
+			<input class='form-control'
+						 ng-model='formData.taskContent'
+						 type='text'
+						 required='true'>
 		</div>
-		<button class='btn btn-success' 
+		<button class='btn btn-success'
 			ng-click='pageFns.insertTask()'>
 			<span class='glyphicon glyphicon-plus'></span>
 		</button>
@@ -19,10 +38,10 @@
 			<span class='glyphicon glyphicon-refresh'></span>
 		</button>
 	</div>
-		
+
 	<div style='padding-top: 25px'>
 		<div ng-hide="pageData.tasks.length">There are no tasks.</div>
-		<table class="table table-striped table-hover table-bordered" 
+		<table class="table table-striped table-hover table-bordered"
 				ng-show="pageData.tasks.length">
 			<tr>
 				<th>
@@ -49,9 +68,9 @@
 
 					<!-- editing mode -->
 					<div ng-show='task.editorState === "editing"'>
-						<input ng-model='task.editorTaskContent' 
-							class='form-control' 
-							type='text' />		
+						<input ng-model='task.editorTaskContent'
+							class='form-control'
+							type='text' />
 					</div>
 				</td>
 				<td>

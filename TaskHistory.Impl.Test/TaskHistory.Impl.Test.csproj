@@ -42,6 +42,7 @@
     <Compile Include="TestFixtures.cs" />
     <Compile Include="Tasks\TaskRepoTest.cs" />
     <Compile Include="FeatureFlags\FeatureFlagRepoTest.cs" />
+    <Compile Include="TaskLists\TaskListWithTasksRepoTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
