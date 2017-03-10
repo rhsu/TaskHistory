@@ -12,6 +12,10 @@ namespace AngularProto.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
+			// TODO figure out role
+			// TODO figure out before filter ("might be easier to do first")
+			/*if (Session["IsAdmin"] != true)
+				throw new Exception("Can't access");*/
 			return View();
 		}
 

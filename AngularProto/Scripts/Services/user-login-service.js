@@ -3,16 +3,20 @@
 
 	app.factory('UserLoginService', function ($http) {
 		return {
-			
+
 			promiseLoginUser(loginViewModel) {
 				return $http.post('/Authentication/Login', { userLoginViewModel: loginViewModel })
 				.then(function (response) {
 					return response.data;
-				}, function (reason) {
-					// placeholder here in the future for error handling
-				});
-			}
+				}, function () {});
+			},
 
+			promiseLoginAdmin(loginViewModel) {
+				return $http.post('/Authentication/AdminLogin', {userLoginViewModel : loginViewModel})
+				.then(function (response) {
+					return response.data;
+				}, function () {});
+			}
 		}
-	}); 
+	});
 })();

@@ -4,6 +4,7 @@ using TaskHistory.ViewModel.FeatureFlags;
 
 namespace AngularProto.Controllers
 {
+	[Authorize]
 	public class FeatureFlagsController : Controller
 	{
 		FeatureFlagsOrchestrator _orchestrator;

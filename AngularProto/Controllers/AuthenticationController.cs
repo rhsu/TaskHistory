@@ -45,8 +45,10 @@ namespace AngularProto.Controllers
 
 			if (user != null)
 			{
+				// TODO Do I need a Session Variable? Probably not
+				// TODO Set Auth Cookie equal to Guid will that break?
 				FormsAuthentication.SetAuthCookie(user.Username, false);
-				Session["CurrentUser"] = user;
+				Session["IsAdmin"] = true;
 
 				isSuccessful = true;
 			}
