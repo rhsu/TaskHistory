@@ -16,38 +16,39 @@
         this.editorState = 'initial',
 
         ///////////////////////////////
-        //							//
-        // state change functions	//
-        //							//
+        //							            //
+        // state change functions	  //
+        //							            //
         //////////////////////////////
         this.setInitialState = function () {
-            this.editorTaskContent = taskContent;
-            this.editorState = 'initial';
+          this.editorTaskContent = this.taskContent;
+          this.editorState = 'initial';
         },
 
         this.setConfirmDeleteState = function () {
-            this.editorState = 'confirmDelete';
+          this.editorState = 'confirmDelete';
         },
 
         this.setDeletedState = function () {
-            this.editorState = 'deleted';
+          this.editorState = 'deleted';
         },
 
         this.setEditingState = function () {
-            this.editorState = 'editing';
+
+          this.editorState = 'editing';
         }
     }
 
     app.factory('TaskTableViewFactory', function () {
         return {
-            
-            buildFromJson(jsonObj) {  
+
+            buildFromJson(jsonObj) {
                 const id = jsonObj.TaskId || -1;
                 const content = jsonObj.TaskContent || '';
 
                 return new TaskTableView(id, content);
             },
-            
+
             buildFromJsonCollection(jsonObjCollection) {
                 const retVal = []
                 for (let i = 0; i < jsonObjCollection.length; i++) {
@@ -56,11 +57,11 @@
                 }
                 return retVal;
             },
-            
+
             updateFromJson(jsonObj, task) {
                 const id = jsonObj.TaskId || -1;
                 const content = jsonObj.TaskContent || '';
-                
+
                 task.taskId = id;
                 task.taskContent = content;
             }

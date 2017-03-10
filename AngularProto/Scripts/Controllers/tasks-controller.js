@@ -41,8 +41,6 @@
         };
 
         $scope.pageFns.updateTaskContent = function (task) {
-          console.log(task);
-          // TODO Why do I have editor taskContent?
           task.taskContent = task.editorTaskContent;
           task.editorTaskContent = task.taskContent;
           TaskService.update(task).then(function (response) {
