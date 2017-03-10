@@ -120,6 +120,9 @@ namespace TaskHistory.Impl.Tasks
 		{
 			_taskFactory = taskFactory;
 			_dataProxy = applicationDataProxy;
+
+			// TODO: FeatureFlagRepo should exists here
+			// because each repo method should have access to UserId
 		}
 	}
 }

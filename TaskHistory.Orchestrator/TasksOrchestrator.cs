@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TaskHistory.Api.FeatureFlags;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
 using TaskHistory.Api.ViewRepos;
@@ -10,9 +11,12 @@ namespace TaskHistory.Orchestrator.Tasks
 {
 	public class TasksOrchestrator
 	{
-		readonly ITaskRepo _repo;
-		readonly ITaskViewRepo _viewRepo;
-		readonly ObjectMapperTasks _objectMapper;
+		readonly ITaskRepo _taskRepo;
+		readonly ITaskViewRepo _taskViewRepo;
+		readonly IFeatureFlagRepo _featureFlagRepo;
+		readonly ObjectMapperTasks _taskObjectMapper;
+
+		readonly IFeatureFlag _productionDatabaseFlag;
 
 		public IEnumerable<TaskTableViewModel> Retrieve(IUser user)
 		{
@@ -75,11 +79,27 @@ namespace TaskHistory.Orchestrator.Tasks
 			return retVal;
 		}
 
-		public TasksOrchestrator(ITaskRepo repo, ITaskViewRepo viewRepo, ObjectMapperTasks mapper)
+		public bool OrchestratorDeleteTask(IUser user, int taskId)
 		{
-			_repo = repo;
-			_viewRepo = viewRepo;
-			_objectMapper = mapper;
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+
+			_taskRepo.DeleteTask_OLD(taskId, user.UserId);
+
+			return true;
+		}
+
+		public TasksOrchestrator(ITaskRepo taskRepo, 
+		                         ITaskViewRepo taskViewRepo, 
+		                         ObjectMapperTasks taskPresenter,
+		                         IFeatureFlagRepo featureFlagRepo)
+		{
+			_taskRepo = taskRepo;
+			_taskViewRepo = taskViewRepo;
+			_taskObjectMapper = taskPresenter;
+			_featureFlagRepo = featureFlagRepo;
+
+			_productionDatabaseFlag = featureFlagRepo.Read("production");
 		}
 	}
 }
