@@ -30,15 +30,48 @@
           <th>Name</th>
           <th>Value</th>
           <th></th>
-					<th></th>
      </tr>
 			<tr ng-repeat='flag in appData.flags'>
-	            <td>{{ $index + 1 }}</td>
-	            <td>{{flag.id}}</td>
+				<td>{{ $index + 1 }}</td>
+	   		<td>{{flag.id}}</td>
 				<td>{{flag.name}}</td>
 				<td>{{flag.value}}</td>
-				<td></td>
-				<td></td>
+				<td> <!-- buttons icons here -->
+
+					<!-- Pencil Icon -->
+					<button class='btn btn-default'
+						ng-show='false'
+						ng-click=''>
+						<span class='glyphicon glyphicon-pencil'></span>
+					</button>
+
+					<!-- Delete X icon-->
+					<button class='btn btn-danger'
+						ng-show='true'
+						ng-click='pageFns.delete(flag)'>
+						<span class='glyphicon glyphicon-trash'></span>
+					</button>
+
+					<!-- Back Icon-->
+					<button class='btn btn-primary'
+						ng-show='false'
+						ng-click=''>
+						<span class='glyphicon glyphicon-arrow-left'></span>
+					</button>
+
+					<!-- Undo-->
+					<button class='btn btn-primary'
+						ng-show='false'
+						ng-click=''>Undo</button>
+
+					<!-- Submit Edit (OK Icon)-->
+					<button class='btn btn-success'
+							ng-show='false'
+							ng-click=''>
+						<span class='glyphicon glyphicon-ok'></span>
+					</button>
+
+				</td>
 			</tr>
 		</table>
 </div>

@@ -11,5 +11,7 @@ namespace TaskHistory.Api.FeatureFlags
 		IFeatureFlag Update(int id, string name, string value);
 
 		int Delete(int id);
+
+		int DeleteAll();
 	}
 }

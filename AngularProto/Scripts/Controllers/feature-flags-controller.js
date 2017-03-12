@@ -12,12 +12,6 @@
                                                      FeatureFlagService,
                                                      FeatureFlagTableViewFactory) {
 
-
-        /***** PageData Declarations *****/
-        $scope.pageData = {};
-        $scope.pageData.flags = [];
-        /***** End Page Data Declarations *****/
-
         /***** Form Data Declaration *****/
         $scope.formData = {};
         /***** End Form Data Declaration *****/
@@ -34,8 +28,22 @@
                         $rootScope.appData.flags.push(newFlag);
                         resetForm();
                     }
-                }, function (reason) {});
+                }, function () {});
         }
+
+        $scope.pageFns.delete = function (flag) {
+          FeatureFlagService.delete(flag.id)
+            .then(function (response) {
+              const success = response.data;
+              if (success) {
+                const idx = $rootScope.appData.flags.findIndex(function (elem) {
+                  return elem.id == flag.id;
+                });
+                $rootScope.appData.flags.splice(idx, 1);
+              }
+            }, function () {});
+        }
+
         /***** End Page Function Declarations *****/
         var resetForm = function (newFlag) {
             $scope.formData = {};

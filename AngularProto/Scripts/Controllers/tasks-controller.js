@@ -37,8 +37,20 @@
                     const task = TaskTableViewFactory.buildFromJson(data);
                     $scope.pageData.tasks.push(task);
                 }
-            }, function (reason) {});
+            }, function () {});
         };
+
+        $scope.pageFns.updateTaskContent = function (task) {
+          task.taskContent = task.editorTaskContent;
+          task.editorTaskContent = task.taskContent;
+          TaskService.update(task).then(function (response) {
+            const data = response.data;
+            if (data) {
+              TaskTableViewFactory.updateFromJson(data, task);
+              task.setInitialState();
+            }
+          }, function () {});
+        }
 
         $scope.pageFns.deleteTask = function (task) {
             task.isDeleted = true;
@@ -48,7 +60,7 @@
                     TaskTableViewFactory.updateFromJson(data, task);
                     task.setDeletedState();
                 }
-            }, function (reason) {});
+            }, function () {});
         };
 
         $scope.pageFns.undoDeleteTask = function (task) {
@@ -59,7 +71,7 @@
                     TaskTableViewFactory.updateFromJson(data, task);
                     task.setInitialState();
                 }
-            }, function (reason) {});
+            }, function () {});
         };
 
         $scope.pageFns.displayBackButton = function (task) {

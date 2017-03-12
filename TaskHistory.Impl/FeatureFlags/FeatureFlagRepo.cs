@@ -15,6 +15,7 @@ namespace TaskHistory.Impl.FeatureFlags
 		const string ReadStoredProcedure = "FeatureFlags_Read";
 		const string UpdatedStoredProcedure = "FeatureFlags_Update";		
 		const string DeleteStoredProcedure = "FeatureFlags_Delete";
+		const string DeleteAllStoredProcedure = "FeatureFlags_All_Delete";
 
 		public IFeatureFlag Create(string name, string value)
 		{
@@ -39,7 +40,6 @@ namespace TaskHistory.Impl.FeatureFlags
 			return returnVal;
 		}
 
-		// TODO No way to actually test this yet
 		public int Delete(int id)
 		{
 			var parameters = new List<ISqlDataParameter>();
@@ -85,6 +85,12 @@ namespace TaskHistory.Impl.FeatureFlags
 				throw new NullReferenceException("Null returned from DataProvider");
 
 			return returnVal;
+		}
+
+		public int DeleteAll()
+		{
+			int deleted = _dataProxy.ExecuteNonQuery(DeleteAllStoredProcedure);
+			return deleted;
 		}
 
 		public FeatureFlagRepo(FeatureFlagFactory factory,
