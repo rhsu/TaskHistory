@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 using TaskHistory.Api.FeatureFlags;
 using TaskHistory.Impl.FeatureFlags;
 
@@ -46,10 +47,14 @@ namespace TaskHistory.Impl.Test.FeatureFlags
 			var name = "Feature Flag Name";
 			var value = "this is a value";
 
-			IFeatureFlag feature = _repo.Create(name,
+			IFeatureFlag flag = _repo.Create(name,
 												value);
 
-			int numDeleted = _repo.Delete(feature.Id);
+			var flags = _repo.Read().ToList();
+
+			Assert.True(flags.Exists(x => x.Id == flag.Id));
+
+			int numDeleted = _repo.Delete(flag.Id);
 
 			Assert.AreEqual(1, numDeleted);
 		}

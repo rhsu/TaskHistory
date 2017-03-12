@@ -39,7 +39,6 @@ namespace TaskHistory.Impl.FeatureFlags
 			return returnVal;
 		}
 
-		// TODO No way to actually test this yet
 		public int Delete(int id)
 		{
 			var parameters = new List<ISqlDataParameter>();
