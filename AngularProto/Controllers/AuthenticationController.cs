@@ -39,7 +39,7 @@ namespace AngularProto.Controllers
 			if (userLoginViewModel == null)
 				throw new ArgumentNullException(nameof(userLoginViewModel));
 
-			IUser user = _authenticationOrchestrator.OrchestrateValidateUser(userLoginViewModel);
+			IUser user = _authenticationOrchestrator.OrchestratorValidateAdminUser(userLoginViewModel);
 
 			bool isSuccessful = false;
 
@@ -47,7 +47,7 @@ namespace AngularProto.Controllers
 			{
 				// TODO Do I need a Session Variable? Probably not
 				// TODO Set Auth Cookie equal to Guid will that break?
-				FormsAuthentication.SetAuthCookie(user.Username, false);
+				FormsAuthentication.SetAuthCookie(Guid.NewGuid().ToString(), false);
 				Session["IsAdmin"] = true;
 
 				isSuccessful = true;
