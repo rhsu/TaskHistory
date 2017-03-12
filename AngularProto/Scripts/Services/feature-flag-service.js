@@ -26,7 +26,6 @@
             },
 
             delete(id) {
-                console.log(id);
                 return $http.post('/FeatureFlags/Delete/', {
                     id: id
                 });

@@ -12,12 +12,6 @@
                                                      FeatureFlagService,
                                                      FeatureFlagTableViewFactory) {
 
-
-        /***** PageData Declarations *****/
-        $scope.pageData = {};
-        $scope.pageData.flags = [];
-        /***** End Page Data Declarations *****/
-
         /***** Form Data Declaration *****/
         $scope.formData = {};
         /***** End Form Data Declaration *****/
@@ -42,11 +36,10 @@
             .then(function (response) {
               const success = response.data;
               if (success) {
-                const idx = $scope.pageData.flags.findIndex(function (elem) {
+                const idx = $rootScope.appData.flags.findIndex(function (elem) {
                   return elem.id == flag.id;
                 });
-
-                
+                $rootScope.appData.flags.splice(idx, 1);
               }
             }, function () {});
         }
