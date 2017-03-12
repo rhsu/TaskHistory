@@ -33,12 +33,20 @@ namespace TaskHistory.Impl.Test.FeatureFlags
 		[Test]
 		public void Read()
 		{
-			// TODO can't test this until I have the ability
-			//      to delete all feature flags
-			/*for (var i = 0; i < 5; i++)
+			_repo.DeleteAll();
+
+			for (var i = 0; i < 5; i++)
 			{
-				
-			}*/
+				_repo.Create($"name{i}", $"value{i}");
+			}
+
+			var flags = _repo.Read().ToList();
+
+			for (var i = 0; i < 5; i++)
+			{
+				var exists = flags.Exists(x => x.Name == $"name{i}");
+				Assert.True(exists);
+			}
 		}
 
 		[Test]
@@ -57,6 +65,22 @@ namespace TaskHistory.Impl.Test.FeatureFlags
 			int numDeleted = _repo.Delete(flag.Id);
 
 			Assert.AreEqual(1, numDeleted);
+		}
+
+		[Test]
+		public void DeleteAll()
+		{
+			// TODO can't test this until I have the ability
+			//      to delete all feature flags
+			for (var i = 0; i < 5; i++)
+			{
+				_repo.Create("name", "value");	
+			}
+
+			_repo.DeleteAll();
+
+			var flags = _repo.Read();
+			Assert.True(flags.Count() == 0);
 		}
 	}
 }
