@@ -52,6 +52,7 @@ namespace TaskHistory.Impl.Users
 			return registeredUser;
 		}
 
+		// TODO WAT?
 		public IEnumerable<IUser> ReadAllUsers(int limit)
 		{
 			var returnVal = new List<IUser>();
@@ -83,6 +84,12 @@ namespace TaskHistory.Impl.Users
 			returnVal.Add(_dataProxy.CreateParameter("pLastName", userParams.LastName));
 
 			return returnVal;
+		}
+
+		public bool DefaultUserExists()
+		{
+			// TODO Probably easier to make that stored procedure return a value
+			return false;
 		}
 
 

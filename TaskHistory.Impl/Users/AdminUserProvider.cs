@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Authentication;
 using TaskHistory.Api.Users;
+using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Users
 {
@@ -10,10 +11,14 @@ namespace TaskHistory.Impl.Users
 		const string _default_password = "password";
 
 		UserFactory _userFactory;
+		IUserRepo _userRepo;
 
-		public AdminUserProvider(UserFactory userFactory)
+		public AdminUserProvider(UserFactory userFactory,
+		                         IUserRepo userRepo,
+		                         ApplicationDataProxy dataProxy)
 		{
 			_userFactory = userFactory;
+			_userRepo = userRepo;
 		}
 
 		public IUser BuildAdminUser()
@@ -23,6 +28,13 @@ namespace TaskHistory.Impl.Users
 				throw new NullReferenceException("null user returned");
 
 			return user;
+		}
+
+		public bool DefaultUserExists()
+		{
+			
+
+			return false;
 		}
 
 		public IUser AuthenticateAdminUser(string name, string password)
