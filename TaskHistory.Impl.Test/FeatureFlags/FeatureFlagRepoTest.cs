@@ -70,8 +70,6 @@ namespace TaskHistory.Impl.Test.FeatureFlags
 		[Test]
 		public void DeleteAll()
 		{
-			// TODO can't test this until I have the ability
-			//      to delete all feature flags
 			for (var i = 0; i < 5; i++)
 			{
 				_repo.Create("name", "value");	
