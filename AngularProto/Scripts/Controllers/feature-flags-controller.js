@@ -34,8 +34,23 @@
                         $rootScope.appData.flags.push(newFlag);
                         resetForm();
                     }
-                }, function (reason) {});
+                }, function () {});
         }
+
+        $scope.pageFns.delete = function (flag) {
+          FeatureFlagService.delete(flag.id)
+            .then(function (response) {
+              const success = response.data;
+              if (success) {
+                const idx = $scope.pageData.flags.findIndex(function (elem) {
+                  return elem.id == flag.id;
+                });
+
+                
+              }
+            }, function () {});
+        }
+
         /***** End Page Function Declarations *****/
         var resetForm = function (newFlag) {
             $scope.formData = {};

@@ -32,7 +32,7 @@ namespace AngularProto.Controllers
 			return Json(_orchestrator.Update(viewModel));
 		}
 
-		[HttpDelete]
+		[HttpPost]
 		public ActionResult Delete(int id)
 		{
 			return Json(_orchestrator.Delete(id));
