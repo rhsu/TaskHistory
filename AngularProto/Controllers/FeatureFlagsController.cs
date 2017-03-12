@@ -32,6 +32,12 @@ namespace AngularProto.Controllers
 			return Json(_orchestrator.Update(viewModel));
 		}
 
+		[HttpPost]
+		public ActionResult Delete(int id)
+		{
+			return Json(_orchestrator.Delete(id));
+		}
+
 		public FeatureFlagsController(FeatureFlagsOrchestrator orchestrator)
 		{
 			_orchestrator = orchestrator;

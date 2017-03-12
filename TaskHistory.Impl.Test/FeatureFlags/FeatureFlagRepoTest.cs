@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 using TaskHistory.Api.FeatureFlags;
 using TaskHistory.Impl.FeatureFlags;
 
@@ -32,12 +33,20 @@ namespace TaskHistory.Impl.Test.FeatureFlags
 		[Test]
 		public void Read()
 		{
-			// TODO can't test this until I have the ability
-			//      to delete all feature flags
-			/*for (var i = 0; i < 5; i++)
+			_repo.DeleteAll();
+
+			for (var i = 0; i < 5; i++)
 			{
-				
-			}*/
+				_repo.Create($"name{i}", $"value{i}");
+			}
+
+			var flags = _repo.Read().ToList();
+
+			for (var i = 0; i < 5; i++)
+			{
+				var exists = flags.Exists(x => x.Name == $"name{i}");
+				Assert.True(exists);
+			}
 		}
 
 		[Test]
@@ -46,12 +55,30 @@ namespace TaskHistory.Impl.Test.FeatureFlags
 			var name = "Feature Flag Name";
 			var value = "this is a value";
 
-			IFeatureFlag feature = _repo.Create(name,
+			IFeatureFlag flag = _repo.Create(name,
 												value);
 
-			int numDeleted = _repo.Delete(feature.Id);
+			var flags = _repo.Read().ToList();
+
+			Assert.True(flags.Exists(x => x.Id == flag.Id));
+
+			int numDeleted = _repo.Delete(flag.Id);
 
 			Assert.AreEqual(1, numDeleted);
+		}
+
+		[Test]
+		public void DeleteAll()
+		{
+			for (var i = 0; i < 5; i++)
+			{
+				_repo.Create("name", "value");	
+			}
+
+			_repo.DeleteAll();
+
+			var flags = _repo.Read();
+			Assert.True(flags.Count() == 0);
 		}
 	}
 }
