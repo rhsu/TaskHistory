@@ -7,8 +7,6 @@
     $scope.pageState.defaultUserExists = false;
 
     DefaultUserService.defaultUserExists().then(function (response) {
-      console.log(response.data);
-
       if (response.data) {
         $scope.pageState.defaultUserExists = response.data;
       }
