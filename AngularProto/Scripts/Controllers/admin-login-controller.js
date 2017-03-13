@@ -2,6 +2,7 @@
   var app = angular.module('app');
 
   app.controller('AdminLoginController', function ($scope,
+    $location,
     UserLoginService) {
 
     $scope.formData = {};
@@ -12,8 +13,11 @@
 
     $scope.fns.login = function () {
       UserLoginService.promiseLoginAdmin($scope.formData)
-        .then(function (response) {
-          console.log(response);
+        .then(function (successful) {
+          if (successful) {
+            console.log("got here!!!");
+            $location.path('Admin/FeatureFlags')
+          }
         }, function () {});
     }
 

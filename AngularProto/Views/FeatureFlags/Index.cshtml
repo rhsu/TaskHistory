@@ -1,6 +1,10 @@
-<div class='container app-content'>
+<div class='container app-content' ng-controller='DefaultUserController'>
 	Does Admin User exist?
 	<button>Create</button>
+
+	<div>
+		{{ pageState.defaultUserExists }}
+	</div>
 </div>
 
 <div class='container app-content' ng-controller='FeatureFlagsController'>

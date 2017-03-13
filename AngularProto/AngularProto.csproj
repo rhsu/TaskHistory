@@ -159,6 +159,7 @@
     <Content Include="Scripts\Factories\task-table-view-factory.js" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Scripts\Controllers\admin-login-controller.js" />
+    <Content Include="Scripts\Controllers\default-user-controller.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
