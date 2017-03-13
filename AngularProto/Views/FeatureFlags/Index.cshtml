@@ -1,6 +1,11 @@
 <div class='container app-content' ng-controller='DefaultUserController'>
-	Does Admin User exist?
-	<button>Create</button>
+	<form class='form-inline' ng-if='!pageState.defaultUserExists'>
+		<label>Create Default User</label>
+		<button class='btn btn-success'
+		        ng-click='pageFns.registerDefaultUser()'>
+			<span class='glyphicon glyphicon-ok'></span>
+		</button>
+	</form>
 </div>
 
 <div class='container app-content' ng-controller='FeatureFlagsController'>

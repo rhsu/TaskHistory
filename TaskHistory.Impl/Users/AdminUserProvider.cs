@@ -7,7 +7,7 @@ namespace TaskHistory.Impl.Users
 {
 	public class AdminUserProvider : IAdminUserProvider
 	{
-		const string _default_name = "admin";
+		const string _default_name = "robert";
 		const string _default_password = "password";
 
 		UserFactory _userFactory;
