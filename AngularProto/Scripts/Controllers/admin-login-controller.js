@@ -15,7 +15,6 @@
       UserLoginService.promiseLoginAdmin($scope.formData)
         .then(function (successful) {
           if (successful) {
-            console.log("got here!!!");
             $location.path('Admin/FeatureFlags')
           }
         }, function () {});
