@@ -52,6 +52,7 @@ namespace TaskHistory.Impl.Users
 			return registeredUser;
 		}
 
+		// TODO WAT?
 		public IEnumerable<IUser> ReadAllUsers(int limit)
 		{
 			var returnVal = new List<IUser>();
@@ -84,7 +85,6 @@ namespace TaskHistory.Impl.Users
 
 			return returnVal;
 		}
-
 
 		public UserRepo(UserFactory userFactory, ApplicationDataProxy dataProxy)
 		{

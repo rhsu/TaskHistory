@@ -63,6 +63,8 @@
     <Compile Include="FeatureFlags\IFeatureFlagRepo.cs" />
     <Compile Include="TaskLists\ITaskListWithTasks.cs" />
     <Compile Include="TaskLists\ITaskListWithTasksRepo.cs" />
+    <Compile Include="Users\IAdminUserProvider.cs" />
+    <Compile Include="Users\IDefaultUserProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

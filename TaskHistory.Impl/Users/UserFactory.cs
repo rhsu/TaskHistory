@@ -6,6 +6,15 @@ namespace TaskHistory.Impl.Users
 {
 	public class UserFactory : IFromDataReaderFactory<IUser>
 	{
+		public IUser Build(int userId, 
+		                   string userName, 
+		                   string firstName, 
+		                   string lastName, 
+		                   string email)
+		{
+			return new User(userId, userName, firstName, lastName, email);
+		}
+
 		public IUser Build(ISqlDataReader reader)
 		{
 			if (reader == null)

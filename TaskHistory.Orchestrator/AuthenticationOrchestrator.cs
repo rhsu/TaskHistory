@@ -1,39 +1,16 @@
 ﻿using System;
 using TaskHistory.Api.Users;
 using TaskHistory.ViewModel.Users;
-using TaskHistory.ObjectMapper.Users;
 
 namespace TaskHistory.Orchestrator.Home
 {
 	public class AuthenticationOrchestrator
 	{
 		readonly IUserRepo _userRepo;
-		readonly ObjectMapperUsers _userObjectMapper;
+		readonly IAdminUserProvider _adminUserProvider;
+		readonly IDefaultUserProvider _defaultUserProvider;
 
-		// TODO This has been moved. Do not call this anymore
-		public UserRegistrationStatusViewModel OrchestrateRegisterUser(UserRegistrationParametersViewModel vmUserRegister)
-		{
-			if (vmUserRegister == null)
-				throw new ArgumentNullException(nameof(vmUserRegister));
-
-			UserRegistrationParameters userParams = _userObjectMapper.Map(vmUserRegister);
-			if (userParams == null)
-				throw new NullReferenceException("Null returned from ObjectMapperUser");
-
-			IUser newUser = _userRepo.RegisterUser(userParams);
-			// [TODO] https://github.com/rhsu/TaskHistory/issues/124
-			// user repo returning null is not an exception. Indicates that the user exists already. 
-			// Probably should be a better way to indicate this
-
-			UserRegistrationStatusViewModel registrationStatus = _userObjectMapper.Map(newUser, vmUserRegister);
-			if (registrationStatus == null)
-				throw new NullReferenceException("Null returned from ObjectMapperUser");
-
-
-			return registrationStatus;
-		}
-
-		public IUser OrchestrateValidateUser(UserLoginViewModel userLoginViewModel)
+		public IUser ValidateUser(UserLoginViewModel userLoginViewModel)
 		{
 			if (userLoginViewModel == null)
 				throw new ArgumentNullException(nameof(userLoginViewModel));
@@ -46,10 +23,43 @@ namespace TaskHistory.Orchestrator.Home
 			return user;
 		}
 
-		public AuthenticationOrchestrator(IUserRepo userRepo, ObjectMapperUsers userObjectMapper)
+		public IUser ValidateAdminUser(UserLoginViewModel userLoginViewModel)
 		{
+			if (userLoginViewModel == null)
+				throw new ArgumentNullException(nameof(userLoginViewModel));
+
+			string username = userLoginViewModel.Username;
+			string password = userLoginViewModel.Password;
+
+			IUser user = _adminUserProvider.AuthenticateAdminUser(username, password);
+
+			return user;
+		}
+
+		public bool DefaultUserExists()
+		{
+			var exists = _defaultUserProvider.DefaultUserExists();
+			return exists;
+		}
+
+		public IUser RegisterDefaultUser()
+		{
+			var user = _defaultUserProvider.RegisterDefaultUser();
+			if (user == null)
+				throw new NullReferenceException("null user returned from admin user provider when registering default user");
+
+			// TODO should havea  UserViewModel instead of returning the entire IUser object
+
+			return user;
+		}
+
+		public AuthenticationOrchestrator(IUserRepo userRepo,
+										  IAdminUserProvider adminUserProvider,
+		                                  IDefaultUserProvider defaultUserProvider)
+		{
+			_adminUserProvider = adminUserProvider;
 			_userRepo = userRepo;
-			_userObjectMapper = userObjectMapper;
+			_defaultUserProvider = defaultUserProvider;
 		}
 	}
 }
