@@ -86,13 +86,6 @@ namespace TaskHistory.Impl.Users
 			return returnVal;
 		}
 
-		public bool DefaultUserExists()
-		{
-			// TODO Probably easier to make that stored procedure return a value
-			return false;
-		}
-
-
 		public UserRepo(UserFactory userFactory, ApplicationDataProxy dataProxy)
 		{
 			_userFactory = userFactory;

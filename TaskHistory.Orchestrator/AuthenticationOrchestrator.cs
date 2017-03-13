@@ -9,7 +9,7 @@ namespace TaskHistory.Orchestrator.Home
 		readonly IUserRepo _userRepo;
 		readonly IAdminUserProvider _adminUserProvider;
 
-		public IUser OrchestrateValidateUser(UserLoginViewModel userLoginViewModel)
+		public IUser ValidateUser(UserLoginViewModel userLoginViewModel)
 		{
 			if (userLoginViewModel == null)
 				throw new ArgumentNullException(nameof(userLoginViewModel));
@@ -22,7 +22,7 @@ namespace TaskHistory.Orchestrator.Home
 			return user;
 		}
 
-		public IUser OrchestratorValidateAdminUser(UserLoginViewModel userLoginViewModel)
+		public IUser ValidateAdminUser(UserLoginViewModel userLoginViewModel)
 		{
 			if (userLoginViewModel == null)
 				throw new ArgumentNullException(nameof(userLoginViewModel));
@@ -31,6 +31,23 @@ namespace TaskHistory.Orchestrator.Home
 			string password = userLoginViewModel.Password;
 
 			IUser user = _adminUserProvider.AuthenticateAdminUser(username, password);
+
+			return user;
+		}
+
+		public bool DefaultUserExists()
+		{
+			var exists = _adminUserProvider.DefaultUserExists();
+			return exists;
+		}
+
+		public IUser RegisterDefaultUser()
+		{
+			var user = _adminUserProvider.RegisterDefaultUser();
+			if (user == null)
+				throw new NullReferenceException("null user returned from admin user provider when registering default user");
+
+			// TODO should havea  UserViewModel instead of returning the entire IUser object
 
 			return user;
 		}

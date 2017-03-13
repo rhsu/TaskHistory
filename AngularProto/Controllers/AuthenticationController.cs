@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Authentication;
 using System.Web.Mvc;
 using System.Web.Security;
 using TaskHistory.Api.Users;
@@ -9,7 +10,7 @@ namespace AngularProto.Controllers
 {
     public class AuthenticationController : Controller
     {
-		readonly AuthenticationOrchestrator _authenticationOrchestrator;
+		readonly AuthenticationOrchestrator _orchestrator;
 		
 		[HttpPost]
 		public JsonResult Login(UserLoginViewModel userLoginViewModel)
@@ -17,7 +18,7 @@ namespace AngularProto.Controllers
 			if (userLoginViewModel == null)
 				throw new ArgumentNullException(nameof(userLoginViewModel));
 
-			IUser user = _authenticationOrchestrator.OrchestrateValidateUser(userLoginViewModel);
+			IUser user = _orchestrator.ValidateUser(userLoginViewModel);
 
 			bool isSuccessful = false;
 
@@ -39,14 +40,13 @@ namespace AngularProto.Controllers
 			if (userLoginViewModel == null)
 				throw new ArgumentNullException(nameof(userLoginViewModel));
 
-			IUser user = _authenticationOrchestrator.OrchestratorValidateAdminUser(userLoginViewModel);
+			IUser user = _orchestrator.ValidateAdminUser(userLoginViewModel);
 
 			bool isSuccessful = false;
 
 			if (user != null)
 			{
-				// TODO Do I need a Session Variable? Probably not
-				// TODO Set Auth Cookie equal to Guid will that break?
+				// TODO Do I need a Session Variable? Probably not. Investigate how to do this using roles
 				FormsAuthentication.SetAuthCookie(Guid.NewGuid().ToString(), false);
 				Session["IsAdmin"] = true;
 
@@ -57,15 +57,33 @@ namespace AngularProto.Controllers
 		}
 
 		[HttpPost]
+		public JsonResult DefaultUserExists()
+		{
+			if ((bool)Session["IsAdmin"] != true)
+				throw new AuthenticationException("Invalid credentials to access Admin Pages");
+
+			return Json(_orchestrator.DefaultUserExists());
+		}
+
+		[HttpPost]
+		public JsonResult RegisterDefaultUser()
+		{
+			if ((bool)Session["IsAdmin"] != true)
+				throw new AuthenticationException("Invalid credentials to access Admin Pages");
+
+			return Json(_orchestrator.RegisterDefaultUser());
+		}
+
+		[HttpPost]
 		public JsonResult Logout()
 		{
 			FormsAuthentication.SignOut();
 			return Json(true);
 		}
 
-		public AuthenticationController(AuthenticationOrchestrator homeOrchestrator)
+		public AuthenticationController(AuthenticationOrchestrator orchestrator)
 		{
-			_authenticationOrchestrator = homeOrchestrator;
+			_orchestrator = orchestrator;
 		}
     }
 }

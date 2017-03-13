@@ -21,7 +21,7 @@ namespace TaskHistory.Impl.Users
 			_userRepo = userRepo;
 		}
 
-		public IUser BuildAdminUser()
+		IUser BuildAdminUser()
 		{
 			IUser user = _userFactory.Build(-1, "admin", "admin", "admin", "admin");
 			if (user == null)
@@ -32,9 +32,23 @@ namespace TaskHistory.Impl.Users
 
 		public bool DefaultUserExists()
 		{
-			
+			IUser user = _userRepo.ValidateUsernameAndPassword(_default_name, _default_password);
+			return user != null;
+		}
 
-			return false;
+		public IUser RegisterDefaultUser()
+		{
+			var userRegistrationParams = new UserRegistrationParameters(_default_name,
+																		_default_password,
+																		"robert",
+																		"hsu",
+																		"robert@gmail.com");
+
+			IUser user = _userRepo.RegisterUser(userRegistrationParams);
+			if (user == null)
+				throw new NullReferenceException("Null returned from user repo when registering default user");
+
+			return user;
 		}
 
 		public IUser AuthenticateAdminUser(string name, string password)
