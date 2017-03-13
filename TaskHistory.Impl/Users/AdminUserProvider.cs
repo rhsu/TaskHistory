@@ -7,7 +7,7 @@ namespace TaskHistory.Impl.Users
 {
 	public class AdminUserProvider : IAdminUserProvider
 	{
-		const string _default_name = "robert";
+		const string _default_name = "admin";
 		const string _default_password = "password";
 
 		UserFactory _userFactory;
@@ -26,27 +26,6 @@ namespace TaskHistory.Impl.Users
 			IUser user = _userFactory.Build(-1, "admin", "admin", "admin", "admin");
 			if (user == null)
 				throw new NullReferenceException("null user returned");
-
-			return user;
-		}
-
-		public bool DefaultUserExists()
-		{
-			IUser user = _userRepo.ValidateUsernameAndPassword(_default_name, _default_password);
-			return user != null;
-		}
-
-		public IUser RegisterDefaultUser()
-		{
-			var userRegistrationParams = new UserRegistrationParameters(_default_name,
-																		_default_password,
-																		"robert",
-																		"hsu",
-																		"robert@gmail.com");
-
-			IUser user = _userRepo.RegisterUser(userRegistrationParams);
-			if (user == null)
-				throw new NullReferenceException("Null returned from user repo when registering default user");
 
 			return user;
 		}

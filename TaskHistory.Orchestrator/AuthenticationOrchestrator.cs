@@ -8,6 +8,7 @@ namespace TaskHistory.Orchestrator.Home
 	{
 		readonly IUserRepo _userRepo;
 		readonly IAdminUserProvider _adminUserProvider;
+		readonly IDefaultUserProvider _defaultUserProvider;
 
 		public IUser ValidateUser(UserLoginViewModel userLoginViewModel)
 		{
@@ -37,13 +38,13 @@ namespace TaskHistory.Orchestrator.Home
 
 		public bool DefaultUserExists()
 		{
-			var exists = _adminUserProvider.DefaultUserExists();
+			var exists = _defaultUserProvider.DefaultUserExists();
 			return exists;
 		}
 
 		public IUser RegisterDefaultUser()
 		{
-			var user = _adminUserProvider.RegisterDefaultUser();
+			var user = _defaultUserProvider.RegisterDefaultUser();
 			if (user == null)
 				throw new NullReferenceException("null user returned from admin user provider when registering default user");
 
@@ -53,10 +54,12 @@ namespace TaskHistory.Orchestrator.Home
 		}
 
 		public AuthenticationOrchestrator(IUserRepo userRepo,
-										  IAdminUserProvider adminUserProvider)
+										  IAdminUserProvider adminUserProvider,
+		                                  IDefaultUserProvider defaultUserProvider)
 		{
 			_adminUserProvider = adminUserProvider;
 			_userRepo = userRepo;
+			_defaultUserProvider = defaultUserProvider;
 		}
 	}
 }

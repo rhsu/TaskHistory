@@ -17,6 +17,9 @@ namespace TaskHistory.Bindings
 
 			kernel.Bind<IAdminUserProvider>()
 				  .To<AdminUserProvider>();
+
+			kernel.Bind<IDefaultUserProvider>()
+				  .To<DefaultUserProvider>();
 		}
 	}
 }

@@ -160,6 +160,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Scripts\Controllers\admin-login-controller.js" />
     <Content Include="Scripts\Controllers\default-user-controller.js" />
+    <Content Include="Scripts\Services\default-user-service.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
@@ -178,9 +179,6 @@
       <Project>{012C3866-D51D-4917-AFC6-1B7AD7DD6FC7}</Project>
       <Name>TaskHistory.ViewModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\Services\default-user-service.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
