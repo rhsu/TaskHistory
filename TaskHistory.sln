@@ -17,8 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Impl.Test", "Ta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.WebApp", "TaskHistory.WebApp\TaskHistory.WebApp.csproj", "{38673E33-19E3-4907-B048-3E21972D3FE1}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "TaskHistory.WebApp", "AngularProto\TaskHistory.WebApp.csproj", "{22218ED1-A6D6-4C8C-BA47-00C26E48A19F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,9 +55,5 @@ Global
 		{38673E33-19E3-4907-B048-3E21972D3FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38673E33-19E3-4907-B048-3E21972D3FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38673E33-19E3-4907-B048-3E21972D3FE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22218ED1-A6D6-4C8C-BA47-00C26E48A19F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22218ED1-A6D6-4C8C-BA47-00C26E48A19F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22218ED1-A6D6-4C8C-BA47-00C26E48A19F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22218ED1-A6D6-4C8C-BA47-00C26E48A19F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
