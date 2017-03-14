@@ -20,7 +20,7 @@ namespace TaskHistory.Impl.Tasks
 		readonly TaskFactory _taskFactory;
 		readonly ApplicationDataProxy _dataProxy;
 
-		public ITask CreateTask(string taskContent, int userId)
+		public ITask CreateTask(int userId, string taskContent)
 		{
 			if (taskContent == null)
 				throw new ArgumentNullException(nameof(taskContent));
@@ -38,7 +38,8 @@ namespace TaskHistory.Impl.Tasks
 			return returnVal;
 		}
 
-		public bool AssertTaskListExists(int userId, int listId)
+		// TODO Marking this for possible deletion
+		bool AssertTaskListExists(int userId, int listId)
 		{
 			var parameters = new List<ISqlDataParameter>();
 
@@ -76,6 +77,7 @@ namespace TaskHistory.Impl.Tasks
 			return retVal;
 		}
 
+		// TODO Marking for possible deletion
 		public bool AssociateTaskToList(int userId, int taskId, int listId)
 		{
 			return false;
@@ -92,7 +94,9 @@ namespace TaskHistory.Impl.Tasks
 			return returnVal;
 		}
 
-		public ITask UpdateTask(TaskUpdatingParameters taskParameterDto, int userId, int taskId)
+		public ITask UpdateTask(int userId, 
+		                        TaskUpdatingParameters taskParameterDto, 
+		                        int taskId)
 		{
 			if (taskParameterDto == null)
 				throw new ArgumentNullException(nameof(taskParameterDto));

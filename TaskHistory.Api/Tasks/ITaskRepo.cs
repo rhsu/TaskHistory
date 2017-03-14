@@ -2,10 +2,9 @@ using System.Collections.Generic;
 
 namespace TaskHistory.Api.Tasks
 {
-	//TODO: Can UserId come from a context object?
 	public interface ITaskRepo
 	{
-		ITask CreateTask(string taskContent, int userId);
+		ITask CreateTask(int userId, string taskContent);
 
 		IEnumerable<ITask> ReadTasks(int userId);
 
@@ -13,8 +12,8 @@ namespace TaskHistory.Api.Tasks
 
 		bool AssociateTaskToList(int userId, int taskId, int listId);
 
-		ITask UpdateTask(TaskUpdatingParameters taskUpdatingParameters, 
-		                 int userId, 
+		ITask UpdateTask(int userId,
+						 TaskUpdatingParameters taskUpdatingParameters, 
 		                 int taskId);
 	}
 }
