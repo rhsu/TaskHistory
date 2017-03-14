@@ -54,7 +54,7 @@ namespace TaskHistory.Impl.Test.Users
 			                                                            userParams.Password);
 
 			Assert.NotNull(validatedUser);
-			Assert.AreEqual(registeredUser.UserId, validatedUser.UserId);
+			Assert.AreEqual(registeredUser.Id, validatedUser.Id);
 			Assert.AreEqual(registeredUser.FirstName, validatedUser.FirstName);
 			Assert.AreEqual(registeredUser.LastName, validatedUser.LastName);
 			Assert.AreEqual(registeredUser.Username, validatedUser.Username);

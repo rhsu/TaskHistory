@@ -36,7 +36,7 @@ namespace TaskHistory.Impl.Test.Tasks
 		public void CreateTask()
 		{
 			string taskContent = "Content of my task";
-			int userId = _user.UserId;
+			int userId = _user.Id;
 
 			var newtask = _taskRepo.CreateTask(userId, taskContent);
 
@@ -63,18 +63,18 @@ namespace TaskHistory.Impl.Test.Tasks
 			for (var i = 0; i < 5; i++)
 			{
 				var taskContent = $"task{i}";
-				var newTask = _taskRepo.CreateTask(user.UserId, taskContent);
-				lookup.Add(newTask.TaskId, taskContent);
+				var newTask = _taskRepo.CreateTask(user.Id, taskContent);
+				lookup.Add(newTask.Id, taskContent);
 			}
 
-			var tasks = _taskRepo.ReadAll(user.UserId);
+			var tasks = _taskRepo.ReadAll(user.Id);
 
 			for (var i = 0; i < 5; i++)
 			{
 				var taskContent = $"task{i}";
 				var foundTask = tasks.Where(t => t.Content == $"task{i}").First();
 
-				Assert.AreEqual(taskContent, lookup[foundTask.TaskId]);
+				Assert.AreEqual(taskContent, lookup[foundTask.Id]);
 			}
 		}
 
@@ -84,13 +84,13 @@ namespace TaskHistory.Impl.Test.Tasks
 			string newText = "New Text 123345";
 
 			var updateParams = new TaskUpdatingParameters(newText, false, false);
-			var taskId = _testFixtures.Task.TaskId;
-			var userId = _testFixtures.User.UserId;
+			var taskId = _testFixtures.Task.Id;
+			var userId = _testFixtures.User.Id;
 
 			var updated = _taskRepo.UpdateTask(userId, updateParams, taskId);
 
 			Assert.AreEqual(newText, updated.Content);
-			Assert.AreEqual(taskId, updated.TaskId);
+			Assert.AreEqual(taskId, updated.Id);
 		}
 
 		[Test]
@@ -102,7 +102,7 @@ namespace TaskHistory.Impl.Test.Tasks
 			// 3. this relationship already exists
 
 			// in this test, assume that all is good
-			var userId = _testFixtures.User.UserId;
+			var userId = _testFixtures.User.Id;
 			var listId = _testFixtures.TaskList.Id;
 			var content = "test content here";
 

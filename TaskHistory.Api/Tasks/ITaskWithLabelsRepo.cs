@@ -5,6 +5,6 @@ namespace TaskHistory.Api.Tasks
 {
 	public interface ITaskWithLabelsRepo
 	{
-		IEnumerable<ITaskWithLabels> Read(IUser user);
+		IEnumerable<ITaskWithLabels> Read(int userId);
 	}
 }

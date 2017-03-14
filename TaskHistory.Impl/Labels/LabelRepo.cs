@@ -43,7 +43,7 @@ namespace TaskHistory.Impl.Labels
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			var userIdParam = _dataProxy.CreateParameter("pUserId", user.UserId);
+			var userIdParam = _dataProxy.CreateParameter("pUserId", user.Id);
 			if (userIdParam == null)
 				throw new NullReferenceException(NullFromApplicationDataProxy);
 
