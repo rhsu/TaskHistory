@@ -41,7 +41,6 @@
     <Compile Include="Sql\SqlModule.cs" />
     <Compile Include="Users\UserModule.cs" />
     <Compile Include="Tasks\TaskModule.cs" />
-    <Compile Include="ViewRepos\ViewRepoModule.cs" />
     <Compile Include="Terminal\TerminalModule.cs" />
     <Compile Include="Labels\LabelModule.cs" />
     <Compile Include="FeatureFlags\FeatureFlagModule.cs" />
@@ -67,7 +66,6 @@
     <Folder Include="Sql\" />
     <Folder Include="Tasks\" />
     <Folder Include="Users\" />
-    <Folder Include="ViewRepos\" />
     <Folder Include="Terminal\" />
     <Folder Include="FeatureFlags\" />
     <Folder Include="TaskLists\" />

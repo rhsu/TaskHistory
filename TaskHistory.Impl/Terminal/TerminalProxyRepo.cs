@@ -66,7 +66,7 @@ namespace TaskHistory.Impl.Terminal
 
 					break;
 				case TerminalRegisteredObject.Task:
-					var tasks = _registeredObjProxy.TaskRepo.ReadTasks(user.UserId);
+					var tasks = _registeredObjProxy.TaskRepo.ReadAll(user.UserId);
 					var taskTerminalObjects = TerminalObjectMapper.ConvertTasks(tasks);
 					returnVal.AddRange(taskTerminalObjects);
 
