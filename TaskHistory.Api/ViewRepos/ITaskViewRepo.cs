@@ -9,4 +9,3 @@ namespace TaskHistory.Api.ViewRepos
 		IEnumerable<ITask> ReadTasksForUser (IUser user);
 	}
 }
-

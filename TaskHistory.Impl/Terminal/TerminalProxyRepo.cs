@@ -36,8 +36,8 @@ namespace TaskHistory.Impl.Terminal
 					_registeredObjProxy.LabelRepo.CreateNewLabel("some content from command response's option");
 					break;
 				case TerminalRegisteredObject.Task:
-					_registeredObjProxy.TaskRepo.CreateTask("some content from command response's object",
-					                                       user.UserId);
+					_registeredObjProxy.TaskRepo.CreateTask(user.UserId,
+															"some content from command response's object");
 					break;
 			}
 
@@ -93,7 +93,7 @@ namespace TaskHistory.Impl.Terminal
 				case TerminalRegisteredObject.Task:
 					// need to create task updating parameters
 					// TODO: Where does this come from?
-					_registeredObjProxy.TaskRepo.UpdateTask(null, user.UserId, -1);
+					_registeredObjProxy.TaskRepo.UpdateTask(user.UserId, null, -1);
 					break;
 			}
 
@@ -103,7 +103,7 @@ namespace TaskHistory.Impl.Terminal
 		public int PerformDeleteOperation(TerminalCommandResponse commandResponse, IUser user)
 		{
 			if (user == null)
-				throw new ArgumentNullException("user");
+				throw new ArgumentNullException(nameof(user));
 
 			if (commandResponse.CommandAction != TerminalCommandAction.Delete)
 				throw new InvalidOperationException($"Command action for this operation must be list instead of {commandResponse.CommandAction}");

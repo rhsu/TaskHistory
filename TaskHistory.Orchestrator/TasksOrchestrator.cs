@@ -38,7 +38,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (string.IsNullOrEmpty(content))
 				throw new ArgumentNullException(nameof(content));
 
-			ITask task = _repo.CreateTask(content, user.UserId);
+			ITask task = _repo.CreateTask(user.UserId, content);
 			if (task == null)
 				throw new NullReferenceException("Null returned from task repo");
 
@@ -64,7 +64,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (updateParams == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
-			ITask task = _repo.UpdateTask(updateParams, user.UserId, taskId);
+			ITask task = _repo.UpdateTask(user.UserId, updateParams, taskId);
 			if (task == null)
 				throw new NullReferenceException("null returned from TaskRepo");
 

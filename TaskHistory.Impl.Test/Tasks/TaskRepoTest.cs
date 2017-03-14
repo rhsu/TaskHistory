@@ -38,7 +38,7 @@ namespace TaskHistory.Impl.Test.Tasks
 			string taskContent = "Content of my task";
 			int userId = _user.UserId;
 
-			var newtask = _taskRepo.CreateTask(taskContent, userId);
+			var newtask = _taskRepo.CreateTask(userId, taskContent);
 
 			Assert.AreEqual(taskContent, newtask.Content);
 
@@ -63,7 +63,7 @@ namespace TaskHistory.Impl.Test.Tasks
 			for (var i = 0; i < 5; i++)
 			{
 				var taskContent = $"task{i}";
-				var newTask = _taskRepo.CreateTask(taskContent, user.UserId);
+				var newTask = _taskRepo.CreateTask(user.UserId, taskContent);
 				lookup.Add(newTask.TaskId, taskContent);
 			}
 
@@ -87,7 +87,7 @@ namespace TaskHistory.Impl.Test.Tasks
 			var taskId = _testFixtures.Task.TaskId;
 			var userId = _testFixtures.User.UserId;
 
-			var updated = _taskRepo.UpdateTask(updateParams, userId, taskId);
+			var updated = _taskRepo.UpdateTask(userId, updateParams, taskId);
 
 			Assert.AreEqual(newText, updated.Content);
 			Assert.AreEqual(taskId, updated.TaskId);
