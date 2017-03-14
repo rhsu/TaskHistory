@@ -47,9 +47,6 @@
     <Compile Include="Labels\Label.cs" />
     <Compile Include="Labels\LabelRepo.cs" />
     <Compile Include="Labels\LabelFactory.cs" />
-    <Compile Include="TasksComplex\TaskComplex.cs" />
-    <Compile Include="TasksComplex\TaskComplexRepo.cs" />
-    <Compile Include="TasksComplex\TaskComplexFactory.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\UserRepo.cs" />
     <Compile Include="Users\UserFactory.cs" />
@@ -90,7 +87,6 @@
   <ItemGroup>
     <Folder Include="Tasks\" />
     <Folder Include="Labels\" />
-    <Folder Include="TasksComplex\" />
     <Folder Include="Users\" />
     <Folder Include="Sql\" />
     <Folder Include="ViewRepos\" />
