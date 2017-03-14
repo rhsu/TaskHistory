@@ -105,8 +105,6 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="Controllers\RoutesDemoController.cs" />
-    <Compile Include="Models\TestModel.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />

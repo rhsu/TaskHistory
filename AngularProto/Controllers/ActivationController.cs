@@ -2,7 +2,7 @@
 using TaskHistory.Orchestrator;
 using TaskHistory.ViewModel.Users;
 
-namespace AngularProto.Controllers
+namespace TaskHistory.WebApp.Controllers
 {
 	public class ActivationController : Controller
 	{

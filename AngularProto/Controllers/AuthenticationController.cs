@@ -6,7 +6,7 @@ using TaskHistory.Api.Users;
 using TaskHistory.Orchestrator.Home;
 using TaskHistory.ViewModel.Users;
 
-namespace AngularProto.Controllers
+namespace TaskHistory.WebApp.Controllers
 {
     public class AuthenticationController : Controller
     {
