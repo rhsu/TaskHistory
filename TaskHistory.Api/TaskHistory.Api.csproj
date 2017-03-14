@@ -37,8 +37,6 @@
     <Compile Include="Users\IUser.cs" />
     <Compile Include="Labels\ILabel.cs" />
     <Compile Include="Labels\ILabelRepo.cs" />
-    <Compile Include="TasksComplex\ITaskComplex.cs" />
-    <Compile Include="TasksComplex\ITaskComplexRepo.cs" />
     <Compile Include="Users\IUserRepo.cs" />
     <Compile Include="Sql\IFromDataReaderFactory.cs" />
     <Compile Include="Sql\ISqlDataReader.cs" />
@@ -65,13 +63,14 @@
     <Compile Include="TaskLists\ITaskListWithTasksRepo.cs" />
     <Compile Include="Users\IAdminUserProvider.cs" />
     <Compile Include="Users\IDefaultUserProvider.cs" />
+    <Compile Include="Tasks\ITaskWithLabels.cs" />
+    <Compile Include="Tasks\ITaskWithLabelsRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Tasks\" />
     <Folder Include="Users\" />
     <Folder Include="Labels\" />
-    <Folder Include="TasksComplex\" />
     <Folder Include="Sql\" />
     <Folder Include="ViewRepos\" />
     <Folder Include="Configuration\" />
