@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using TaskHistory.Orchestrator.Home;
 
-namespace AngularProto.Controllers
+namespace TaskHistory.WebApp.Controllers
 {
 	public class HomeController : Controller
 	{

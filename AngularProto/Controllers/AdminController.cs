@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace AngularProto.Controllers
+namespace TaskHistory.WebApp.Controllers
 {
 	public class AdminController : Controller
 	{

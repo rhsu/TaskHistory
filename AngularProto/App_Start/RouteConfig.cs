@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace AngularProto
+namespace TaskHistory.WebApp
 {
 	public class RouteConfig
 	{

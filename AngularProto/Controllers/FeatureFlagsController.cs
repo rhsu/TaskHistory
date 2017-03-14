@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using TaskHistory.Orchestrator;
 using TaskHistory.ViewModel.FeatureFlags;
 
-namespace AngularProto.Controllers
+namespace TaskHistory.WebApp.Controllers
 {
 	[Authorize]
 	public class FeatureFlagsController : Controller

@@ -1,1 +1,1 @@
-﻿<%@ Application Inherits="AngularProto.Global" %>
+﻿<%@ Application Inherits="TaskHistory.WebApp.Global" %>

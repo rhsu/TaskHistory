@@ -2,7 +2,7 @@
 using TaskHistory.Orchestrator.Tasks;
 using TaskHistory.ViewModel.Tasks;
 
-namespace AngularProto.Controllers
+namespace TaskHistory.WebApp.Controllers
 {
 	[Authorize]
 	public class TasksController : ApplicationController
