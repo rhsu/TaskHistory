@@ -83,7 +83,7 @@ namespace TaskHistory.Impl.Tasks
 			return false;
 		}
 
-		public IEnumerable<ITask> ReadTasks(int userId)
+		public IEnumerable<ITask> ReadAll(int userId)
 		{
 			var parameter = _dataProxy.CreateParameter("pUserId", userId);
 

@@ -67,7 +67,7 @@ namespace TaskHistory.Impl.Test.Tasks
 				lookup.Add(newTask.TaskId, taskContent);
 			}
 
-			var tasks = _taskRepo.ReadTasks(user.UserId);
+			var tasks = _taskRepo.ReadAll(user.UserId);
 
 			for (var i = 0; i < 5; i++)
 			{

@@ -50,7 +50,6 @@
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\UserRepo.cs" />
     <Compile Include="Users\UserFactory.cs" />
-    <Compile Include="ViewRepos\TaskViewRepo.cs" />
     <Compile Include="Sql\DataParameter.cs" />
     <Compile Include="Sql\SqlDataReader.cs" />
     <Compile Include="Sql\SqlDataParameter.cs" />
@@ -89,7 +88,6 @@
     <Folder Include="Labels\" />
     <Folder Include="Users\" />
     <Folder Include="Sql\" />
-    <Folder Include="ViewRepos\" />
     <Folder Include="Configuration\" />
     <Folder Include="Sql\Factories\" />
     <Folder Include="Sql\Proxies\" />

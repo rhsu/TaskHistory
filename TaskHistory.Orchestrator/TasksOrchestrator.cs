@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
-using TaskHistory.Api.ViewRepos;
 using TaskHistory.ViewModel.Tasks;
 using TaskHistoryObjectMapper;
 
@@ -11,7 +10,6 @@ namespace TaskHistory.Orchestrator.Tasks
 	public class TasksOrchestrator
 	{
 		readonly ITaskRepo _repo;
-		readonly ITaskViewRepo _viewRepo;
 		readonly ObjectMapperTasks _objectMapper;
 
 		public IEnumerable<TaskTableViewModel> Retrieve(IUser user)
@@ -19,7 +17,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			IEnumerable<ITask> tasks = _viewRepo.ReadTasksForUser(user);
+			IEnumerable<ITask> tasks = _repo.ReadAll(user.UserId);
 			if (tasks == null)
 				throw new NullReferenceException($"null returned from TaskViewRepo when reading {user.UserId}");
 
@@ -75,10 +73,10 @@ namespace TaskHistory.Orchestrator.Tasks
 			return retVal;
 		}
 
-		public TasksOrchestrator(ITaskRepo repo, ITaskViewRepo viewRepo, ObjectMapperTasks mapper)
+		public TasksOrchestrator(ITaskRepo repo, 
+		                         ObjectMapperTasks mapper)
 		{
 			_repo = repo;
-			_viewRepo = viewRepo;
 			_objectMapper = mapper;
 		}
 	}

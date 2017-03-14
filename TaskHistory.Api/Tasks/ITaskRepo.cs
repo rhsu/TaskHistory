@@ -6,7 +6,7 @@ namespace TaskHistory.Api.Tasks
 	{
 		ITask CreateTask(int userId, string taskContent);
 
-		IEnumerable<ITask> ReadTasks(int userId);
+		IEnumerable<ITask> ReadAll(int userId);
 
 		ITask CreateTaskOnList(int userId, int listId, string content);
 
