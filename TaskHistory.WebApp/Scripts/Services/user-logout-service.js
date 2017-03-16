@@ -10,9 +10,7 @@
 				return $http.post('/Authentication/Logout')
 				.then(function (response) {
 					return response.data;
-				}, function (reason) {
-					// TODO placeholder for error handling here.
-				}); 
+				}, function () {}); 
 			}
 
 		}
