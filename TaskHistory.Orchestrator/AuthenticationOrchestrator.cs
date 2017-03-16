@@ -1,5 +1,6 @@
 ﻿using System;
 using TaskHistory.Api.Users;
+using TaskHistory.ObjectMapper.Users;
 using TaskHistory.ViewModel.Users;
 
 namespace TaskHistory.Orchestrator.Home
@@ -7,6 +8,7 @@ namespace TaskHistory.Orchestrator.Home
 	public class AuthenticationOrchestrator
 	{
 		readonly IUserRepo _userRepo;
+		readonly ObjectMapperUsers _userObjectMapper;
 		readonly IAdminUserProvider _adminUserProvider;
 		readonly IDefaultUserProvider _defaultUserProvider;
 
@@ -53,13 +55,29 @@ namespace TaskHistory.Orchestrator.Home
 			return user;
 		}
 
+		public bool RegisterUser(UserRegistrationParametersViewModel vmUserRegister)
+		{
+			if (vmUserRegister == null)
+				throw new ArgumentNullException(nameof(vmUserRegister));
+
+			UserRegistrationParameters userParams = _userObjectMapper.Map(vmUserRegister);
+			if (userParams == null)
+				throw new NullReferenceException("Null returned from ObjectMapperUser");
+
+			IUser newUser = _userRepo.RegisterUser(userParams);
+
+			return (newUser != null);
+		}
+
 		public AuthenticationOrchestrator(IUserRepo userRepo,
 										  IAdminUserProvider adminUserProvider,
-		                                  IDefaultUserProvider defaultUserProvider)
+		                                  IDefaultUserProvider defaultUserProvider,
+		                                  ObjectMapperUsers userObjectMapper)
 		{
 			_adminUserProvider = adminUserProvider;
 			_userRepo = userRepo;
 			_defaultUserProvider = defaultUserProvider;
+			_userObjectMapper = userObjectMapper;
 		}
 	}
 }
