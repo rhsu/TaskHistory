@@ -88,9 +88,6 @@
     <Folder Include="Content\" />
     <Folder Include="Models\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Scripts\Demo\" />
-    <Folder Include="Scripts\Demo\Controllers\" />
-    <Folder Include="Scripts\Demo\Services\" />
     <Folder Include="Scripts\Services\" />
     <Folder Include="Scripts\Controllers\" />
     <Folder Include="Views\Tasks\" />
@@ -130,9 +127,6 @@
     <Content Include="Views\RoutesDemo\Two.cshtml" />
     <Content Include="Views\RoutesDemo\Three.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\Demo\Controllers\AppController.js" />
-    <Content Include="Scripts\Demo\Services\DummyService.js" />
-    <Content Include="Scripts\Demo\App.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Views\Tasks\Index.cshtml" />
     <Content Include="Content\StarterTemplate.css" />
