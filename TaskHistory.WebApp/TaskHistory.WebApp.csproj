@@ -133,7 +133,6 @@
     <Content Include="Scripts\Services\user-login-service.js" />
     <Content Include="Scripts\Services\task-service.js" />
     <Content Include="Scripts\Controllers\tasks-controller.js" />
-    <Content Include="Scripts\Services\task-table-view-service.js" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Scripts\Controllers\register-controller.js" />
     <Content Include="Scripts\Services\user-register-service.js" />
