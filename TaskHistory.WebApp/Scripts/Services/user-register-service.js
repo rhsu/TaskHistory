@@ -5,12 +5,10 @@
 		return {
 
 			promiseRegisterUser(userRegisterViewModel) {
-				return $http.post('/Activation/Register', { userRegisterViewModel : userRegisterViewModel })
+				return $http.post('/Authentication/Register', { userRegisterViewModel : userRegisterViewModel })
 				.then(function (response) {
 					return response.data;
-				}, function (reason) {
-					// placeholder for error handling
-				});
+				}, function () {});
 			}
 		}
 	});

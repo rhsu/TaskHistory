@@ -53,7 +53,7 @@ namespace TaskHistory.Impl.Terminal
 			if (task == null)
 				throw new ArgumentNullException ("task");
 
-			var returnVal = _terminalObjectFactory.Create (task.TaskId, task.Content);
+			var returnVal = _terminalObjectFactory.Create (task.Id, task.Content);
 			if (returnVal == null)
 				throw new NullReferenceException ("Null returned from Terminal Object Factory");
 

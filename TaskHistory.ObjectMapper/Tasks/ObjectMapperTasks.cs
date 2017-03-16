@@ -28,7 +28,7 @@ namespace TaskHistoryObjectMapper
 			if (task == null)
 				throw new ArgumentNullException(nameof(task));
 
-			var returnVal = new TaskTableViewModel(task.TaskId, task.Content);
+			var returnVal = new TaskTableViewModel(task.Id, task.Content);
 
 			return returnVal;
 		}

@@ -11,7 +11,13 @@ namespace TaskHistory.WebApp.Controllers
     public class AuthenticationController : Controller
     {
 		readonly AuthenticationOrchestrator _orchestrator;
-		
+
+		[HttpPost]
+		public JsonResult Register(UserRegistrationParametersViewModel userRegisterViewModel)
+		{
+			return Json(_orchestrator.RegisterUser(userRegisterViewModel));
+		}
+
 		[HttpPost]
 		public JsonResult Login(UserLoginViewModel userLoginViewModel)
 		{

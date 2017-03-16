@@ -9,7 +9,7 @@ namespace TaskHistory.ObjectMapper.Users
 		public UserRegistrationParameters Map(UserRegistrationParametersViewModel userParamsViewModel)
 		{
 			if (userParamsViewModel == null)
-				throw new ArgumentNullException ("viewModel");
+				throw new ArgumentNullException (nameof(userParamsViewModel));
 
 			var returnVal = new UserRegistrationParameters (userParamsViewModel.Username,
 				userParamsViewModel.Password,
@@ -39,10 +39,6 @@ namespace TaskHistory.ObjectMapper.Users
 				vmUserRegister.Email);
 
 			return returnVal;
-		}
-
-		public ObjectMapperUsers ()
-		{
 		}
 	}
 }

@@ -72,12 +72,12 @@ namespace TaskHistory.Impl.Test
 
 		void CreateTask()
 		{
-			_task = _taskRepo.CreateTask(_user.UserId, "My First Task");
+			_task = _taskRepo.CreateTask(_user.Id, "My First Task");
 		}
 
 		void CreateTaskList()
 		{
-			_taskList = _taskListRepo.Create(_user.UserId, "My First Task List");
+			_taskList = _taskListRepo.Create(_user.Id, "My First Task List");
 		}
 	}
 }

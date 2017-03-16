@@ -639,32 +639,41 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Insert_List_Associate`(
     ,IN `pListId` INT
 )
 BEGIN
-	INSERT INTO `Tasks`
-    (
-		 `UserId`
-        ,`Content`
-    )
-    VALUES
-    (
-		 `pUserId`
-        ,`pContent`
-    );
+	SET @taskId = -1;
     
-    SET @taskId = last_insert_id();
+	IF (SELECT 1 = 1 
+		FROM `TaskLists` 
+        WHERE `Id` = `pListId` AND `UserId` = `pUserId`)
+    THEN
+	BEGIN
+		INSERT INTO `Tasks`
+		(
+			 `UserId`
+			,`Content`
+		)
+		VALUES
+		(
+			 `pUserId`
+			,`pContent`
+		);
     
-    INSERT INTO `TaskToTaskListAssociations`
-    (
-		 `TaskId`
-        ,`TaskListId`
-    )
-    VALUES
-    (
-		 @taskId
-        ,`pListId`
-    );
+		SET @taskId = last_insert_id();
+        
+        INSERT INTO `TaskToTaskListAssociations`
+        (
+			 `TaskId`
+            ,`TaskListId`
+        )
+        VALUES
+        (
+			 @taskId
+            ,`pListId`
+        );
+    END;
+    END IF;
     
-    SELECT * FROM `Tasks` 
-    WHERE `TaskId` = @taskId;
+	SELECT * FROM `Tasks`
+	WHERE `TaskId` = @taskId;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;

@@ -7,6 +7,10 @@
 
       create(name) {
         return $http.post('/TaskLists/Create', { name: name });
+      },
+
+      retrieve() {
+        return $http.post('/TaskLists/Retrieve');
       }
 
     }
