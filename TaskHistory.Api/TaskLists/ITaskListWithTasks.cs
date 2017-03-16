@@ -8,8 +8,8 @@ namespace TaskHistory.Api.TaskLists
 	//      find a good reason for it to
 	public interface ITaskListWithTasks
 	{
-		int Id { get; }
-		string Name { get; }
+		int ListId { get; }
+		string ListName { get; }
 
 		IEnumerable<ITask> Tasks { get; }
 	}

@@ -17,12 +17,12 @@ namespace TaskHistory.Impl
 			_tasks = tasks;
 		}
 
-		public int Id
+		public int ListId
 		{
 			get { return _id; }
 		}
 
-		public string Name
+		public string ListName
 		{
 			get { return _name; }
 		}
