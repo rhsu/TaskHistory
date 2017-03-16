@@ -38,25 +38,6 @@ namespace TaskHistory.Impl.Tasks
 			return returnVal;
 		}
 
-		// TODO Marking this for possible deletion
-		bool AssertTaskListExists(int userId, int listId)
-		{
-			var parameters = new List<ISqlDataParameter>();
-
-			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_dataProxy.CreateParameter("pListId", listId));
-
-			// TODO can nonquery or DataReader return an int from
-			// a SELECT COUNT(*) like query?
-			/*SELECT t.* FROM Tasks t
-	INNER JOIN TaskToTaskListAssociations a
-	ON t.TaskId
-    INNER JOIN TaskLists l
-    ON l.Id;*/
-
-			return true;
-		}
-
 		// This will return null if unsuccessful (No task was created)
 		public ITask CreateTaskOnList(int userId, int listId, string content)
 		{
