@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Security.Authentication;
 using TaskHistory.Api.Users;
-using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Users
 {
