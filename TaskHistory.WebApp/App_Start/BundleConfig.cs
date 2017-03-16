@@ -10,11 +10,6 @@ namespace TaskHistory.WebApp
 			if (bundles == null)
 				throw new ArgumentNullException(nameof(bundles));
 
-			bundles.Add(new ScriptBundle("~/bundles/DemoApp")
-			            .Include("~/Scripts/Demo/App.js")
-			            .IncludeDirectory("~/Scripts/Demo/Services", "*.js")
-			            .IncludeDirectory("~/Scripts/Demo/Controllers", "*.js"));
-
 			bundles.Add(new ScriptBundle("~/bundles/App")
 			            .Include("~/Scripts/app.js")
 			            .IncludeDirectory("~/Scripts/Services", "*.js")
