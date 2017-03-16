@@ -71,8 +71,8 @@ namespace TaskHistory.Impl.Tasks
 			                                      CreateTaskAndAssociateToList,
 			                                      parameters);
 
-			if (retVal == null)
-				throw new NullReferenceException("Null returned from dataProxy");
+			//if (retVal == null)
+			//	throw new NullReferenceException("Null returned from dataProxy");
 
 			return retVal;
 		}

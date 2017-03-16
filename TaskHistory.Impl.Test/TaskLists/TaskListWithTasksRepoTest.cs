@@ -22,7 +22,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		[Test]
 		public void Read()
 		{
-			// TODO can't do this yet since I need to associate a couple of tasks to a list
+			// TODO This is now possible
 		}
 	}
 }

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.TaskLists;
@@ -14,20 +13,17 @@ namespace TaskHistory.Impl.Test.Tasks
 	{
 		TestFixtures _testFixtures;
 		ITaskRepo _taskRepo;
-		ITaskListRepo _taskListRepo;
 		IUser _user;
 
 		public Tasks()
 		{
 			var taskFactory = new TaskFactory();
-			var taskListFactory = new TaskListFactory();
 
 			var appDataProxyFactory = new ApplicationDataProxyFactory();
 			var appDataProxy = appDataProxyFactory.Build();
 
 			_testFixtures = new TestFixtures();
 			_taskRepo = new TaskRepo(taskFactory, appDataProxy);
-			_taskListRepo = new TaskListRepo(taskListFactory, appDataProxy);
 
 			_user = _testFixtures.User;
 		}
@@ -41,10 +37,6 @@ namespace TaskHistory.Impl.Test.Tasks
 			var newtask = _taskRepo.CreateTask(userId, taskContent);
 
 			Assert.AreEqual(taskContent, newtask.Content);
-
-			// TODO: Objects returned from database do not have a UserId
-			// Do I care?
-			// Assert.AreEqual(userId, newtask.UserId);
 		}
 
 		[Test]
@@ -94,28 +86,50 @@ namespace TaskHistory.Impl.Test.Tasks
 		}
 
 		[Test]
-		public void CreateTaskOnList()
+		public void CreateTaskOnList_Works()
 		{
-			// a lot of things here can fail
-			// 1. a list does not exist with that Id
-			// 2. the list id is valid but not for that user
-			// 3. this relationship already exists
-
-			// in this test, assume that all is good
 			var userId = _testFixtures.User.Id;
 			var listId = _testFixtures.TaskList.Id;
 			var content = "test content here";
 
 			ITask task = _taskRepo.CreateTaskOnList(userId, listId, content);
-			var taskLists = _taskListRepo.Read(userId);
-			var taskList = taskLists.Where(x => x.Id == listId).First();
 
 			Assert.AreEqual(content, task.Content);
 		}
 
-		/*[Test]
-		public void CreateTaskOnList()
+		[Test]
+		public void CreateTaskOnList_NoList()
 		{
-		}*/
+			var userId = _testFixtures.User.Id;
+
+			ITask task = _taskRepo.CreateTaskOnList(userId, -1, "Some Content Here");
+			Assert.Null(task);
+		}
+
+		[Test]
+		public void CreateTaskOnList_NoUser()
+		{
+			var listId = _testFixtures.TaskList.Id;
+
+			ITask task = _taskRepo.CreateTaskOnList(-1, listId, "Some Content Here");
+			Assert.Null(task);
+		}
+
+		// TODO This is not ready yet.
+		//[Test]
+		public void CreateTaskOnList_AlreadyExists()
+		{
+			// 3. this relationship already exists
+
+			var userId = _testFixtures.User.Id;
+			var listId = _testFixtures.TaskList.Id;
+			var content = "test content here";
+
+			ITask task = _taskRepo.CreateTaskOnList(userId, listId, content);
+
+			ITask secondAttempt = _taskRepo.CreateTaskOnList(userId, listId, content);
+			// TODO this is not ready yet
+			//Assert.Null(secondAttempt);
+		}
 	}
 }
