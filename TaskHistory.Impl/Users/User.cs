@@ -6,7 +6,7 @@ namespace TaskHistory.Impl.Users
 	{
 		readonly string _fullName;
 
-		public int UserId { get; }
+		public int Id { get; }
 		public string Username { get; }
 		public string FirstName { get; }
 		public string LastName { get; }
@@ -15,7 +15,7 @@ namespace TaskHistory.Impl.Users
 
 		public User(int id, string userName, string firstName, string lastName, string email)
 		{
-			UserId = id;
+			Id = id;
 			Username = userName;
 			FirstName = firstName;
 			LastName = lastName;

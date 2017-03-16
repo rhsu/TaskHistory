@@ -2,7 +2,7 @@
 {
 	public interface ITask
 	{
-		int TaskId { get; }
+		int Id { get; }
 		string Content { get; }
 		bool IsCompleted { get; }
 	}

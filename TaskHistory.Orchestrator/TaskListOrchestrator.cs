@@ -35,7 +35,7 @@ namespace TaskHistory.Orchestrator
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			var list = _listWithTasksRepo.Read(user.UserId);
+			var list = _listWithTasksRepo.Read(user.Id);
 			if (list == null)
 				throw new NullReferenceException("Null returned from repo");
 
@@ -50,7 +50,7 @@ namespace TaskHistory.Orchestrator
 			if (string.IsNullOrEmpty(name))
 				throw new ArgumentNullException(nameof(name));
 
-			var list = _listRepo.Create(user.UserId, name);
+			var list = _listRepo.Create(user.Id, name);
 			if (list == null)
 				throw new NullReferenceException("null returned from repo");
 

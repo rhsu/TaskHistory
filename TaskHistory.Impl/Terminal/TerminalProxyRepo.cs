@@ -36,7 +36,7 @@ namespace TaskHistory.Impl.Terminal
 					_registeredObjProxy.LabelRepo.CreateNewLabel("some content from command response's option");
 					break;
 				case TerminalRegisteredObject.Task:
-					_registeredObjProxy.TaskRepo.CreateTask(user.UserId,
+					_registeredObjProxy.TaskRepo.CreateTask(user.Id,
 															"some content from command response's object");
 					break;
 			}
@@ -66,7 +66,7 @@ namespace TaskHistory.Impl.Terminal
 
 					break;
 				case TerminalRegisteredObject.Task:
-					var tasks = _registeredObjProxy.TaskRepo.ReadAll(user.UserId);
+					var tasks = _registeredObjProxy.TaskRepo.ReadAll(user.Id);
 					var taskTerminalObjects = TerminalObjectMapper.ConvertTasks(tasks);
 					returnVal.AddRange(taskTerminalObjects);
 
@@ -93,7 +93,7 @@ namespace TaskHistory.Impl.Terminal
 				case TerminalRegisteredObject.Task:
 					// need to create task updating parameters
 					// TODO: Where does this come from?
-					_registeredObjProxy.TaskRepo.UpdateTask(user.UserId, null, -1);
+					_registeredObjProxy.TaskRepo.UpdateTask(user.Id, null, -1);
 					break;
 			}
 

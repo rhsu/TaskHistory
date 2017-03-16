@@ -17,9 +17,9 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			IEnumerable<ITask> tasks = _repo.ReadAll(user.UserId);
+			IEnumerable<ITask> tasks = _repo.ReadAll(user.Id);
 			if (tasks == null)
-				throw new NullReferenceException($"null returned from TaskViewRepo when reading {user.UserId}");
+				throw new NullReferenceException($"null returned from TaskViewRepo when reading {user.Id}");
 
 			IEnumerable<TaskTableViewModel> viewModel = _objectMapper.Map(tasks);
 			if (viewModel == null)
@@ -36,7 +36,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (string.IsNullOrEmpty(content))
 				throw new ArgumentNullException(nameof(content));
 
-			ITask task = _repo.CreateTask(user.UserId, content);
+			ITask task = _repo.CreateTask(user.Id, content);
 			if (task == null)
 				throw new NullReferenceException("Null returned from task repo");
 
@@ -62,7 +62,7 @@ namespace TaskHistory.Orchestrator.Tasks
 			if (updateParams == null)
 				throw new NullReferenceException("null returned from TaskObjectMapper");
 
-			ITask task = _repo.UpdateTask(user.UserId, updateParams, taskId);
+			ITask task = _repo.UpdateTask(user.Id, updateParams, taskId);
 			if (task == null)
 				throw new NullReferenceException("null returned from TaskRepo");
 

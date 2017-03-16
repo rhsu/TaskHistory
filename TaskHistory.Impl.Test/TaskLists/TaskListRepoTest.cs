@@ -28,7 +28,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 			IUser user = _testFixtures.User;
 			string listName = "My List";
 
-			ITaskList taskList = _taskListRepo.Create(user.UserId, listName);
+			ITaskList taskList = _taskListRepo.Create(user.Id, listName);
 
 			Assert.AreEqual(listName, taskList.Name);
 		}
@@ -44,11 +44,11 @@ namespace TaskHistory.Impl.Test.TaskLists
 			for (var i = 0; i < 5; i++)
 			{
 				var listName = $"list{i}";
-				var newList = _taskListRepo.Create(user.UserId, listName);
+				var newList = _taskListRepo.Create(user.Id, listName);
 				lookup.Add(newList.Id, newList.Name);
 			}
 
-			var lists = _taskListRepo.Read(user.UserId);
+			var lists = _taskListRepo.Read(user.Id);
 
 			for (var i = 0; i < 5; i++)
 			{
@@ -65,7 +65,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 			ITaskList taskList = _testFixtures.TaskList;
 			var newName = "Some New Name 123456";
 
-			ITaskList updated = _taskListRepo.Update(_testFixtures.User.UserId, taskList.Id, newName);
+			ITaskList updated = _taskListRepo.Update(_testFixtures.User.Id, taskList.Id, newName);
 
 			Assert.AreEqual(taskList.Id, updated.Id);
 			Assert.AreEqual(newName, updated.Name);
