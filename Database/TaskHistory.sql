@@ -639,32 +639,41 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `Tasks_Insert_List_Associate`(
     ,IN `pListId` INT
 )
 BEGIN
-	INSERT INTO `Tasks`
-    (
-		 `UserId`
-        ,`Content`
-    )
-    VALUES
-    (
-		 `pUserId`
-        ,`pContent`
-    );
+	SET @taskId = -1;
     
-    SET @taskId = last_insert_id();
+	IF (SELECT 1 = 1 
+		FROM `TaskLists` 
+        WHERE `Id` = `pListId` AND `UserId` = `pUserId`)
+    THEN
+	BEGIN
+		INSERT INTO `Tasks`
+		(
+			 `UserId`
+			,`Content`
+		)
+		VALUES
+		(
+			 `pUserId`
+			,`pContent`
+		);
     
-    INSERT INTO `TaskToTaskListAssociations`
-    (
-		 `TaskId`
-        ,`TaskListId`
-    )
-    VALUES
-    (
-		 @taskId
-        ,`pListId`
-    );
+		SET @taskId = last_insert_id();
+        
+        INSERT INTO `TaskToTaskListAssociations`
+        (
+			 `TaskId`
+            ,`TaskListId`
+        )
+        VALUES
+        (
+			 @taskId
+            ,`pListId`
+        );
+    END;
+    END IF;
     
-    SELECT * FROM `Tasks` 
-    WHERE `TaskId` = @taskId;
+	SELECT * FROM `Tasks`
+	WHERE `TaskId` = @taskId;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -721,6 +730,25 @@ BEGIN
     SELECT * FROM `Tasks`
     WHERE
     	`TaskID` = `pTaskID`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Users_All_Delete` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Users_All_Delete`()
+BEGIN
+	DELETE FROM Users;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -815,4 +843,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-13  8:36:36
+-- Dump completed on 2017-03-16 13:56:14
