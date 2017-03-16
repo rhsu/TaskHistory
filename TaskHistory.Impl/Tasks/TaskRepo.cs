@@ -57,6 +57,7 @@ namespace TaskHistory.Impl.Tasks
 			return true;
 		}
 
+		// This will return null if unsuccessful (No task was created)
 		public ITask CreateTaskOnList(int userId, int listId, string content)
 		{
 			if (string.IsNullOrEmpty(content))
@@ -70,9 +71,6 @@ namespace TaskHistory.Impl.Tasks
 			var retVal = _dataProxy.ExecuteReader(_taskFactory,
 			                                      CreateTaskAndAssociateToList,
 			                                      parameters);
-
-			//if (retVal == null)
-			//	throw new NullReferenceException("Null returned from dataProxy");
 
 			return retVal;
 		}
