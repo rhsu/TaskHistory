@@ -37,8 +37,8 @@ namespace TaskHistory.Impl.TaskLists
 			var pUserId = _appDataProxy.CreateParameter("pUserId", userId);
 
 			var tasksLists = _appDataProxy.ExecuteOnCollection(_factory,
-																		  ReadStoredProcedure,
-																		  pUserId);
+															   ReadStoredProcedure,
+															   pUserId);
 
 			if (tasksLists == null)
 				throw new NullReferenceException("null returned from appDataProxy");
