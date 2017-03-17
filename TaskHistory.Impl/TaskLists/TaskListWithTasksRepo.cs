@@ -22,35 +22,55 @@ namespace TaskHistory.Impl.TaskLists
 			_dataProxy = dataProxy;
 		}
 
-		public ITaskListWithTasks Read(int userId)
+		public IEnumerable<ITaskListWithTasks> Read(int userId)
 		{
-			var list = _dataProxy.ExecuteReader(_factory, ReadStoredProcedure);
+			/*var list = _dataProxy.ExecuteReader(_factory, ReadStoredProcedure);
 			if (list == null)
-				throw new NullReferenceException("Null returned from data proxy");
+				throw new NullReferenceException("Null returned from data proxy");*/
 
 			//TODO temporarily here as a Proof of Concept
 			var tempFactory = new TempFactory(null);
 
-			IEnumerable<KeyValuePair<int, ITask>> things = _dataProxy.ExecuteOnCollection(tempFactory, "");
+			IEnumerable<KeyValuePair<int, TempQueryResult>> kvpList 
+				= _dataProxy.ExecuteOnCollection(tempFactory, ReadStoredProcedure);
 
-			var cachedResultSet = new Dictionary<int, ITask>();
+			var listNameCache = new Dictionary<int, string>();
+			var taskCache = new Dictionary<int, List<ITask>>();
 
-			/*for (var i = 0; i < things.Count(); i++)
+			var retVal = new List<ITaskListWithTasks>();
+
+			foreach (var item in kvpList)
 			{
-				// TODO I forogt how to iterate through IEnumerable
-				var currentThing = things.ElementAt(i);
+				int listId = item.Key;
+				string listName = item.Value.ListName;
+				ITask task = item.Value.Task;
 
-				if (cachedResultSet.ContainsKey(currentThing.Key))
+				if (!listNameCache.ContainsKey(listId))
 				{
+					listNameCache[listId] = listName;
 				}
-				else
+
+				if (!taskCache.ContainsKey(listId))
 				{
+					taskCache[listId] = new List<ITask>();
 				}
-			}*/
+				taskCache[listId].Add(task);
 
-			// TODO and then loop again to unflatten the array
+				//var taskListWithTasks = new TaskListWithTasks(listId, listName, null);
+			}
 
-			return list;
+			foreach (var kvp in listNameCache)
+			{
+				int listId = kvp.Key;
+				string value = kvp.Value;
+
+				// TODO does this still work if a list has no tasks?
+				List<ITask> tasks = taskCache[listId];
+
+				var taskListWithTasks = new TaskListWithTasks(listId, value, tasks);
+			}
+
+			return retVal;
 		}
 
 		// TODO Spec changed. Need a Read all but do I still need a Read single?
