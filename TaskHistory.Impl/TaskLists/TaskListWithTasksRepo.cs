@@ -9,7 +9,7 @@ namespace TaskHistory.Impl.TaskLists
 		TaskListWithTasksFactory _factory;
 		ApplicationDataProxy _dataProxy;
 
-		const string ReadStoredProcedure = "TaskListsWithTasks_Read";
+		const string ReadStoredProcedure = "TaskListsWithTasks_Select";
 
 		public TaskListWithTasksRepo(TaskListWithTasksFactory factory,
 		                             ApplicationDataProxy dataProxy)
