@@ -21,7 +21,11 @@ namespace TaskHistory.Impl.TaskLists
 			if (reader == null)
 				throw new NullReferenceException(nameof(reader));
 
-			int id = reader.GetInt("Id");
+			var cache = new Dictionary<int, ITask>();
+
+
+
+			/*int id = reader.GetInt("Id");
 			string name = reader.GetString("Name");
 
 			var tasks = new List<ITask>();
@@ -30,9 +34,11 @@ namespace TaskHistory.Impl.TaskLists
 			{
 				var task = _taskFactory.Build(reader);
 				tasks.Add(task);
-			}
+			}*/
 
-			return new TaskListWithTasks(id, name, tasks);
+			//return new TaskListWithTasks(id, name, tasks);
+
+			return null;
 		}
 	}
 }
