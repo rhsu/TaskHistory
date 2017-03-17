@@ -7,6 +7,32 @@ using TaskHistory.Impl.Tasks;
 
 namespace TaskHistory.Impl.TaskLists
 {
+	// TODO not sure what to do with this yet
+	public class TempFactory : IFromDataReaderFactory<KeyValuePair<int, ITask>>
+	{
+		TaskFactory _taskFactory;
+
+		public TempFactory(TaskFactory taskFactory)
+		{
+			_taskFactory = taskFactory;
+		}
+
+		public KeyValuePair<int, ITask> Build(ISqlDataReader reader)
+		{
+			if (reader == null)
+				throw new NullReferenceException(nameof(reader));
+
+			var retVal = new KeyValuePair<int, ITask>();
+
+			int listId = reader.GetInt("listId");
+			int taskId = reader.GetInt("taskId");
+			string taskContent = reader.GetString("taskContent");
+
+			return retVal;
+		}
+	}
+
+
 	public class TaskListWithTasksFactory : IFromDataReaderFactory<ITaskListWithTasks>
 	{
 		TaskFactory _taskFactory;
