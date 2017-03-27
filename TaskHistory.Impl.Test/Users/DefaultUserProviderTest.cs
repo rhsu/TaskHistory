@@ -19,8 +19,6 @@ namespace TaskHistory.Impl.Test.Users
 			_appDataProxy.ExecuteNonQuery("USERS_ALL_DELETE");
 		}
 
-
-
 		public DefaultUserProviderTest()
 		{
 			_appDataProxy = new ApplicationDataProxyFactory().Build();
@@ -28,7 +26,5 @@ namespace TaskHistory.Impl.Test.Users
 			var userRepo = new UserRepo(userFactory, _appDataProxy);
 			_userProvider = new DefaultUserProvider(userRepo);
 		}
-
-
 	}
 }

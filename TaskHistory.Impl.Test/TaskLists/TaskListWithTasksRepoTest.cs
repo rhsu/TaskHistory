@@ -43,9 +43,9 @@ namespace TaskHistory.Impl.Test.TaskLists
 				expectedTasks.Add(t.Id, t);
 			}
 
-			ITaskListWithTasks listWithTasks = _repo.Read(userId);
+			var listsWithTasks = _repo.Read(userId);
 
-			var actualTasks = listWithTasks.Tasks;
+			var actualTasks = listsWithTasks.First().Tasks;
 
 			for (var i = 0; i < actualTasks.Count(); i++)
 			{

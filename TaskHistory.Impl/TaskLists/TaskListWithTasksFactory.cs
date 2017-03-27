@@ -7,18 +7,18 @@ using TaskHistory.Impl.Tasks;
 
 namespace TaskHistory.Impl.TaskLists
 {
+	// TODO not sure what to do with this yet
 	public class TempQueryResult
 	{
 		public ITask Task { get; set; }
 		public string ListName { get; set; }
 	}
 
-	// TODO not sure what to do with this yet
-	public class TempFactory : IFromDataReaderFactory<KeyValuePair<int, TempQueryResult>>
+	public class TaskListWithTasksFactory : IFromDataReaderFactory<KeyValuePair<int, TempQueryResult>>
 	{
 		TaskFactory _taskFactory;
 
-		public TempFactory(TaskFactory taskFactory)
+		public TaskListWithTasksFactory(TaskFactory taskFactory)
 		{
 			_taskFactory = taskFactory;
 		}
@@ -29,60 +29,25 @@ namespace TaskHistory.Impl.TaskLists
 				throw new NullReferenceException(nameof(reader));
 
 			// key
-			int listId = reader.GetInt("listId");
+			int listId = reader.GetInt("ListId");
 
 			// Query Result Object
-			int taskId = reader.GetInt("taskId");
-			string listName = reader.GetString("listName");
-			string taskContent = reader.GetString("taskContent");
+			int? taskId = reader.GetInt("TaskId");
+			string listName = reader.GetString("ListName");
+			string taskContent = reader.GetString("TaskContent");
 
 			var tempQueryResult = new TempQueryResult();
-			tempQueryResult.Task = new Task(taskId, taskContent, false);
+
+			if (taskId.HasValue)
+			{
+				tempQueryResult.Task = _taskFactory.Build(reader);
+			}
+
 			tempQueryResult.ListName = listName;
 
-			var retVal = new KeyValuePair<int, TempQueryResult>(listId, null);
+			var retVal = new KeyValuePair<int, TempQueryResult>(listId, tempQueryResult);
 
 			return retVal;
 		}
-	}
-
-
-	public class TaskListWithTasksFactory //: IFromDataReaderFactory<ITaskListWithTasks>
-	{
-		TaskFactory _taskFactory;
-
-		public TaskListWithTasksFactory(TaskFactory taskFactory)
-		{
-			_taskFactory = taskFactory;
-		}
-
-		public ITaskListWithTasks Build(int id, string listName, IEnumerable<ITask> tasks)
-		{
-
-			return new TaskListWithTasks(id, listName, tasks);
-		}
-
-		/*public ITaskListWithTasks Build(ISqlDataReader reader)
-		{
-			if (reader == null)
-				throw new NullReferenceException(nameof(reader));
-
-			var cache = new Dictionary<int, ITask>();
-
-
-
-			/*int id = reader.GetInt("Id");
-			string name = reader.GetString("Name");
-
-			var tasks = new List<ITask>();
-
-			if (reader.NextResult())
-			{
-				var task = _taskFactory.Build(reader);
-				tasks.Add(task);
-			}*/
-
-			//return new TaskListWithTasks(id, name, tasks);
-		}*/
 	}
 }
