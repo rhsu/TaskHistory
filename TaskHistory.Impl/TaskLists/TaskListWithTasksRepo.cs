@@ -24,10 +24,6 @@ namespace TaskHistory.Impl.TaskLists
 
 		public IEnumerable<ITaskListWithTasks> Read(int userId)
 		{
-			/*var list = _dataProxy.ExecuteReader(_factory, ReadStoredProcedure);
-			if (list == null)
-				throw new NullReferenceException("Null returned from data proxy");*/
-
 			//TODO temporarily here as a Proof of Concept
 			var tempFactory = new TempFactory(null);
 
@@ -55,8 +51,6 @@ namespace TaskHistory.Impl.TaskLists
 					taskCache[listId] = new List<ITask>();
 				}
 				taskCache[listId].Add(task);
-
-				//var taskListWithTasks = new TaskListWithTasks(listId, listName, null);
 			}
 
 			foreach (var kvp in listNameCache)
