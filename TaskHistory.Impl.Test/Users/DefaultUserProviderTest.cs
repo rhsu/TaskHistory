@@ -23,16 +23,16 @@ namespace TaskHistory.Impl.Test.Users
 		{
 			DeleteAllUsers();
 
-			//Assert.False(_userProvider.DefaultUserExists());
+			Assert.False(_userProvider.DefaultUserExists());
 		}
 
 		[Test]
 		public void DefaultUserExists_True()
 		{
 			DeleteAllUsers();
-			//_userProvider.RegisterDefaultUser();
+			_userProvider.RegisterDefaultUser();
 
-			//Assert.True(_userProvider.DefaultUserExists());
+			Assert.True(_userProvider.DefaultUserExists());
 		}
 
 		public DefaultUserProviderTest()
