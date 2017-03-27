@@ -10,7 +10,8 @@ namespace TaskHistory.Impl.Test.TaskLists
 		ITaskListWithTasksRepo _repo;
 		TestFixtures _testFixtures;
 
-		public TaskListWithTasksRepoTest()
+		[SetUp]
+		public void Init()
 		{
 			var factory = new TaskListWithTasksFactory(new TaskFactory());
 			var appDataProxy = new ApplicationDataProxyFactory().Build();

@@ -9,7 +9,8 @@ namespace TaskHistory.Impl.Test.Users
 	{
 		AdminUserProvider _provider;
 
-		public AdminUserProviderTest()
+		[SetUp]
+		public void Init()
 		{
 			var userFactory = new UserFactory();
 

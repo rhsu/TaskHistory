@@ -10,7 +10,8 @@ namespace TaskHistory.Impl.Test.FeatureFlags
 	{
 		IFeatureFlagRepo _repo;
 
-		public FeatureFlagRepoTest()
+		[SetUp]
+		public void Init()
 		{
 			var factory = new FeatureFlagFactory();
 			var dataProxy = new ApplicationDataProxyFactory().Build();

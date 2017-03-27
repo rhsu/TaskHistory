@@ -10,7 +10,8 @@ namespace TaskHistory.Impl.Test.Users
 	{
 		IUserRepo _userRepo;
 
-		public UserRepoTest()
+		[SetUp]
+		public void Init()
 		{
 			var userFactory = new UserFactory();
 			var appDataProxy = new ApplicationDataProxyFactory().Build();
@@ -27,9 +28,6 @@ namespace TaskHistory.Impl.Test.Users
 
 			Assert.NotNull(newUser);
 			Assert.AreEqual(newUser.Username, userParams.Username);
-			// TODO: Once I can execute select queries against the database, 
-			//       then, do the below assert
-			// Assert.AreEqual(newUser.Password, password);
 			Assert.AreEqual(newUser.FirstName, userParams.FirstName);
 			Assert.AreEqual(newUser.LastName, userParams.LastName);
 			Assert.AreEqual(newUser.Email, userParams.Email);
