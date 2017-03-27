@@ -6,9 +6,9 @@ namespace TaskHistory.Impl.Sql
 {
 	public class SqlDataReader : ISqlDataReader
 	{
-		private MySqlDataReader _reader;
+		MySqlDataReader _reader;
 
-		private object GetObjectFromReader (string propertyName)
+		object GetObjectFromReader (string propertyName)
 		{
 			object obj = null;
 
@@ -41,6 +41,15 @@ namespace TaskHistory.Impl.Sql
 		{
 			var obj = GetObjectFromReader (propertyName);
 			return Convert.ToInt32 (obj);
+		}
+
+		public int? GetNullableInt(string propertyName)
+		{
+			var obj = GetObjectFromReader(propertyName);
+			if (obj == null)
+				return null;
+			
+			return Convert.ToInt32(obj);
 		}
 
 		public string GetString(string propertyName)
