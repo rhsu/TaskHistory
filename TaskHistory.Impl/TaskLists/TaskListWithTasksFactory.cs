@@ -34,13 +34,19 @@ namespace TaskHistory.Impl.TaskLists
 			// Query Result Object
 			int? taskId = reader.GetInt("TaskId");
 			string listName = reader.GetString("ListName");
-			string taskContent = reader.GetString("TaskContent");
+			//string taskContent = reader.GetString("TaskContent");
 
 			var tempQueryResult = new TempQueryResult();
 
 			if (taskId.HasValue)
 			{
-				tempQueryResult.Task = _taskFactory.Build(reader);
+				//tempQueryResult.Task = _taskFactory.Build(reader);
+
+				//int taskId = reader.GetInt("TaskId");
+				string content = reader.GetString("TaskContent");
+				//bool isCompleted = reader.GetBool("IsCompleted");
+
+				tempQueryResult.Task = new Task(taskId.Value, content, false);
 			}
 
 			tempQueryResult.ListName = listName;

@@ -21,8 +21,12 @@ namespace TaskHistory.Impl.TaskLists
 
 		public IEnumerable<ITaskListWithTasks> Read(int userId)
 		{
+			var parameter = _dataProxy.CreateParameter("pUserId", userId);
+
 			IEnumerable<KeyValuePair<int, TempQueryResult>> kvpList 
-				= _dataProxy.ExecuteOnCollection(_factory, ReadStoredProcedure);
+				= _dataProxy.ExecuteOnCollection(_factory, 
+			                                     ReadStoredProcedure,
+			                                     parameter);
 
 			var listNameCache = new Dictionary<int, string>();
 			var taskCache = new Dictionary<int, List<ITask>>();
