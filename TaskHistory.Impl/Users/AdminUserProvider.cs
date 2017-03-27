@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Security.Authentication;
 using TaskHistory.Api.Users;
-using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Users
 {
@@ -11,14 +9,10 @@ namespace TaskHistory.Impl.Users
 		const string _default_password = "password";
 
 		UserFactory _userFactory;
-		IUserRepo _userRepo;
 
-		public AdminUserProvider(UserFactory userFactory,
-		                         IUserRepo userRepo,
-		                         ApplicationDataProxy dataProxy)
+		public AdminUserProvider(UserFactory userFactory)
 		{
 			_userFactory = userFactory;
-			_userRepo = userRepo;
 		}
 
 		IUser BuildAdminUser()
@@ -56,7 +50,8 @@ namespace TaskHistory.Impl.Users
 			// TODO for number 3 need to make sure that users have Roles 
 			// This requires more digging into MVC
 
-			throw new AuthenticationException("Invalid Username and Password");
+			// throw new AuthenticationException("Invalid Username and Password");
+			return null;
 		}
 	}
 }

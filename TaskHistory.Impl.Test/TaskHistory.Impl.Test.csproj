@@ -43,6 +43,8 @@
     <Compile Include="Tasks\TaskRepoTest.cs" />
     <Compile Include="FeatureFlags\FeatureFlagRepoTest.cs" />
     <Compile Include="TaskLists\TaskListWithTasksRepoTest.cs" />
+    <Compile Include="Users\AdminUserProviderTest.cs" />
+    <Compile Include="Users\DefaultUserProviderTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
