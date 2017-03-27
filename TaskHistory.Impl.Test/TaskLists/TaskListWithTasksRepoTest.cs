@@ -31,7 +31,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		}
 
 		[Test]
-		public void Read()
+		public void Read_TaskList_With_Tasks()
 		{
 			int userId = _testFixtures.User.Id;
 			int listId = _testFixtures.TaskList.Id;
@@ -56,6 +56,14 @@ namespace TaskHistory.Impl.Test.TaskLists
 				Assert.AreEqual(expectedTask.Id, currentTask.Id);				
 				Assert.AreEqual(expectedTask.Content, currentTask.Content);
 			}
+		}
+
+		public void Read_TaskLists_No_Tasks()
+		{
+			var listsWithTasks = _repo.Read(_testFixtures.User.Id);
+			var list = listsWithTasks.First();
+
+			Assert.AreEqual(0, list.Tasks.Count());
 		}
 	}
 }
