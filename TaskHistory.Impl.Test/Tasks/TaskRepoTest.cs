@@ -15,7 +15,8 @@ namespace TaskHistory.Impl.Test.Tasks
 		ITaskRepo _taskRepo;
 		IUser _user;
 
-		public Tasks()
+		[SetUp]
+		public void Init()
 		{
 			var taskFactory = new TaskFactory();
 
@@ -42,24 +43,16 @@ namespace TaskHistory.Impl.Test.Tasks
 		[Test]
 		public void ReadTasks()
 		{
-			// TODO need to rethink this
-			//      this is an issue because the user might have tasks
-			//      depending on whether or not the previous test ran
-			//      The temporary solution is just to create a new TestFixture
-			//      and go from there.
-			var readTestFixture = new TestFixtures();
-			var user = readTestFixture.User;
-
 			var lookup = new Dictionary<int, string>();
 
 			for (var i = 0; i < 5; i++)
 			{
 				var taskContent = $"task{i}";
-				var newTask = _taskRepo.CreateTask(user.Id, taskContent);
+				var newTask = _taskRepo.CreateTask(_user.Id, taskContent);
 				lookup.Add(newTask.Id, taskContent);
 			}
 
-			var tasks = _taskRepo.ReadAll(user.Id);
+			var tasks = _taskRepo.ReadAll(_user.Id);
 
 			for (var i = 0; i < 5; i++)
 			{
