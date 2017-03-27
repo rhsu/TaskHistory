@@ -16,7 +16,8 @@ namespace TaskHistory.Impl.Test.TaskLists
 
 		ITaskRepo _taskRepo;
 
-		public TaskListWithTasksRepoTest()
+		[SetUp]
+		public void Init()
 		{
 			var taskFactory = new TaskFactory();
 

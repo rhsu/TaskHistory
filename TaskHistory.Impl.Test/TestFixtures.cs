@@ -2,6 +2,7 @@
 using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
+using TaskHistory.Impl.Sql;
 using TaskHistory.Impl.TaskLists;
 using TaskHistory.Impl.Tasks;
 using TaskHistory.Impl.Users;
@@ -13,6 +14,8 @@ namespace TaskHistory.Impl.Test
 		readonly IUserRepo _userRepo;
 		readonly ITaskRepo _taskRepo;
 		readonly ITaskListRepo _taskListRepo;
+
+		readonly ApplicationDataProxy _dataProxy;
 
 		IUser _user;
 		ITask _task;
@@ -40,11 +43,13 @@ namespace TaskHistory.Impl.Test
 			var taskListFactory = new TaskListFactory();
 
 			var appDataProxyFactory = new ApplicationDataProxyFactory();
+			_dataProxy = appDataProxyFactory.Build();
 
+			_dataProxy.ExecuteNonQuery("_Data_Reset");
 
-			_userRepo = new UserRepo(userFactory, appDataProxyFactory.Build());
-			_taskListRepo = new TaskListRepo(taskListFactory, appDataProxyFactory.Build());
-			_taskRepo = new TaskRepo(taskFactory, appDataProxyFactory.Build());
+			_userRepo = new UserRepo(userFactory, _dataProxy);
+			_taskListRepo = new TaskListRepo(taskListFactory, _dataProxy);
+			_taskRepo = new TaskRepo(taskFactory, _dataProxy);
 
 			CreateUser();
 			CreateTask();
