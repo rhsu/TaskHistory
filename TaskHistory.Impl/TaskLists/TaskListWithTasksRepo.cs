@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TaskHistory.Api.TaskLists;
+using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.TaskLists
@@ -18,13 +22,49 @@ namespace TaskHistory.Impl.TaskLists
 			_dataProxy = dataProxy;
 		}
 
-		public ITaskListWithTasks Read(int userId)
+		public IEnumerable<ITaskListWithTasks> Read(int userId)
 		{
-			var list = _dataProxy.ExecuteReader(_factory, ReadStoredProcedure);
-			if (list == null)
-				throw new NullReferenceException("Null returned from data proxy");
+			//TODO temporarily here as a Proof of Concept
+			var tempFactory = new TempFactory(null);
 
-			return list;
+			IEnumerable<KeyValuePair<int, TempQueryResult>> kvpList 
+				= _dataProxy.ExecuteOnCollection(tempFactory, ReadStoredProcedure);
+
+			var listNameCache = new Dictionary<int, string>();
+			var taskCache = new Dictionary<int, List<ITask>>();
+
+			var retVal = new List<ITaskListWithTasks>();
+
+			foreach (var item in kvpList)
+			{
+				int listId = item.Key;
+				string listName = item.Value.ListName;
+				ITask task = item.Value.Task;
+
+				if (!listNameCache.ContainsKey(listId))
+				{
+					listNameCache[listId] = listName;
+				}
+
+				if (!taskCache.ContainsKey(listId))
+				{
+					taskCache[listId] = new List<ITask>();
+				}
+				taskCache[listId].Add(task);
+			}
+
+			foreach (var kvp in listNameCache)
+			{
+				int listId = kvp.Key;
+				string value = kvp.Value;
+
+				// TODO does this still work if a list has no tasks?
+				List<ITask> tasks = taskCache[listId];
+
+				var taskListWithTasks = new TaskListWithTasks(listId, value, tasks);
+			}
+
+			return retVal;
 		}
 
 		// TODO Spec changed. Need a Read all but do I still need a Read single?

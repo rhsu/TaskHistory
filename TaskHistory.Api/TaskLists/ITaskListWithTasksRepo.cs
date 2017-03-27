@@ -1,7 +1,9 @@
-﻿namespace TaskHistory.Api.TaskLists
+﻿using System.Collections.Generic;
+
+namespace TaskHistory.Api.TaskLists
 {
 	public interface ITaskListWithTasksRepo
 	{
-		ITaskListWithTasks Read(int userId);
+		IEnumerable<ITaskListWithTasks> Read(int userId);
 	}
 }
