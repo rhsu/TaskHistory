@@ -101,7 +101,7 @@ CREATE TABLE `TaskLists` (
   `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`Id`),
   KEY `fk_tasklists_user_idx` (`UserId`),
-  CONSTRAINT `fk_tasklists_user` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_tasklists_user` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
