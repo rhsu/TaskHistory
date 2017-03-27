@@ -28,8 +28,14 @@ namespace TaskHistory.Impl.TaskLists
 			                                     ReadStoredProcedure,
 			                                     parameter);
 
+			// storage where key is the listId and vaue is the listName
 			var listNameCache = new Dictionary<int, string>();
+
+			// storage where key is the listId and value is the list of tasks
 			var taskCache = new Dictionary<int, List<ITask>>();
+
+			// there is an assumption that a list cannot exist without a name
+			// but a list could contain 0 tasks
 
 			var retVal = new List<ITaskListWithTasks>();
 
@@ -54,12 +60,14 @@ namespace TaskHistory.Impl.TaskLists
 			foreach (var kvp in listNameCache)
 			{
 				int listId = kvp.Key;
-				string value = kvp.Value;
+				string listName = kvp.Value;
 
 				// TODO does this still work if a list has no tasks?
 				List<ITask> tasks = taskCache[listId];
 
-				var taskListWithTasks = new TaskListWithTasks(listId, value, tasks);
+				var taskListWithTasks = new TaskListWithTasks(listId, listName, tasks);
+
+				retVal.Add(taskListWithTasks);
 			}
 
 			return retVal;
