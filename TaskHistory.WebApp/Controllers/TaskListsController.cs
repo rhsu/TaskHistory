@@ -14,11 +14,12 @@ namespace TaskHistory.WebApp.Controllers
         }
 
 		// TODO Might not need this
-		/*[HttpPost]
+		[HttpPost]
 		public JsonResult Retrieve()
 		{
-			return Json(_orchestrator.Retrieve(_currentUser));
-		}*/
+			//return Json(_orchestrator.Retrieve(_currentUser));
+			return null;
+		}
 
 		[HttpPost]
 		public JsonResult Create(string name)
