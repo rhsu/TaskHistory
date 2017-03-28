@@ -29,7 +29,7 @@ namespace TaskHistory.Orchestrator.Tasks
 		}
 
 		public TaskTableViewModel Create(IUser user, string content)
-    {
+    	{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
@@ -43,6 +43,27 @@ namespace TaskHistory.Orchestrator.Tasks
 			TaskTableViewModel viewModel = _objectMapper.Map(task);
 			if (viewModel == null)
 				throw new NullReferenceException("Null returned from task presenter");
+
+			return viewModel;
+		}
+
+		// TODO should this be using TaskTableViewModel or a different viewModel?
+		//		coincidentally, this will work ok. but not sure if sustainable
+		public TaskTableViewModel CreateOnList(IUser user, int listId, string content)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+
+			if (string.IsNullOrEmpty(content))
+				throw new ArgumentNullException(nameof(content));
+
+			var task = _repo.CreateTaskOnList(user.Id, listId, content);
+			if (task == null)
+				throw new NullReferenceException("null returned from Repo");
+
+			var viewModel = _objectMapper.Map(task);
+			if (viewModel == null)
+				throw new NullReferenceException("null returned from ObjectMapper");
 
 			return viewModel;
 		}
