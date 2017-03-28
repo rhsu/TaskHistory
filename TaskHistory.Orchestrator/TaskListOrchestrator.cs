@@ -13,23 +13,6 @@ namespace TaskHistory.Orchestrator
 		readonly ITaskListWithTasksRepo _listWithTasksRepo;
 		readonly ObjectMapperTaskLists _mapper;
 
-		// TODO Might not need this
-		/*public IEnumerable<TaskListViewModel> Retrieve(IUser user)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-
-			var lists = _repo.Read(user.UserId);
-			if (lists == null)
-				throw new NullReferenceException("Null returned from repo");
-
-			var viewModels = _mapper.Map(lists);
-			if (viewModels == null)
-				throw new NullReferenceException("Null return from mapper");
-
-			return viewModels;
-		}*/
-
 		public IEnumerable<TaskListDetailedTableViewModel> Retrieve(IUser user)
 		{
 			if (user == null)
@@ -38,6 +21,7 @@ namespace TaskHistory.Orchestrator
 			var list = _listWithTasksRepo.Read(user.Id);
 			if (list == null)
 				throw new NullReferenceException("Null returned from repo");
+			
 
 			return null;
 		}

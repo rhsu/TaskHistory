@@ -29,7 +29,7 @@ namespace TaskHistory.Orchestrator.Tasks
 		}
 
 		public TaskTableViewModel Create(IUser user, string content)
-    {
+    	{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
@@ -45,6 +45,20 @@ namespace TaskHistory.Orchestrator.Tasks
 				throw new NullReferenceException("Null returned from task presenter");
 
 			return viewModel;
+		}
+
+		public void CreateOnList(IUser user, int listId, string content)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+
+			if (string.IsNullOrEmpty(content))
+				throw new ArgumentNullException(nameof(content));
+
+			_repo.CreateTaskOnList(user.Id, listId, content);
+
+			// TODO what is the return of this?
+			// What does that view model look like?
 		}
 
 
