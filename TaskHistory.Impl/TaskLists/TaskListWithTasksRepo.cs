@@ -2,6 +2,7 @@
 using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.Sql;
+using TaskHistory.Impl.TaskLists.QueryResults;
 
 namespace TaskHistory.Impl.TaskLists
 {
@@ -23,7 +24,7 @@ namespace TaskHistory.Impl.TaskLists
 		{
 			var parameter = _dataProxy.CreateParameter("pUserId", userId);
 
-			IEnumerable<KeyValuePair<int, TempQueryResult>> kvpList 
+			IEnumerable<KeyValuePair<int, TaskListWithTasksQueryResult>> kvpList 
 				= _dataProxy.ExecuteOnCollection(_factory, 
 			                                     ReadStoredProcedure,
 			                                     parameter);

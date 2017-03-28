@@ -21,7 +21,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		{
 			var taskFactory = new TaskFactory();
 
-			var factory = new TaskListWithTasksFactory(taskFactory);
+			var factory = new TaskListWithTasksFactory();
 			var appDataProxy = new ApplicationDataProxyFactory().Build();
 
 			_testFixtures = new TestFixtures();
