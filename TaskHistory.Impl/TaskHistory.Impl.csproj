@@ -81,6 +81,7 @@
     <Compile Include="TaskLists\TaskListWithTasksFactory.cs" />
     <Compile Include="Users\AdminUserProvider.cs" />
     <Compile Include="Users\DefaultUserProvider.cs" />
+    <Compile Include="TaskLists\QueryResults\TaskListWithTasksQueryResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -94,6 +95,7 @@
     <Folder Include="Terminal\" />
     <Folder Include="TaskLists\" />
     <Folder Include="FeatureFlags\" />
+    <Folder Include="TaskLists\QueryResults\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

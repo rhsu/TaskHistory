@@ -6,6 +6,8 @@
 
 		int GetInt(string propertyName);
 
+		int? GetNullableInt(string propertyName);
+
 		string GetString(string propertyName);
 
 		bool GetBool(string propertyName);

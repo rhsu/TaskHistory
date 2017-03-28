@@ -3,7 +3,6 @@ using System.Linq;
 using NUnit.Framework;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
-using TaskHistory.Impl.TaskLists;
 using TaskHistory.Impl.Tasks;
 
 namespace TaskHistory.Impl.Test.Tasks
