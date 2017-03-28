@@ -325,19 +325,23 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `History_Select`(IN `pUserId` INT)
     NO SQL
-SELECT h.*
+SELECT h.*,
+	   u.id,
+	   u.firstName,
+       u.lastName,
+       u.userName
 FROM 
 	`History` AS h
- 	INNER JOIN `User` AS U
-    ON h.UserId = User.UserId
+ 	INNER JOIN `User` AS u
+    ON h.UserId = u.UserId
 WHERE
 	h.UserId = `pUserId` ;;
 DELIMITER ;
@@ -856,11 +860,11 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `_Data_Reset`()
 BEGIN
-	# All Foreign Keys should be set as CASCADE
-    # so this will delete all user data
+	
+    
 	DELETE FROM Users;
     
-    # Delete all non-specific user data
+    
     DELETE FROM FeatureFlags;
 END ;;
 DELIMITER ;
@@ -878,4 +882,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-27 14:40:50
+-- Dump completed on 2017-03-27 17:53:42

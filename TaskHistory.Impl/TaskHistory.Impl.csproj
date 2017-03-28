@@ -82,6 +82,9 @@
     <Compile Include="Users\AdminUserProvider.cs" />
     <Compile Include="Users\DefaultUserProvider.cs" />
     <Compile Include="TaskLists\QueryResults\TaskListWithTasksQueryResult.cs" />
+    <Compile Include="History\HistoryRepo.cs" />
+    <Compile Include="History\History.cs" />
+    <Compile Include="History\HistoryFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -96,6 +99,7 @@
     <Folder Include="TaskLists\" />
     <Folder Include="FeatureFlags\" />
     <Folder Include="TaskLists\QueryResults\" />
+    <Folder Include="History\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
