@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TaskHistory.Api.TaskLists;
 using TaskHistory.ViewModel.TaskLists;
-using TaskHistory.ViewModel.Tasks;
 using TaskHistoryObjectMapper;
 
 namespace TaskHistory.ObjectMapper.TaskLists
@@ -40,15 +39,13 @@ namespace TaskHistory.ObjectMapper.TaskLists
 			if (taskList == null)
 				throw new ArgumentNullException(nameof(taskList));
 
-			var viewModel = new TaskListDetailedTableViewModel();
-			viewModel.ListId = taskList.ListId;
-			viewModel.ListName = taskList.ListName;
-
 			var vmTasks = _taskObjMapper.Map(taskList.Tasks);
 			if (vmTasks == null)
-				throw new NullReferenceException("null returned from object mapper");
+				throw new NullReferenceException("null returned from ObjectMapper");
 
-			viewModel.Tasks = vmTasks;
+			var viewModel = new TaskListDetailedTableViewModel(taskList.ListId,
+			                                                   taskList.ListName,
+			                                                   vmTasks);
 
 			return viewModel;
 		}
