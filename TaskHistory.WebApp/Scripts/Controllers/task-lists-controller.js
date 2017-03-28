@@ -23,9 +23,8 @@
       }, function (reason) {});
     }
 
-    TaskListsService.read(function (response) {
-      console.log('in the read!');
-      console.log(response);
+    TaskListsService.read().then(function (response) {
+      console.log(response.data);
     }, function () {});
 
   });
