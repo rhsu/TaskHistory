@@ -14,7 +14,7 @@ namespace TaskHistory.WebApp.Controllers
         }
 
 		[HttpPost]
-		public JsonResult Retrieve()
+		public JsonResult Read()
 		{
 			return Json(_orchestrator.Read(_currentUser));
 		}

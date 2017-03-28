@@ -17,6 +17,9 @@ namespace TaskHistoryObjectMapper
 			foreach (var task in tasks)
 			{
 				var taskVM = Map(task);
+				if (taskVM == null)
+					throw new NullReferenceException("null returned from ObjectMapper");
+
 				returnVal.Add(taskVM);
 			}
 
