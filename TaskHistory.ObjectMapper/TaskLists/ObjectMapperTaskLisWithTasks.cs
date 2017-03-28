@@ -1,10 +1,56 @@
 ﻿using System;
-namespace TaskHistory.ObjectMapper
+using System.Collections.Generic;
+using TaskHistory.Api.TaskLists;
+using TaskHistory.ViewModel.TaskLists;
+using TaskHistory.ViewModel.Tasks;
+using TaskHistoryObjectMapper;
+
+namespace TaskHistory.ObjectMapper.TaskLists
 {
 	public class ObjectMapperTaskLisWithTasks
 	{
-		public ObjectMapperTaskLisWithTasks()
+		ObjectMapperTasks _taskObjMapper;
+
+		public ObjectMapperTaskLisWithTasks(ObjectMapperTasks taskObjMapper)
 		{
+			_taskObjMapper = taskObjMapper;
+		}
+
+		public IEnumerable<TaskListDetailedTableViewModel> Map(IEnumerable<ITaskListWithTasks> taskLists)
+		{
+			if (taskLists == null)
+				throw new ArgumentNullException(nameof(taskLists));
+
+			var retVal = new List<TaskListDetailedTableViewModel>();
+
+			foreach (var taskList in taskLists)
+			{
+				var viewModel = Map(taskList);
+				if (viewModel == null)
+					throw new NullReferenceException("null returned from ObjectMapper");
+
+				retVal.Add(viewModel);
+			}
+
+			return retVal;
+		}
+
+		public TaskListDetailedTableViewModel Map(ITaskListWithTasks taskList)
+		{
+			if (taskList == null)
+				throw new ArgumentNullException(nameof(taskList));
+
+			var viewModel = new TaskListDetailedTableViewModel();
+			viewModel.ListId = taskList.ListId;
+			viewModel.ListName = taskList.ListName;
+
+			var vmTasks = _taskObjMapper.Map(taskList.Tasks);
+			if (vmTasks == null)
+				throw new NullReferenceException("null returned from object mapper");
+
+			viewModel.Tasks = vmTasks;
+
+			return viewModel;
 		}
 	}
 }
