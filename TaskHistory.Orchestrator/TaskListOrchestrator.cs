@@ -10,21 +10,10 @@ namespace TaskHistory.Orchestrator
 	public class TaskListOrchestrator
 	{
 		readonly ITaskListRepo _listRepo;
+		readonly ObjectMapperTaskLists _listMapper;
+
 		readonly ITaskListWithTasksRepo _listWithTasksRepo;
-		readonly ObjectMapperTaskLists _mapper;
-
-		public IEnumerable<TaskListDetailedTableViewModel> Retrieve(IUser user)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-
-			var list = _listWithTasksRepo.Read(user.Id);
-			if (list == null)
-				throw new NullReferenceException("Null returned from repo");
-			
-
-			return null;
-		}
+		readonly ObjectMapperTaskLisWithTasks _listWithTasksMapper;
 
 		public TaskListViewModel Create(IUser user, string name)
 		{
@@ -36,22 +25,41 @@ namespace TaskHistory.Orchestrator
 
 			var list = _listRepo.Create(user.Id, name);
 			if (list == null)
-				throw new NullReferenceException("null returned from repo");
+				throw new NullReferenceException("null returned from Repo");
 
-			var viewModel = _mapper.Map(list);
+			var viewModel = _listMapper.Map(list);
 			if (viewModel == null)
-				throw new NullReferenceException("null returned from mapper");
+				throw new NullReferenceException("null returned from ObjectMapper");
 
 			return viewModel;
 		}
 
+		public IEnumerable<TaskListDetailedTableViewModel> Read(IUser user)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+
+			var lists = _listWithTasksRepo.Read(user.Id);
+			if (lists == null)
+				throw new NullReferenceException("null returned from Repo");
+
+			var retVal = _listWithTasksMapper.Map(lists);
+			if (retVal == null)
+				throw new NullReferenceException("null returned from ObjectMapper");
+
+			return retVal;
+		}
+
 		public TaskListOrchestrator(ITaskListRepo listRepo,
+		                            ObjectMapperTaskLists listMapper,
 		                            ITaskListWithTasksRepo listWithTaskRepo,
-		                            ObjectMapperTaskLists mapper)
+		                            ObjectMapperTaskLisWithTasks listWithTasksMapper)
 		{
 			_listRepo = listRepo;
+			_listMapper = listMapper;
+
 			_listWithTasksRepo = listWithTaskRepo;
-			_mapper = mapper;
+			_listWithTasksMapper = listWithTasksMapper;
 		}
 	}
 }

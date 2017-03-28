@@ -7,6 +7,7 @@ namespace TaskHistory.ObjectMapper.TaskLists
 {
 	public class ObjectMapperTaskLists
 	{
+		// TODO do I need this?
 		public IEnumerable<TaskListViewModel> Map(IEnumerable<ITaskList> lists)
 		{
 			if (lists == null)
