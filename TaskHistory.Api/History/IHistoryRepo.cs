@@ -5,8 +5,8 @@ namespace TaskHistory.Api.History
 {
 	public interface IHistoryRepo
 	{
-		IEnumerable<IHistory> Get(int userId);
+		IEnumerable<IHistory> Read(int userId);
 
-		IHistory Record(HistoryCreationParams historyDto);
+		IHistory Create(int userId, HistoryCreationParams historyDto);
 	}
 }

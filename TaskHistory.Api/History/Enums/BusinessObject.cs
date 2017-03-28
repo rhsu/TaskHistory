@@ -1,4 +1,4 @@
-﻿namespace TaskHistory.Api
+﻿namespace TaskHistory.Api.History
 {
 	public enum BusinessObject
 	{

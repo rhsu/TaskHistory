@@ -1,5 +1,4 @@
 ﻿using System;
-using TaskHistory.Api;
 using TaskHistory.Api.History;
 
 namespace TaskHistory.Impl.History
@@ -19,34 +18,35 @@ namespace TaskHistory.Impl.History
 
 		public DateTime ActionDate
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
+			get { return _actionDate; }
 		}
 
 		public int Id
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
+			get { return _id; }
 		}
 
 		public BusinessObject Object
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
+			get { return _obj; }
 		}
 
 		public int UserId
 		{
-			get
-			{
-				throw new NotImplementedException();
-			}
+			get { return _userId; }
+		}
+
+		public History(int id,
+					   BusinessAction action,
+					   BusinessObject obj,
+					   DateTime actionDate,
+					   int userId)
+		{
+			_id = id;
+			_action = action;
+			_obj = obj;
+			_actionDate = actionDate;
+			_userId = userId;
 		}
 	}
 }
