@@ -1,29 +1,14 @@
 using System;
 using System.Collections.Generic;
 using TaskHistory.Api.Sql;
-using TaskHistory.Api.TaskLists;
-using TaskHistory.Api.Tasks;
+using TaskHistory.Impl.TaskLists.QueryResults;
 using TaskHistory.Impl.Tasks;
 
 namespace TaskHistory.Impl.TaskLists
 {
-	// TODO not sure what to do with this yet
-	public class TempQueryResult
+	public class TaskListWithTasksFactory : IFromDataReaderFactory<KeyValuePair<int, TaskListWithTasksQueryResult>>
 	{
-		public ITask Task { get; set; }
-		public string ListName { get; set; }
-	}
-
-	public class TaskListWithTasksFactory : IFromDataReaderFactory<KeyValuePair<int, TempQueryResult>>
-	{
-		TaskFactory _taskFactory;
-
-		public TaskListWithTasksFactory(TaskFactory taskFactory)
-		{
-			_taskFactory = taskFactory;
-		}
-
-		public KeyValuePair<int, TempQueryResult> Build(ISqlDataReader reader)
+		public KeyValuePair<int, TaskListWithTasksQueryResult> Build(ISqlDataReader reader)
 		{
 			if (reader == null)
 				throw new NullReferenceException(nameof(reader));
@@ -34,24 +19,21 @@ namespace TaskHistory.Impl.TaskLists
 			// Query Result Object
 			int? taskId = reader.GetInt("TaskId");
 			string listName = reader.GetString("ListName");
-			//string taskContent = reader.GetString("TaskContent");
 
-			var tempQueryResult = new TempQueryResult();
+			// TODO how do I use DI here?
+			var queryResult = new TaskListWithTasksQueryResult();
 
 			if (taskId.HasValue)
 			{
-				//tempQueryResult.Task = _taskFactory.Build(reader);
-
-				//int taskId = reader.GetInt("TaskId");
 				string content = reader.GetString("TaskContent");
-				//bool isCompleted = reader.GetBool("IsCompleted");
 
-				tempQueryResult.Task = new Task(taskId.Value, content, false);
+				// TODO how do I use DI here?
+				queryResult.Task = new Task(taskId.Value, content, false);
 			}
 
-			tempQueryResult.ListName = listName;
+			queryResult.ListName = listName;
 
-			var retVal = new KeyValuePair<int, TempQueryResult>(listId, tempQueryResult);
+			var retVal = new KeyValuePair<int, TaskListWithTasksQueryResult>(listId, queryResult);
 
 			return retVal;
 		}

@@ -62,7 +62,6 @@ namespace TaskHistory.Impl.TaskLists
 				int listId = kvp.Key;
 				string listName = kvp.Value;
 
-				// TODO does this still work if a list has no tasks?
 				List<ITask> tasks = taskCache[listId];
 
 				var taskListWithTasks = new TaskListWithTasks(listId, listName, tasks);
