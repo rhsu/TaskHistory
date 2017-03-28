@@ -45,11 +45,12 @@ namespace TaskHistory.Impl.Sql
 
 		public int? GetNullableInt(string propertyName)
 		{
-			var obj = GetObjectFromReader(propertyName);
+			/*var obj = GetObjectFromReader(propertyName);
 			if (obj == null)
 				return null;
 			
-			return Convert.ToInt32(obj);
+			return Convert.ToInt32(obj);*/
+			return null;
 		}
 
 		public string GetString(string propertyName)

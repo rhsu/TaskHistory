@@ -23,6 +23,11 @@
       }, function (reason) {});
     }
 
+    TaskListsService.read(function (response) {
+      console.log('in the read!');
+      console.log(response);
+    }, function () {});
+
   });
 
 })();
