@@ -345,7 +345,7 @@ SELECT  h.*
        ,u.LastName
 FROM 
 	`History` AS h
- 	INNER JOIN `User` AS u
+ 	INNER JOIN `Users` AS u
     ON h.UserId = u.UserId
 WHERE
 	h.UserId = `pUserId`
@@ -889,4 +889,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-29 14:49:13
+-- Dump completed on 2017-03-29 14:59:29

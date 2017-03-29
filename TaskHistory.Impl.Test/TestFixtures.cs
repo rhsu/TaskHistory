@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TaskHistory.Api.History;
 using TaskHistory.Api.History.DataTransferObjects;
 using TaskHistory.Api.TaskLists;
@@ -25,6 +26,8 @@ namespace TaskHistory.Impl.Test
 		ITask _task;
 		ITaskList _taskList;
 
+		List<IHistory> _histories;
+
 		public IUser User
 		{
 			get { return _user; }
@@ -38,6 +41,11 @@ namespace TaskHistory.Impl.Test
 		public ITask Task
 		{
 			get { return _task; }
+		}
+
+		public IEnumerable<IHistory> Histories
+		{
+			get { return _histories; }
 		}
 
 		public TestFixtures()
@@ -56,6 +64,8 @@ namespace TaskHistory.Impl.Test
 			_taskListRepo = new TaskListRepo(taskListFactory, _dataProxy);
 			_taskRepo = new TaskRepo(taskFactory, _dataProxy);
 			_historyRepo = new HistoryRepo(historyFactory, _dataProxy);
+
+			_histories = new List<IHistory>();
 
 			CreateUser();
 			CreateTask();
@@ -86,20 +96,22 @@ namespace TaskHistory.Impl.Test
 			_task = _taskRepo.CreateTask(_user.Id, "My First Task");
 
 
-			//var historyDto = new HistoryCreationParams(BusinessAction.Create,
-			//                                           BusinessObject.Task);
+			var historyDto = new HistoryCreationParams(BusinessAction.Create,
+			                                           BusinessObject.Task);
 
-			//_historyRepo.Create(_user.Id, historyDto);
+			var history = _historyRepo.Create(_user.Id, historyDto);
+			_histories.Add(history);
 		}
 
 		void CreateTaskList()
 		{
 			_taskList = _taskListRepo.Create(_user.Id, "My First Task List");
 
-			//var historyDto = new HistoryCreationParams(BusinessAction.Create,
-			//										   BusinessObject.TaskList);
+			var historyDto = new HistoryCreationParams(BusinessAction.Create,
+													   BusinessObject.TaskList);
 
-			//_historyRepo.Create(_user.Id, historyDto);
+			var history =_historyRepo.Create(_user.Id, historyDto);
+			_histories.Add(history);
 		}
 	}
 }

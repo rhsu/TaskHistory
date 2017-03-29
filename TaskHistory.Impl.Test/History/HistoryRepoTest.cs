@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using TaskHistory.Api.History;
 using TaskHistory.Api.History.DataTransferObjects;
@@ -65,6 +67,42 @@ namespace TaskHistory.Impl.Test
 			Assert.AreEqual(expectedDateTime.Month, actualDateTime.Month);
 			Assert.AreEqual(expectedDateTime.Day, actualDateTime.Day);
 			Assert.AreEqual(expectedDateTime.Year, actualDateTime.Year);
+		}
+
+		[Test]
+		public void Read()
+		{
+			var readHistories = _repo.Read(_testFixtures.User.Id).OrderBy(x => x.Id);
+			var createdHistories = _testFixtures.Histories.OrderBy(x => x.Id);
+
+			Assert.AreEqual(readHistories.Count(), createdHistories.Count());
+
+			var readHistoryCache = Dictify(readHistories);			
+			var createdHistoryCache = Dictify(readHistories);
+
+			foreach (var kvp in readHistoryCache)
+			{
+				var expected = createdHistoryCache[kvp.Key];
+				var actual = kvp.Value;
+
+				Assert.AreEqual(expected.Action, actual.Action);
+				Assert.AreEqual(expected.ActionDate, actual.ActionDate);
+				Assert.AreEqual(expected.Id, actual.Id);
+				Assert.AreEqual(expected.Object, actual.Object);
+				Assert.AreEqual(expected.UserId, actual.UserId);
+			}
+		}
+
+		static IDictionary<int, IHistory> Dictify(IEnumerable<IHistory> histories)
+		{
+			var retVal = new Dictionary<int, IHistory>();
+
+			foreach (var history in histories)
+			{
+				retVal.Add(history.Id, history);
+			}
+
+			return retVal;
 		}
 
 		static HistoryCreationParams CreateParams(BusinessAction action,
