@@ -14,18 +14,12 @@ namespace TaskHistory.Impl.History
 			int id = reader.GetInt("historyId");
 			int userId = reader.GetInt("userId");
 
-			// TODO Make a get enum method
-			// so I can do string action = reader.GetEnum<BusinessAction>("businessAction");
-			// string action = reader.GetString("businessAction");
-			// string obj = reader.GetString("businessObject");
-
-			// TODO how?
 			DateTime actionDate = reader.GetDateTime("actionDate");
 
-			BusinessAction tempAction = BusinessAction.Create;
-			BusinessObject tempObject = BusinessObject.Task;
+			BusinessAction businessAction = reader.GetEnum<BusinessAction>("BusinessAction");
+			BusinessObject businessObject = reader.GetEnum<BusinessObject>("BusinessObject");
 
-			var retVal = new History(id, tempAction, tempObject, actionDate, userId);
+			var retVal = new History(id, businessAction, businessObject, actionDate, userId);
 			return retVal;
 		}
 	}
