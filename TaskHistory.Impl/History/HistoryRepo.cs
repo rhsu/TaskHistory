@@ -9,8 +9,8 @@ namespace TaskHistory.Impl.History
 {
 	public class HistoryRepo : IHistoryRepo
 	{
-		const string ReadStoredProcedure = "";
 		const string CreateStoredProcedure = "";
+		const string ReadStoredProcedure = "";
 
 		HistoryFactory _factory;
 		ApplicationDataProxy _dataProxy;
@@ -19,6 +19,24 @@ namespace TaskHistory.Impl.History
 		{
 			_factory = factory;
 			_dataProxy = dataProxy;
+		}
+
+		public IHistory Create(int userId, HistoryCreationParams historyDto)
+		{
+			if (historyDto == null)
+				throw new ArgumentNullException(nameof(historyDto));
+
+			var parameters = BuildParameters(userId, historyDto);
+			if (parameters == null)
+				throw new NullReferenceException("null returned from Repo");
+
+			var retVal = _dataProxy.ExecuteReader(_factory,
+												  CreateStoredProcedure,
+												  parameters);
+			if (retVal == null)
+				throw new NullReferenceException("null returned from DataProxy");
+
+			return retVal;
 		}
 
 		public IEnumerable<IHistory> Read(int userId)
@@ -34,31 +52,12 @@ namespace TaskHistory.Impl.History
 			return retVal;
 		}
 
-		public IHistory Create(int userId, HistoryCreationParams historyDto)
-		{
-			if (historyDto == null)
-				throw new ArgumentNullException(nameof(historyDto));
-
-			var parameters = BuildParameters(userId, historyDto);
-			if (parameters == null)
-				throw new NullReferenceException("null returned from Repo");
-
-			var retVal = _dataProxy.ExecuteReader(_factory, 
-			                                      CreateStoredProcedure,
-			                                      parameters);
-			if (retVal == null)
-				throw new NullReferenceException("null returned from DataProxy");
-
-			return retVal;
-		}
-
 		List<ISqlDataParameter> BuildParameters(int userId, HistoryCreationParams dto)
 		{
 			if (dto == null)
 				throw new ArgumentNullException(nameof(dto));
 
 			var retVal = new List<ISqlDataParameter>();
-
 
 			retVal.Add(_dataProxy.CreateParameter("pAction", dto.Action));
 			retVal.Add(_dataProxy.CreateParameter("pObject", dto.Object));

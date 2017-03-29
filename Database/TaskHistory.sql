@@ -39,8 +39,8 @@ DROP TABLE IF EXISTS `History`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `History` (
   `HistoryId` int(11) NOT NULL AUTO_INCREMENT,
-  `ActionDate` date NOT NULL,
-  `ActionDone` varchar(64) NOT NULL,
+  `ActionDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `BusinessAction` varchar(64) NOT NULL,
   `BusinessObject` varchar(64) NOT NULL,
   `UserId` int(11) NOT NULL,
   PRIMARY KEY (`HistoryId`),
@@ -294,9 +294,9 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
@@ -304,16 +304,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `History_Create`(IN `pActionDate` DA
     NO SQL
 INSERT INTO `History`
 (
-     `ActionDate`
-    ,`ActionDone`
+     `BusinessAction`
     ,`BusinessObject`
     ,`UserId`
 )
 VALUES
 (
-     `pActionDate`
-    ,`pActionDone`
-    ,`pBusinessObj`
+     `pAction`
+    ,`pObject`
     ,`pUserId`
 ) ;;
 DELIMITER ;
@@ -325,23 +323,19 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `History_Select`(IN `pUserId` INT)
     NO SQL
-SELECT h.*,
-	   u.id,
-	   u.firstName,
-       u.lastName,
-       u.userName
+SELECT h.*
 FROM 
 	`History` AS h
- 	INNER JOIN `User` AS u
-    ON h.UserId = u.UserId
+ 	INNER JOIN `User` AS U
+    ON h.UserId = User.UserId
 WHERE
 	h.UserId = `pUserId` ;;
 DELIMITER ;
@@ -882,4 +876,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-27 17:53:42
+-- Dump completed on 2017-03-29 13:57:21
