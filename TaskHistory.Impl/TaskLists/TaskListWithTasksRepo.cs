@@ -55,7 +55,11 @@ namespace TaskHistory.Impl.TaskLists
 				{
 					taskCache[listId] = new List<ITask>();
 				}
-				taskCache[listId].Add(task);
+
+				if (task != null)
+				{
+					taskCache[listId].Add(task);
+				}
 			}
 
 			foreach (var kvp in listNameCache)

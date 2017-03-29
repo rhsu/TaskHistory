@@ -50,7 +50,7 @@ namespace TaskHistory.Orchestrator.Home
 			if (user == null)
 				throw new NullReferenceException("null user returned from admin user provider when registering default user");
 
-			// TODO should havea  UserViewModel instead of returning the entire IUser object
+			// TODO should have a UserViewModel instead of returning the entire IUser object
 
 			return user;
 		}

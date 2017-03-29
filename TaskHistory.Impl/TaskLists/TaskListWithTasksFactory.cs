@@ -17,7 +17,7 @@ namespace TaskHistory.Impl.TaskLists
 			int listId = reader.GetInt("ListId");
 
 			// Query Result Object
-			int? taskId = reader.GetInt("TaskId");
+			int? taskId = reader.GetNullableInt("TaskId");
 			string listName = reader.GetString("ListName");
 
 			// TODO how do I use DI here?

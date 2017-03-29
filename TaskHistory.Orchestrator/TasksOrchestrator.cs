@@ -12,24 +12,8 @@ namespace TaskHistory.Orchestrator.Tasks
 		readonly ITaskRepo _repo;
 		readonly ObjectMapperTasks _objectMapper;
 
-		public IEnumerable<TaskTableViewModel> Retrieve(IUser user)
-		{
-			if (user == null)
-				throw new ArgumentNullException(nameof(user));
-
-			IEnumerable<ITask> tasks = _repo.ReadAll(user.Id);
-			if (tasks == null)
-				throw new NullReferenceException($"null returned from TaskViewRepo when reading {user.Id}");
-
-			IEnumerable<TaskTableViewModel> viewModel = _objectMapper.Map(tasks);
-			if (viewModel == null)
-				throw new NullReferenceException("Null returned from task presenter");
-
-			return viewModel;
-		}
-
 		public TaskTableViewModel Create(IUser user, string content)
-    	{
+		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
@@ -38,11 +22,11 @@ namespace TaskHistory.Orchestrator.Tasks
 
 			ITask task = _repo.CreateTask(user.Id, content);
 			if (task == null)
-				throw new NullReferenceException("Null returned from task repo");
+				throw new NullReferenceException("null returned from Repo");
 
 			TaskTableViewModel viewModel = _objectMapper.Map(task);
 			if (viewModel == null)
-				throw new NullReferenceException("Null returned from task presenter");
+				throw new NullReferenceException("null returned from ObjectMapper");
 
 			return viewModel;
 		}
@@ -68,10 +52,25 @@ namespace TaskHistory.Orchestrator.Tasks
 			return viewModel;
 		}
 
+		public IEnumerable<TaskTableViewModel> Read(IUser user)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
 
-		public TaskTableViewModel Edit(IUser user, 
-		                              int taskId, 
-		                              TaskEditViewModel viewModel)
+			IEnumerable<ITask> tasks = _repo.ReadAll(user.Id);
+			if (tasks == null)
+				throw new NullReferenceException("null returned from Repo");
+
+			IEnumerable<TaskTableViewModel> viewModel = _objectMapper.Map(tasks);
+			if (viewModel == null)
+				throw new NullReferenceException("null returned from ObjectMapper");
+
+			return viewModel;
+		}
+
+		public TaskTableViewModel Update(IUser user, 
+		                              	 int taskId, 
+		                              	 TaskEditViewModel viewModel)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
@@ -81,15 +80,15 @@ namespace TaskHistory.Orchestrator.Tasks
 
 			TaskUpdatingParameters updateParams = _objectMapper.Map(viewModel);
 			if (updateParams == null)
-				throw new NullReferenceException("null returned from TaskObjectMapper");
+				throw new NullReferenceException("null returned from ObjectMapper");
 
 			ITask task = _repo.UpdateTask(user.Id, updateParams, taskId);
 			if (task == null)
-				throw new NullReferenceException("null returned from TaskRepo");
+				throw new NullReferenceException("null returned from Repo");
 
 			TaskTableViewModel retVal = _objectMapper.Map(task);
 			if (retVal == null)
-				throw new NullReferenceException("null returned from TaskObjectMapper");
+				throw new NullReferenceException("null returned from ObjectMapper");
 
 			return retVal;
 		}
