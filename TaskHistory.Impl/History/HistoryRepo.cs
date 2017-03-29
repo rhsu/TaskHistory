@@ -9,8 +9,8 @@ namespace TaskHistory.Impl.History
 {
 	public class HistoryRepo : IHistoryRepo
 	{
-		const string CreateStoredProcedure = "";
-		const string ReadStoredProcedure = "";
+		const string CreateStoredProcedure = "History_Create";
+		const string ReadStoredProcedure = "History_Select";
 
 		HistoryFactory _factory;
 		ApplicationDataProxy _dataProxy;

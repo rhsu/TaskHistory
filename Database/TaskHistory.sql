@@ -300,20 +300,28 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `History_Create`(IN `pActionDate` DATETIME, IN `pActionDone` VARCHAR(64), IN `pBusinessObj` VARCHAR(64), IN `pUserId` INT)
-    NO SQL
-INSERT INTO `History`
-(
-     `BusinessAction`
-    ,`BusinessObject`
-    ,`UserId`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `History_Create`(
+    IN `pAction` VARCHAR(64), 
+    IN `pObject` VARCHAR(64), 
+    IN `pUserId` INT
 )
-VALUES
-(
-     `pAction`
-    ,`pObject`
-    ,`pUserId`
-) ;;
+BEGIN
+	INSERT INTO `History`
+	(
+		 `BusinessAction`
+		,`BusinessObject`
+		,`UserId`
+	)
+	VALUES
+	(
+		 `pAction`
+		,`pObject`
+		,`pUserId`
+	);
+
+	SELECT * FROM `History`
+	WHERE `HistoryId` = last_insert_id();
+END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -876,4 +884,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-29 13:57:21
+-- Dump completed on 2017-03-29 14:29:46
