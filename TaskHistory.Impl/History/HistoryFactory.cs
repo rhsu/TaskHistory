@@ -20,9 +20,7 @@ namespace TaskHistory.Impl.History
 			// string obj = reader.GetString("businessObject");
 
 			// TODO how?
-			// DateTime actionDate = reader.GetDateTime("actionDate");
-
-			DateTime actionDate = DateTime.Now;
+			DateTime actionDate = reader.GetDateTime("actionDate");
 
 			BusinessAction tempAction = BusinessAction.Create;
 			BusinessObject tempObject = BusinessObject.Task;
