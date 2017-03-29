@@ -47,6 +47,26 @@ namespace TaskHistory.Impl.Test
 			Assert.AreEqual(expectedDateTime.Year, actualDateTime.Year);
 		}
 
+		[Test]
+		public void Create_SomethingElse()
+		{
+			var parameters = CreateParams(BusinessAction.Read,
+										  BusinessObject.TaskList);
+
+			var history = _repo.Create(_testFixtures.User.Id, parameters);
+
+			Assert.AreEqual(BusinessAction.Read, history.Action);
+			Assert.AreEqual(BusinessObject.TaskList, history.Object);
+			Assert.AreEqual(_testFixtures.User.Id, history.UserId);
+
+			DateTime expectedDateTime = DateTime.UtcNow;
+			DateTime actualDateTime = history.ActionDate;
+
+			Assert.AreEqual(expectedDateTime.Month, actualDateTime.Month);
+			Assert.AreEqual(expectedDateTime.Day, actualDateTime.Day);
+			Assert.AreEqual(expectedDateTime.Year, actualDateTime.Year);
+		}
+
 		static HistoryCreationParams CreateParams(BusinessAction action,
 		                                          BusinessObject obj)
 		{
