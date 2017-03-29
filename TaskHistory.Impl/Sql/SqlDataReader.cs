@@ -64,6 +64,12 @@ namespace TaskHistory.Impl.Sql
 			return Convert.ToBoolean (obj);
 		}
 
+		public T GetEnum<T>(string propertyName)
+		{
+			var str = GetString(propertyName);
+			return (T) Enum.Parse(typeof(T), str);
+		}
+
 		public SqlDataReader (MySqlDataReader reader)
 		{
 			_reader = reader;
