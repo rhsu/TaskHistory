@@ -45,6 +45,12 @@ namespace TaskHistory.Impl.Sql
 			return Convert.ToBoolean (obj);
 		}
 
+		public T GetEnum<T>(string propertyName)
+		{
+			var str = GetString(propertyName);
+			return (T) Enum.Parse(typeof(T), str);
+		}
+
 		public DateTime GetDateTime(string propertyName)
 		{
 			var obj = GetObjectFromReader(propertyName);
