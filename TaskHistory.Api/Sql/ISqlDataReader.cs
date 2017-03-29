@@ -1,4 +1,6 @@
-﻿namespace TaskHistory.Api.Sql
+﻿using System;
+
+namespace TaskHistory.Api.Sql
 {
 	public interface ISqlDataReader
 	{
@@ -12,6 +14,6 @@
 
 		bool GetBool(string propertyName);
 
-		bool NextResult();
+		DateTime GetDateTime(string propertyName);
 	}
 }
