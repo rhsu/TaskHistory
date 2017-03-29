@@ -45,7 +45,8 @@ CREATE TABLE `History` (
   `UserId` int(11) NOT NULL,
   PRIMARY KEY (`HistoryId`),
   KEY `UserId` (`UserId`),
-  KEY `UserId_2` (`UserId`)
+  KEY `UserId_2` (`UserId`),
+  CONSTRAINT `fk_History_1` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -331,21 +332,25 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `History_Select`(IN `pUserId` INT)
     NO SQL
-SELECT h.*
+SELECT  h.*
+	   ,u.FirstName
+       ,u.LastName
 FROM 
 	`History` AS h
- 	INNER JOIN `User` AS U
-    ON h.UserId = User.UserId
+ 	INNER JOIN `User` AS u
+    ON h.UserId = u.UserId
 WHERE
-	h.UserId = `pUserId` ;;
+	h.UserId = `pUserId`
+ORDER BY
+	h.actionDate ASC ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -884,4 +889,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-29 14:29:46
+-- Dump completed on 2017-03-29 14:47:27
