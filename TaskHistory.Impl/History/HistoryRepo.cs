@@ -12,35 +12,47 @@ namespace TaskHistory.Impl.History
 		const string ReadStoredProcedure = "";
 		const string CreateStoredProcedure = "";
 
-		ApplicationDataProxy _dataProxy;
 		HistoryFactory _factory;
+		ApplicationDataProxy _dataProxy;
 
-		public HistoryRepo(ApplicationDataProxy dataProxy, HistoryFactory factory)
+		public HistoryRepo(HistoryFactory factory, ApplicationDataProxy dataProxy)
 		{
-			_dataProxy = dataProxy;
 			_factory = factory;
+			_dataProxy = dataProxy;
 		}
 
 		public IEnumerable<IHistory> Read(int userId)
 		{
 			var param = _dataProxy.CreateParameter("pUserId", userId);
 
-			var retVal = _dataProxy.ExecuteOnCollection(_factory, CreateStoredProcedure);
+			var retVal = _dataProxy.ExecuteOnCollection(_factory, 
+			                                            ReadStoredProcedure, 
+			                                            param);
 			if (retVal == null)
 				throw new NullReferenceException("Null returned from DataProxy");
 
 			return retVal;
 		}
 
-		public IHistory Create(HistoryCreationParams historyDto)
+		public IHistory Create(int userId, HistoryCreationParams historyDto)
 		{
 			if (historyDto == null)
 				throw new ArgumentNullException(nameof(historyDto));
 
-			throw new NotImplementedException();
+			var parameters = BuildParameters(userId, historyDto);
+			if (parameters == null)
+				throw new NullReferenceException("null returned from Repo");
+
+			var retVal = _dataProxy.ExecuteReader(_factory, 
+			                                      CreateStoredProcedure,
+			                                      parameters);
+			if (retVal == null)
+				throw new NullReferenceException("null returned from DataProxy");
+
+			return retVal;
 		}
 
-		List<ISqlDataParameter> ConvertParams(HistoryCreationParams dto)
+		List<ISqlDataParameter> BuildParameters(int userId, HistoryCreationParams dto)
 		{
 			if (dto == null)
 				throw new ArgumentNullException(nameof(dto));
@@ -50,6 +62,7 @@ namespace TaskHistory.Impl.History
 
 			retVal.Add(_dataProxy.CreateParameter("pAction", dto.Action));
 			retVal.Add(_dataProxy.CreateParameter("pObject", dto.Object));
+			retVal.Add(_dataProxy.CreateParameter("pUserId", userId));
 
 			return retVal;
 		}

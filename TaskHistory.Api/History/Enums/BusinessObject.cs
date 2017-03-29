@@ -2,6 +2,7 @@
 {
 	public enum BusinessObject
 	{
-		Task
+		Task,
+		TaskList
 	}
 }
