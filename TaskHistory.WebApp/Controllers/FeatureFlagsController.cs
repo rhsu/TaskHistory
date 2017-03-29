@@ -31,7 +31,7 @@ namespace TaskHistory.WebApp.Controllers
 		[HttpPost]
 		public ActionResult Get()
 		{
-			return Json(_orchestrator.GetFlags());
+			return Json(_orchestrator.Read());
 		}
 
 		[HttpPost]

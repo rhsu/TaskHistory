@@ -18,7 +18,7 @@ namespace TaskHistory.WebApp.Controllers
 		[HttpPost]
 		public JsonResult Retrieve()
 		{
-			return Json(_taskOrchestrator.Retrieve(_currentUser));
+			return Json(_taskOrchestrator.Read(_currentUser));
 		}
 
 		[HttpPost]
@@ -30,7 +30,7 @@ namespace TaskHistory.WebApp.Controllers
 		[HttpPost]
 		public JsonResult Edit(TaskEditViewModel viewModel, int taskId)
 		{
-			return Json(_taskOrchestrator.Edit(_currentUser,
+			return Json(_taskOrchestrator.Update(_currentUser,
 			                                   taskId,
 			                                   viewModel));
 		}
