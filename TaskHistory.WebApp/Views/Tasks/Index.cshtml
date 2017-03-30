@@ -22,7 +22,8 @@
 				<ul>
 					<li ng-repeat='list in pageData.taskListWithTasks'>
 						<label>{{ list.listName }}</label>
-						<div ng-hide="list.tasks.length">list contains no tasks.</div>
+						<div class='well'
+								 ng-hide="list.tasks.length">list contains no tasks.</div>
 					</li>
 				</ul>
 				<!--ul>
