@@ -4,6 +4,7 @@
 
   app.controller('TaskListsController', function ($scope,
     TaskListsService,
+    TaskListWithTasksFactory,
     $rootScope) {
 
     const listFeature = $rootScope.appData.flags.find(function(elem) {
@@ -17,16 +18,29 @@
 
     $scope.pageFns = {};
 
+    var refreshTaskLists = function () {
+      TaskListsService.read().then(function (response) {
+        const data = response.data;
+        if (data) {
+          const taskListsWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
+          $scope.pageData.taskListWithTasks = taskListsWithTasks
+        }
+      }, function () {});
+    }
+
     $scope.pageFns.createTaskList = function () {
-      TaskListsService.create($scope.formData.name).then(function (data) {
-        console.log(data);
+      TaskListsService.create($scope.formData.name).then(function (response) {
+        if (response.data) {
+          refreshTaskLists();
+          $scope.formData.name = '';
+        }
       }, function (reason) {});
     }
 
-    TaskListsService.read().then(function (response) {
-      console.log(response.data);
-    }, function () {});
+    $scope.pageData = {};
+    $scope.pageData.taskListWithTasks = [];
 
+    refreshTaskLists();
   });
 
 })();
