@@ -37,6 +37,10 @@
       }, function (reason) {});
     }
 
+    $scope.pageFns.createTaskOnList = function (listId, taskContent) {
+      
+    }
+
     $scope.pageData = {};
     $scope.pageData.taskListWithTasks = [];
 

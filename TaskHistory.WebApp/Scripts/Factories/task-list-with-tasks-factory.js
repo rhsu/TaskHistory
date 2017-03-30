@@ -5,6 +5,16 @@
     this.listId = listId;
     this.listName = listName;
     this.tasks = tasks;
+
+    // state variables
+    this.showTasks = true;
+  }
+
+  /**
+  Hides or shows the tasks for the list instance
+  */
+  TaskListWithTasks.prototype.tasksVisible = function (bool) {
+    this.showTasks = bool;
   }
 
   app.factory('TaskListWithTasksFactory', function (TaskTableViewFactory) {

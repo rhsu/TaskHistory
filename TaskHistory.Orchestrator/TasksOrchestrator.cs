@@ -31,8 +31,6 @@ namespace TaskHistory.Orchestrator.Tasks
 			return viewModel;
 		}
 
-		// TODO should this be using TaskTableViewModel or a different viewModel?
-		//		coincidentally, this will work ok. but not sure if sustainable
 		public TaskTableViewModel CreateOnList(IUser user, int listId, string content)
 		{
 			if (user == null)
