@@ -25,7 +25,6 @@
     }
 
     TaskListsService.read().then(function (response) {
-      //console.log(response.data);
       const data = response.data;
       if (data) {
         const test = TaskListWithTasksFactory.buildFromJsonCollection(data);
