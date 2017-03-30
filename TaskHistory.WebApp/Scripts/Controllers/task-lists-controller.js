@@ -27,8 +27,8 @@
     TaskListsService.read().then(function (response) {
       const data = response.data;
       if (data) {
-        const test = TaskListWithTasksFactory.buildFromJsonCollection(data);
-        console.log(test);
+        const taskListsWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
+        console.log(taskListsWithTasks);
       }
     }, function () {});
 
