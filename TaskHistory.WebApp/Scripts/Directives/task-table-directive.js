@@ -1,9 +1,9 @@
 (function () {
   const app = angular.module('app');
 
-  app.directive('testDirective', function (TaskService,
+  app.directive('taskTable', function (TaskService,
     TaskTableViewFactory) {
-      
+
     return {
       restrict: 'E',
       templateUrl: 'Content/task-table-template.html',
