@@ -91,7 +91,6 @@
     <Folder Include="Scripts\Services\" />
     <Folder Include="Scripts\Controllers\" />
     <Folder Include="Views\Tasks\" />
-    <Folder Include="Scripts\Models\" />
     <Folder Include="Views\FeatureFlags\" />
     <Folder Include="Views\Admin\" />
   </ItemGroup>
@@ -151,6 +150,8 @@
     <Content Include="Scripts\Controllers\default-user-controller.js" />
     <Content Include="Scripts\Services\default-user-service.js" />
     <Content Include="Scripts\Factories\task-list-with-tasks-factory.js" />
+    <Content Include="Scripts\Directives\task-table-directive.js" />
+    <Content Include="Content\task-table-template.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
