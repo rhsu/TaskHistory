@@ -4,7 +4,8 @@
   app.directive('testDirective', function () {
     return {
       restrict: 'E',
-      template: '<div>Hello World</div>'
+      //template: '<div>Hello World</div>'
+      templateUrl: 'Content/task-table-template.html'
     }
   });
 })();
