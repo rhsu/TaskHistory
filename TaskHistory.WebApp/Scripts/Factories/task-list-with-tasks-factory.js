@@ -1,7 +1,5 @@
 (function () {
-  var app = angular.module('app');
-
-  console.log('bundled!');
+  const app = angular.module('app');
 
   function TaskListWithTasks(listId, listName, tasks) {
     this.listId = listId;
