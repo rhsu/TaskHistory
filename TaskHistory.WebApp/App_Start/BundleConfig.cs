@@ -12,6 +12,7 @@ namespace TaskHistory.WebApp
 
 			bundles.Add(new ScriptBundle("~/bundles/App")
 			            .Include("~/Scripts/app.js")
+			            .IncludeDirectory("~/Scripts/Directives", "*.js")
 			            .IncludeDirectory("~/Scripts/Services", "*.js")
 			            .IncludeDirectory("~/Scripts/Factories", "*.js")
 			            .IncludeDirectory("~/Scripts/Controllers", "*.js"));
