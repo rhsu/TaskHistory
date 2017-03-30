@@ -44,4 +44,10 @@ There are a couple of utility shell scripts written to facilitate developing the
 - `Database/SaveDatabase.sh`: dumps the current schema into `TaskHistory.sql`. To save time, this will also load the test database.
 - `Database/LoadDatabase.sh`: loads the current schema `TaskHistory.sql` into TaskHistory database
 - `Database/TestDatabaseLoad.sh`: same as `LoadDatabase.sh` but for the Test database
-- `Scripts/kill8080.sh`: kills the port 8080. This usually occurs when monodevelop crashes for whatever reason but doesn't free up the port 8080. 
+- `Scripts/kill8080.sh`: kills the port 8080. This usually occurs when monodevelop crashes for whatever reason but doesn't free up the port 8080.
+
+Admin Tool
+----------
+See `AdminUserProvider.cs` for login credentials or for changing the login credentials. By default, these are username: `admin` and password `password`.
+
+Currently the admin tool allows setting feature flags (which may enable hidden secret features) or create a default user. See `DefaultUserProvider.cs` for the default user login credentials. By default, this is username: `robert` and password `password`.
