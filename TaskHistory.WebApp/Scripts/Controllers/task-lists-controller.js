@@ -18,20 +18,37 @@
 
     $scope.pageFns = {};
 
+    var refreshTaskLists = function () {
+      TaskListsService.read().then(function (response) {
+        const data = response.data;
+        if (data) {
+          const taskListsWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
+          $scope.pageData.taskListWithTasks = taskListsWithTasks
+        }
+      }, function () {});
+    }
+
     $scope.pageFns.createTaskList = function () {
-      TaskListsService.create($scope.formData.name).then(function (data) {
-        console.log(data);
+      TaskListsService.create($scope.formData.name).then(function (response) {
+        if (response.data) {
+          refreshTaskLists();
+          $scope.formData.name = '';
+        }
       }, function (reason) {});
     }
 
-    TaskListsService.read().then(function (response) {
+    $scope.pageData = {};
+    $scope.pageData.taskListWithTasks = [];
+
+    /*TaskListsService.read().then(function (response) {
       const data = response.data;
       if (data) {
         const taskListsWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
-        console.log(taskListsWithTasks);
+        $scope.pageData.taskListWithTasks = taskListsWithTasks
       }
-    }, function () {});
+    }, function () {});*/
 
+    refreshTaskLists();
   });
 
 })();
