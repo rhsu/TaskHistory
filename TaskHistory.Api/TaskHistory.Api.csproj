@@ -64,6 +64,11 @@
     <Compile Include="Users\IDefaultUserProvider.cs" />
     <Compile Include="Tasks\ITaskWithLabels.cs" />
     <Compile Include="Tasks\ITaskWithLabelsRepo.cs" />
+    <Compile Include="History\IHistory.cs" />
+    <Compile Include="History\Enums\BusinessObject.cs" />
+    <Compile Include="History\Enums\BusinessAction.cs" />
+    <Compile Include="History\IHistoryRepo.cs" />
+    <Compile Include="History\DataTransferObjects\HistoryCreationParams.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -78,5 +83,8 @@
     <Folder Include="Terminal\enumerations\" />
     <Folder Include="TaskLists\" />
     <Folder Include="FeatureFlags\" />
+    <Folder Include="History\" />
+    <Folder Include="History\Enums\" />
+    <Folder Include="History\DataTransferObjects\" />
   </ItemGroup>
 </Project>

@@ -39,13 +39,14 @@ DROP TABLE IF EXISTS `History`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `History` (
   `HistoryId` int(11) NOT NULL AUTO_INCREMENT,
-  `ActionDate` date NOT NULL,
-  `ActionDone` varchar(64) NOT NULL,
+  `ActionDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `BusinessAction` varchar(64) NOT NULL,
   `BusinessObject` varchar(64) NOT NULL,
   `UserId` int(11) NOT NULL,
   PRIMARY KEY (`HistoryId`),
   KEY `UserId` (`UserId`),
-  KEY `UserId_2` (`UserId`)
+  KEY `UserId_2` (`UserId`),
+  CONSTRAINT `fk_History_1` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -294,28 +295,34 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `History_Create`(IN `pActionDate` DATETIME, IN `pActionDone` VARCHAR(64), IN `pBusinessObj` VARCHAR(64), IN `pUserId` INT)
-    NO SQL
-INSERT INTO `History`
-(
-     `ActionDate`
-    ,`ActionDone`
-    ,`BusinessObject`
-    ,`UserId`
+CREATE DEFINER=`root`@`localhost` PROCEDURE `History_Create`(
+    IN `pAction` VARCHAR(64), 
+    IN `pObject` VARCHAR(64), 
+    IN `pUserId` INT
 )
-VALUES
-(
-     `pActionDate`
-    ,`pActionDone`
-    ,`pBusinessObj`
-    ,`pUserId`
-) ;;
+BEGIN
+	INSERT INTO `History`
+	(
+		 `BusinessAction`
+		,`BusinessObject`
+		,`UserId`
+	)
+	VALUES
+	(
+		 `pAction`
+		,`pObject`
+		,`pUserId`
+	);
+
+	SELECT * FROM `History`
+	WHERE `HistoryId` = last_insert_id();
+END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -325,21 +332,25 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `History_Select`(IN `pUserId` INT)
     NO SQL
-SELECT h.*
+SELECT  h.*
+	   ,u.FirstName
+       ,u.LastName
 FROM 
 	`History` AS h
- 	INNER JOIN `User` AS U
-    ON h.UserId = User.UserId
+ 	INNER JOIN `Users` AS u
+    ON h.UserId = u.UserId
 WHERE
-	h.UserId = `pUserId` ;;
+	h.UserId = `pUserId`
+ORDER BY
+	h.actionDate DESC ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -856,11 +867,11 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `_Data_Reset`()
 BEGIN
-	# All Foreign Keys should be set as CASCADE
-    # so this will delete all user data
+	
+    
 	DELETE FROM Users;
     
-    # Delete all non-specific user data
+    
     DELETE FROM FeatureFlags;
 END ;;
 DELIMITER ;
@@ -878,4 +889,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-27 14:40:50
+-- Dump completed on 2017-03-29 14:59:29

@@ -15,5 +15,7 @@ namespace TaskHistory.Api.Sql
 		bool GetBool(string propertyName);
 
 		DateTime GetDateTime(string propertyName);
+
+		T GetEnum<T>(string propertyName);
 	}
 }

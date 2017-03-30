@@ -45,6 +45,7 @@
     <Compile Include="TaskLists\TaskListWithTasksRepoTest.cs" />
     <Compile Include="Users\AdminUserProviderTest.cs" />
     <Compile Include="Users\DefaultUserProviderTest.cs" />
+    <Compile Include="History\HistoryRepoTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -68,5 +69,6 @@
     <Folder Include="TaskLists\" />
     <Folder Include="Tasks\" />
     <Folder Include="FeatureFlags\" />
+    <Folder Include="History\" />
   </ItemGroup>
 </Project>
