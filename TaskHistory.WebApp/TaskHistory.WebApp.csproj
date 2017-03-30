@@ -150,6 +150,7 @@
     <Content Include="Scripts\Controllers\admin-login-controller.js" />
     <Content Include="Scripts\Controllers\default-user-controller.js" />
     <Content Include="Scripts\Services\default-user-service.js" />
+    <Content Include="Scripts\Factories\task-list-with-tasks-factory.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">

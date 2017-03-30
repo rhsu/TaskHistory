@@ -4,6 +4,7 @@
 
   app.controller('TaskListsController', function ($scope,
     TaskListsService,
+    TaskListWithTasksFactory,
     $rootScope) {
 
     const listFeature = $rootScope.appData.flags.find(function(elem) {
@@ -24,7 +25,12 @@
     }
 
     TaskListsService.read().then(function (response) {
-      console.log(response.data);
+      //console.log(response.data);
+      const data = response.data;
+      if (data) {
+        const test = TaskListWithTasksFactory.buildFromJsonCollection(data);
+        console.log(test);
+      }
     }, function () {});
 
   });
