@@ -20,13 +20,21 @@
 		<div class='container app-content'>
 				<ul>
 					<li ng-repeat='list in pageData.taskListWithTasks'>
+
+						<span class='btn-group'>
+							<button class='btn btn-xs btn-default'>
+								<span class='glyphicon glyphicon-minus'></span>
+							</button>
+							<button class='btn btn-xs btn-success'>
+								<span class='glyphicon glyphicon-plus'></span>
+							</button>
+							<button class='btn btn-xs btn-danger'>
+								<span class='glyphicon glyphicon-trash'></span>
+							</button>
+						</span>
+
 						<label>{{ list.listName }}</label>
-						<button class='btn btn-xs btn-success' style='margin: 1px;'>
-							<span class='glyphicon glyphicon-plus'></span>
-						</button>
-						<button class='btn btn-xs btn-danger' style='margin: 1px'>
-							<span class='glyphicon glyphicon-trash'></span>
-						</button>
+
 						<div class='well'
 								 ng-hide="list.tasks.length">list contains no tasks.</div>
 						<task-table tasks='list.tasks'></task-table>
