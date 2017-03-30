@@ -40,14 +40,6 @@
     $scope.pageData = {};
     $scope.pageData.taskListWithTasks = [];
 
-    /*TaskListsService.read().then(function (response) {
-      const data = response.data;
-      if (data) {
-        const taskListsWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
-        $scope.pageData.taskListWithTasks = taskListsWithTasks
-      }
-    }, function () {});*/
-
     refreshTaskLists();
   });
 
