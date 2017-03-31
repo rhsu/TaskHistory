@@ -25,7 +25,9 @@
 							<button class='btn btn-xs btn-default'>
 								<span class='glyphicon glyphicon-minus'></span>
 							</button>
-							<button class='btn btn-xs btn-success'>
+							<button class='btn btn-xs btn-success'
+											ng-hide='list.showAddTaskForm'
+											ng-click='list.displayAddTaskForm();'>
 								<span class='glyphicon glyphicon-plus'></span>
 							</button>
 							<button class='btn btn-xs btn-danger'>
@@ -34,6 +36,19 @@
 						</span>
 
 						<label>{{ list.listName }}</label>
+
+						<form class='form-inline' style='margin-bottom: 15px;'
+									ng-show='list.showAddTaskForm'>
+							<div class='form-group'>
+								<label>New Task For <span style='color: #2aabd2;'>{{ list.listName }}</span>:</label>
+								<input class='form-control input-sm'
+											 type='text'
+											 required='true' >
+								<button class='btn btn-sm btn-success'>
+									<span class='glyphicon glyphicon-plus'></span>
+								</button>
+							</div>
+						</form>
 
 						<div class='well'
 								 ng-hide="list.tasks.length">list contains no tasks.</div>
