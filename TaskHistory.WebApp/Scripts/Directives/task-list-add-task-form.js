@@ -16,20 +16,20 @@
         listName: '='
       },
       link: function ($scope, elem, attr, ctrl) {
-        $scope.directiveFns = {};
 
+        var refreshTaskLists = function () {
+          TaskListsService.read().then(function (response) {
+            const data = response.data;
+            if (data) {
+              const taskListsWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
+              $scope.pageData.taskListWithTasks = taskListsWithTasks
+            }
+          }, function () {});
+        }
+
+        $scope.directiveFns = {};
         $scope.directiveFns.createTaskOnList = function ($scope.listId,
           $scope.taskContent) {
-
-            var refreshTaskLists = function () {
-              TaskListsService.read().then(function (response) {
-                const data = response.data;
-                if (data) {
-                  const taskListsWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
-                  $scope.pageData.taskListWithTasks = taskListsWithTasks
-                }
-              }, function () {});
-            }
 
             TaskService.createTaskOnList($scope.listId, $scope.taskContent)
               .then(function (response) {
