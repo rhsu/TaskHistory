@@ -9,9 +9,7 @@
       restrict: 'E',
       templateUrl: 'Content/task-list-add-task-form.html',
       scope: {
-        taskContent: '=',
-        listId: '=',
-        listName: '='
+        list: '='
       },
       link: function ($scope, elem, attr, ctrl) {
 
@@ -26,17 +24,16 @@
         }
 
         $scope.directiveFns = {};
-        $scope.directiveFns.createTaskOnList = function ($scope.listId,
-          $scope.taskContent) {
+        $scope.directiveFns.createTaskOnList = function () {
 
-            TaskService.createTaskOnList($scope.listId, $scope.taskContent)
-              .then(function (response) {
+          TaskService.createTaskOnList($scope.list.listId,
+            $scope.list.taskFormName).then(function (response) {
 
-                if (response.data) {
-                  refreshTaskLists();
-                }
+              if (response.data) {
+                refreshTaskLists();
+              }
 
-              }, function () {});
+          }, function () {});
 
         }
       }
