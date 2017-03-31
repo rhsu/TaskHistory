@@ -28,6 +28,14 @@ namespace TaskHistory.WebApp.Controllers
 		}
 
 		[HttpPost]
+		public JsonResult CreateTaskOnList(int listId, string taskContent)
+		{
+			return Json(_taskOrchestrator.CreateOnList(_currentUser,
+													   listId,
+			                                           taskContent));
+		}
+
+		[HttpPost]
 		public JsonResult Edit(TaskEditViewModel viewModel, int taskId)
 		{
 			return Json(_taskOrchestrator.Update(_currentUser,

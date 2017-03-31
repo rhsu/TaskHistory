@@ -16,85 +16,28 @@
 		</form>
 
 		<!-- Rendering Tasks with Lists Here-->
-		<!-- TODO refactor to directive -->
 		<div>{{ pageData.taskListWithTasks }}</div>
 		<div class='container app-content'>
 				<ul>
 					<li ng-repeat='list in pageData.taskListWithTasks'>
+
+						<span class='btn-group'>
+							<button class='btn btn-xs btn-default'>
+								<span class='glyphicon glyphicon-minus'></span>
+							</button>
+							<button class='btn btn-xs btn-success'>
+								<span class='glyphicon glyphicon-plus'></span>
+							</button>
+							<button class='btn btn-xs btn-danger'>
+								<span class='glyphicon glyphicon-trash'></span>
+							</button>
+						</span>
+
 						<label>{{ list.listName }}</label>
+
 						<div class='well'
 								 ng-hide="list.tasks.length">list contains no tasks.</div>
-
-					 <!-- TODO Should be a directive -->
-					 <table class="table table-striped table-hover table-bordered"
-					 				ng-show="list.tasks.length">
-						<tr>
-						<th>#</th>
-						<th>Task</th>
-						<th></th>
-						</tr>
-						<tr ng-repeat="task in list.tasks">
-							<td>{{ $index+1 }}</td>
-							<td>
-								<!-- normal display mode -->
-								<div ng-show='pageFns.displayReadonlyMode(task)'>
-									{{task.taskContent}}
-								</div>
-
-								<!-- deleted mode -->
-								<div style='text-decoration: line-through'
-									 ng-show='task.editorState === "deleted"'>
-									{{task.taskContent}}
-								</div>
-
-								<!-- editing mode -->
-								<div ng-show='task.editorState === "editing"'>
-									<input ng-model='task.editorTaskContent'
-										class='form-control'
-										type='text' />
-								</div>
-							</td>
-							<td>
-								<!-- Pencil Icon -->
-								<button class='btn btn-default'
-									ng-show='task.editorState === "initial"'
-									ng-click='task.setEditingState()'>
-									<span class='glyphicon glyphicon-pencil'></span>
-								</button>
-
-								<!-- Delete X icon-->
-								<button class='btn btn-danger'
-									ng-show='task.editorState === "initial"'
-									ng-click='task.setConfirmDeleteState()'>
-									<span class='glyphicon glyphicon-trash'></span>
-								</button>
-
-								<!-- Back Icon-->
-								<button class='btn btn-primary'
-									ng-show='pageFns.displayBackButton(task)'
-									ng-click='task.setInitialState()'>
-									<span class='glyphicon glyphicon-arrow-left'></span>
-								</button>
-
-								<!-- Are you sure?-->
-								<button class='btn btn-danger'
-									ng-show='task.editorState === "confirmDelete"'
-									ng-click='pageFns.deleteTask(task)'>Are you sure?</button>
-
-								<!-- Undo-->
-								<button class='btn btn-primary'
-									ng-show='task.editorState ==="deleted"'
-									ng-click='pageFns.undoDeleteTask(task)'>Undo</button>
-
-								<!-- Submit Edit (OK Icon)-->
-								<button class='btn btn-success'
-										ng-show='task.editorState ==="editing"'
-										ng-click='pageFns.updateTaskContent(task)'>
-									<span class='glyphicon glyphicon-ok'></span>
-								</button>
-							</td>
-						</tr>
-						</table>
+						<task-table tasks='list.tasks'></task-table>
 					</li>
 				</ul>
 		</div>
@@ -125,7 +68,7 @@
 	</div>
 
 	<div class='app-content'>
-		<task-table tasks='pageData.tasks'></test-directive>
+		<task-table tasks='pageData.tasks'></task-table>
 	</div>
 
 </div>

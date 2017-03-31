@@ -4,6 +4,7 @@
 
   app.controller('TaskListsController', function ($scope,
     TaskListsService,
+    TaskService,
     TaskListWithTasksFactory,
     $rootScope) {
 
@@ -34,7 +35,13 @@
           refreshTaskLists();
           $scope.formData.name = '';
         }
-      }, function (reason) {});
+      }, function () {});
+    }
+
+    $scope.pageFns.createTaskOnList = function (listId, taskContent) {
+      TaskService.createTaskOnList(listId, taskContent).then(function (response) {
+        refreshTaskLists();
+      }, function () {});
     }
 
     $scope.pageData = {};
