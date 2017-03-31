@@ -10,7 +10,7 @@
             },
 
 						createTaskOnList(listId, taskContent) {
-							return $http.post('/Tasks/CreateTaskOnList', { listId; listId, taskContent: taskContent })
+							return $http.post('/Tasks/CreateTaskOnList', { listId: listId, taskContent: taskContent });
 						},
 
             retrieve() {
