@@ -146,8 +146,9 @@
     <Content Include="Scripts\Controllers\default-user-controller.js" />
     <Content Include="Scripts\Services\default-user-service.js" />
     <Content Include="Scripts\Factories\task-list-with-tasks-factory.js" />
-    <Content Include="Scripts\Directives\task-table-directive.js" />
     <Content Include="Content\task-table-template.html" />
+    <Content Include="Scripts\Directives\task-list-add-task-form.js" />
+    <Content Include="Scripts\Directives\task-table.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
