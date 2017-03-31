@@ -479,11 +479,15 @@ BEGIN
      ,ttla.TaskId
      ,t.Content as `TaskContent`
      ,tl.Name as `listName`
+     ,t.IsDeleted as `IsTaskDeleted`
 	FROM `TaskLists` as tl
 	LEFT JOIN `TaskToTaskListAssociations` as ttla
-	ON tl.Id = ttla.TaskListId
+		ON tl.Id = ttla.TaskListId
 	LEFT JOIN `Tasks` as t
-	ON ttla.TaskId = t.TaskId;
+		ON ttla.TaskId = t.TaskId
+	WHERE
+		tl.IsDeleted = 0
+        AND tl.UserId = `pUserId`;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -889,4 +893,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-29 14:59:29
+-- Dump completed on 2017-03-31 11:14:50

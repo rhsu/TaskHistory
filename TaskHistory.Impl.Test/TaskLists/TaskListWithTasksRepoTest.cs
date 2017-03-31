@@ -69,5 +69,27 @@ namespace TaskHistory.Impl.Test.TaskLists
 
 			Assert.AreEqual(0, list.Tasks.Count());
 		}
+
+		[Test]
+		public void Read_TaskLists_With_Deleted_Tasks()
+		{
+			var taskList = _testFixtures.TaskList;
+			int userId = _testFixtures.User.Id;
+
+			// create some task on the list
+			var task = _taskRepo.CreateTaskOnList(userId, taskList.Id, "Hello World");
+
+			var taskUpdatingParams = new TaskUpdatingParameters(task.Content, 
+			                                                    task.IsCompleted, 
+			                                                    true);
+
+			var updatedTask = _taskRepo.UpdateTask(userId, taskUpdatingParams, task.Id);
+
+			var listWithTasks = _repo.Read(userId);
+
+			var taskIds = listWithTasks.First().Tasks.Select(x => x.Id);
+
+			Assert.False(taskIds.Contains(updatedTask.Id));
+		}
 	}
 }

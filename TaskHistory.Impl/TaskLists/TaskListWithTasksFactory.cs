@@ -20,10 +20,12 @@ namespace TaskHistory.Impl.TaskLists
 			int? taskId = reader.GetNullableInt("TaskId");
 			string listName = reader.GetString("ListName");
 
+			bool? isTaskDeleted = reader.GetNullableBool("IsTaskDeleted");
+
 			// TODO how do I use DI here?
 			var queryResult = new TaskListWithTasksQueryResult();
 
-			if (taskId.HasValue)
+			if (taskId.HasValue && (isTaskDeleted == false))
 			{
 				string content = reader.GetString("TaskContent");
 

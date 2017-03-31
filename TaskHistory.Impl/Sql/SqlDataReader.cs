@@ -45,6 +45,15 @@ namespace TaskHistory.Impl.Sql
 			return Convert.ToBoolean (obj);
 		}
 
+		public bool? GetNullableBool(string propertyName)
+		{
+			var obj = GetObjectFromReader(propertyName);
+			if (DBNull.Value == obj)
+				return null;
+
+			return Convert.ToBoolean(obj);
+		}
+
 		public T GetEnum<T>(string propertyName)
 		{
 			var str = GetString(propertyName);
