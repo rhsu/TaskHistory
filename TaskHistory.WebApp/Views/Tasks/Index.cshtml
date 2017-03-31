@@ -43,8 +43,10 @@
 								<label>Add New Task For <span style='color: #2aabd2;'>{{ list.listName }}</span>:</label>
 								<input class='form-control input-sm'
 											 type='text'
+											 ng-model='list.taskFormName'
 											 required='true' >
-								<button class='btn btn-sm btn-success'>
+								<button class='btn btn-sm btn-success'
+												ng-click='pageFns.createTaskOnList(list.listId, list.taskFormName);'>
 									<span class='glyphicon glyphicon-plus'></span>
 								</button>
 								<button class='btn btn-sm btn-primary'
@@ -75,7 +77,7 @@
 						 required='true'>
 		</div>
 		<button class='btn btn-success'
-			ng-click='pageFns.insertTask()'>
+						ng-click='pageFns.insertTask()'>
 			<span class='glyphicon glyphicon-plus'></span>
 		</button>
 	</form>

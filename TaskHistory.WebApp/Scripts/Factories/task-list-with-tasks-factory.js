@@ -9,7 +9,9 @@
     // state variables
     this.showTasks = true;
     this.showAddTaskForm = false;
-    this.showConfirmDelete = false
+    this.showConfirmDelete = false;
+
+    this.taskFormName = '';
   }
 
   app.factory('TaskListWithTasksFactory', function (TaskTableViewFactory) {
