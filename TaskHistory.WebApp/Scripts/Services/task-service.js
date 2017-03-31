@@ -9,12 +9,16 @@
                 return $http.post('/Tasks/Create/', { content: content });
             },
 
+						createTaskOnList(listId, taskContent) {
+							return $http.post('/Tasks/CreateTaskOnList', { listId; listId, taskContent: taskContent })
+						},
+
             retrieve() {
                 return $http.post('/Tasks/Retrieve/');
             },
 
             update(task) {
-                return $http.post('/Tasks/Edit', { viewModel : task, 
+                return $http.post('/Tasks/Edit', { viewModel : task,
                                                    taskId : task.taskId
                                                  });
             }
