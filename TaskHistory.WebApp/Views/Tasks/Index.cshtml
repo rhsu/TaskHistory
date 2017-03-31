@@ -72,6 +72,13 @@
 							</div>
 						</form>
 
+						<div style='border: 2px solid red; margin: 5px; '>
+							<task-list-add-task-form
+								list-name='list.listName'
+								list-id='list.listId'
+								task-content='list.taskFormName'></task-list-add-task-form>
+						</div>
+
 						<div class='well'
 								 ng-hide="list.tasks.length">list contains no tasks.</div>
 						<task-table tasks='list.tasks'></task-table>
