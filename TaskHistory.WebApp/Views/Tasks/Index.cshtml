@@ -22,14 +22,29 @@
 					<li ng-repeat='list in pageData.taskListWithTasks'>
 
 						<span class='btn-group'>
+							<!-- collapse -->
 							<button class='btn btn-xs btn-default'>
 								<span class='glyphicon glyphicon-minus'></span>
 							</button>
+
+							<!-- add task to list -->
 							<button class='btn btn-xs btn-success'
 											ng-hide='list.showAddTaskForm'
 											ng-click='list.showAddTaskForm = true'>
 								<span class='glyphicon glyphicon-plus'></span>
 							</button>
+
+							<!-- sync -->
+							<button class='btn btn-xs btn-info'>
+								<span class='glyphicon glyphicon-refresh'></span>
+							</button>
+
+							<!-- update -->
+							<button class='btn btn-xs btn-default'>
+								<span class='glyphicon glyphicon-pencil'></span>
+							</button>
+
+							<!-- delete -->
 							<button class='btn btn-xs btn-danger'>
 								<span class='glyphicon glyphicon-trash'></span>
 							</button>
