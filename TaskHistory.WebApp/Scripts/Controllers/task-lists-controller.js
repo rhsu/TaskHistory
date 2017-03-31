@@ -40,7 +40,10 @@
 
     $scope.pageFns.createTaskOnList = function (listId, taskContent) {
       TaskService.createTaskOnList(listId, taskContent).then(function (response) {
-        refreshTaskLists();
+        // TODO can this be changed to refreshTaskList (singular?)
+        if (response.data) {
+          refreshTaskLists();
+        }
       }, function () {});
     }
 

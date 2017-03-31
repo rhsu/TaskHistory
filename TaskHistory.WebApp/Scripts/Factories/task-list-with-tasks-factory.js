@@ -8,13 +8,10 @@
 
     // state variables
     this.showTasks = true;
-  }
+    this.showAddTaskForm = false;
+    this.showConfirmDelete = false;
 
-  /**
-  Hides or shows the tasks for the list instance
-  */
-  TaskListWithTasks.prototype.tasksVisible = function (bool) {
-    this.showTasks = bool;
+    this.taskFormName = '';
   }
 
   app.factory('TaskListWithTasksFactory', function (TaskTableViewFactory) {
