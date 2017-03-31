@@ -41,15 +41,6 @@
               }, function () {});
 
         }
-
-        /*$scope.pageFns.createTaskOnList = function (listId, taskContent) {
-          TaskService.createTaskOnList(listId, taskContent).then(function (response) {
-            // TODO can this be changed to refreshTaskList (singular?)
-            if (response.data) {
-              refreshTaskLists();
-            }
-          }, function () {});
-        }*/
       }
     }
   });
