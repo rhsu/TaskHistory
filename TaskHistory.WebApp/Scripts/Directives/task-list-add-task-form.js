@@ -1,8 +1,6 @@
 (function () {
   const app = angular.module('app');
 
-  console.log("bundled");
-
   app.directive('taskListAddTaskForm', function (TaskService,
     TaskListsService,
     TaskListWithTasksFactory) {
