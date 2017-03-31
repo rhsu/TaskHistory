@@ -28,11 +28,11 @@
         $scope.pageFns.deleteTask = function (task) {
             task.isDeleted = true;
             TaskService.update(task).then(function (response) {
-                const data = response.data;
-                if (data) {
-                    TaskTableViewFactory.updateFromJson(data, task);
-                    task.setDeletedState();
-                }
+              const data = response.data;
+              if (data) {
+                  TaskTableViewFactory.updateFromJson(data, task);
+                  task.setDeletedState();
+              }
             }, function () {});
         }
 
