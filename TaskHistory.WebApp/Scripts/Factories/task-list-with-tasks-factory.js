@@ -12,17 +12,6 @@
     this.showConfirmDelete = false
   }
 
-  /**
-  Hides or shows the tasks for the list instance
-  */
-  /*TaskListWithTasks.prototype.tasksVisible = function (bool) {
-    this.showTasks = bool;
-  }*/
-
-  TaskListWithTasks.prototype.displayAddTaskForm = function () {
-    this.showAddTaskForm = true;
-  }
-
   app.factory('TaskListWithTasksFactory', function (TaskTableViewFactory) {
     return {
 
