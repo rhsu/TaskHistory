@@ -72,8 +72,10 @@
 							</div>
 						</form>
 
-						<div style='border: 2px solid red; margin: 5px; '>
-							<task-list-add-task-form list='list'></task-list-add-task-form>
+						<div>
+							<task-list-add-task-form list='list'
+																			 ng-show='list.showAddTaskForm'>
+							</task-list-add-task-form>
 						</div>
 
 						<div class='well'

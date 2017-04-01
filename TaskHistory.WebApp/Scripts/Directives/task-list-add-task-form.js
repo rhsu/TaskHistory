@@ -17,8 +17,11 @@
           TaskListsService.read().then(function (response) {
             const data = response.data;
             if (data) {
+              // TODO this should eventually be refresh task list (singular)
+              // TODO actually can't continue until we can refresh just one task list
               const taskListsWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
-              $scope.pageData.taskListWithTasks = taskListsWithTasks
+              $scope.list = taskListsWithTasks[0];
+              console.log($scope.list);
             }
           }, function () {});
         }
