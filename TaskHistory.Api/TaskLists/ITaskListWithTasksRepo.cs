@@ -4,6 +4,8 @@ namespace TaskHistory.Api.TaskLists
 {
 	public interface ITaskListWithTasksRepo
 	{
-		IEnumerable<ITaskListWithTasks> Read(int userId);
+		IEnumerable<ITaskListWithTasks> ReadAll(int userId);
+
+		ITaskListWithTasks Read(int userId, int listId);
 	}
 }

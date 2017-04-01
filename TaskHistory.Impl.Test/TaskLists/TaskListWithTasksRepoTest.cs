@@ -47,7 +47,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 				expectedTasks.Add(t.Id, t);
 			}
 
-			var listsWithTasks = _repo.Read(userId);
+			var listsWithTasks = _repo.ReadAll(userId);
 
 			var actualTasks = listsWithTasks.First().Tasks;
 
@@ -64,7 +64,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		[Test]
 		public void Read_TaskLists_No_Tasks()
 		{
-			var listsWithTasks = _repo.Read(_testFixtures.User.Id);
+			var listsWithTasks = _repo.ReadAll(_testFixtures.User.Id);
 			var list = listsWithTasks.First();
 
 			Assert.AreEqual(0, list.Tasks.Count());
@@ -85,7 +85,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 
 			var updatedTask = _taskRepo.UpdateTask(userId, taskUpdatingParams, task.Id);
 
-			var listWithTasks = _repo.Read(userId);
+			var listWithTasks = _repo.ReadAll(userId);
 
 			var taskIds = listWithTasks.First().Tasks.Select(x => x.Id);
 
