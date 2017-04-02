@@ -505,7 +505,8 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskListsWithTasks_Select`(
-	IN `pUserId` INT
+	 IN `pUserId` INT
+    ,IN `pListId` INT
 )
 BEGIN
 	SELECT 
@@ -521,7 +522,8 @@ BEGIN
 		ON ttla.TaskId = t.TaskId
 	WHERE
 		tl.IsDeleted = 0
-        AND tl.UserId = `pUserId`;
+        AND tl.UserId = `pUserId`
+        AND tl.ListId = `pListId`;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -927,4 +929,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-31 17:53:34
+-- Dump completed on 2017-04-01 20:38:40
