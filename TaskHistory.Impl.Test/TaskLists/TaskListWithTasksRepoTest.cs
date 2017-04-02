@@ -15,7 +15,6 @@ namespace TaskHistory.Impl.Test.TaskLists
 		TestFixtures _testFixtures;
 
 		ITaskRepo _taskRepo;
-		ITaskListRepo _listRepo;
 
 		[SetUp]
 		public void Init()
@@ -30,11 +29,10 @@ namespace TaskHistory.Impl.Test.TaskLists
 			_repo = new TaskListWithTasksRepo(factory, appDataProxy);
 
 			_taskRepo = new TaskRepo(taskFactory, appDataProxy);
-			_listRepo = new TaskListRepo(listFactory, appDataProxy);
 		}
 
 		[Test]
-		public void Read_TaskList_With_Tasks()
+		public void Read_All_TaskList_With_Tasks()
 		{
 			int userId = _testFixtures.User.Id;
 			int listId = _testFixtures.TaskList.Id;
@@ -62,7 +60,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		}
 
 		[Test]
-		public void Read_TaskLists_No_Tasks()
+		public void Read_All_TaskLists_No_Tasks()
 		{
 			var listsWithTasks = _repo.ReadAll(_testFixtures.User.Id);
 			var list = listsWithTasks.First();
