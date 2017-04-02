@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TaskHistory.Api.Sql;
 using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.Tasks;
@@ -13,6 +15,7 @@ namespace TaskHistory.Impl.TaskLists
 		ApplicationDataProxy _dataProxy;
 
 		const string ReadAllStoredProcedure = "TaskListsWithTasks_All_Select";
+		const string ReadStoredProcedure = "TaskListWithTasks_Select";
 
 		public TaskListWithTasksRepo(TaskListWithTasksFactory factory,
 		                             ApplicationDataProxy dataProxy)
@@ -36,13 +39,12 @@ namespace TaskHistory.Impl.TaskLists
 			// storage where key is the listId and value is the list of tasks
 			var taskCache = new Dictionary<int, List<ITask>>();
 
-			// there is an assumption that a list cannot exist without a name
-			// but a list could contain 0 tasks
-
 			var retVal = new List<ITaskListWithTasks>();
 
 			foreach (var item in kvpList)
 			{
+				// there is an assumption that a list cannot exist without a name
+				// but a list could contain 0 tasks
 				int listId = item.Key;
 				string listName = item.Value.ListName;
 				ITask task = item.Value.Task;
@@ -84,20 +86,27 @@ namespace TaskHistory.Impl.TaskLists
 			parameter.Add(_dataProxy.CreateParameter("pUserId", userId));
 			parameter.Add(_dataProxy.CreateParameter("pListId", listId));
 
-			// TODO I believe this returns a List
-			var kvp = _dataProxy.ExecuteReader(_factory, "");
+			var kvpList = _dataProxy.ExecuteOnCollection(_factory, "ReadStoredProcedure");
+			if (kvpList == null)
+				throw new NullReferenceException("null returned from DataProxy");
 
-			// storage where key is the listId and vaue is the listName
-			var listNameCache = new Dictionary<int, string>();
+			var tasks = new List<ITask>();
 
-			// storage where key is the listId and value is the list of tasks
-			var taskCache = new Dictionary<int, List<ITask>>();
+			string listName = kvpList.First().Value.ListName;
 
-			var retVal = new List<ITaskListWithTasks>();
+			foreach (var item in kvpList)
+			{
+				ITask task = item.Value.Task;
 
-			// TODO can't continue until I know what the shape of the stored procedure returns
+				if (task != null)
+				{
+					tasks.Add(task);
+				}
+			}
 
-			return null;
+			var retVal = new TaskListWithTasks(listId, listName, tasks);
+
+			return retVal;
 		}
 	}
 }
