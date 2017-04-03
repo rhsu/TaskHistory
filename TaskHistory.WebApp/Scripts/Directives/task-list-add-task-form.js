@@ -34,6 +34,9 @@
               // equal to the return value from the response?
               if (response.data) {
                 refreshTaskList();
+
+                // TODO explore this
+                // $scope.list = TaskListWithTasksFactory.buildFromJson(response.data);
               }
 
           }, function () {});
