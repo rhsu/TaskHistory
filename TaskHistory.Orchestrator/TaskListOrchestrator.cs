@@ -34,16 +34,32 @@ namespace TaskHistory.Orchestrator
 			return viewModel;
 		}
 
-		public IEnumerable<TaskListDetailedTableViewModel> Read(IUser user)
+		public IEnumerable<TaskListDetailedTableViewModel> ReadAll(IUser user)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			var lists = _listWithTasksRepo.Read(user.Id);
+			var lists = _listWithTasksRepo.ReadAll(user.Id);
 			if (lists == null)
 				throw new NullReferenceException("null returned from Repo");
 
 			var retVal = _listWithTasksMapper.Map(lists);
+			if (retVal == null)
+				throw new NullReferenceException("null returned from ObjectMapper");
+
+			return retVal;
+		}
+
+		public TaskListDetailedTableViewModel Read(IUser user, int listId)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+
+			var list = _listWithTasksRepo.Read(user.Id, listId);
+			if (list == null)
+				throw new NullReferenceException("null returned from Repo");
+
+			var retVal = _listWithTasksMapper.Map(list);
 			if (retVal == null)
 				throw new NullReferenceException("null returned from ObjectMapper");
 

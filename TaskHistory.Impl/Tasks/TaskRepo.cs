@@ -39,6 +39,7 @@ namespace TaskHistory.Impl.Tasks
 		}
 
 		// This will return null if unsuccessful (No task was created)
+		// TODO if its null, should throw an error. Why is this not throwing an error?
 		public ITask CreateTaskOnList(int userId, int listId, string content)
 		{
 			if (string.IsNullOrEmpty(content))

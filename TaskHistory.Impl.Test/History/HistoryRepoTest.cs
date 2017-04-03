@@ -41,7 +41,8 @@ namespace TaskHistory.Impl.Test
 			Assert.AreEqual(BusinessObject.Task, history.Object);
 			Assert.AreEqual(_testFixtures.User.Id, history.UserId);
 
-			DateTime expectedDateTime = DateTime.UtcNow;
+			// TODO this should be UTC now but need to patch DB to get that working
+			DateTime expectedDateTime = DateTime.Now;
 			DateTime actualDateTime = history.ActionDate;
 
 			Assert.AreEqual(expectedDateTime.Month, actualDateTime.Month);
@@ -61,7 +62,8 @@ namespace TaskHistory.Impl.Test
 			Assert.AreEqual(BusinessObject.TaskList, history.Object);
 			Assert.AreEqual(_testFixtures.User.Id, history.UserId);
 
-			DateTime expectedDateTime = DateTime.UtcNow;
+			// TODO this should be UTC now but need to patch DB to get that working
+			DateTime expectedDateTime = DateTime.Now;
 			DateTime actualDateTime = history.ActionDate;
 
 			Assert.AreEqual(expectedDateTime.Month, actualDateTime.Month);

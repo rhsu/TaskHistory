@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using TaskHistory.Api.Sql;
 using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.Sql;
@@ -11,6 +14,7 @@ namespace TaskHistory.Impl.TaskLists
 		TaskListWithTasksFactory _factory;
 		ApplicationDataProxy _dataProxy;
 
+		const string ReadAllStoredProcedure = "TaskListsWithTasks_All_Select";
 		const string ReadStoredProcedure = "TaskListsWithTasks_Select";
 
 		public TaskListWithTasksRepo(TaskListWithTasksFactory factory,
@@ -20,13 +24,13 @@ namespace TaskHistory.Impl.TaskLists
 			_dataProxy = dataProxy;
 		}
 
-		public IEnumerable<ITaskListWithTasks> Read(int userId)
+		public IEnumerable<ITaskListWithTasks> ReadAll(int userId)
 		{
 			var parameter = _dataProxy.CreateParameter("pUserId", userId);
 
 			IEnumerable<KeyValuePair<int, TaskListWithTasksQueryResult>> kvpList 
 				= _dataProxy.ExecuteOnCollection(_factory, 
-			                                     ReadStoredProcedure,
+			                                     ReadAllStoredProcedure,
 			                                     parameter);
 
 			// storage where key is the listId and vaue is the listName
@@ -35,13 +39,12 @@ namespace TaskHistory.Impl.TaskLists
 			// storage where key is the listId and value is the list of tasks
 			var taskCache = new Dictionary<int, List<ITask>>();
 
-			// there is an assumption that a list cannot exist without a name
-			// but a list could contain 0 tasks
-
 			var retVal = new List<ITaskListWithTasks>();
 
 			foreach (var item in kvpList)
 			{
+				// there is an assumption that a list cannot exist without a name
+				// but a list could contain 0 tasks
 				int listId = item.Key;
 				string listName = item.Value.ListName;
 				ITask task = item.Value.Task;
@@ -73,6 +76,37 @@ namespace TaskHistory.Impl.TaskLists
 
 				retVal.Add(taskListWithTasks);
 			}
+
+			return retVal;
+		}
+
+		public ITaskListWithTasks Read(int userId, int listId)
+		{
+			var parameters = new List<ISqlDataParameter>();
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pListId", listId));
+
+			var kvpList = _dataProxy.ExecuteOnCollection(_factory, 
+			                                             ReadStoredProcedure,
+			                                             parameters);
+			if (kvpList == null)
+				throw new NullReferenceException("null returned from DataProxy");
+
+			var tasks = new List<ITask>();
+
+			string listName = kvpList.First().Value.ListName;
+
+			foreach (var item in kvpList)
+			{
+				ITask task = item.Value.Task;
+
+				if (task != null)
+				{
+					tasks.Add(task);
+				}
+			}
+
+			var retVal = new TaskListWithTasks(listId, listName, tasks);
 
 			return retVal;
 		}
