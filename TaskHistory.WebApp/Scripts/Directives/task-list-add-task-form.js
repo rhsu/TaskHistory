@@ -13,15 +13,13 @@
       },
       link: function ($scope, elem, attr, ctrl) {
 
-        var refreshTaskLists = function () {
-          TaskListsService.readAll().then(function (response) {
+        var refreshTaskList = function () {
+          TaskListsService.read($scope.list.listId).then(function (response) {
             const data = response.data;
             if (data) {
-              // TODO this should eventually be refresh task list (singular)
-              // TODO actually can't continue until we can refresh just one task list
-              const taskListsWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
-              $scope.list = taskListsWithTasks[0];
-              console.log($scope.list);
+              const taskListsWithTasks = TaskListWithTasksFactory.buildFromJson(data);
+              console.log(taskListWithTask);
+              $scope.list = taskListsWithTasks;
             }
           }, function () {});
         }
@@ -32,8 +30,10 @@
           TaskService.createTaskOnList($scope.list.listId,
             $scope.list.taskFormName).then(function (response) {
 
+              // TODO instead of doing this, can I just set the value
+              // equal to the return value from the response?
               if (response.data) {
-                refreshTaskLists();
+                refreshTaskList();
               }
 
           }, function () {});
