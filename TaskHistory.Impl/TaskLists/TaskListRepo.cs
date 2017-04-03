@@ -6,6 +6,8 @@ using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.TaskLists
 {
+
+	// TODO I am deleting this!
 	public class TaskListRepo : ITaskListRepo
 	{
 		const string CreateStoredProcedure = "TaskLists_Create";

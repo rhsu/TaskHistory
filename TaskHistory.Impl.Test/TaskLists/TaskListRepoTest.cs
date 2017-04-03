@@ -34,7 +34,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 			Assert.AreEqual(listName, taskList.Name);
 		}
 
-		[Test]
+		/*[Test]
 		public void Read()
 		{
 			var readTestFixtures = new TestFixtures();
@@ -58,9 +58,9 @@ namespace TaskHistory.Impl.Test.TaskLists
 
 				Assert.AreEqual(listName, lookup[foundList.Id]);
 			}
-		}
+		}*/
 
-		[Test]
+		/*[Test]
 		public void Update()
 		{
 			ITaskList taskList = _testFixtures.TaskList;
@@ -70,6 +70,6 @@ namespace TaskHistory.Impl.Test.TaskLists
 
 			Assert.AreEqual(taskList.Id, updated.Id);
 			Assert.AreEqual(newName, updated.Name);
-		}
+		}*/
 	}
 }

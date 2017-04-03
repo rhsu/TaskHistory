@@ -15,6 +15,9 @@ namespace TaskHistory.Orchestrator
 		readonly ITaskListWithTasksRepo _listWithTasksRepo;
 		readonly ObjectMapperTaskLisWithTasks _listWithTasksMapper;
 
+		// TODO do I still need TaskListViewModel?
+		//		should everything just be done through TaskListWithTaskRepo
+		//		and then get rid of ITaskListRepo
 		public TaskListViewModel Create(IUser user, string name)
 		{
 			if (user == null)
@@ -64,6 +67,16 @@ namespace TaskHistory.Orchestrator
 				throw new NullReferenceException("null returned from ObjectMapper");
 
 			return retVal;
+		}
+
+		public TaskListDetailedTableViewModel Update(IUser user, int listId, string listContent)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+
+			// var thing = _listRepo.Update
+
+			return null;
 		}
 
 		public TaskListOrchestrator(ITaskListRepo listRepo,
