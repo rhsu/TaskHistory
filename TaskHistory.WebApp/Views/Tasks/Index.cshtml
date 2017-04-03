@@ -52,25 +52,9 @@
 
 						<label>{{ list.listName }}</label>
 
-						<form class='form-inline' style='margin-bottom: 15px;'
-									ng-show='list.showAddTaskForm'>
-							<div class='form-group'>
-								<label>Add New Task For <span style='color: #2aabd2;'>{{ list.listName }}</span>:</label>
-								<input class='form-control input-sm'
-											 type='text'
-											 ng-model='list.taskFormName'
-											 required='true' >
-								<button class='btn btn-sm btn-success'
-												ng-click='pageFns.createTaskOnList(list.listId, list.taskFormName);'>
-									<span class='glyphicon glyphicon-plus'></span>
-								</button>
-								<button class='btn btn-sm btn-primary'
-												ng-click='list.showAddTaskForm = false'
-												type='button'>
-									<span class='glyphicon glyphicon-arrow-left'></span>
-								</button>
-							</div>
-						</form>
+						<task-list-add-task-form list='list'
+																		 ng-show='list.showAddTaskForm'>
+						</task-list-add-task-form>
 
 						<div class='well'
 								 ng-hide="list.tasks.length">list contains no tasks.</div>

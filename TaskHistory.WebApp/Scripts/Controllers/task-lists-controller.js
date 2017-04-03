@@ -20,7 +20,7 @@
     $scope.pageFns = {};
 
     var refreshTaskLists = function () {
-      TaskListsService.read().then(function (response) {
+      TaskListsService.readAll().then(function (response) {
         const data = response.data;
         if (data) {
           const taskListsWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
