@@ -30,15 +30,8 @@
 
           TaskService.createTaskOnList($scope.list.listId,
             $scope.list.taskFormName).then(function (response) {
-
-              // TODO instead of doing this, can I just set the value
-              // equal to the return value from the response?
               const data = response.data;
               if (data) {
-                //refreshTaskList();
-
-                // TODO explore this
-                // $scope.list = TaskListWithTasksFactory.buildFromJson(response.data);
                 const newTask = TaskTableViewFactory.buildFromJson(data);
                 $scope.list.tasks.push(newTask);
               }
