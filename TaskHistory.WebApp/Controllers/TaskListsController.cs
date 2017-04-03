@@ -14,8 +14,7 @@ namespace TaskHistory.WebApp.Controllers
         }
 
 		[HttpPost]
-		// TODO temporary patch
-		public JsonResult Read()
+		public JsonResult ReadAll()
 		{
 			return Json(_orchestrator.ReadAll(_currentUser));
 		}

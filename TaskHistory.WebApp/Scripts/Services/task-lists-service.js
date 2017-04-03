@@ -9,8 +9,8 @@
         return $http.post('/TaskLists/Create', { name: name });
       },
 
-      read() {
-        return $http.post('/TaskLists/Read');
+      readAll() {
+        return $http.post('/TaskLists/ReadAll');
       }
 
     }

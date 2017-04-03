@@ -14,7 +14,7 @@
       link: function ($scope, elem, attr, ctrl) {
 
         var refreshTaskLists = function () {
-          TaskListsService.read().then(function (response) {
+          TaskListsService.readAll().then(function (response) {
             const data = response.data;
             if (data) {
               // TODO this should eventually be refresh task list (singular)
