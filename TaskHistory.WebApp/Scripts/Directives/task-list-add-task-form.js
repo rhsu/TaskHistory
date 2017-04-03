@@ -2,6 +2,7 @@
   const app = angular.module('app');
 
   app.directive('taskListAddTaskForm', function (TaskService,
+    TaskTableViewFactory,
     TaskListsService,
     TaskListWithTasksFactory) {
 
@@ -13,7 +14,7 @@
       },
       link: function ($scope, elem, attr, ctrl) {
 
-        var refreshTaskList = function () {
+        /*var refreshTaskList = function () {
           TaskListsService.read($scope.list.listId).then(function (response) {
             const data = response.data;
             if (data) {
@@ -22,7 +23,7 @@
               $scope.list = taskListsWithTasks;
             }
           }, function () {});
-        }
+        }*/
 
         $scope.directiveFns = {};
         $scope.directiveFns.createTaskOnList = function () {
@@ -32,11 +33,14 @@
 
               // TODO instead of doing this, can I just set the value
               // equal to the return value from the response?
-              if (response.data) {
-                refreshTaskList();
+              const data = response.data;
+              if (data) {
+                //refreshTaskList();
 
                 // TODO explore this
                 // $scope.list = TaskListWithTasksFactory.buildFromJson(response.data);
+                const newTask = TaskTableViewFactory.buildFromJson(data);
+                $scope.list.tasks.push(newTask);
               }
 
           }, function () {});
