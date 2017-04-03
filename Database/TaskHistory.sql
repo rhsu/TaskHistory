@@ -556,9 +556,7 @@ BEGIN
         ,pName
     );
     
-    SELECT * FROM `TaskLists`
-    WHERE `Id` = last_insert_id();
-    
+    CALL TaskListsWithTasks_Select(`pUserId`, last_insert_id());
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -929,4 +927,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-03  8:37:32
+-- Dump completed on 2017-04-03 16:53:03
