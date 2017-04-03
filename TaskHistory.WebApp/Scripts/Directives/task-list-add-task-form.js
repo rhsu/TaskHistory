@@ -14,17 +14,6 @@
       },
       link: function ($scope, elem, attr, ctrl) {
 
-        /*var refreshTaskList = function () {
-          TaskListsService.read($scope.list.listId).then(function (response) {
-            const data = response.data;
-            if (data) {
-              const taskListsWithTasks = TaskListWithTasksFactory.buildFromJson(data);
-              console.log(taskListWithTask);
-              $scope.list = taskListsWithTasks;
-            }
-          }, function () {});
-        }*/
-
         $scope.directiveFns = {};
         $scope.directiveFns.createTaskOnList = function () {
 
@@ -34,6 +23,7 @@
               if (data) {
                 const newTask = TaskTableViewFactory.buildFromJson(data);
                 $scope.list.tasks.push(newTask);
+                $scope.list.taskFormName = '';
               }
 
           }, function () {});
