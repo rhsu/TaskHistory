@@ -11,10 +11,10 @@
 
       readAll() {
         return $http.post('/TaskLists/ReadAll');
-      }
+      },
 
       read(listId) {
-        return $http.post('/TaskLists/Read', { listId: listId })
+        return $http.post('/TaskLists/Read', { listId: listId });
       }
 
     }
