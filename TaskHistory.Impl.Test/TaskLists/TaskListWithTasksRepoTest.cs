@@ -20,7 +20,6 @@ namespace TaskHistory.Impl.Test.TaskLists
 		public void Init()
 		{
 			var taskFactory = new TaskFactory();
-			var listFactory = new TaskListFactory();
 
 			var factory = new TaskListWithTasksFactory();
 			var appDataProxy = new ApplicationDataProxyFactory().Build();
