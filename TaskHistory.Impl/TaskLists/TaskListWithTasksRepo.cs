@@ -14,6 +14,8 @@ namespace TaskHistory.Impl.TaskLists
 		TaskListWithTasksFactory _factory;
 		ApplicationDataProxy _dataProxy;
 
+		const string CreatedStoredProcedure = "TaskLists_Create";
+
 		const string ReadAllStoredProcedure = "TaskListsWithTasks_All_Select";
 		const string ReadStoredProcedure = "TaskListsWithTasks_Select";
 
@@ -116,10 +118,10 @@ namespace TaskHistory.Impl.TaskLists
 		{
 			var parameters = new List<ISqlDataParameter>();
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_dataProxy.CreateParameter("pListContent", listContent));
+			parameters.Add(_dataProxy.CreateParameter("pName", listContent));
 
 			var kvpList = _dataProxy.ExecuteOnCollection(_factory,
-														 ReadStoredProcedure,
+														 CreatedStoredProcedure,
 														 parameters);
 			if (kvpList == null)
 				throw new NullReferenceException("null returned from DataProxy");
