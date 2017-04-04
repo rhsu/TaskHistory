@@ -7,5 +7,7 @@ namespace TaskHistory.Api.TaskLists
 		IEnumerable<ITaskListWithTasks> ReadAll(int userId);
 
 		ITaskListWithTasks Read(int userId, int listId);
+
+		ITaskListWithTasks Create(int userId, string content);
 	}
 }
