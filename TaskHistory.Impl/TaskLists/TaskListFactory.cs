@@ -11,8 +11,8 @@ namespace TaskHistory.Impl.TaskLists
 			if (reader == null)
 				throw new ArgumentNullException(nameof(reader));
 
-			int id = reader.GetInt("Id");
-			string name = reader.GetString("Name");
+			int id = reader.GetInt("listId");
+			string name = reader.GetString("listName");
 
 			return new TaskList(id, name);
 		}
