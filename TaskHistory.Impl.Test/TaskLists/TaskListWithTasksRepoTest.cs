@@ -127,5 +127,17 @@ namespace TaskHistory.Impl.Test.TaskLists
 
 			Assert.AreEqual(0, list.Tasks.Count());
 		}
+
+		[Test]
+		public void Create_TaskList()
+		{
+			var userId = _testFixtures.User.Id;
+			string listName = "Some List Im Buliding";
+
+			var taskList = _repo.Create(userId, listName);
+
+			Assert.AreEqual(listName, taskList.ListName);
+			Assert.AreEqual(new List<ITask>(), taskList.Tasks);
+		}
 	}
 }

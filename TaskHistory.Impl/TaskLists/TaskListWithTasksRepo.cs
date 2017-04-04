@@ -70,6 +70,7 @@ namespace TaskHistory.Impl.TaskLists
 				int listId = kvp.Key;
 				string listName = kvp.Value;
 
+				// TODO this should be done via a new TaskListFactory
 				List<ITask> tasks = taskCache[listId];
 
 				var taskListWithTasks = new TaskListWithTasks(listId, listName, tasks);
@@ -108,6 +109,25 @@ namespace TaskHistory.Impl.TaskLists
 
 			var retVal = new TaskListWithTasks(listId, listName, tasks);
 
+			return retVal;
+		}
+
+		public ITaskListWithTasks Create(int userId, string listContent)
+		{
+			var parameters = new List<ISqlDataParameter>();
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pListContent", listContent));
+
+			var kvpList = _dataProxy.ExecuteOnCollection(_factory,
+														 ReadStoredProcedure,
+														 parameters);
+			if (kvpList == null)
+				throw new NullReferenceException("null returned from DataProxy");
+
+			string listName = kvpList.First().Value.ListName;
+			int listId = kvpList.First().Key;
+
+			var retVal = new TaskListWithTasks(listId, listName, new List<ITask>());
 			return retVal;
 		}
 	}
