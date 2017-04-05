@@ -575,19 +575,20 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_Update`(
 	 IN `pUserId` int
-    ,IN `pListId` int
+    ,IN `pId` int
     ,IN `pName` varchar(64)
+    ,IN `pIsDeleted` bool
 )
 BEGIN
 	UPDATE `TaskLists`
     SET
-		`Name` = `pName`
+		 `Name`      = `pName`
+        ,`IsDeleted` = `pIsDeleted`
 	WHERE
 		`UserId` = `pUserId`
         AND `Id` = `pListId`;
         
-	SELECT * FROM `TaskLists`
-    WHERE `Id` = `pListId`;
+	 CALL TaskLists_Select(`pUserId`, `pId`);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -874,4 +875,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-05 11:16:29
+-- Dump completed on 2017-04-05 13:05:22
