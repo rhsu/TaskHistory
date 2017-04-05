@@ -73,7 +73,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 			int userId = _testFixtures.User.Id;
 
 			// create some task on the list
-			var task = _taskRepo.CreateTaskOnList(userId, taskList.Id, "Hello World");
+			var task = _taskRepo.CreateTaskOnList(userId, taskList.ListId, "Hello World");
 
 			var taskUpdatingParams = new TaskUpdatingParameters(task.Content, 
 			                                                    task.IsCompleted, 
@@ -92,7 +92,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		public void Read_TaskList_With_Tasks()
 		{
 			int userId = _testFixtures.User.Id;
-			int listId = _testFixtures.TaskList.Id;
+			int listId = _testFixtures.TaskList.ListId;
 			// create 5 tasks and associate them to the existing testFixture list
 			var expectedTasks = new Dictionary<int, ITask>();
 
@@ -121,7 +121,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		public void Read_TaskLists_No_Tasks()
 		{
 			int userId = _testFixtures.User.Id;
-			int listId = _testFixtures.TaskList.Id;
+			int listId = _testFixtures.TaskList.ListId;
 
 			var list = _repo.Read(userId, listId);
 
