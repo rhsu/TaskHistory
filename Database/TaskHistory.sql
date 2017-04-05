@@ -586,7 +586,7 @@ BEGIN
         ,`IsDeleted` = `pIsDeleted`
 	WHERE
 		`UserId` = `pUserId`
-        AND `Id` = `pListId`;
+        AND `Id` = `pId`;
         
 	 CALL TaskLists_Select(`pUserId`, `pId`);
 END ;;
@@ -875,4 +875,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-05 13:05:22
+-- Dump completed on 2017-04-05 13:13:58

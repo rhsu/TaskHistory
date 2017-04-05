@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using TaskHistory.Api.TaskLists;
+using TaskHistory.Api.TaskLists.DataTransferObjects;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.TaskLists;
 using TaskHistory.Impl.Tasks;
@@ -138,6 +139,17 @@ namespace TaskHistory.Impl.Test.TaskLists
 
 			Assert.AreEqual(listName, taskList.ListName);
 			Assert.AreEqual(new List<ITask>(), taskList.Tasks);
+		}
+
+		[Test]
+		public void Update_TaskList_Delete()
+		{
+			var userId = _testFixtures.User.Id;
+			var name = _testFixtures.TaskList.ListName;
+			var listId = _testFixtures.TaskList.ListId;
+			var param = new TaskListUpdatingParameters(name, true);
+
+			_repo.Update(userId, listId, param);
 		}
 	}
 }
