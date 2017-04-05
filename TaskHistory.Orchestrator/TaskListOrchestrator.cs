@@ -9,7 +9,7 @@ namespace TaskHistory.Orchestrator
 {
 	public class TaskListOrchestrator
 	{
-		readonly ITaskListWithTasksRepo _repo;
+		readonly ITaskListRepo _repo;
 		readonly ObjectMapperTaskLisWithTasks _objectMapper;
 
 		public TaskListDetailedTableViewModel Create(IUser user, string name)
@@ -73,7 +73,7 @@ namespace TaskHistory.Orchestrator
 			return null;
 		}
 
-		public TaskListOrchestrator(ITaskListWithTasksRepo repo,
+		public TaskListOrchestrator(ITaskListRepo repo,
 		                            ObjectMapperTaskLisWithTasks mapper)
 		{
 			_repo = repo;

@@ -3,7 +3,7 @@ using TaskHistory.Api.Tasks;
 
 namespace TaskHistory.Api.TaskLists
 {
-	public interface ITaskListWithTasks
+	public interface ITaskList
 	{
 		int ListId { get; }
 		string ListName { get; }

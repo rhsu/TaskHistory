@@ -11,7 +11,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 	[TestFixture]
 	public class TaskListWithTasksRepoTest
 	{
-		ITaskListWithTasksRepo _repo;
+		ITaskListRepo _repo;
 		TestFixtures _testFixtures;
 
 		ITaskRepo _taskRepo;
@@ -25,7 +25,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 			var appDataProxy = new ApplicationDataProxyFactory().Build();
 
 			_testFixtures = new TestFixtures();
-			_repo = new TaskListWithTasksRepo(factory, appDataProxy);
+			_repo = new TaskListRepo(factory, appDataProxy);
 
 			_taskRepo = new TaskRepo(taskFactory, appDataProxy);
 		}

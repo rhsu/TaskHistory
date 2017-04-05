@@ -15,7 +15,7 @@ namespace TaskHistory.ObjectMapper.TaskLists
 			_taskObjMapper = taskObjMapper;
 		}
 
-		public IEnumerable<TaskListDetailedTableViewModel> Map(IEnumerable<ITaskListWithTasks> taskLists)
+		public IEnumerable<TaskListDetailedTableViewModel> Map(IEnumerable<ITaskList> taskLists)
 		{
 			if (taskLists == null)
 				throw new ArgumentNullException(nameof(taskLists));
@@ -34,7 +34,7 @@ namespace TaskHistory.ObjectMapper.TaskLists
 			return retVal;
 		}
 
-		public TaskListDetailedTableViewModel Map(ITaskListWithTasks taskList)
+		public TaskListDetailedTableViewModel Map(ITaskList taskList)
 		{
 			if (taskList == null)
 				throw new ArgumentNullException(nameof(taskList));

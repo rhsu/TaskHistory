@@ -9,7 +9,7 @@ using TaskHistory.Impl.TaskLists.QueryResults;
 
 namespace TaskHistory.Impl.TaskLists
 {
-	public class TaskListWithTasksRepo : ITaskListWithTasksRepo
+	public class TaskListRepo : ITaskListRepo
 	{
 		TaskListWithTasksFactory _factory;
 		ApplicationDataProxy _dataProxy;
@@ -19,14 +19,14 @@ namespace TaskHistory.Impl.TaskLists
 		const string ReadAllStoredProcedure = "TaskListsWithTasks_All_Select";
 		const string ReadStoredProcedure = "TaskListsWithTasks_Select";
 
-		public TaskListWithTasksRepo(TaskListWithTasksFactory factory,
+		public TaskListRepo(TaskListWithTasksFactory factory,
 		                             ApplicationDataProxy dataProxy)
 		{
 			_factory = factory;
 			_dataProxy = dataProxy;
 		}
 
-		public IEnumerable<ITaskListWithTasks> ReadAll(int userId)
+		public IEnumerable<ITaskList> ReadAll(int userId)
 		{
 			var parameter = _dataProxy.CreateParameter("pUserId", userId);
 
@@ -41,7 +41,7 @@ namespace TaskHistory.Impl.TaskLists
 			// storage where key is the listId and value is the list of tasks
 			var taskCache = new Dictionary<int, List<ITask>>();
 
-			var retVal = new List<ITaskListWithTasks>();
+			var retVal = new List<ITaskList>();
 
 			foreach (var item in kvpList)
 			{
@@ -75,7 +75,7 @@ namespace TaskHistory.Impl.TaskLists
 				// TODO this should be done via a new TaskListFactory
 				List<ITask> tasks = taskCache[listId];
 
-				var taskListWithTasks = new TaskListWithTasks(listId, listName, tasks);
+				var taskListWithTasks = new TaskList(listId, listName, tasks);
 
 				retVal.Add(taskListWithTasks);
 			}
@@ -83,7 +83,7 @@ namespace TaskHistory.Impl.TaskLists
 			return retVal;
 		}
 
-		public ITaskListWithTasks Read(int userId, int listId)
+		public ITaskList Read(int userId, int listId)
 		{
 			var parameters = new List<ISqlDataParameter>();
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
@@ -109,12 +109,12 @@ namespace TaskHistory.Impl.TaskLists
 				}
 			}
 
-			var retVal = new TaskListWithTasks(listId, listName, tasks);
+			var retVal = new TaskList(listId, listName, tasks);
 
 			return retVal;
 		}
 
-		public ITaskListWithTasks Create(int userId, string listContent)
+		public ITaskList Create(int userId, string listContent)
 		{
 			var parameters = new List<ISqlDataParameter>();
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
@@ -129,7 +129,7 @@ namespace TaskHistory.Impl.TaskLists
 			string listName = kvpList.First().Value.ListName;
 			int listId = kvpList.First().Key;
 
-			var retVal = new TaskListWithTasks(listId, listName, new List<ITask>());
+			var retVal = new TaskList(listId, listName, new List<ITask>());
 			return retVal;
 		}
 	}

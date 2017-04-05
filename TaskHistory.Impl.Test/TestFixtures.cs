@@ -17,14 +17,14 @@ namespace TaskHistory.Impl.Test
 	{
 		readonly IUserRepo _userRepo;
 		readonly ITaskRepo _taskRepo;
-		readonly ITaskListWithTasksRepo _taskListRepo;
+		readonly ITaskListRepo _taskListRepo;
 		readonly IHistoryRepo _historyRepo;
 
 		readonly ApplicationDataProxy _dataProxy;
 
 		IUser _user;
 		ITask _task;
-		ITaskListWithTasks _taskList;
+		ITaskList _taskList;
 
 		List<IHistory> _histories;
 
@@ -33,7 +33,7 @@ namespace TaskHistory.Impl.Test
 			get { return _user; }
 		}
 
-		public ITaskListWithTasks TaskList
+		public ITaskList TaskList
 		{
 			get { return _taskList; }
 		}
@@ -61,7 +61,7 @@ namespace TaskHistory.Impl.Test
 			_dataProxy.ExecuteNonQuery("_Data_Reset");
 
 			_userRepo = new UserRepo(userFactory, _dataProxy);
-			_taskListRepo = new TaskListWithTasksRepo(taskListFactory, _dataProxy);
+			_taskListRepo = new TaskListRepo(taskListFactory, _dataProxy);
 			_taskRepo = new TaskRepo(taskFactory, _dataProxy);
 			_historyRepo = new HistoryRepo(historyFactory, _dataProxy);
 

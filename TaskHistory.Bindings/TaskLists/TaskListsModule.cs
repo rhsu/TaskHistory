@@ -12,8 +12,8 @@ namespace TaskHistory.Bindings
 			if (kernel == null)
 				throw new ArgumentNullException(nameof(kernel));
 
-			kernel.Bind<ITaskListWithTasksRepo>()
-				  .To<TaskListWithTasksRepo>();
+			kernel.Bind<ITaskListRepo>()
+				  .To<TaskListRepo>();
 		}
 	}
 }

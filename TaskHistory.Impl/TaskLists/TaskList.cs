@@ -4,13 +4,13 @@ using TaskHistory.Api.Tasks;
 
 namespace TaskHistory.Impl
 {
-	public class TaskListWithTasks : ITaskListWithTasks
+	public class TaskList : ITaskList
 	{
 		int _id;
 		string _name;
 		IEnumerable<ITask> _tasks;
 
-		public TaskListWithTasks(int id, string name, IEnumerable<ITask> tasks)
+		public TaskList(int id, string name, IEnumerable<ITask> tasks)
 		{
 			_id = id;
 			_name = name;
