@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.TaskLists;
@@ -10,17 +8,17 @@ namespace TaskHistory.Impl.Test.TaskLists
 	[TestFixture]
 	public class TaskListRepoTest
 	{
-		ITaskListRepo _taskListRepo;
+		ITaskListWithTasksRepo _taskListRepo;
 		TestFixtures _testFixtures;
 
 		[SetUp]
 		public void Init()
 		{
-			var factory = new TaskListFactory();
+			var factory = new TaskListWithTasksFactory();
 			var appDataProxy = new ApplicationDataProxyFactory().Build();
 
 			_testFixtures = new TestFixtures();
-			_taskListRepo = new TaskListRepo(factory, appDataProxy);
+			_taskListRepo = new TaskListWithTasksRepo(factory, appDataProxy);
 		}
 
 		[Test]
@@ -29,9 +27,9 @@ namespace TaskHistory.Impl.Test.TaskLists
 			IUser user = _testFixtures.User;
 			string listName = "My List";
 
-			ITaskList taskList = _taskListRepo.Create(user.Id, listName);
+			ITaskListWithTasks taskList = _taskListRepo.Create(user.Id, listName);
 
-			Assert.AreEqual(listName, taskList.Name);
+			Assert.AreEqual(listName, taskList.ListName);
 		}
 
 		/*[Test]

@@ -34,7 +34,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		public void Read_All_TaskList_With_Tasks()
 		{
 			int userId = _testFixtures.User.Id;
-			int listId = _testFixtures.TaskList.Id;
+			int listId = _testFixtures.TaskList.ListId;
 			// create 5 tasks and associate them to the existing testFixture list
 			var expectedTasks = new Dictionary<int, ITask>();
 

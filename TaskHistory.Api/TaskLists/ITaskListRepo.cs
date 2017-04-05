@@ -6,7 +6,7 @@ namespace TaskHistory.Api.TaskLists
 	{
 		//IEnumerable<ITaskList> Read(int userId);
 
-		ITaskList Create(int userId, string name);
+		// ITaskList Create(int userId, string name);
 
 		//ITaskList Update(int userId, int listId, string name);
 	}
