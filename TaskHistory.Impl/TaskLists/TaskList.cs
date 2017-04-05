@@ -2,7 +2,7 @@
 using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.Tasks;
 
-namespace TaskHistory.Impl
+namespace TaskHistory.Impl.TaskLists
 {
 	public class TaskList : ITaskList
 	{
