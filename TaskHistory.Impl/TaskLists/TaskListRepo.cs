@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TaskHistory.Api.Sql;
 using TaskHistory.Api.TaskLists;
+using TaskHistory.Api.TaskLists.DataTransferObjects;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.Sql;
 using TaskHistory.Impl.TaskLists.QueryResults;
@@ -19,7 +20,7 @@ namespace TaskHistory.Impl.TaskLists
 		const string ReadAllStoredProcedure = "TaskLists_All_Select";
 		const string ReadStoredProcedure = "TaskLists_Select";
 
-		const string UpdateStoredProcedure = "";
+		const string UpdateStoredProcedure = "TaskLists_Update";
 
 		public TaskListRepo(TaskListWithTasksFactory factory,
 		                             ApplicationDataProxy dataProxy)
@@ -132,6 +133,44 @@ namespace TaskHistory.Impl.TaskLists
 			int listId = kvpList.First().Key;
 
 			var retVal = new TaskList(listId, listName, new List<ITask>());
+			return retVal;
+		}
+
+		public ITaskList Update(int userId, int id, TaskListUpdatingParameters listUpdatingParams)
+		{
+			if (listUpdatingParams == null)
+				throw new ArgumentNullException(nameof(listUpdatingParams));
+
+			var parameters = new List<ISqlDataParameter>();
+
+			parameters.Add(_dataProxy.CreateParameter("pId", id));
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", listUpdatingParams.isDeleted));
+			parameters.Add(_dataProxy.CreateParameter("pName", listUpdatingParams.listName));
+
+			var queryCache = _dataProxy.ExecuteOnCollection(_factory, 
+			                                          		UpdateStoredProcedure, 
+			                                          		parameters);
+
+			if (queryCache == null)
+				throw new NullReferenceException("null returned from DataProxy");
+				
+			string listName = queryCache.First().Value.ListName;
+			int listId = queryCache.First().Key;
+
+			var tasks = new List<ITask>();
+
+			foreach (var item in queryCache)
+			{
+				ITask task = item.Value.Task;
+				if (task != null)
+				{
+					tasks.Add(task);
+				}
+			}
+
+			var retVal = new TaskList(listId, listName, tasks);
+
 			return retVal;
 		}
 	}
