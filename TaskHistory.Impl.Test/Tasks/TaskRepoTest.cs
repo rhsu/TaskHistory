@@ -81,7 +81,7 @@ namespace TaskHistory.Impl.Test.Tasks
 		public void CreateTaskOnList_Works()
 		{
 			var userId = _testFixtures.User.Id;
-			var listId = _testFixtures.TaskList.Id;
+			var listId = _testFixtures.TaskList.ListId;
 			var content = "test content here";
 
 			ITask task = _taskRepo.CreateTaskOnList(userId, listId, content);
@@ -101,7 +101,7 @@ namespace TaskHistory.Impl.Test.Tasks
 		[Test]
 		public void CreateTaskOnList_NoUser()
 		{
-			var listId = _testFixtures.TaskList.Id;
+			var listId = _testFixtures.TaskList.ListId;
 
 			ITask task = _taskRepo.CreateTaskOnList(-1, listId, "Some Content Here");
 			Assert.Null(task);
@@ -114,7 +114,7 @@ namespace TaskHistory.Impl.Test.Tasks
 			// 3. this relationship already exists
 
 			var userId = _testFixtures.User.Id;
-			var listId = _testFixtures.TaskList.Id;
+			var listId = _testFixtures.TaskList.ListId;
 			var content = "test content here";
 
 			ITask task = _taskRepo.CreateTaskOnList(userId, listId, content);

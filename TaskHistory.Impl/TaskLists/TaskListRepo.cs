@@ -1,76 +1,136 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TaskHistory.Api.Sql;
 using TaskHistory.Api.TaskLists;
+using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.Sql;
+using TaskHistory.Impl.TaskLists.QueryResults;
 
 namespace TaskHistory.Impl.TaskLists
 {
 	public class TaskListRepo : ITaskListRepo
 	{
-		const string CreateStoredProcedure = "TaskLists_Create";
-		const string ReadStoredProcedure = "TaskLists_Read";
-		const string UpdatedStoredProceudre = "TaskLists_Update";
+		TaskListWithTasksFactory _factory;
+		ApplicationDataProxy _dataProxy;
 
-		readonly TaskListFactory _factory;
-		readonly ApplicationDataProxy _appDataProxy;
+		const string CreatedStoredProcedure = "TaskLists_Create";
 
-		public ITaskList Create(int userId, string name)
+		const string ReadAllStoredProcedure = "TaskListsWithTasks_All_Select";
+		const string ReadStoredProcedure = "TaskListsWithTasks_Select";
+
+		public TaskListRepo(TaskListWithTasksFactory factory,
+		                             ApplicationDataProxy dataProxy)
 		{
-			if (string.IsNullOrEmpty(name))
-				throw new ArgumentNullException(nameof(name));
-
-			var parameters = new List<ISqlDataParameter>();
-
-			parameters.Add(_appDataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_appDataProxy.CreateParameter("pName", name));
-
-			var newTaskList = _appDataProxy.ExecuteReader(_factory,
-													CreateStoredProcedure,
-													parameters);
-
-			return newTaskList;
+			_factory = factory;
+			_dataProxy = dataProxy;
 		}
 
-		public IEnumerable<ITaskList> Read(int userId)
+		public IEnumerable<ITaskList> ReadAll(int userId)
 		{
-			var pUserId = _appDataProxy.CreateParameter("pUserId", userId);
+			var parameter = _dataProxy.CreateParameter("pUserId", userId);
 
-			var tasksLists = _appDataProxy.ExecuteOnCollection(_factory,
-															   ReadStoredProcedure,
-															   pUserId);
+			IEnumerable<KeyValuePair<int, TaskListWithTasksQueryResult>> kvpList 
+				= _dataProxy.ExecuteOnCollection(_factory, 
+			                                     ReadAllStoredProcedure,
+			                                     parameter);
 
-			if (tasksLists == null)
-				throw new NullReferenceException("null returned from appDataProxy");
+			// storage where key is the listId and vaue is the listName
+			var listNameCache = new Dictionary<int, string>();
 
-			return tasksLists;
-		}
+			// storage where key is the listId and value is the list of tasks
+			var taskCache = new Dictionary<int, List<ITask>>();
 
-		public ITaskList Update(int userId, int listId, string name)
-		{
-			if (string.IsNullOrEmpty(name))
-				throw new ArgumentNullException(nameof(name));
+			var retVal = new List<ITaskList>();
 
-			var parameters = new List<ISqlDataParameter>();
+			foreach (var item in kvpList)
+			{
+				// there is an assumption that a list cannot exist without a name
+				// but a list could contain 0 tasks
+				int listId = item.Key;
+				string listName = item.Value.ListName;
+				ITask task = item.Value.Task;
 
-			parameters.Add(_appDataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_appDataProxy.CreateParameter("pListId", listId));			
-			parameters.Add(_appDataProxy.CreateParameter("pName", name));
+				if (!listNameCache.ContainsKey(listId))
+				{
+					listNameCache[listId] = listName;
+				}
 
-			var retVal = _appDataProxy.ExecuteReader(_factory,
-								  UpdatedStoredProceudre,
-								  parameters);
+				if (!taskCache.ContainsKey(listId))
+				{
+					taskCache[listId] = new List<ITask>();
+				}
 
-			if (retVal == null)
-				throw new NullReferenceException("Null returned from appDataProxy");
+				if (task != null)
+				{
+					taskCache[listId].Add(task);
+				}
+			}
+
+			foreach (var kvp in listNameCache)
+			{
+				int listId = kvp.Key;
+				string listName = kvp.Value;
+
+				// TODO this should be done via a new TaskListFactory
+				List<ITask> tasks = taskCache[listId];
+
+				var taskListWithTasks = new TaskList(listId, listName, tasks);
+
+				retVal.Add(taskListWithTasks);
+			}
 
 			return retVal;
 		}
 
-		public TaskListRepo(TaskListFactory taskListFactory, ApplicationDataProxy appDataProxy)
+		public ITaskList Read(int userId, int listId)
 		{
-			_factory = taskListFactory;
-			_appDataProxy = appDataProxy;
+			var parameters = new List<ISqlDataParameter>();
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pListId", listId));
+
+			var kvpList = _dataProxy.ExecuteOnCollection(_factory, 
+			                                             ReadStoredProcedure,
+			                                             parameters);
+			if (kvpList == null)
+				throw new NullReferenceException("null returned from DataProxy");
+
+			var tasks = new List<ITask>();
+
+			string listName = kvpList.First().Value.ListName;
+
+			foreach (var item in kvpList)
+			{
+				ITask task = item.Value.Task;
+
+				if (task != null)
+				{
+					tasks.Add(task);
+				}
+			}
+
+			var retVal = new TaskList(listId, listName, tasks);
+
+			return retVal;
+		}
+
+		public ITaskList Create(int userId, string listContent)
+		{
+			var parameters = new List<ISqlDataParameter>();
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pName", listContent));
+
+			var kvpList = _dataProxy.ExecuteOnCollection(_factory,
+														 CreatedStoredProcedure,
+														 parameters);
+			if (kvpList == null)
+				throw new NullReferenceException("null returned from DataProxy");
+
+			string listName = kvpList.First().Value.ListName;
+			int listId = kvpList.First().Key;
+
+			var retVal = new TaskList(listId, listName, new List<ITask>());
+			return retVal;
 		}
 	}
 }

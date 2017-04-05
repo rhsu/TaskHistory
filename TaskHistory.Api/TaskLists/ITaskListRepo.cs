@@ -4,10 +4,10 @@ namespace TaskHistory.Api.TaskLists
 {
 	public interface ITaskListRepo
 	{
-		IEnumerable<ITaskList> Read(int userId);
+		IEnumerable<ITaskList> ReadAll(int userId);
 
-		ITaskList Create(int userId, string name);
+		ITaskList Read(int userId, int listId);
 
-		ITaskList Update(int userId, int listId, string name);
+		ITaskList Create(int userId, string content);
 	}
 }

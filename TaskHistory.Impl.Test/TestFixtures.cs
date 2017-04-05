@@ -52,7 +52,7 @@ namespace TaskHistory.Impl.Test
 		{
 			var userFactory = new UserFactory();
 			var taskFactory = new TaskFactory();
-			var taskListFactory = new TaskListFactory();
+			var taskListFactory = new TaskListWithTasksFactory();
 			var historyFactory = new HistoryFactory();
 
 			var appDataProxyFactory = new ApplicationDataProxyFactory();

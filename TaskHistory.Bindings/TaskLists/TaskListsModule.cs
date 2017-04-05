@@ -14,9 +14,6 @@ namespace TaskHistory.Bindings
 
 			kernel.Bind<ITaskListRepo>()
 				  .To<TaskListRepo>();
-
-			kernel.Bind<ITaskListWithTasksRepo>()
-				  .To<TaskListWithTasksRepo>();
 		}
 	}
 }

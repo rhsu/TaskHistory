@@ -11,7 +11,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 	[TestFixture]
 	public class TaskListWithTasksRepoTest
 	{
-		ITaskListWithTasksRepo _repo;
+		ITaskListRepo _repo;
 		TestFixtures _testFixtures;
 
 		ITaskRepo _taskRepo;
@@ -25,7 +25,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 			var appDataProxy = new ApplicationDataProxyFactory().Build();
 
 			_testFixtures = new TestFixtures();
-			_repo = new TaskListWithTasksRepo(factory, appDataProxy);
+			_repo = new TaskListRepo(factory, appDataProxy);
 
 			_taskRepo = new TaskRepo(taskFactory, appDataProxy);
 		}
@@ -34,7 +34,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		public void Read_All_TaskList_With_Tasks()
 		{
 			int userId = _testFixtures.User.Id;
-			int listId = _testFixtures.TaskList.Id;
+			int listId = _testFixtures.TaskList.ListId;
 			// create 5 tasks and associate them to the existing testFixture list
 			var expectedTasks = new Dictionary<int, ITask>();
 
@@ -73,7 +73,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 			int userId = _testFixtures.User.Id;
 
 			// create some task on the list
-			var task = _taskRepo.CreateTaskOnList(userId, taskList.Id, "Hello World");
+			var task = _taskRepo.CreateTaskOnList(userId, taskList.ListId, "Hello World");
 
 			var taskUpdatingParams = new TaskUpdatingParameters(task.Content, 
 			                                                    task.IsCompleted, 
@@ -92,7 +92,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		public void Read_TaskList_With_Tasks()
 		{
 			int userId = _testFixtures.User.Id;
-			int listId = _testFixtures.TaskList.Id;
+			int listId = _testFixtures.TaskList.ListId;
 			// create 5 tasks and associate them to the existing testFixture list
 			var expectedTasks = new Dictionary<int, ITask>();
 
@@ -121,11 +121,23 @@ namespace TaskHistory.Impl.Test.TaskLists
 		public void Read_TaskLists_No_Tasks()
 		{
 			int userId = _testFixtures.User.Id;
-			int listId = _testFixtures.TaskList.Id;
+			int listId = _testFixtures.TaskList.ListId;
 
 			var list = _repo.Read(userId, listId);
 
 			Assert.AreEqual(0, list.Tasks.Count());
+		}
+
+		[Test]
+		public void Create_TaskList()
+		{
+			var userId = _testFixtures.User.Id;
+			string listName = "Some List Im Buliding";
+
+			var taskList = _repo.Create(userId, listName);
+
+			Assert.AreEqual(listName, taskList.ListName);
+			Assert.AreEqual(new List<ITask>(), taskList.Tasks);
 		}
 	}
 }

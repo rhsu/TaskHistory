@@ -38,7 +38,6 @@
     <Compile Include="Terminal\TerminalInterpreterHelperTest.cs" />
     <Compile Include="Users\UserRepoTest.cs" />
     <Compile Include="AppDataProxyFactory\ApplicationDataProxyFactory.cs" />
-    <Compile Include="TaskLists\TaskListRepoTest.cs" />
     <Compile Include="TestFixtures.cs" />
     <Compile Include="Tasks\TaskRepoTest.cs" />
     <Compile Include="FeatureFlags\FeatureFlagRepoTest.cs" />

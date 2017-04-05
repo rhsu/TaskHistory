@@ -6,6 +6,8 @@ using TaskHistory.Impl.Tasks;
 
 namespace TaskHistory.Impl.TaskLists
 {
+	// TODO this is not a TaskListWithTasksFactory
+	//		Rename to TaskListQueryCacheFactory
 	public class TaskListWithTasksFactory : IFromDataReaderFactory<KeyValuePair<int, TaskListWithTasksQueryResult>>
 	{
 		public KeyValuePair<int, TaskListWithTasksQueryResult> Build(ISqlDataReader reader)

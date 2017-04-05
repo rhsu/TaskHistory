@@ -31,6 +31,12 @@ namespace TaskHistory.WebApp.Controllers
 			return Json(_orchestrator.Create(_currentUser, name));
 		}
 
+		[HttpPost]
+		public JsonResult Update(int listId, string listContent)
+		{
+			return Json(_orchestrator.Update(_currentUser, listId, listContent));
+		}
+
 		public TaskListsController(TaskListOrchestrator orchestrator, ApplicationContext appContext)
 			: base(appContext)
 		{
