@@ -54,7 +54,6 @@
     <Compile Include="Terminal\ITerminalProxyRepo.cs" />
     <Compile Include="Terminal\ITerminalObject.cs" />
     <Compile Include="Terminal\ITerminalObjectMapper.cs" />
-    <Compile Include="TaskLists\ITaskList.cs" />
     <Compile Include="FeatureFlags\IFeatureFlag.cs" />
     <Compile Include="FeatureFlags\IFeatureFlagRepo.cs" />
     <Compile Include="TaskLists\ITaskListWithTasks.cs" />

@@ -70,8 +70,6 @@
     <Compile Include="Terminal\TerminalInterpreterHelper.cs" />
     <Compile Include="Terminal\IRegisteredObjectRepoProxy.cs" />
     <Compile Include="Terminal\RegisteredObjectRepoProxy.cs" />
-    <Compile Include="TaskLists\TaskList.cs" />
-    <Compile Include="TaskLists\TaskListFactory.cs" />
     <Compile Include="FeatureFlags\FeatureFlag.cs" />
     <Compile Include="FeatureFlags\FeatureFlagRepo.cs" />
     <Compile Include="FeatureFlags\FeatureFlagFactory.cs" />

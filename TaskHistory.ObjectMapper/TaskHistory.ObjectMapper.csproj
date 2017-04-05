@@ -35,7 +35,6 @@
     <Compile Include="Users\ObjectMapperUsers.cs" />
     <Compile Include="Tasks\ObjectMapperTasks.cs" />
     <Compile Include="FeatureFlags\FeatureFlagObjectMapper.cs" />
-    <Compile Include="TaskLists\ObjectMapperTaskLists.cs" />
     <Compile Include="TaskLists\ObjectMapperTaskLisWithTasks.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
