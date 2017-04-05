@@ -16,8 +16,8 @@ namespace TaskHistory.Impl.TaskLists
 
 		const string CreatedStoredProcedure = "TaskLists_Create";
 
-		const string ReadAllStoredProcedure = "TaskListsWithTasks_All_Select";
-		const string ReadStoredProcedure = "TaskListsWithTasks_Select";
+		const string ReadAllStoredProcedure = "TaskLists_All_Select";
+		const string ReadStoredProcedure = "TaskLists_Select";
 
 		public TaskListRepo(TaskListWithTasksFactory factory,
 		                             ApplicationDataProxy dataProxy)
