@@ -9,7 +9,7 @@ using TaskHistory.Impl.Tasks;
 namespace TaskHistory.Impl.Test.TaskLists
 {
 	[TestFixture]
-	public class TaskListWithTasksRepoTest
+	public class TaskListRepoTest
 	{
 		ITaskListRepo _repo;
 		TestFixtures _testFixtures;

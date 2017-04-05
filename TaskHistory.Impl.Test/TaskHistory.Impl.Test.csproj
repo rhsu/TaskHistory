@@ -41,7 +41,7 @@
     <Compile Include="TestFixtures.cs" />
     <Compile Include="Tasks\TaskRepoTest.cs" />
     <Compile Include="FeatureFlags\FeatureFlagRepoTest.cs" />
-    <Compile Include="TaskLists\TaskListWithTasksRepoTest.cs" />
+    <Compile Include="TaskLists\TaskListRepoTest.cs" />
     <Compile Include="Users\AdminUserProviderTest.cs" />
     <Compile Include="Users\DefaultUserProviderTest.cs" />
     <Compile Include="History\HistoryRepoTest.cs" />
