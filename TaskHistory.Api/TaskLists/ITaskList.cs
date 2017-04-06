@@ -7,6 +7,7 @@ namespace TaskHistory.Api.TaskLists
 	{
 		int ListId { get; }
 		string ListName { get; }
+		bool IsDeleted { get; }
 
 		IEnumerable<ITask> Tasks { get; }
 	}

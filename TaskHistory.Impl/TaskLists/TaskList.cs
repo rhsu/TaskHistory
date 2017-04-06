@@ -6,30 +6,20 @@ namespace TaskHistory.Impl.TaskLists
 {
 	public class TaskList : ITaskList
 	{
-		int _id;
-		string _name;
-		IEnumerable<ITask> _tasks;
+		public int ListId { get; }
 
-		public TaskList(int id, string name, IEnumerable<ITask> tasks)
-		{
-			_id = id;
-			_name = name;
-			_tasks = tasks;
-		}
+		public string ListName { get; }
 
-		public int ListId
-		{
-			get { return _id; }
-		}
+		public bool IsDeleted { get; }
 
-		public string ListName
-		{
-			get { return _name; }
-		}
+		public IEnumerable<ITask> Tasks { get; }
 
-		public IEnumerable<ITask> Tasks
+		public TaskList(int listId, string listName, bool isDeleted, IEnumerable<ITask> tasks)
 		{
-			get { return _tasks; }
+			ListId = listId;
+			ListName = listName;
+			Tasks = tasks;
+			IsDeleted = isDeleted;
 		}
 	}
 }

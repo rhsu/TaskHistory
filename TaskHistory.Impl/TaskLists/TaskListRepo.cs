@@ -78,7 +78,9 @@ namespace TaskHistory.Impl.TaskLists
 				// TODO this should be done via a new TaskListFactory
 				List<ITask> tasks = taskCache[listId];
 
-				var taskListWithTasks = new TaskList(listId, listName, tasks);
+				// ReadAll only returns Not Deleted TaskLists
+				// TODO: should review this
+				var taskListWithTasks = new TaskList(listId, listName, false, tasks);
 
 				retVal.Add(taskListWithTasks);
 			}
@@ -112,7 +114,8 @@ namespace TaskHistory.Impl.TaskLists
 				}
 			}
 
-			var retVal = new TaskList(listId, listName, tasks);
+			// Read only returns NOT deleted TaskLists
+			var retVal = new TaskList(listId, listName, false, tasks);
 
 			return retVal;
 		}
@@ -132,7 +135,8 @@ namespace TaskHistory.Impl.TaskLists
 			string listName = kvpList.First().Value.ListName;
 			int listId = kvpList.First().Key;
 
-			var retVal = new TaskList(listId, listName, new List<ITask>());
+			// a created TaskList is Not Deleted
+			var retVal = new TaskList(listId, listName, false, new List<ITask>());
 			return retVal;
 		}
 
@@ -169,7 +173,9 @@ namespace TaskHistory.Impl.TaskLists
 				}
 			}
 
-			var retVal = new TaskList(listId, listName, tasks);
+			// TODO shouldn't be trusting the param value 
+			// but the alternative requires rewriting the QueryCache
+			var retVal = new TaskList(listId, listName, listUpdatingParams.isDeleted, tasks);
 
 			return retVal;
 		}
