@@ -149,7 +149,12 @@ namespace TaskHistory.Impl.Test.TaskLists
 			var listId = _testFixtures.TaskList.ListId;
 			var param = new TaskListUpdatingParameters(name, true);
 
-			_repo.Update(userId, listId, param);
+			var updated = _repo.Update(userId, listId, param);
+
+			Assert.AreEqual(listId, updated.ListId);
+			Assert.AreEqual(name, updated.ListName);
+			// TODO make is Deleted Property
+			// Assert.AreEqual(true, updated.IsDeleted); 
 		}
 	}
 }
