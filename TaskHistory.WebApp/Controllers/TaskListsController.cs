@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using TaskHistory.Orchestrator;
+using TaskHistory.ViewModel.TaskLists;
 
 namespace TaskHistory.WebApp.Controllers
 {
@@ -32,9 +33,9 @@ namespace TaskHistory.WebApp.Controllers
 		}
 
 		[HttpPost]
-		public JsonResult Update(int listId, string listContent)
+		public JsonResult Update(int listId, TaskListEditViewModel editViewModel)
 		{
-			return Json(_orchestrator.Update(_currentUser, listId, listContent));
+			return Json(_orchestrator.Update(_currentUser, listId, editViewModel));
 		}
 
 		public TaskListsController(TaskListOrchestrator orchestrator, ApplicationContext appContext)

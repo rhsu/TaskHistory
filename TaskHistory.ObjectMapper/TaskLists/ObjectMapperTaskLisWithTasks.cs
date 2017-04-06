@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaskHistory.Api.TaskLists;
+using TaskHistory.Api.TaskLists.DataTransferObjects;
 using TaskHistory.ViewModel.TaskLists;
 using TaskHistoryObjectMapper;
 
@@ -45,9 +46,23 @@ namespace TaskHistory.ObjectMapper.TaskLists
 
 			var viewModel = new TaskListDetailedTableViewModel(taskList.ListId,
 			                                                   taskList.ListName,
+			                                                   taskList.IsDeleted,
 			                                                   vmTasks);
 
 			return viewModel;
+		}
+
+		public TaskListUpdatingParameters Map(TaskListEditViewModel editViewModel)
+		{
+			if (editViewModel == null)
+				throw new ArgumentNullException(nameof(editViewModel));
+
+			string listName = editViewModel.Name;
+			bool isDeleted = editViewModel.IsDeleted;
+
+			var updateParams = new TaskListUpdatingParameters(listName, isDeleted);
+
+			return updateParams;
 		}
 	}
 }

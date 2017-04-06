@@ -42,6 +42,7 @@
     <Compile Include="FeatureFlags\FeatureFlagTableViewModel.cs" />
     <Compile Include="FeatureFlags\FeatureFlagCreateViewModel.cs" />
     <Compile Include="TaskLists\TaskListDetailedTableViewModel.cs" />
+    <Compile Include="TaskLists\TaskListEditViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tasks\" />
