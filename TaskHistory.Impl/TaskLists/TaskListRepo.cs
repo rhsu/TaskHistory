@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TaskHistory.Api.Sql;
 using TaskHistory.Api.TaskLists;
+using TaskHistory.Api.TaskLists.DataTransferObjects;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.Sql;
 using TaskHistory.Impl.TaskLists.QueryResults;
@@ -14,10 +15,12 @@ namespace TaskHistory.Impl.TaskLists
 		TaskListWithTasksFactory _factory;
 		ApplicationDataProxy _dataProxy;
 
-		const string CreatedStoredProcedure = "TaskLists_Create";
+		const string CreateStoredProcedure = "TaskLists_Create";
 
 		const string ReadAllStoredProcedure = "TaskLists_All_Select";
 		const string ReadStoredProcedure = "TaskLists_Select";
+
+		const string UpdateStoredProcedure = "TaskLists_Update";
 
 		public TaskListRepo(TaskListWithTasksFactory factory,
 		                             ApplicationDataProxy dataProxy)
@@ -75,7 +78,9 @@ namespace TaskHistory.Impl.TaskLists
 				// TODO this should be done via a new TaskListFactory
 				List<ITask> tasks = taskCache[listId];
 
-				var taskListWithTasks = new TaskList(listId, listName, tasks);
+				// ReadAll only returns Not Deleted TaskLists
+				// TODO: should review this
+				var taskListWithTasks = new TaskList(listId, listName, false, tasks);
 
 				retVal.Add(taskListWithTasks);
 			}
@@ -109,7 +114,8 @@ namespace TaskHistory.Impl.TaskLists
 				}
 			}
 
-			var retVal = new TaskList(listId, listName, tasks);
+			// Read only returns NOT deleted TaskLists
+			var retVal = new TaskList(listId, listName, false, tasks);
 
 			return retVal;
 		}
@@ -121,7 +127,7 @@ namespace TaskHistory.Impl.TaskLists
 			parameters.Add(_dataProxy.CreateParameter("pName", listContent));
 
 			var kvpList = _dataProxy.ExecuteOnCollection(_factory,
-														 CreatedStoredProcedure,
+														 CreateStoredProcedure,
 														 parameters);
 			if (kvpList == null)
 				throw new NullReferenceException("null returned from DataProxy");
@@ -129,7 +135,48 @@ namespace TaskHistory.Impl.TaskLists
 			string listName = kvpList.First().Value.ListName;
 			int listId = kvpList.First().Key;
 
-			var retVal = new TaskList(listId, listName, new List<ITask>());
+			// a created TaskList is Not Deleted
+			var retVal = new TaskList(listId, listName, false, new List<ITask>());
+			return retVal;
+		}
+
+		public ITaskList Update(int userId, int id, TaskListUpdatingParameters listUpdatingParams)
+		{
+			if (listUpdatingParams == null)
+				throw new ArgumentNullException(nameof(listUpdatingParams));
+
+			var parameters = new List<ISqlDataParameter>();
+
+			parameters.Add(_dataProxy.CreateParameter("pId", id));
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", listUpdatingParams.isDeleted));
+			parameters.Add(_dataProxy.CreateParameter("pName", listUpdatingParams.listName));
+
+			var queryCache = _dataProxy.ExecuteOnCollection(_factory, 
+			                                          		UpdateStoredProcedure, 
+			                                          		parameters);
+
+			if (queryCache == null)
+				throw new NullReferenceException("null returned from DataProxy");
+				
+			string listName = queryCache.First().Value.ListName;
+			int listId = queryCache.First().Key;
+
+			var tasks = new List<ITask>();
+
+			foreach (var item in queryCache)
+			{
+				ITask task = item.Value.Task;
+				if (task != null)
+				{
+					tasks.Add(task);
+				}
+			}
+
+			// TODO shouldn't be trusting the param value 
+			// but the alternative requires rewriting the QueryCache
+			var retVal = new TaskList(listId, listName, listUpdatingParams.isDeleted, tasks);
+
 			return retVal;
 		}
 	}

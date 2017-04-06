@@ -109,7 +109,7 @@ namespace TaskHistory.Impl.Test.Tasks
 
 		// TODO This is not ready yet.
 		//[Test]
-		public void CreateTaskOnList_AlreadyExists()
+		/*public void CreateTaskOnList_AlreadyExists()
 		{
 			// 3. this relationship already exists
 
@@ -122,6 +122,6 @@ namespace TaskHistory.Impl.Test.Tasks
 			ITask secondAttempt = _taskRepo.CreateTaskOnList(userId, listId, content);
 			// TODO this is not ready yet
 			//Assert.Null(secondAttempt);
-		}
+		}*/
 	}
 }

@@ -67,6 +67,7 @@
     <Compile Include="History\Enums\BusinessAction.cs" />
     <Compile Include="History\IHistoryRepo.cs" />
     <Compile Include="History\DataTransferObjects\HistoryCreationParams.cs" />
+    <Compile Include="TaskLists\DataTransferObjects\TaskListUpdatingParameters.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -84,5 +85,6 @@
     <Folder Include="History\" />
     <Folder Include="History\Enums\" />
     <Folder Include="History\DataTransferObjects\" />
+    <Folder Include="TaskLists\DataTransferObjects\" />
   </ItemGroup>
 </Project>
