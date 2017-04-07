@@ -56,6 +56,12 @@
 																		 ng-show='list.showAddTaskForm'>
 						</task-list-add-task-form>
 
+						<!--<task-list-delete-form list='list'
+																	 ng-show='list.showDeleteForm'>
+						</task-list-delete-form> -->
+
+						<task-list-delete-form></task-list-delete-form>
+
 						<div class='well'
 								 ng-hide="list.tasks.length">list contains no tasks.</div>
 						<task-table tasks='list.tasks'></task-table>
