@@ -12,6 +12,41 @@
     this.showConfirmDelete = false;
 
     this.taskFormName = '';
+
+    /*this.initialState = function() {
+      this.states = {
+        showTasks: true,
+        showAddTaskForm: false,
+        showConfirmDelete: false
+      };
+
+      console.log(this.states);
+    }*/
+
+    this.initialState();
+  }
+
+  TaskListWithTasks.prototype.initialState = function () {
+    // state variables
+    this.showTasks = true;
+    this.showAddTaskForm = false;
+    this.showConfirmDelete = false;
+
+    this.states = {
+      showTasks: true,
+      showAddTaskForm: false,
+      showConfirmDelete: false
+    };
+
+    console.log(this.states);
+  }
+
+  TaskListWithTasks.prototype.setState(state) {
+    for (s in this.states) {
+      if (s === state) {
+        
+      }
+    }
   }
 
   app.factory('TaskListWithTasksFactory', function (TaskTableViewFactory) {
