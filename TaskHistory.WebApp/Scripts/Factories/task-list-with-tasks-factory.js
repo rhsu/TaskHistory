@@ -38,15 +38,20 @@
       showConfirmDelete: false
     };
 
-    console.log(this.states);
+    this.setState('showConfirmDelete');
   }
 
-  TaskListWithTasks.prototype.setState(state) {
+  TaskListWithTasks.prototype.setState = function (state) {
     for (s in this.states) {
-      if (s === state) {
-        
-      }
+      /*if (s === state) {
+        this.states[s] = true;
+      } else {
+        this.states[s] = false;
+      }*/
+      this.states[s] = (s === state);
     }
+
+    console.log(this.states);
   }
 
   app.factory('TaskListWithTasksFactory', function (TaskTableViewFactory) {
