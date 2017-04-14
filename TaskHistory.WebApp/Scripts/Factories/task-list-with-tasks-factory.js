@@ -6,9 +6,6 @@
     this.listName = listName;
     this.tasks = tasks;
 
-    // state variables
-    this.showTasks = true;
-
     this.taskFormName = '';
 
     this.initialState();
