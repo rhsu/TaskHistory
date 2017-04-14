@@ -8,8 +8,6 @@
 
     // state variables
     this.showTasks = true;
-    this.showAddTaskForm = false;
-    this.showConfirmDelete = false;
 
     this.taskFormName = '';
 
@@ -28,14 +26,6 @@
     for (s in this.states) {
       this.states[s] = (s === state);
     }
-  }
-
-  TaskListWithTasks.prototype.reset = function () {
-    this.states = {
-      showTasks: true,
-      showAddTaskForm: false,
-      showConfirmDelete: false
-    };
   }
 
   app.factory('TaskListWithTasksFactory', function (TaskTableViewFactory) {
