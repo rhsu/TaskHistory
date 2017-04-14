@@ -30,7 +30,7 @@
 							<!-- add task to list -->
 							<button class='btn btn-xs btn-success'
 											ng-hide='list.showAddTaskForm'
-											ng-click='list.showAddTaskForm = true'>
+											ng-click='list.setState("showAddTaskForm")'>
 								<span class='glyphicon glyphicon-plus'></span>
 							</button>
 
@@ -53,7 +53,7 @@
 						<label>{{ list.listName }}</label>
 
 						<task-list-add-task-form list='list'
-																		 ng-show='list.showAddTaskForm'>
+																		 ng-show='list.states.showAddTaskForm'>
 						</task-list-add-task-form>
 
 						<!--<task-list-delete-form list='list'

@@ -13,45 +13,29 @@
 
     this.taskFormName = '';
 
-    /*this.initialState = function() {
-      this.states = {
-        showTasks: true,
-        showAddTaskForm: false,
-        showConfirmDelete: false
-      };
-
-      console.log(this.states);
-    }*/
-
     this.initialState();
   }
 
   TaskListWithTasks.prototype.initialState = function () {
-    // state variables
-    this.showTasks = true;
-    this.showAddTaskForm = false;
-    this.showConfirmDelete = false;
-
     this.states = {
       showTasks: true,
       showAddTaskForm: false,
       showConfirmDelete: false
     };
-
-    this.setState('showConfirmDelete');
   }
 
   TaskListWithTasks.prototype.setState = function (state) {
     for (s in this.states) {
-      /*if (s === state) {
-        this.states[s] = true;
-      } else {
-        this.states[s] = false;
-      }*/
       this.states[s] = (s === state);
     }
+  }
 
-    console.log(this.states);
+  TaskListWithTasks.prototype.reset = function () {
+    this.states = {
+      showTasks: true,
+      showAddTaskForm: false,
+      showConfirmDelete: false
+    };
   }
 
   app.factory('TaskListWithTasksFactory', function (TaskTableViewFactory) {
