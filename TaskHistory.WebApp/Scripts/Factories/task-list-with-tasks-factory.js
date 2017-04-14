@@ -15,7 +15,7 @@
     this.states = {
       showTasks: true,
       showAddTaskForm: false,
-      showConfirmDelete: false
+      showDeleteForm: false
     };
   }
 
