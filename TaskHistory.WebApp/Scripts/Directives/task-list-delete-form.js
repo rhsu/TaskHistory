@@ -12,6 +12,15 @@
       },
       link: function ($scope, elem, attr, ctrl) {
         //some stuff happens here
+
+        $scope.pageFns = {};
+
+        $scope.pageFns.deleteTask = function (list, inclueTasks) {
+          // some stuff happens and then...
+
+          // TODO should be deletedState()
+          list.initialState();
+        }
       }
     }
 
