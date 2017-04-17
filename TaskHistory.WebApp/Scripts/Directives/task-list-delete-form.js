@@ -18,8 +18,12 @@
         $scope.pageFns.deleteTask = function (list, inclueTasks) {
           // some stuff happens and then...
 
-          // TODO should be deletedState()
+          // setting to initialState in case the user undeletes
+          // TODO: review this when the promise is invoked
+          //       this can be removed if we make a roundtrip
+          //       retrieving the deleted TaskList
           list.initialState();
+          list.isDeleted = true;
         }
       }
     }

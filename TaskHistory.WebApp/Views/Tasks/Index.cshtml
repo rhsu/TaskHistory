@@ -66,10 +66,9 @@
 							<task-table tasks='list.tasks'></task-table>
 						</div>
 
-						<div ng-if='!list.isDeleted'>
+						<div ng-if='list.isDeleted'>
 							<label class='deleted-text'>{{ list.listName }}</label>
-
-							<button class='btn btn-xs btn-primary'>Undo</button>
+							<button ng-click='list.isDeleted=false' class='btn btn-xs btn-primary'>Undo</button>
 						</div>
 					</li>
 				</ul>
