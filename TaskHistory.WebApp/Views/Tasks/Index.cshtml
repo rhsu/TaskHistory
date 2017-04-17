@@ -19,51 +19,58 @@
 		<div class='container app-content'>
 				<ul>
 					<li ng-repeat='list in pageData.taskListWithTasks'>
+						<div ng-if='!list.isDeleted'>
+							<span class='btn-group'>
+								<!-- collapse -->
+								<button class='btn btn-xs btn-default'>
+									<span class='glyphicon glyphicon-minus'></span>
+								</button>
 
-						<span class='btn-group'>
-							<!-- collapse -->
-							<button class='btn btn-xs btn-default'>
-								<span class='glyphicon glyphicon-minus'></span>
-							</button>
+								<!-- add task to list -->
+								<button class='btn btn-xs btn-success'
+												ng-hide='list.states.showAddTaskForm'
+												ng-click='list.setState("showAddTaskForm")'>
+									<span class='glyphicon glyphicon-plus'></span>
+								</button>
 
-							<!-- add task to list -->
-							<button class='btn btn-xs btn-success'
-											ng-hide='list.states.showAddTaskForm'
-											ng-click='list.setState("showAddTaskForm")'>
-								<span class='glyphicon glyphicon-plus'></span>
-							</button>
+								<!-- sync -->
+								<button class='btn btn-xs btn-info'>
+									<span class='glyphicon glyphicon-refresh'></span>
+								</button>
 
-							<!-- sync -->
-							<button class='btn btn-xs btn-info'>
-								<span class='glyphicon glyphicon-refresh'></span>
-							</button>
+								<!-- update -->
+								<button class='btn btn-xs btn-default'>
+									<span class='glyphicon glyphicon-pencil'></span>
+								</button>
 
-							<!-- update -->
-							<button class='btn btn-xs btn-default'>
-								<span class='glyphicon glyphicon-pencil'></span>
-							</button>
+								<!-- delete -->
+								<button class='btn btn-xs btn-danger'
+												ng-hide='list.states.showDeleteForm'
+												ng-click='list.setState("showDeleteForm")'>
+									<span class='glyphicon glyphicon-trash'></span>
+								</button>
+							</span>
 
-							<!-- delete -->
-							<button class='btn btn-xs btn-danger'
-											ng-hide='list.states.showDeleteForm'
-											ng-click='list.setState("showDeleteForm")'>
-								<span class='glyphicon glyphicon-trash'></span>
-							</button>
-						</span>
+							<label>{{ list.listName }}</label>
 
-						<label>{{ list.listName }}</label>
+							<task-list-add-task-form list='list'
+																			 ng-show='list.states.showAddTaskForm'>
+							</task-list-add-task-form>
 
-						<task-list-add-task-form list='list'
-																		 ng-show='list.states.showAddTaskForm'>
-						</task-list-add-task-form>
+							<task-list-delete-form list='list'
+																		 ng-show='list.states.showDeleteForm'>
+							</task-list-delete-form>
 
-						<task-list-delete-form list='list'
-																	 ng-show='list.states.showDeleteForm'>
-						</task-list-delete-form>
+							<div class='well'
+									 ng-hide="list.tasks.length">list contains no tasks.</div>
+							<task-table tasks='list.tasks'></task-table>
+						</div>
 
-						<div class='well'
-								 ng-hide="list.tasks.length">list contains no tasks.</div>
-						<task-table tasks='list.tasks'></task-table>
+						<div ng-if='!list.isDeleted'>
+							<label class='deleted-text'>{{ list.listName }}</label>
+
+							<button class='btn btn-xs btn-primary'>Undo</button>
+						</div>
 					</li>
 				</ul>
 		</div>
