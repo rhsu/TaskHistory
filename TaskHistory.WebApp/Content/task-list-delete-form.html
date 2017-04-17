@@ -1,1 +1,11 @@
-<div class='well' style='margin-top: 15px;'>Hello World</div>
+<div style='margin-top: 15px;'>
+  <form class='form-inline' style='margin-bottom: 15px;'>
+    <label>Are you sure you want to delete <span style='color: #2aabd2;'>{{ list.listName }}</span>?</label>
+
+    <button class='btn btn-sm btn-primary'
+            ng-click='list.initialState()'
+            type='button'>
+      <span class='glyphicon glyphicon-arrow-left'></span>
+    </button>
+  </form>
+</div>

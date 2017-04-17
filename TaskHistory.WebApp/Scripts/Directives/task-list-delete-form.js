@@ -7,9 +7,9 @@
     return {
       restrict: 'E',
       templateUrl: 'Content/task-list-delete-form.html',
-      /*scope: {
+      scope: {
         list: '='
-      },*/
+      },
       link: function ($scope, elem, attr, ctrl) {
         //some stuff happens here
       }
