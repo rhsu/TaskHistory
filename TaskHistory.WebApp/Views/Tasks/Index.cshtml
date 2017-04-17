@@ -29,8 +29,8 @@
 
 							<!-- add task to list -->
 							<button class='btn btn-xs btn-success'
-											ng-hide='list.showAddTaskForm'
-											ng-click='list.showAddTaskForm = true'>
+											ng-hide='list.states.showAddTaskForm'
+											ng-click='list.setState("showAddTaskForm")'>
 								<span class='glyphicon glyphicon-plus'></span>
 							</button>
 
@@ -45,7 +45,9 @@
 							</button>
 
 							<!-- delete -->
-							<button class='btn btn-xs btn-danger'>
+							<button class='btn btn-xs btn-danger'
+											ng-hide='list.states.showDeleteForm'
+											ng-click='list.setState("showDeleteForm")'>
 								<span class='glyphicon glyphicon-trash'></span>
 							</button>
 						</span>
@@ -53,8 +55,12 @@
 						<label>{{ list.listName }}</label>
 
 						<task-list-add-task-form list='list'
-																		 ng-show='list.showAddTaskForm'>
+																		 ng-show='list.states.showAddTaskForm'>
 						</task-list-add-task-form>
+
+						<task-list-delete-form list='list'
+																	 ng-show='list.states.showDeleteForm'>
+						</task-list-delete-form>
 
 						<div class='well'
 								 ng-hide="list.tasks.length">list contains no tasks.</div>

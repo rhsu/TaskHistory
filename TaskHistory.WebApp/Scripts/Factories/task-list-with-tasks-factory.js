@@ -6,12 +6,23 @@
     this.listName = listName;
     this.tasks = tasks;
 
-    // state variables
-    this.showTasks = true;
-    this.showAddTaskForm = false;
-    this.showConfirmDelete = false;
-
     this.taskFormName = '';
+
+    this.initialState();
+  }
+
+  TaskListWithTasks.prototype.initialState = function () {
+    this.states = {
+      showTasks: true,
+      showAddTaskForm: false,
+      showDeleteForm: false
+    };
+  }
+
+  TaskListWithTasks.prototype.setState = function (state) {
+    for (s in this.states) {
+      this.states[s] = (s === state);
+    }
   }
 
   app.factory('TaskListWithTasksFactory', function (TaskTableViewFactory) {

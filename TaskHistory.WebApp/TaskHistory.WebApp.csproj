@@ -150,6 +150,7 @@
     <Content Include="Scripts\Directives\task-list-add-task-form.js" />
     <Content Include="Scripts\Directives\task-table.js" />
     <Content Include="Content\task-list-add-task-form.html" />
+    <Content Include="Content\task-list-delete-form.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">

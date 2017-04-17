@@ -1,0 +1,23 @@
+<div style='margin-top: 15px;'>
+  <form class='form-inline' style='margin-bottom: 15px;'>
+    <label>Are you sure you want to delete <span class='highlight'>{{ list.listName }}</span>?</label>
+
+    <button class ='btn btn-sm btn-danger'
+            ng-click='pageFns.deleteTask(list, false)'
+            type='button'>
+      <span class='glyphicon glyphicon-trash'></span>
+    </button>
+
+    <button class='btn btn-sm btn-primary'
+            ng-click='list.initialState()'
+            type='button'>
+      <span class='glyphicon glyphicon-arrow-left'></span>
+    </button>
+
+    <button class='btn btn-sm btn-danger'
+            ng-click='pageFns.deleteTask(list, true)'
+            type='button'>
+      <span>And All Tasks</span>
+    </button>
+  </form>
+</div>

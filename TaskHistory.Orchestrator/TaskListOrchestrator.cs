@@ -63,14 +63,29 @@ namespace TaskHistory.Orchestrator
 			return retVal;
 		}
 
-		public TaskListDetailedTableViewModel Update(IUser user, int listId, string listContent)
+		public TaskListDetailedTableViewModel Update(IUser user, 
+		                                             int listId, 
+		                                             TaskListEditViewModel editViewModel)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			// var thing = _listRepo.Update
+			if (editViewModel == null)
+				throw new ArgumentNullException(nameof(editViewModel));
 
-			return null;
+			var editParams = _objectMapper.Map(editViewModel);
+			if (editParams == null)
+				throw new NullReferenceException("null returned from ObjectMapper");
+
+			var taskList = _repo.Update(user.Id, listId, editParams);
+			if (taskList == null)
+				throw new NullReferenceException("null returned from Repo");
+
+			var retVal = _objectMapper.Map(taskList);
+			if (retVal == null)
+				throw new NullReferenceException("null returned from ObjectMapper");
+
+			return retVal;
 		}
 
 		public TaskListOrchestrator(ITaskListRepo repo,

@@ -7,17 +7,18 @@ namespace TaskHistory.ViewModel.TaskLists
 	{
 		public int ListId { get; }
 		public string ListName { get; }
+		public bool IsDeleted { get; }
 
-		// TODO should this be using TaskTableViewModel or a different viewModel?
-		//		coincidentally, this will work ok. but not sure if sustainable
 		public IEnumerable<TaskTableViewModel> Tasks { get; }
 
 		public TaskListDetailedTableViewModel(int id, 
 		                                      string name, 
+		                                      bool isDeleted,
 		                                      IEnumerable<TaskTableViewModel> tasks)
 		{
 			ListId = id;
 			ListName = name;
+			IsDeleted = isDeleted;
 			Tasks = tasks;
 		}
 	}
