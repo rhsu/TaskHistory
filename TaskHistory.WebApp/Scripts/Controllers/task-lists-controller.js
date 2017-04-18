@@ -39,7 +39,6 @@
 
     $scope.pageFns.syncList = function (list) {
       TaskListsService.read(list.listId).then(function (response) {
-        console.log('here!!!');
         const data = response.data;
         if (data) {
           TaskListWithTasksFactory.updateFromJson(list, data);
