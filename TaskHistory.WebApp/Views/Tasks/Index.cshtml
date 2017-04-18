@@ -11,7 +11,7 @@
 			</div>
 			<button class='btn btn-success'
 						  ng-click='pageFns.createTaskList()'>
-				<span class='glyphicon glyphicon-plus'></span>
+				<span class='glyphicon glyphicon-ok'></span>
 			</button>
 		</form>
 
@@ -22,15 +22,24 @@
 						<div ng-if='!list.isDeleted'>
 							<span class='btn-group'>
 								<!-- collapse -->
-								<button class='btn btn-xs btn-default'>
+								<button class='btn btn-xs btn-default'
+												ng-show='list.showTasks'
+												ng-click='list.showTasks = false'>
 									<span class='glyphicon glyphicon-minus'></span>
+								</button>
+
+								<!-- uncollapse -->
+								<button class='btn btn-xs btn-default'
+												ng-hide='list.showTasks'
+												ng-click='list.showTasks = true'>
+									<span class='glyphicon glyphicon-plus'></span>
 								</button>
 
 								<!-- add task to list -->
 								<button class='btn btn-xs btn-success'
 												ng-hide='list.states.showAddTaskForm'
 												ng-click='list.setState("showAddTaskForm")'>
-									<span class='glyphicon glyphicon-plus'></span>
+									<span class='glyphicon glyphicon-ok'></span>
 								</button>
 
 								<!-- sync -->
@@ -92,7 +101,7 @@
 		</div>
 		<button class='btn btn-success'
 						ng-click='pageFns.insertTask()'>
-			<span class='glyphicon glyphicon-plus'></span>
+			<span class='glyphicon glyphicon-ok'></span>
 		</button>
 	</form>
 
