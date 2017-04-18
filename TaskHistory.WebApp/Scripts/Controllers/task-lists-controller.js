@@ -30,8 +30,13 @@
 
     $scope.pageFns.createTaskList = function () {
       TaskListsService.create($scope.formData.name).then(function (response) {
-        if (response.data) {
-          refreshTaskLists();
+        const data = response.data;
+        if (data) {
+          // add the new taskList
+          const taskListWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
+          $scope.pageData.taskListWithTasks.push(taskListWithTasks);
+
+          // reset the form
           $scope.formData.name = '';
         }
       }, function () {});
