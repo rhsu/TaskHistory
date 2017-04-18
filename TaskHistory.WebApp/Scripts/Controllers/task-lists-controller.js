@@ -4,7 +4,6 @@
 
   app.controller('TaskListsController', function ($scope,
     TaskListsService,
-    TaskService,
     TaskListWithTasksFactory,
     $rootScope) {
 
@@ -38,11 +37,12 @@
       }, function () {});
     }
 
-    $scope.pageFns.createTaskOnList = function (listId, taskContent) {
-      TaskService.createTaskOnList(listId, taskContent).then(function (response) {
-        // TODO can this be changed to refreshTaskList (singular?)
-        if (response.data) {
-          refreshTaskLists();
+    $scope.pageFns.syncList = function (list) {
+      TaskListsService.read(list.listId).then(function (response) {
+        console.log('here!!!');
+        const data = response.data;
+        if (data) {
+          TaskListWithTasksFactory.updateFromJson(list, data);
         }
       }, function () {});
     }

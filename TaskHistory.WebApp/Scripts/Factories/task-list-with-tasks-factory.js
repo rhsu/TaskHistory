@@ -53,15 +53,12 @@
       updateFromJson(list, json) {
         const listName = json.ListName || '';
         const isDeleted = json.IsDeleted;
+        const tasks = json.Tasks;
 
         list.listName = listName;
         list.isDeleted = isDeleted;
 
-        // TODO update Tasks from jso
-        // Looks like:
-        /*  for (let i = 0; i < json.Tasks.length; i++) {
-            }
-        */
+        list.tasks = TaskTableViewFactory.buildFromJsonCollection(tasks);
       }
 
     }
