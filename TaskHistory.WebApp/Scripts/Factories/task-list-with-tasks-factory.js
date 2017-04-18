@@ -26,8 +26,6 @@
     }
   }
 
-  //TaskListWithTasks.prototype.setDeleted
-
   app.factory('TaskListWithTasksFactory', function (TaskTableViewFactory) {
     return {
 
@@ -59,9 +57,11 @@
         list.listName = listName;
         list.isDeleted = isDeleted;
 
-        // TODO update Tasks from json
-        /*for (let i = 0; i < json.Tasks.length; i++) {
-        }*/
+        // TODO update Tasks from jso
+        // Looks like:
+        /*  for (let i = 0; i < json.Tasks.length; i++) {
+            }
+        */
       }
 
     }
