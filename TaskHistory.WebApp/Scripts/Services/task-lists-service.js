@@ -15,6 +15,13 @@
 
       read(listId) {
         return $http.post('/TaskLists/Read', { listId: listId });
+      },
+
+      update(listId, editViewModel) {
+        //console.log(editViewModel);
+        return $http.post('/TaskLists/Update',
+          { listId: listId,
+            editViewModel: editViewModel});
       }
 
     }

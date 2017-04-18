@@ -2,7 +2,8 @@
 
   const app = angular.module('app');
 
-  app.directive('taskListDeleteForm', function () {
+  app.directive('taskListDeleteForm', function (TaskListsService,
+    TaskListWithTasksFactory) {
 
     return {
       restrict: 'E',
@@ -17,6 +18,10 @@
 
         $scope.pageFns.deleteTask = function (list, inclueTasks) {
           // some stuff happens and then...
+          TaskListsService.update(list.listId, {name: list.listName, isDeleted: true})
+            .then(function (response) {
+              console.log(response);
+            }, {});
 
           // setting to initialState in case the user undeletes
           // TODO: review this when the promise is invoked

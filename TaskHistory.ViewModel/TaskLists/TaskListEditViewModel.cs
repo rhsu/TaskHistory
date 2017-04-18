@@ -2,13 +2,13 @@
 {
 	public class TaskListEditViewModel
 	{
-		public string Name { get; }
-		public bool IsDeleted { get; }
+		public string Name { get; set; }
+		public bool IsDeleted { get; set; }
 
-		public TaskListEditViewModel(string name, bool isDeleted)
+		public TaskListEditViewModel()
 		{
-			Name = name;
-			IsDeleted = isDeleted;
+			//Name = name;
+			//IsDeleted = isDeleted;
 		}
 	}
 }
