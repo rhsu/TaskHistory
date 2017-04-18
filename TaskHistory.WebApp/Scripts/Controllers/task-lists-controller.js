@@ -11,8 +11,8 @@
       return elem.name == 'list';
     });
 
-    $scope.featureEnabled = {}
-    $scope.featureEnabled.list = listFeature && listFeature.value === 'enabled'
+    $scope.featureEnabled = {};
+    $scope.featureEnabled.list = listFeature && listFeature.value === 'enabled';
 
     $scope.formData = {};
 
