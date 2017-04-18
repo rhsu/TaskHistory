@@ -18,7 +18,6 @@
       },
 
       update(listId, editViewModel) {
-        //console.log(editViewModel);
         return $http.post('/TaskLists/Update',
           { listId: listId,
             editViewModel: editViewModel});
