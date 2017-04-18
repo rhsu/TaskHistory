@@ -11,8 +11,8 @@
       return elem.name == 'list';
     });
 
-    $scope.featureEnabled = {}
-    $scope.featureEnabled.list = listFeature && listFeature.value === 'enabled'
+    $scope.featureEnabled = {};
+    $scope.featureEnabled.list = listFeature && listFeature.value === 'enabled';
 
     $scope.formData = {};
 
@@ -33,7 +33,7 @@
         const data = response.data;
         if (data) {
           // add the new taskList
-          const taskListWithTasks = TaskListWithTasksFactory.buildFromJsonCollection(data);
+          const taskListWithTasks = TaskListWithTasksFactory.buildFromJson(data);
           $scope.pageData.taskListWithTasks.push(taskListWithTasks);
 
           // reset the form
@@ -69,6 +69,11 @@
           const data = response.data;
           if (data) {
             TaskListWithTasksFactory.updateFromJson(list, data);
+
+            // reset the toggle state
+            // TODO when I have a collapse and uncollapse all
+            //      what should this value be?
+            list.showTasks = true;
           }
         }, {})
     }

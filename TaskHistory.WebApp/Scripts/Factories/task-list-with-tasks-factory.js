@@ -9,12 +9,13 @@
 
     this.taskFormName = '';
 
+    this.showTasks = true;
+
     this.initialState();
   }
 
   TaskListWithTasks.prototype.initialState = function () {
     this.states = {
-      showTasks: true,
       showAddTaskForm: false,
       showDeleteForm: false
     };
