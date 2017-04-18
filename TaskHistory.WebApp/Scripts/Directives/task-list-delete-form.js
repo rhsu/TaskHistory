@@ -2,7 +2,8 @@
 
   const app = angular.module('app');
 
-  app.directive('taskListDeleteForm', function () {
+  app.directive('taskListDeleteForm', function (TaskListsService,
+    TaskListWithTasksFactory) {
 
     return {
       restrict: 'E',
@@ -11,15 +12,18 @@
         list: '='
       },
       link: function ($scope, elem, attr, ctrl) {
-        //some stuff happens here
-
+        
         $scope.pageFns = {};
 
         $scope.pageFns.deleteTask = function (list, inclueTasks) {
-          // some stuff happens and then...
 
-          // TODO should be deletedState()
-          list.initialState();
+          TaskListsService.update(list.listId, {name: list.listName, isDeleted: true})
+            .then(function (response) {
+              const data = response.data;
+              if (data) {
+                TaskListWithTasksFactory.updateFromJson(list, data);
+              }
+            }, {});
         }
       }
     }

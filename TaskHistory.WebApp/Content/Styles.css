@@ -5,3 +5,7 @@
 .highlight {
   color: #2aabd2;
 }
+
+.deleted-text {
+  text-decoration: line-through;
+}

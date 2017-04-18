@@ -1,10 +1,11 @@
 (function () {
   const app = angular.module('app');
 
-  function TaskListWithTasks(listId, listName, tasks) {
+  function TaskListWithTasks(listId, listName, isDeleted, tasks) {
     this.listId = listId;
     this.listName = listName;
     this.tasks = tasks;
+    this.isDeleted = isDeleted;
 
     this.taskFormName = '';
 
@@ -31,9 +32,11 @@
       buildFromJson(json) {
         const listId = json.ListId || -1;
         const listName = json.ListName || '';
+        const isDeleted = json.IsDeleted;
+
         const tasks = TaskTableViewFactory.buildFromJsonCollection(json.Tasks);
 
-        return new TaskListWithTasks(listId, listName, tasks);
+        return new TaskListWithTasks(listId, listName, isDeleted, tasks);
       },
 
       buildFromJsonCollection(jsonCollection) {
@@ -45,6 +48,20 @@
         }
 
         return retVal;
+      },
+
+      updateFromJson(list, json) {
+        const listName = json.ListName || '';
+        const isDeleted = json.IsDeleted;
+
+        list.listName = listName;
+        list.isDeleted = isDeleted;
+
+        // TODO update Tasks from jso
+        // Looks like:
+        /*  for (let i = 0; i < json.Tasks.length; i++) {
+            }
+        */
       }
 
     }
