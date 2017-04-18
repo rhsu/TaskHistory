@@ -71,9 +71,11 @@
 																		 ng-show='list.states.showDeleteForm'>
 							</task-list-delete-form>
 
-							<div class='well'
-									 ng-hide="list.tasks.length">list contains no tasks.</div>
-							<task-table tasks='list.tasks'></task-table>
+							<div ng-show='list.showTasks'>
+								<div class='well'
+										 ng-hide="list.tasks.length">list contains no tasks.</div>
+								<task-table tasks='list.tasks'></task-table>
+							</div>
 						</div>
 
 						<div ng-if='list.isDeleted'>
