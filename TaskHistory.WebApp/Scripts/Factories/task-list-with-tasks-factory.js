@@ -50,6 +50,18 @@
         }
 
         return retVal;
+      },
+
+      updateFromJson(list, json) {
+        const listName = json.ListName || '';
+        const isDeleted = json.IsDeleted;
+
+        list.listName = listName;
+        list.isDeleted = isDeleted;
+
+        // TODO update Tasks from json
+        /*for (let i = 0; i < json.Tasks.length; i++) {
+        }*/
       }
 
     }

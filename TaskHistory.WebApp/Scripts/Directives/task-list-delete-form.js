@@ -12,23 +12,18 @@
         list: '='
       },
       link: function ($scope, elem, attr, ctrl) {
-        //some stuff happens here
-
+        
         $scope.pageFns = {};
 
         $scope.pageFns.deleteTask = function (list, inclueTasks) {
-          // some stuff happens and then...
+
           TaskListsService.update(list.listId, {name: list.listName, isDeleted: true})
             .then(function (response) {
-              console.log(response);
+              const data = response.data;
+              if (data) {
+                TaskListWithTasksFactory.updateFromJson(list, data);
+              }
             }, {});
-
-          // setting to initialState in case the user undeletes
-          // TODO: review this when the promise is invoked
-          //       this can be removed if we make a roundtrip
-          //       retrieving the deleted TaskList
-          list.initialState();
-          list.isDeleted = true;
         }
       }
     }

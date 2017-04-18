@@ -51,6 +51,23 @@
     $scope.pageData.taskListWithTasks = [];
 
     refreshTaskLists();
+
+    // TODO consider refactoring this as this is moved to a directive
+    $scope.pageFns.undoDeleteTaskList = function (list) {
+      // TODO for now, will only focus on deleting and undeleting
+      //      a task list
+      //      won't touch tasks
+      //      because that branches the undo here to two possibilities:
+      //        1. undelete that taskList + bulk undelete all associated tasks
+      //        2. only undelete the taskList
+      TaskListsService.update(list.listId, {name: list.listName, isDeleted: false})
+        .then(function (response) {
+          const data = response.data;
+          if (data) {
+            TaskListWithTasksFactory.updateFromJson(list, data);
+          }
+        }, {})
+    }
   });
 
 })();

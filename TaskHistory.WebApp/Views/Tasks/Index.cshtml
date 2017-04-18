@@ -68,7 +68,10 @@
 
 						<div ng-if='list.isDeleted'>
 							<label class='deleted-text'>{{ list.listName }}</label>
-							<button ng-click='list.isDeleted=false' class='btn btn-xs btn-primary'>Undo</button>
+							<button ng-click='pageFns.undoDeleteTaskList(list)'
+											class='btn btn-xs btn-primary'>
+											<span>Undo</span>
+							</button>
 						</div>
 					</li>
 				</ul>
