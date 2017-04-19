@@ -17,7 +17,8 @@
   TaskListWithTasks.prototype.initialState = function () {
     this.states = {
       showAddTaskForm: false,
-      showDeleteForm: false
+      showDeleteForm: false,
+      showEditForm: false
     };
   }
 
