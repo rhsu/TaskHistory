@@ -1,6 +1,6 @@
 (function() {
   const app = angular.module('app');
-  
+
   app.directive('taskListEditForm', function (TaskListsService,
     TaskListWithTasksFactory) {
 
@@ -12,6 +12,7 @@
       },
 
       link: function ($scope, elem, attr, ctrl) {
+          $scope.pageFns = {};
 
           $scope.pageFns.editListName = function (listName) {
             TaskListsService.update(list.listId, { name: listName, isDeleted: list.isDeleted })
