@@ -12,14 +12,16 @@
       },
 
       link: function ($scope, elem, attr, ctrl) {
-          $scope.pageFns = {};
+          $scope.directiveFns = {};
 
-          $scope.pageFns.editListName = function (listName) {
-            TaskListsService.update(list.listId, { name: listName, isDeleted: list.isDeleted })
+          $scope.directiveFns.editList = function (list) {
+
+            TaskListsService.update(list.listId, { name: list.listName, isDeleted: list.isDeleted })
               .then(function (response) {
                 const data = response.data;
                 if (data) {
                   TaskListWithTasksFactory.updateFromJson(list, data);
+                  list.initialState();
                 }
               }, function () {})
           }
