@@ -11,6 +11,10 @@
 
     $scope.pageFns = {};
 
+    $scope.pageFns.refreshLists = function () {
+      refreshTaskLists();
+    }
+
     var refreshTaskLists = function () {
       TaskListsService.readAll().then(function (response) {
         const data = response.data;
