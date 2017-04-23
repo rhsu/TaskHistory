@@ -11,7 +11,7 @@
 
     $scope.pageFns = {};
 
-    var refreshTaskLists = function () {
+    $scope.pageFns.refreshLists = function () {
       TaskListsService.readAll().then(function (response) {
         const data = response.data;
         if (data) {
@@ -47,7 +47,7 @@
     $scope.pageData = {};
     $scope.pageData.taskListWithTasks = [];
 
-    refreshTaskLists();
+    $scope.pageFns.refreshLists();
 
     // TODO consider refactoring this as this is moved to a directive
     $scope.pageFns.undoDeleteTaskList = function (list) {
