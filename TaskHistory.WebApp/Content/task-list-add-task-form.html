@@ -1,14 +1,16 @@
-<form class='form-inline' style='margin-bottom: 15px;'>
+<form class='form-inline task-list-form'>
   <div class='form-group'>
     <label>Add New Task For <span class='highlight'>{{ list.listName }}</span>:</label>
     <input class='form-control input-sm'
            type='text'
            ng-model='list.taskFormName'
            required='true' >
+
     <button class='btn btn-sm btn-success'
             ng-click='directiveFns.createTaskOnList();'>
       <span class='glyphicon glyphicon-ok'></span>
     </button>
+    
     <button class='btn btn-sm btn-primary'
             ng-click='list.initialState()'
             type='button'>

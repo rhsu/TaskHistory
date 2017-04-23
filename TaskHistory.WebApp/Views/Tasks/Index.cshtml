@@ -49,7 +49,9 @@
 								</button>
 
 								<!-- update -->
-								<button class='btn btn-xs btn-default'>
+								<button class='btn btn-xs btn-default'
+												ng-hide='list.states.showEditForm'
+												ng-click='list.setState("showEditForm")'>
 									<span class='glyphicon glyphicon-pencil'></span>
 								</button>
 
@@ -70,6 +72,10 @@
 							<task-list-delete-form list='list'
 																		 ng-show='list.states.showDeleteForm'>
 							</task-list-delete-form>
+
+							<task-list-edit-form list='list'
+																	 ng-show='list.states.showEditForm'>
+							</task-list-edit-form>
 
 							<div ng-show='list.showTasks'>
 								<div class='well'

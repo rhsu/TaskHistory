@@ -1,0 +1,21 @@
+﻿<form class='form-inline task-list-form'>
+  <div class='form-group'>
+    <label>Edit Name <span class='highlight'>{{ list.listName }}</span>:</label>
+    <input class='form-control input-sm'
+           type='text'
+           ng-model='list.listName'
+           required='true' >
+
+   <button class='btn btn-sm btn-success'
+           ng-click='directiveFns.editList(list);'>
+     <span class='glyphicon glyphicon-ok'></span>
+   </button>
+
+   <button class='btn btn-sm btn-primary'
+           ng-click='list.initialState()'
+           type='button'>
+     <span class='glyphicon glyphicon-arrow-left'></span>
+   </button>
+
+  </div>
+</div>
