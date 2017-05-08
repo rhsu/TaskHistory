@@ -93,6 +93,7 @@
     <Folder Include="Views\Tasks\" />
     <Folder Include="Views\FeatureFlags\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\TaskLists\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -154,6 +155,7 @@
     <Content Include="Content\task-list-edit-form.html" />
     <Content Include="Scripts\Directives\task-list-delete-form.js" />
     <Content Include="Scripts\Directives\task-list-edit-form.js" />
+    <Content Include="Views\TaskLists\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
