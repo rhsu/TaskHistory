@@ -13,8 +13,8 @@
 		.when('/Tasks', {
 			templateUrl: '/Tasks/Index'
 		})
-    .when('/Lists', {
-    	templateUrl: '/Lists/Index'
+    .when('/TaskLists', {
+    	templateUrl: '/TaskLists/Index'
     })
 		.when('/Admin', {
 			templateUrl: '/Admin/Index'
