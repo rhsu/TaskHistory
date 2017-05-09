@@ -94,6 +94,7 @@
     <Folder Include="Views\FeatureFlags\" />
     <Folder Include="Views\Admin\" />
     <Folder Include="Views\TaskLists\" />
+    <Folder Include="Views\History\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="Scripts\run.cs">
       <DependentUpon>run.js</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\HistoryController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -160,6 +162,8 @@
     <Content Include="Scripts\Directives\task-list-edit-form.js" />
     <Content Include="Views\TaskLists\Index.cshtml" />
     <Content Include="Scripts\routes.js" />
+    <Content Include="Views\History\Index.cshtml" />
+    <Content Include="Scripts\Controllers\history-controller.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">

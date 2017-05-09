@@ -23,6 +23,9 @@
 		.when('/Admin/FeatureFlags', {
 			templateUrl: '/FeatureFlags/Index'
 		})
+		.when('/History', {
+			templateUrl: '/History/Index'
+		})
 		.when('/Terminal', {
 			templateUrl: '/Tasks/Index'
 		});
