@@ -12,10 +12,12 @@ namespace TaskHistory.Impl.Tasks
 				throw new ArgumentNullException(nameof(reader));
 
 			int taskId = reader.GetInt("TaskId");
+			int userId = reader.GetInt("UserId");
+			int taskPriorityId = reader.GetInt("TaskPriorityId");
 			string content = reader.GetString("Content");
 			bool isCompleted = reader.GetBool("IsCompleted");
 
-			return new Task(taskId, content, isCompleted);
+			return new Task(taskId, userId, taskPriorityId, content, isCompleted);
 		}
 	}
 }

@@ -12,7 +12,7 @@ namespace TaskHistory.Impl.TaskLists
 {
 	public class TaskListRepo : ITaskListRepo
 	{
-		TaskListWithTasksFactory _factory;
+		TaskListQueryCacheFactory _factory;
 		ApplicationDataProxy _dataProxy;
 
 		const string CreateStoredProcedure = "TaskLists_Create";
@@ -22,7 +22,7 @@ namespace TaskHistory.Impl.TaskLists
 
 		const string UpdateStoredProcedure = "TaskLists_Update";
 
-		public TaskListRepo(TaskListWithTasksFactory factory,
+		public TaskListRepo(TaskListQueryCacheFactory factory,
 		                             ApplicationDataProxy dataProxy)
 		{
 			_factory = factory;

@@ -6,9 +6,7 @@ using TaskHistory.Impl.Tasks;
 
 namespace TaskHistory.Impl.TaskLists
 {
-	// TODO this is not a TaskListWithTasksFactory
-	//		Rename to TaskListQueryCacheFactory
-	public class TaskListWithTasksFactory : IFromDataReaderFactory<KeyValuePair<int, TaskListWithTasksQueryResult>>
+	public class TaskListQueryCacheFactory : IFromDataReaderFactory<KeyValuePair<int, TaskListWithTasksQueryResult>>
 	{
 		public KeyValuePair<int, TaskListWithTasksQueryResult> Build(ISqlDataReader reader)
 		{
@@ -22,6 +20,10 @@ namespace TaskHistory.Impl.TaskLists
 			int? taskId = reader.GetNullableInt("TaskId");
 			string listName = reader.GetString("ListName");
 
+			// TODO need these values
+			int? userId = reader.GetNullableInt("UserId");			
+			int? taskPriorityId = reader.GetNullableInt("TaskPriorityId");
+			bool? isTaskCompleted = reader.GetNullableBool("IsTaskCompleted");
 			bool? isTaskDeleted = reader.GetNullableBool("IsTaskDeleted");
 
 			// TODO how do I use DI here?
@@ -32,7 +34,11 @@ namespace TaskHistory.Impl.TaskLists
 				string content = reader.GetString("TaskContent");
 
 				// TODO how do I use DI here?
-				queryResult.Task = new Task(taskId.Value, content, false);
+				queryResult.Task = new Task(taskId.Value, 
+				                            userId.Value, 
+				                            taskPriorityId.Value, 
+				                            content, 
+				                            isTaskCompleted.Value);
 			}
 
 			queryResult.ListName = listName;
