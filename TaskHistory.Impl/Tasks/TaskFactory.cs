@@ -13,7 +13,7 @@ namespace TaskHistory.Impl.Tasks
 
 			int taskId = reader.GetInt("TaskId");
 			int userId = reader.GetInt("UserId");
-			int taskPriorityId = reader.GetInt("TaskPriorityId");
+			int? taskPriorityId = reader.GetNullableInt("TaskPriorityId");
 			string content = reader.GetString("Content");
 			bool isCompleted = reader.GetBool("IsCompleted");
 

@@ -153,7 +153,7 @@ DROP TABLE IF EXISTS `Tasks`;
 CREATE TABLE `Tasks` (
   `TaskId` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` int(11) NOT NULL,
-  `TaskPriorityId` int(11) NOT NULL,
+  `TaskPriorityId` int(11) DEFAULT NULL,
   `Content` varchar(256) NOT NULL,
   `IsCompleted` tinyint(1) NOT NULL DEFAULT '0',
   `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
@@ -929,4 +929,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-24 13:12:07
+-- Dump completed on 2017-05-24 13:23:54

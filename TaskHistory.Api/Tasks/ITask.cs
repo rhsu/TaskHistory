@@ -4,7 +4,7 @@
 	{
 		int Id { get; }
 		int UserId { get; }
-		int TaskPriorityId { get; }
+		int? TaskPriorityId { get; }
 		string Content { get; }
 		bool IsCompleted { get; }
 	}
