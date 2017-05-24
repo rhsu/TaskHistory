@@ -84,7 +84,7 @@ CREATE TABLE `Subtasks` (
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`SubtaskID`),
   KEY `TaskID_FK` (`TaskID`),
-  CONSTRAINT `TaskFK` FOREIGN KEY (`TaskID`) REFERENCES `Tasks` (`TaskID`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `TaskFK` FOREIGN KEY (`TaskID`) REFERENCES `Tasks` (`TaskId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,6 +107,24 @@ CREATE TABLE `TaskLists` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `TaskPriority`
+--
+
+DROP TABLE IF EXISTS `TaskPriority`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `TaskPriority` (
+  `Id` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `Name` int(11) NOT NULL,
+  `Rank` int(11) NOT NULL,
+  `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
+  `CreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ModifiedDate` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `TaskToTaskListAssociations`
 --
 
@@ -121,7 +139,7 @@ CREATE TABLE `TaskToTaskListAssociations` (
   KEY `fk_taskId_to_task_idx` (`TaskId`),
   KEY `fk_listId_to_list_idx` (`TaskListId`),
   CONSTRAINT `fk_listId_to_list` FOREIGN KEY (`TaskListId`) REFERENCES `TaskLists` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_taskId_to_task` FOREIGN KEY (`TaskId`) REFERENCES `Tasks` (`TaskID`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_taskId_to_task` FOREIGN KEY (`TaskId`) REFERENCES `Tasks` (`TaskId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -133,15 +151,15 @@ DROP TABLE IF EXISTS `Tasks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Tasks` (
-  `TaskID` int(11) NOT NULL AUTO_INCREMENT,
+  `TaskId` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` int(11) NOT NULL,
+  `TaskPriorityId` int(11) NOT NULL,
   `Content` varchar(256) NOT NULL,
   `IsCompleted` tinyint(1) NOT NULL DEFAULT '0',
   `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` timestamp NULL DEFAULT NULL,
-  `Priority` int(11) DEFAULT NULL,
-  PRIMARY KEY (`TaskID`),
+  PRIMARY KEY (`TaskId`),
   KEY `UserId` (`UserId`),
   CONSTRAINT `TaskIdToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -911,4 +929,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-23 21:46:14
+-- Dump completed on 2017-05-24 13:12:07
