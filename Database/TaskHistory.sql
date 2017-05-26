@@ -570,9 +570,14 @@ BEGIN
 	SELECT 
 	  tl.Id as `listId`
      ,ttla.TaskId
-     ,t.Content as `TaskContent`
      ,tl.Name as `listName`
+     
+     -- tasks
+     ,t.UserId as `UserId`
      ,t.IsDeleted as `IsTaskDeleted`
+     ,t.Content as `TaskContent`
+     ,t.TaskPriorityId
+     ,t.IsCompleted as `IsTaskCompleted`
 	FROM `TaskLists` as tl
 	LEFT JOIN `TaskToTaskListAssociations` as ttla
 		ON tl.Id = ttla.TaskListId
@@ -942,4 +947,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-26 15:46:19
+-- Dump completed on 2017-05-26 15:50:52
