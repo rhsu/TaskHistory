@@ -75,7 +75,7 @@
     <Compile Include="FeatureFlags\FeatureFlagFactory.cs" />
     <Compile Include="TaskLists\TaskList.cs" />
     <Compile Include="TaskLists\TaskListRepo.cs" />
-    <Compile Include="TaskLists\TaskListWithTasksFactory.cs" />
+    <Compile Include="TaskLists\TaskListQueryCacheFactory.cs" />
     <Compile Include="Users\AdminUserProvider.cs" />
     <Compile Include="Users\DefaultUserProvider.cs" />
     <Compile Include="TaskLists\QueryResults\TaskListWithTasksQueryResult.cs" />

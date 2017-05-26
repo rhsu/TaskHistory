@@ -68,6 +68,7 @@
     <Compile Include="History\IHistoryRepo.cs" />
     <Compile Include="History\DataTransferObjects\HistoryCreationParams.cs" />
     <Compile Include="TaskLists\DataTransferObjects\TaskListUpdatingParameters.cs" />
+    <Compile Include="Tasks\ITaskPriority.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

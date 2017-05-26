@@ -22,7 +22,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 		{
 			var taskFactory = new TaskFactory();
 
-			var factory = new TaskListWithTasksFactory();
+			var factory = new TaskListQueryCacheFactory();
 			var appDataProxy = new ApplicationDataProxyFactory().Build();
 
 			_testFixtures = new TestFixtures();

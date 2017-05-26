@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)
 --
 -- Host: localhost    Database: TaskHistory
 -- ------------------------------------------------------
--- Server version	5.7.17-0ubuntu0.16.04.1
+-- Server version	5.7.18-0ubuntu0.16.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -84,7 +84,7 @@ CREATE TABLE `Subtasks` (
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`SubtaskID`),
   KEY `TaskID_FK` (`TaskID`),
-  CONSTRAINT `TaskFK` FOREIGN KEY (`TaskID`) REFERENCES `Tasks` (`TaskID`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `TaskFK` FOREIGN KEY (`TaskID`) REFERENCES `Tasks` (`TaskId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,6 +107,24 @@ CREATE TABLE `TaskLists` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `TaskPriority`
+--
+
+DROP TABLE IF EXISTS `TaskPriority`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `TaskPriority` (
+  `Id` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `Name` int(11) NOT NULL,
+  `Rank` int(11) NOT NULL,
+  `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
+  `CreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ModifiedDate` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `TaskToTaskListAssociations`
 --
 
@@ -121,7 +139,7 @@ CREATE TABLE `TaskToTaskListAssociations` (
   KEY `fk_taskId_to_task_idx` (`TaskId`),
   KEY `fk_listId_to_list_idx` (`TaskListId`),
   CONSTRAINT `fk_listId_to_list` FOREIGN KEY (`TaskListId`) REFERENCES `TaskLists` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_taskId_to_task` FOREIGN KEY (`TaskId`) REFERENCES `Tasks` (`TaskID`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `fk_taskId_to_task` FOREIGN KEY (`TaskId`) REFERENCES `Tasks` (`TaskId`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -133,14 +151,15 @@ DROP TABLE IF EXISTS `Tasks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Tasks` (
-  `TaskID` int(11) NOT NULL AUTO_INCREMENT,
+  `TaskId` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` int(11) NOT NULL,
+  `TaskPriorityId` int(11) DEFAULT NULL,
   `Content` varchar(256) NOT NULL,
   `IsCompleted` tinyint(1) NOT NULL DEFAULT '0',
   `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
   `CreationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`TaskID`),
+  PRIMARY KEY (`TaskId`),
   KEY `UserId` (`UserId`),
   CONSTRAINT `TaskIdToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -475,11 +494,17 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_All_Select`(
 )
 BEGIN
 	SELECT 
+	 -- TaskLists
 	  tl.Id as `listId`
      ,ttla.TaskId
-     ,t.Content as `TaskContent`
      ,tl.Name as `listName`
+     
+     -- Tasks
      ,t.IsDeleted as `IsTaskDeleted`
+     ,t.IsCompleted as `IsTaskCompleted`
+     ,t.Content as `TaskContent`
+     ,t.TaskPriorityId
+     ,t.UserId
 	FROM `TaskLists` as tl
 	LEFT JOIN `TaskToTaskListAssociations` as ttla
 		ON tl.Id = ttla.TaskListId
@@ -545,9 +570,14 @@ BEGIN
 	SELECT 
 	  tl.Id as `listId`
      ,ttla.TaskId
-     ,t.Content as `TaskContent`
      ,tl.Name as `listName`
+     
+     -- tasks
+     ,t.UserId as `UserId`
      ,t.IsDeleted as `IsTaskDeleted`
+     ,t.Content as `TaskContent`
+     ,t.TaskPriorityId
+     ,t.IsCompleted as `IsTaskCompleted`
 	FROM `TaskLists` as tl
 	LEFT JOIN `TaskToTaskListAssociations` as ttla
 		ON tl.Id = ttla.TaskListId
@@ -578,11 +608,18 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_Select`(
 )
 BEGIN
 	SELECT 
+     -- TaskLists
 	  tl.Id as `listId`
      ,ttla.TaskId
-     ,t.Content as `TaskContent`
      ,tl.Name as `listName`
+     
+     -- Tasks
+     ,t.Content as `TaskContent`
      ,t.IsDeleted as `IsTaskDeleted`
+     ,t.UserId as `UserId`
+     ,t.TaskPriorityId as `TaskPriorityId`
+     ,t.IsCompleted as `IsTaskCompleted`
+     
 	FROM `TaskLists` as tl
 	LEFT JOIN `TaskToTaskListAssociations` as ttla
 		ON tl.Id = ttla.TaskListId
@@ -910,4 +947,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-06  8:35:38
+-- Dump completed on 2017-05-26 15:50:52
