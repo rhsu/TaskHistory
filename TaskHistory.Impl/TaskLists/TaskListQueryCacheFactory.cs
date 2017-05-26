@@ -36,7 +36,7 @@ namespace TaskHistory.Impl.TaskLists
 				// TODO how do I use DI here?
 				queryResult.Task = new Task(taskId.Value, 
 				                            userId.Value, 
-				                            taskPriorityId.Value, 
+				                            taskPriorityId, 
 				                            content, 
 				                            isTaskCompleted.Value);
 			}
