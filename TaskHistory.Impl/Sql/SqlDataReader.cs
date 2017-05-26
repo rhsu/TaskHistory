@@ -74,7 +74,7 @@ namespace TaskHistory.Impl.Sql
 			{
 				obj = _reader[propertyName];
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
 				throw new Exception(string.Format("the property name {0} was not found in the dataReader",
 					propertyName));

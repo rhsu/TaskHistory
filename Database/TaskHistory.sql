@@ -597,11 +597,18 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_Select`(
 )
 BEGIN
 	SELECT 
+     -- TaskLists
 	  tl.Id as `listId`
      ,ttla.TaskId
-     ,t.Content as `TaskContent`
      ,tl.Name as `listName`
+     
+     -- Tasks
+     ,t.Content as `TaskContent`
      ,t.IsDeleted as `IsTaskDeleted`
+     ,t.UserId as `UserId`
+     ,t.TaskPriorityId as `TaskPriorityId`
+     ,t.IsCompleted as `IsTaskCompleted`
+     
 	FROM `TaskLists` as tl
 	LEFT JOIN `TaskToTaskListAssociations` as ttla
 		ON tl.Id = ttla.TaskListId
@@ -929,4 +936,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-24 13:23:54
+-- Dump completed on 2017-05-26 15:39:02
