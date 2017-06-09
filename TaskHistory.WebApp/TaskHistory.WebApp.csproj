@@ -93,6 +93,7 @@
     <Folder Include="Views\Tasks\" />
     <Folder Include="Views\FeatureFlags\" />
     <Folder Include="Views\Admin\" />
+    <Folder Include="Views\TaskLists\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
@@ -111,6 +112,9 @@
     <Compile Include="Controllers\FeatureFlagsController.cs" />
     <Compile Include="Controllers\TaskListsController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Scripts\run.cs">
+      <DependentUpon>run.js</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -154,6 +158,8 @@
     <Content Include="Content\task-list-edit-form.html" />
     <Content Include="Scripts\Directives\task-list-delete-form.js" />
     <Content Include="Scripts\Directives\task-list-edit-form.js" />
+    <Content Include="Views\TaskLists\Index.cshtml" />
+    <Content Include="Scripts\routes.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
@@ -172,6 +178,12 @@
       <Project>{012C3866-D51D-4917-AFC6-1B7AD7DD6FC7}</Project>
       <Name>TaskHistory.ViewModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\run.js">
+      <Generator>RazorTemplatePreprocessor</Generator>
+      <LastGenOutput>run.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
