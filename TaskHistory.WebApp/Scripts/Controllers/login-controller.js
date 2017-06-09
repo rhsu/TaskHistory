@@ -15,7 +15,7 @@
 			UserLoginService.promiseLoginUser($scope.formData)
 				.then(function (response) {
 					if (response) {
-						$location.path('/Tasks');
+						$location.path('/TaskLists');
 					} else {
 						// TODO what do I do here if user doesn't login successfully
 						// Some suggestions maybe all or none.

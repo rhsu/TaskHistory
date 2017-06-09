@@ -22,10 +22,5 @@ namespace TaskHistory.WebApp.Controllers
 		{
 			return View();
 		}
-
-		public ActionResult Demo ()
-		{
-			return View ();
-		}
 	}
 }
