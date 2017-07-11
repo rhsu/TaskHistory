@@ -1,33 +1,5 @@
 (function () {
-	var app = angular.module('app', ['ngRoute']);
-
-	app.config(function ($routeProvider, $locationProvider) {
-		$routeProvider.when('/', {
-			templateUrl: '/Home/Login'
-		}).when('/Register', {
-			templateUrl: '/Home/Register'
-		})
-		.when('/Home', {
-			templateUrl: '/Tasks/Index'
-		})
-		.when('/Tasks', {
-			templateUrl: '/Tasks/Index'
-		})
-    .when('/Lists', {
-    	templateUrl: '/Lists/Index'
-    })
-		.when('/Admin', {
-			templateUrl: '/Admin/Index'
-		})
-		.when('/Admin/FeatureFlags', {
-			templateUrl: '/FeatureFlags/Index'
-		})
-		.when('/Terminal', {
-			templateUrl: '/Tasks/Index'
-		});
-
-		$locationProvider.hashPrefix('');
-	});
+	const app = angular.module('app', ['ngRoute']);
 
 	app.run(function ($http,
 										$rootScope,
