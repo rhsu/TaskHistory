@@ -120,7 +120,10 @@ CREATE TABLE `TaskPriority` (
   `Rank` int(11) NOT NULL,
   `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
   `CreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `ModifiedDate` datetime DEFAULT NULL
+  `ModifiedDate` datetime DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `UserId` (`UserId`),
+  CONSTRAINT `TaskPriorityToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -161,7 +164,9 @@ CREATE TABLE `Tasks` (
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`TaskId`),
   KEY `UserId` (`UserId`),
-  CONSTRAINT `TaskIdToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `TaskPriorityId` (`TaskPriorityId`),
+  CONSTRAINT `TaskIdToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `TaskPirorityIdToTaskPriority` FOREIGN KEY (`TaskPriorityId`) REFERENCES `TaskPriority` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -494,12 +499,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_All_Select`(
 )
 BEGIN
 	SELECT 
-	 -- TaskLists
+	 
 	  tl.Id as `listId`
      ,ttla.TaskId
      ,tl.Name as `listName`
      
-     -- Tasks
+     
      ,t.IsDeleted as `IsTaskDeleted`
      ,t.IsCompleted as `IsTaskCompleted`
      ,t.Content as `TaskContent`
@@ -572,7 +577,7 @@ BEGIN
      ,ttla.TaskId
      ,tl.Name as `listName`
      
-     -- tasks
+     
      ,t.UserId as `UserId`
      ,t.IsDeleted as `IsTaskDeleted`
      ,t.Content as `TaskContent`
@@ -608,12 +613,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskLists_Select`(
 )
 BEGIN
 	SELECT 
-     -- TaskLists
+     
 	  tl.Id as `listId`
      ,ttla.TaskId
      ,tl.Name as `listName`
      
-     -- Tasks
+     
      ,t.Content as `TaskContent`
      ,t.IsDeleted as `IsTaskDeleted`
      ,t.UserId as `UserId`
@@ -947,4 +952,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-26 15:50:52
+-- Dump completed on 2017-07-11 17:53:56
