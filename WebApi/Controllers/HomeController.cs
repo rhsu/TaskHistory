@@ -17,7 +17,7 @@ namespace WebApi.Controllers
 
 		public IHttpActionResult GetTest()
 		{
-			return Json("Hello World");
+			return Json("Hello World ABCDEFG");
 		}
 	}
 }
