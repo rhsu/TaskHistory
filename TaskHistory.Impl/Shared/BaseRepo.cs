@@ -1,12 +1,16 @@
-﻿namespace TaskHistory.Impl.Shared
+﻿using TaskHistory.Impl.Sql;
+
+namespace TaskHistory.Impl.Shared
 {
 	public abstract class BaseRepo
 	{
-		// TODO move this to a shared base
-		const string NullFromApplicationDataProxy = "Null returned from DataProvider";
+		protected const string NullFromApplicationDataProxy = "Null returned from DataProvider";
 
-		public BaseRepo()
+		protected ApplicationDataProxy _dataProxy;
+
+		public BaseRepo(ApplicationDataProxy dataProxy)
 		{
+			_dataProxy = dataProxy;
 		}
 	}
 }
