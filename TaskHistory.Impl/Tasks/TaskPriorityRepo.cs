@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using TaskHistory.Api.Sql;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.Sql;
 
@@ -16,8 +18,18 @@ namespace TaskHistory.Impl.Tasks
 			_dataProxy = dataProxy;
 		}
 
-		public ITaskPriority Create()
+		public ITaskPriority Create(int userId, string name)
 		{
+			// TODO should rank belong somewhere else?
+			//		don't need it yet until the admin page
+
+			// TODO null check of name
+
+			var parameters = new List<ISqlDataParameter>();
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));			
+			parameters.Add(_dataProxy.CreateParameter("pUserId", name));
+
+
 			throw new NotImplementedException();
 		}
 

@@ -2,7 +2,7 @@
 {
 	public interface ITaskPriorityRepo
 	{
-		ITaskPriority Create();
+		ITaskPriority Create(int userId, string name);
 		ITaskPriority Read();
 		ITaskPriority Update();
 		ITaskPriority Delete();
