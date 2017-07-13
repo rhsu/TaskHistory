@@ -84,6 +84,7 @@
     <Compile Include="History\HistoryFactory.cs" />
     <Compile Include="Tasks\TaskPriority.cs" />
     <Compile Include="Tasks\TaskPriorityRepo.cs" />
+    <Compile Include="Tasks\TaskPriorityFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -20,7 +20,7 @@ namespace TaskHistory.Impl
 
 		// TODO .NET now supports named parameter args
 		//		how do I do that?
-		public TaskPriority(int id, int userId, int rank, string name)
+		public TaskPriority(int id, int userId, string name, int rank)
 		{
 			_id = id;
 			_userId = userId;
