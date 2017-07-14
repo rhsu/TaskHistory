@@ -11,6 +11,11 @@ namespace TaskHistory.Impl.Tasks
 		TaskPriorityFactory _factory;
 		ApplicationDataProxy _dataProxy;
 
+		const string CreateStoredProcedure = "TaskPriority_Insert";
+		const string ReadStoredProcedure = "TaskPriority_Read";
+		const string UpdateStoredProcedure = "TaskPriority_Update";
+		const string DeleteStoredProcedure = "TaskPriority_Delete";
+
 		public TaskPriorityRepo(TaskPriorityFactory factory, 
 		                        ApplicationDataProxy dataProxy)
 		{
@@ -18,27 +23,41 @@ namespace TaskHistory.Impl.Tasks
 			_dataProxy = dataProxy;
 		}
 
-		public ITaskPriority Create(int userId, string name)
+		public ITaskPriority Create(int userId, string name, int rank)
 		{
+			if (string.IsNullOrWhiteSpace(name))
+				throw new ArgumentNullException(nameof(name));
+
 			// TODO should rank belong somewhere else?
 			//		don't need it yet until the admin page
-
-			// TODO null check of name
 
 			var parameters = new List<ISqlDataParameter>();
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));			
 			parameters.Add(_dataProxy.CreateParameter("pUserId", name));
+			parameters.Add(_dataProxy.CreateParameter("pRank", rank));
 
+			var taskPriority = _dataProxy.ExecuteReader(
+				_factory,
+				CreateStoredProcedure);
 
-			throw new NotImplementedException();
+			// TODO once the mini-refactor is merged in, then update exception
+			//		with NullFromDataReader
+			if (taskPriority == null)
+				throw new NullReferenceException();
+
+			return taskPriority;
 		}
 
-		public ITaskPriority Delete()
+		public int Delete(int userId, int id)
 		{
-			throw new NotImplementedException();
+			var parameters = new List<ISqlDataParameter>();
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
+			parameters.Add(_dataProxy.CreateParameter("pUserId", id));
+
+			return _dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameters);
 		}
 
-		public ITaskPriority Read()
+		public IEnumerable<ITaskPriority> Read(int userId)
 		{
 			throw new NotImplementedException();
 		}
