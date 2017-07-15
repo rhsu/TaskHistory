@@ -5,25 +5,24 @@ using TaskHistory.Api.Sql;
 using TaskHistory.Api.TaskLists;
 using TaskHistory.Api.TaskLists.DataTransferObjects;
 using TaskHistory.Api.Tasks;
+using TaskHistory.Impl.Shared;
 using TaskHistory.Impl.Sql;
 using TaskHistory.Impl.TaskLists.QueryResults;
 
 namespace TaskHistory.Impl.TaskLists
 {
-	public class TaskListRepo : ITaskListRepo
+	public class TaskListRepo : BaseRepo, ITaskListRepo
 	{
 		TaskListQueryCacheFactory _factory;
-		ApplicationDataProxy _dataProxy;
 
 		const string CreateStoredProcedure = "TaskLists_Create";
-
 		const string ReadAllStoredProcedure = "TaskLists_All_Select";
 		const string ReadStoredProcedure = "TaskLists_Select";
-
 		const string UpdateStoredProcedure = "TaskLists_Update";
 
 		public TaskListRepo(TaskListQueryCacheFactory factory,
-		                             ApplicationDataProxy dataProxy)
+		                    ApplicationDataProxy dataProxy) 
+			:base(dataProxy)
 		{
 			_factory = factory;
 			_dataProxy = dataProxy;
@@ -37,6 +36,9 @@ namespace TaskHistory.Impl.TaskLists
 				= _dataProxy.ExecuteOnCollection(_factory, 
 			                                     ReadAllStoredProcedure,
 			                                     parameter);
+
+			if (kvpList == null)
+				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			// storage where key is the listId and vaue is the listName
 			var listNameCache = new Dictionary<int, string>();
@@ -98,7 +100,7 @@ namespace TaskHistory.Impl.TaskLists
 			                                             ReadStoredProcedure,
 			                                             parameters);
 			if (kvpList == null)
-				throw new NullReferenceException("null returned from DataProxy");
+				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			var tasks = new List<ITask>();
 
@@ -130,7 +132,7 @@ namespace TaskHistory.Impl.TaskLists
 														 CreateStoredProcedure,
 														 parameters);
 			if (kvpList == null)
-				throw new NullReferenceException("null returned from DataProxy");
+				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			string listName = kvpList.First().Value.ListName;
 			int listId = kvpList.First().Key;
@@ -157,7 +159,7 @@ namespace TaskHistory.Impl.TaskLists
 			                                          		parameters);
 
 			if (queryCache == null)
-				throw new NullReferenceException("null returned from DataProxy");
+				throw new NullReferenceException(NullFromApplicationDataProxy);
 				
 			string listName = queryCache.First().Value.ListName;
 			int listId = queryCache.First().Key;
