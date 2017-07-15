@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using TaskHistory.Api.Sql;
 using TaskHistory.Api.Tasks;
+using TaskHistory.Impl.Shared;
 using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Tasks
 {
-	public class TaskRepo : ITaskRepo
+	public class TaskRepo : BaseRepo, ITaskRepo
 	{
 		const string CreateStoredProcedure = "Tasks_Insert";
 		const string ReadStoredProcedure = "Tasks_Select";
@@ -14,11 +15,7 @@ namespace TaskHistory.Impl.Tasks
 		const string DeleteStoredProcedure = "Tasks_Delete";
 		const string CreateTaskAndAssociateToList = "Tasks_Insert_List_Associate";
 
-		// TODO move this to a shared base
-		const string NullFromApplicationDataProxy = "Null returned from DataProvider";
-
 		readonly TaskFactory _taskFactory;
-		readonly ApplicationDataProxy _dataProxy;
 
 		public ITask CreateTask(int userId, string taskContent)
 		{
@@ -100,10 +97,10 @@ namespace TaskHistory.Impl.Tasks
 		}
 
 		public TaskRepo(TaskFactory taskFactory,
-		                ApplicationDataProxy applicationDataProxy)
+		                ApplicationDataProxy dataProxy) 
+			: base (dataProxy)
 		{
 			_taskFactory = taskFactory;
-			_dataProxy = applicationDataProxy;
 		}
 	}
 }

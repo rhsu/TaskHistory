@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using TaskHistory.Api.Sql;
 using TaskHistory.Api.Users;
+using TaskHistory.Impl.Shared;
 using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Users
 {
-	public class UserRepo : IUserRepo
+	public class UserRepo : BaseRepo, IUserRepo
 	{
 		const string UserRegisterStoredProcedure = "Users_Insert";
 		const string UserValidateStoredProcedure = "User_Validate";
 
 		readonly UserFactory _userFactory;
-		readonly ApplicationDataProxy _dataProxy;
 
 		public IUser ValidateUsernameAndPassword(string username, string password)
 		{
@@ -87,6 +87,7 @@ namespace TaskHistory.Impl.Users
 		}
 
 		public UserRepo(UserFactory userFactory, ApplicationDataProxy dataProxy)
+			:base(dataProxy)
 		{
 			_userFactory = userFactory;
 			_dataProxy = dataProxy;
