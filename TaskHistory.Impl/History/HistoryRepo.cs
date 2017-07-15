@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using TaskHistory.Api.History;
 using TaskHistory.Api.History.DataTransferObjects;
 using TaskHistory.Api.Sql;
+using TaskHistory.Impl.Shared;
 using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.History
 {
-	public class HistoryRepo : IHistoryRepo
+	public class HistoryRepo : BaseRepo, IHistoryRepo
 	{
 		const string CreateStoredProcedure = "History_Create";
 		const string ReadStoredProcedure = "History_Select";
 
 		HistoryFactory _factory;
-		ApplicationDataProxy _dataProxy;
 
 		public HistoryRepo(HistoryFactory factory, ApplicationDataProxy dataProxy)
+			: base(dataProxy)
 		{
 			_factory = factory;
 			_dataProxy = dataProxy;
@@ -34,7 +35,7 @@ namespace TaskHistory.Impl.History
 												  CreateStoredProcedure,
 												  parameters);
 			if (retVal == null)
-				throw new NullReferenceException("null returned from DataProxy");
+				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			return retVal;
 		}
@@ -47,7 +48,7 @@ namespace TaskHistory.Impl.History
 			                                            ReadStoredProcedure, 
 			                                            param);
 			if (retVal == null)
-				throw new NullReferenceException("Null returned from DataProxy");
+				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			return retVal;
 		}
