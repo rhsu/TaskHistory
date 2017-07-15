@@ -55,6 +55,9 @@ namespace TaskHistory.Impl.Test
 			var taskListFactory = new TaskListQueryCacheFactory();
 			var historyFactory = new HistoryFactory();
 
+			// TODO TaskPriority should be a test fixture
+			//var taskPriorityFactory = new TaskPriorityFactory();
+
 			var appDataProxyFactory = new ApplicationDataProxyFactory();
 			_dataProxy = appDataProxyFactory.Build();
 
