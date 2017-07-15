@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using TaskHistory.Api.Sql;
 using TaskHistory.Api.Tasks;
+using TaskHistory.Impl.Shared;
 using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.Tasks
 {
-	public class TaskPriorityRepo : ITaskPriorityRepo
+	public class TaskPriorityRepo : BaseRepo, ITaskPriorityRepo
 	{
 		TaskPriorityFactory _factory;
-		ApplicationDataProxy _dataProxy;
 
 		const string CreateStoredProcedure = "TaskPriority_Insert";
 		const string ReadStoredProcedure = "TaskPriority_Read";
 		const string UpdateStoredProcedure = "TaskPriority_Update";
 		const string DeleteStoredProcedure = "TaskPriority_Delete";
 
-		public TaskPriorityRepo(TaskPriorityFactory factory, 
-		                        ApplicationDataProxy dataProxy)
+		public TaskPriorityRepo(TaskPriorityFactory factory,
+								ApplicationDataProxy dataProxy)
+			: base(dataProxy)
 		{
 			_factory = factory;
-			_dataProxy = dataProxy;
 		}
 
 		public ITaskPriority Create(int userId, string name, int rank)
@@ -40,8 +40,6 @@ namespace TaskHistory.Impl.Tasks
 				_factory,
 				CreateStoredProcedure);
 
-			// TODO once the mini-refactor is merged in, then update exception
-			//		with NullFromDataReader
 			if (taskPriority == null)
 				throw new NullReferenceException();
 
