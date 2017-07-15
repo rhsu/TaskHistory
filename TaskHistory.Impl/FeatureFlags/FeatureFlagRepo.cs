@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using TaskHistory.Api.FeatureFlags;
 using TaskHistory.Api.Sql;
+using TaskHistory.Impl.Shared;
 using TaskHistory.Impl.Sql;
 
 namespace TaskHistory.Impl.FeatureFlags
 {
-	public class FeatureFlagRepo : IFeatureFlagRepo
+	public class FeatureFlagRepo : BaseRepo, IFeatureFlagRepo
 	{
-		ApplicationDataProxy _dataProxy;
 		FeatureFlagFactory _factory;
 
 		const string CreateStoredProcedure = "FeatureFlags_Create";
@@ -35,7 +35,7 @@ namespace TaskHistory.Impl.FeatureFlags
 			                                   parameters);
 			
 			if (returnVal == null)
-				throw new NullReferenceException("Null returned from DataProvider");
+				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			return returnVal;
 		}
@@ -46,10 +46,8 @@ namespace TaskHistory.Impl.FeatureFlags
 
 			parameters.Add(_dataProxy.CreateParameter("pId", id));
 
-			 _dataProxy.ExecuteNonQuery(DeleteStoredProcedure,
-			                            parameters);
-
-			return 1;
+			// TODO is there a unit test which checks the return value of this?
+			return _dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameters);
 		}
 
 		public IEnumerable<IFeatureFlag> Read()
@@ -58,7 +56,7 @@ namespace TaskHistory.Impl.FeatureFlags
 														   ReadStoredProcedure);
 
 			if (returnVal == null)
-				throw new NullReferenceException("Null returned from DataProvider");
+				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			return returnVal;
 		}
@@ -82,7 +80,7 @@ namespace TaskHistory.Impl.FeatureFlags
 			                                         parameters);
 
 			if (returnVal == null)
-				throw new NullReferenceException("Null returned from DataProvider");
+				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			return returnVal;
 		}
@@ -94,10 +92,10 @@ namespace TaskHistory.Impl.FeatureFlags
 		}
 
 		public FeatureFlagRepo(FeatureFlagFactory factory,
-		                       ApplicationDataProxy dataProxy)
+							   ApplicationDataProxy dataProxy)
+			: base(dataProxy)
 		{
 			_factory = factory;
-			_dataProxy = dataProxy;
 		}
 	}
 }

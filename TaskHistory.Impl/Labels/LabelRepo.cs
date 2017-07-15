@@ -4,20 +4,18 @@ using TaskHistory.Api.Labels;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.Sql;
 using TaskHistory.Api.Sql;
+using TaskHistory.Impl.Shared;
 
 namespace TaskHistory.Impl.Labels
 {
-	public class LabelRepo : ILabelRepo
+	public class LabelRepo : BaseRepo, ILabelRepo
 	{
 		readonly LabelFactory _labelFactory;
-		readonly ApplicationDataProxy _dataProxy;
 
 		const string CreateStoredProcedure = "Labels_Insert";
 		const string ReadStoredProcedure = "Labels_For_User_Select";
 		const string UpdateStoredProcedure = "Labels_Update";
 		const string DeleteStoredProcedure = "Labels_Logical_Delete";
-
-		const string NullFromApplicationDataProxy = "Null returned from ApplicationDataProxy";
 
 		public LabelFactory LabelFactory
 		{
@@ -85,9 +83,9 @@ namespace TaskHistory.Impl.Labels
 		}
 
 		public LabelRepo(LabelFactory labelFactory,
-		                 ApplicationDataProxy dataProxy)
+						 ApplicationDataProxy dataProxy)
+			: base(dataProxy)
 		{
-			_dataProxy = dataProxy;
 			_labelFactory = labelFactory;
 		}
 	}
