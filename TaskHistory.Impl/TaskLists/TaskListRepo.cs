@@ -37,6 +37,9 @@ namespace TaskHistory.Impl.TaskLists
 			                                     ReadAllStoredProcedure,
 			                                     parameter);
 
+			if (kvpList == null)
+				throw new NullReferenceException(NullFromApplicationDataProxy);
+
 			// storage where key is the listId and vaue is the listName
 			var listNameCache = new Dictionary<int, string>();
 
