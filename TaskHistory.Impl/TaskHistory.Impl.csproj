@@ -101,6 +101,7 @@
     <Folder Include="FeatureFlags\" />
     <Folder Include="TaskLists\QueryResults\" />
     <Folder Include="History\" />
+    <Folder Include="Shared\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
