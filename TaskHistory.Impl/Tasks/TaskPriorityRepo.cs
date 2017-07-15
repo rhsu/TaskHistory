@@ -50,19 +50,33 @@ namespace TaskHistory.Impl.Tasks
 		{
 			var parameters = new List<ISqlDataParameter>();
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_dataProxy.CreateParameter("pUserId", id));
+			parameters.Add(_dataProxy.CreateParameter("pId", id));
 
-			return _dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameters);
+			int deletedCount = _dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameters);
+			return deletedCount;
 		}
 
 		public IEnumerable<ITaskPriority> Read(int userId)
 		{
-			throw new NotImplementedException();
+			var parameter = _dataProxy.CreateParameter("pUserId", userId);
+			var priorities = _dataProxy.ExecuteOnCollection(_factory, ReadStoredProcedure, parameter);
+			if (priorities == null)
+				throw new NullReferenceException(NullFromApplicationDataProxy);
+
+			return priorities;
 		}
 
-		public ITaskPriority Update()
+		public ITaskPriority Update(int userId, int id)
 		{
-			throw new NotImplementedException();
+			var parameters = new List<ISqlDataParameter>();
+			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));			
+			parameters.Add(_dataProxy.CreateParameter("pId", id));
+
+			var priority = _dataProxy.ExecuteReader(_factory, UpdateStoredProcedure, parameters);
+			if (priority == null)
+				throw new NullReferenceException(NullFromApplicationDataProxy);
+
+			return priority;
 		}
 	}
 }
