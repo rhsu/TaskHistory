@@ -82,10 +82,10 @@
     <Compile Include="History\HistoryRepo.cs" />
     <Compile Include="History\History.cs" />
     <Compile Include="History\HistoryFactory.cs" />
-    <Compile Include="Tasks\TaskPriority.cs" />
-    <Compile Include="Tasks\TaskPriorityRepo.cs" />
-    <Compile Include="Tasks\TaskPriorityFactory.cs" />
     <Compile Include="Shared\BaseRepo.cs" />
+    <Compile Include="TaskPriorities\TaskPriority.cs" />
+    <Compile Include="TaskPriorities\TaskPriorityFactory.cs" />
+    <Compile Include="TaskPriorities\TaskPriorityRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -102,6 +102,7 @@
     <Folder Include="TaskLists\QueryResults\" />
     <Folder Include="History\" />
     <Folder Include="Shared\" />
+    <Folder Include="TaskPriorities\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

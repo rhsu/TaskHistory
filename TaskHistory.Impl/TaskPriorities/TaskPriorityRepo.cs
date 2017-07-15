@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using TaskHistory.Api.Sql;
-using TaskHistory.Api.Tasks;
+using TaskHistory.Api.TaskPriorities;
 using TaskHistory.Impl.Shared;
 using TaskHistory.Impl.Sql;
 
-namespace TaskHistory.Impl.Tasks
+namespace TaskHistory.Impl.TaskPriorities
 {
 	public class TaskPriorityRepo : BaseRepo, ITaskPriorityRepo
 	{

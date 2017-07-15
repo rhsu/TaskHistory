@@ -68,8 +68,8 @@
     <Compile Include="History\IHistoryRepo.cs" />
     <Compile Include="History\DataTransferObjects\HistoryCreationParams.cs" />
     <Compile Include="TaskLists\DataTransferObjects\TaskListUpdatingParameters.cs" />
-    <Compile Include="Tasks\ITaskPriority.cs" />
-    <Compile Include="Tasks\ITaskPriorityRepo.cs" />
+    <Compile Include="TaskPriorties\ITaskPriority.cs" />
+    <Compile Include="TaskPriorties\ITaskPriorityRepo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -88,5 +88,6 @@
     <Folder Include="History\Enums\" />
     <Folder Include="History\DataTransferObjects\" />
     <Folder Include="TaskLists\DataTransferObjects\" />
+    <Folder Include="TaskPriorties\" />
   </ItemGroup>
 </Project>

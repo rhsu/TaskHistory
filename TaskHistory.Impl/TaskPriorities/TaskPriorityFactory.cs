@@ -1,8 +1,8 @@
 ﻿using System;
 using TaskHistory.Api.Sql;
-using TaskHistory.Api.Tasks;
+using TaskHistory.Api.TaskPriorities;
 
-namespace TaskHistory.Impl.Tasks
+namespace TaskHistory.Impl.TaskPriorities
 {
 	public class TaskPriorityFactory : IFromDataReaderFactory<ITaskPriority>
 	{

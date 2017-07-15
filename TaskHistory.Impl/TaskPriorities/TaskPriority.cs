@@ -1,6 +1,6 @@
-﻿using TaskHistory.Api.Tasks;
+﻿using TaskHistory.Api.TaskPriorities;
 
-namespace TaskHistory.Impl
+namespace TaskHistory.Impl.TaskPriorities
 {
 	public class TaskPriority : ITaskPriority
 	{

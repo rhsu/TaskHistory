@@ -1,4 +1,4 @@
-﻿namespace TaskHistory.Api.Tasks
+﻿namespace TaskHistory.Api.TaskPriorities
 {
 	public interface ITaskPriority
 	{

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TaskHistory.Api.Tasks
+namespace TaskHistory.Api.TaskPriorities
 {
 	public interface ITaskPriorityRepo
 	{
