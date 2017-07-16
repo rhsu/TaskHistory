@@ -30,12 +30,13 @@ namespace TaskHistory.Impl.TaskPriorities
 
 			var parameters = new List<ISqlDataParameter>();
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));			
-			parameters.Add(_dataProxy.CreateParameter("pUserId", name));
+			parameters.Add(_dataProxy.CreateParameter("pName", name));
 			parameters.Add(_dataProxy.CreateParameter("pRank", rank));
 
 			var taskPriority = _dataProxy.ExecuteReader(
 				_factory,
-				CreateStoredProcedure);
+				CreateStoredProcedure,
+				parameters);
 
 			if (taskPriority == null)
 				throw new NullReferenceException();

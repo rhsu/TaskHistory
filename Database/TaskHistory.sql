@@ -114,16 +114,15 @@ DROP TABLE IF EXISTS `TaskPriority`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `TaskPriority` (
-  `Id` int(11) NOT NULL,
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
   `UserId` int(11) NOT NULL,
-  `Name` int(11) NOT NULL,
+  `Name` varchar(255) NOT NULL,
   `Rank` int(11) NOT NULL,
   `IsDeleted` tinyint(1) NOT NULL DEFAULT '0',
   `CreationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ModifiedDate` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`),
-  KEY `UserId` (`UserId`),
-  CONSTRAINT `TaskPriorityToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `UserId` (`UserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -164,9 +163,7 @@ CREATE TABLE `Tasks` (
   `ModifiedDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`TaskId`),
   KEY `UserId` (`UserId`),
-  KEY `TaskPriorityId` (`TaskPriorityId`),
-  CONSTRAINT `TaskIdToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `TaskPirorityIdToTaskPriority` FOREIGN KEY (`TaskPriorityId`) REFERENCES `TaskPriority` (`Id`)
+  CONSTRAINT `TaskIdToUserId` FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -672,6 +669,42 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `TaskPriority_Insert` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `TaskPriority_Insert`(
+ IN `pUserId` INT, 
+ IN `pName` VARCHAR(255), 
+ IN `pRank` INT)
+BEGIN
+	INSERT INTO `TaskPriority`
+    (
+		`UserId`,
+        `Name`,
+        `Rank`
+    )
+    VALUES
+    (
+		 `pUserId`
+        ,`pName`
+        ,`pRank`
+    );
+    
+    SELECT * FROM `TaskPriority` WHERE
+    `Id` = last_insert_id();
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `Tasks_Delete` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -952,4 +985,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-11 17:53:5
+-- Dump completed on 2017-07-15 21:04:52
