@@ -39,7 +39,7 @@ namespace TaskHistory.Impl.TaskPriorities
 				parameters);
 
 			if (taskPriority == null)
-				throw new NullReferenceException();
+				throw new NullReferenceException(NullFromApplicationDataProxy);
 
 			return taskPriority;
 		}
