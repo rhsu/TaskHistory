@@ -51,6 +51,9 @@ namespace TaskHistory.Impl.Tasks
 			                                      CreateTaskAndAssociateToList,
 			                                      parameters);
 
+			if (retVal == null)
+				throw new NullReferenceException();
+
 			return retVal;
 		}
 
