@@ -15,6 +15,7 @@ namespace TaskHistory.Impl.Test.TaskPriorities
 		public void Init()
 		{
 			var dataProxy = new ApplicationDataProxyFactory().Build();
+			_fixtures = new TestFixtures();
 
 			_factory = new TaskPriorityFactory();
 			_repo = new TaskPriorityRepo(_factory, dataProxy);

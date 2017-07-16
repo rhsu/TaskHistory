@@ -28,9 +28,6 @@ namespace TaskHistory.Impl.TaskPriorities
 			if (string.IsNullOrWhiteSpace(name))
 				throw new ArgumentNullException(nameof(name));
 
-			// TODO should rank belong somewhere else?
-			//		don't need it yet until the admin page
-
 			var parameters = new List<ISqlDataParameter>();
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));			
 			parameters.Add(_dataProxy.CreateParameter("pUserId", name));
