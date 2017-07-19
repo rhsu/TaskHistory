@@ -6,7 +6,7 @@ namespace TaskHistory.Api.TaskPriorities
 	{
 		ITaskPriority Create(int userId, string name, int rank);
 		IEnumerable<ITaskPriority> Read(int userId);
-		ITaskPriority Update(int userId, string name, int rank);
+		ITaskPriority Update(int userId, int id, string name, int rank);
 		int Delete(int userId, int id);
 	}
 }

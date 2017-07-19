@@ -61,18 +61,21 @@ namespace TaskHistory.Impl.Test.TaskPriorities
 			int rank = 999;
 			string name = "new name";
 
+			var priority = _fixtures.TaskPriority;
+			var id = priority.Id;
+
+			Assert.AreNotEqual(rank, priority.Rank);
+			Assert.AreNotEqual(name, priority.Name);
 			// TODO assert that _fixtures.Priority.name and .rank 
 			// 		are not the same as rank and name
 
-			int priorityId = 1; // TODO use the id of _fixutres.Priority.Id;
-
 			int userId = _fixtures.User.Id;
-			var updated = _repo.Update(userId, name, rank);
+			var updated = _repo.Update(userId, id, name, rank);
 
-			// TODO not ready yet.
-			/*Assert.AreEqual(rank, _fixtures.Priority.Rank);			
-			Assert.AreEqual(name, _fixtures.Priority.name);
-			Assert.AreEqual(userId, _fixtures.Priority.UserId);*/
+			Assert.AreEqual(rank, updated.Rank);			
+			Assert.AreEqual(name, updated.Name);
+			Assert.AreEqual(userId, updated.UserId);
+			Assert.AreEqual(id, updated.Id);
 		}
 	}
 }

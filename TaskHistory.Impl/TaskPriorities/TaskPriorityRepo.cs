@@ -64,9 +64,10 @@ namespace TaskHistory.Impl.TaskPriorities
 			return priorities;
 		}
 
-		public ITaskPriority Update(int userId, string name, int rank)
+		public ITaskPriority Update(int userId, int id, string name, int rank)
 		{
 			var parameters = new List<ISqlDataParameter>();
+			parameters.Add(_dataProxy.CreateParameter("pId", id));
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 			parameters.Add(_dataProxy.CreateParameter("pName", name));
 			parameters.Add(_dataProxy.CreateParameter("pRank", rank));
