@@ -77,5 +77,12 @@ namespace TaskHistory.Impl.Test.TaskPriorities
 			Assert.AreEqual(userId, updated.UserId);
 			Assert.AreEqual(id, updated.Id);
 		}
+
+		[Test]
+		public void Delete()
+		{
+			var numDeleted = _repo.Delete(_fixtures.User.Id, _fixtures.TaskPriority.Id);
+			Assert.AreEqual(1, numDeleted);
+		}
 	}
 }

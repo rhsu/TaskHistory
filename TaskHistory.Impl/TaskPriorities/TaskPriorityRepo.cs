@@ -44,16 +44,6 @@ namespace TaskHistory.Impl.TaskPriorities
 			return taskPriority;
 		}
 
-		public int Delete(int userId, int id)
-		{
-			var parameters = new List<ISqlDataParameter>();
-			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_dataProxy.CreateParameter("pId", id));
-
-			int deletedCount = _dataProxy.ExecuteNonQuery(DeleteStoredProcedure, parameters);
-			return deletedCount;
-		}
-
 		public IEnumerable<ITaskPriority> Read(int userId)
 		{
 			var parameter = _dataProxy.CreateParameter("pUserId", userId);
@@ -64,13 +54,18 @@ namespace TaskHistory.Impl.TaskPriorities
 			return priorities;
 		}
 
-		public ITaskPriority Update(int userId, int id, string name, int rank)
+		public ITaskPriority Update(int userId, 
+		                            int id, 
+		                            string name, 
+		                            int rank, 
+		                            bool isDeleted=false)
 		{
 			var parameters = new List<ISqlDataParameter>();
 			parameters.Add(_dataProxy.CreateParameter("pId", id));
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
 			parameters.Add(_dataProxy.CreateParameter("pName", name));
 			parameters.Add(_dataProxy.CreateParameter("pRank", rank));
+			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", isDeleted));
 
 			var priority = _dataProxy.ExecuteReader(_factory, UpdateStoredProcedure, parameters);
 			if (priority == null)
