@@ -86,6 +86,8 @@
     <Compile Include="TaskPriorities\TaskPriority.cs" />
     <Compile Include="TaskPriorities\TaskPriorityFactory.cs" />
     <Compile Include="TaskPriorities\TaskPriorityRepo.cs" />
+    <Compile Include="TaskPriorities\TaskPriorityUpdateParams.cs" />
+    <Compile Include="TaskPriorities\TaskPriorityUpdateParamsFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

@@ -55,17 +55,18 @@ namespace TaskHistory.Impl.TaskPriorities
 		}
 
 		public ITaskPriority Update(int userId, 
-		                            int id, 
-		                            string name, 
-		                            int rank, 
-		                            bool isDeleted=false)
+		                            int id,
+		                            ITaskPriorityUpdateParams updateParams)
 		{
+			if (updateParams == null)
+				throw new ArgumentNullException(nameof(updateParams));
+
 			var parameters = new List<ISqlDataParameter>();
 			parameters.Add(_dataProxy.CreateParameter("pId", id));
 			parameters.Add(_dataProxy.CreateParameter("pUserId", userId));
-			parameters.Add(_dataProxy.CreateParameter("pName", name));
-			parameters.Add(_dataProxy.CreateParameter("pRank", rank));
-			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", isDeleted));
+			parameters.Add(_dataProxy.CreateParameter("pName", updateParams.Name));
+			parameters.Add(_dataProxy.CreateParameter("pRank", updateParams.Rank));
+			parameters.Add(_dataProxy.CreateParameter("pIsDeleted", updateParams.IsDeleted));
 
 			var priority = _dataProxy.ExecuteReader(_factory, UpdateStoredProcedure, parameters);
 			if (priority == null)

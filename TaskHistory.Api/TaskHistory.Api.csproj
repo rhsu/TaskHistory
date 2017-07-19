@@ -70,6 +70,7 @@
     <Compile Include="TaskLists\DataTransferObjects\TaskListUpdatingParameters.cs" />
     <Compile Include="TaskPriorties\ITaskPriority.cs" />
     <Compile Include="TaskPriorties\ITaskPriorityRepo.cs" />
+    <Compile Include="TaskPriorties\ITaskPriorityUpdateParams.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
