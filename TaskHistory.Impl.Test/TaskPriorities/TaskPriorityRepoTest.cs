@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 using TaskHistory.Api.TaskPriorities;
 using TaskHistory.Impl.TaskPriorities;
 
@@ -39,12 +40,19 @@ namespace TaskHistory.Impl.Test.TaskPriorities
 		[Test]
 		public void Read()
 		{
-			// try to read from test fixture.
-			// this test only makes sense once TaskPriority is successfully a testFixture
 			var userId = _fixtures.User.Id;
-			var priorities = _repo.Read(userId);
+			var priority = _fixtures.TaskPriority;
 
-			// TODO assert that _fixtures.Priority is the same as the priorities.First
+			var readPriorities = _repo.Read(userId);
+
+			Assert.AreEqual(1, readPriorities.Count());
+
+			var readPriority = readPriorities.First();
+
+			Assert.AreEqual(priority.Id, readPriority.Id);				
+			Assert.AreEqual(priority.Name, readPriority.Name);
+			Assert.AreEqual(priority.Rank, readPriority.Rank);		
+			Assert.AreEqual(priority.UserId, readPriority.UserId);
 		}
 
 		[Test]
