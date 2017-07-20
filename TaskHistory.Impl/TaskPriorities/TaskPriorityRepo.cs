@@ -14,7 +14,6 @@ namespace TaskHistory.Impl.TaskPriorities
 		const string CreateStoredProcedure = "TaskPriority_Insert";
 		const string ReadStoredProcedure = "TaskPriority_Read";
 		const string UpdateStoredProcedure = "TaskPriority_Update";
-		const string DeleteStoredProcedure = "TaskPriority_Delete";
 
 		public TaskPriorityRepo(TaskPriorityFactory factory,
 								ApplicationDataProxy dataProxy)
