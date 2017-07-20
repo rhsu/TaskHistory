@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using TaskHistory.Api.History;
 using TaskHistory.Api.History.DataTransferObjects;
 using TaskHistory.Api.TaskLists;
+using TaskHistory.Api.TaskPriorities;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.History;
 using TaskHistory.Impl.Sql;
 using TaskHistory.Impl.TaskLists;
+using TaskHistory.Impl.TaskPriorities;
 using TaskHistory.Impl.Tasks;
 using TaskHistory.Impl.Users;
 
@@ -19,14 +21,15 @@ namespace TaskHistory.Impl.Test
 		readonly ITaskRepo _taskRepo;
 		readonly ITaskListRepo _taskListRepo;
 		readonly IHistoryRepo _historyRepo;
+		readonly ITaskPriorityRepo _taskPriorityRepo;
 
 		readonly ApplicationDataProxy _dataProxy;
 
 		IUser _user;
 		ITask _task;
 		ITaskList _taskList;
-
 		List<IHistory> _histories;
+		ITaskPriority _taskPriority;
 
 		public IUser User
 		{
@@ -48,12 +51,18 @@ namespace TaskHistory.Impl.Test
 			get { return _histories; }
 		}
 
+		public ITaskPriority TaskPriority
+		{
+			get { return _taskPriority; }
+		}
+
 		public TestFixtures()
 		{
 			var userFactory = new UserFactory();
 			var taskFactory = new TaskFactory();
 			var taskListFactory = new TaskListQueryCacheFactory();
 			var historyFactory = new HistoryFactory();
+			var taskPriorityFactory = new TaskPriorityFactory();
 
 			var appDataProxyFactory = new ApplicationDataProxyFactory();
 			_dataProxy = appDataProxyFactory.Build();
@@ -64,12 +73,14 @@ namespace TaskHistory.Impl.Test
 			_taskListRepo = new TaskListRepo(taskListFactory, _dataProxy);
 			_taskRepo = new TaskRepo(taskFactory, _dataProxy);
 			_historyRepo = new HistoryRepo(historyFactory, _dataProxy);
+			_taskPriorityRepo = new TaskPriorityRepo(taskPriorityFactory, _dataProxy);
 
 			_histories = new List<IHistory>();
 
 			CreateUser();
 			CreateTask();
 			CreateTaskList();
+			CreateTaskPriority();
 		}
 
 		void CreateUser()
@@ -112,6 +123,13 @@ namespace TaskHistory.Impl.Test
 
 			var history =_historyRepo.Create(_user.Id, historyDto);
 			_histories.Add(history);
+		}
+
+		void CreateTaskPriority()
+		{
+			_taskPriority = _taskPriorityRepo.Create(_user.Id,
+													 "High",
+													 0);
 		}
 	}
 }
