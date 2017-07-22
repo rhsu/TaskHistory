@@ -1,4 +1,7 @@
-﻿using System.Web.Http;
+﻿using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace WebApi.Controllers
 {
@@ -18,6 +21,17 @@ namespace WebApi.Controllers
 		public IHttpActionResult GetTest()
 		{
 			return Json("Hello World ABCDEFG");
+		}
+
+		public OkNegotiatedContentResult<string> Hello()
+		{
+			//var response = Request.CreateResponse(HttpStatusCode.OK, "Hello World");
+			//return response;
+			return Ok("Hello World");
+		}
+
+		public HomeController()
+		{
 		}
 	}
 }
