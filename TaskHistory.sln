@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Impl.Test", "Ta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.WebApp", "TaskHistory.WebApp\TaskHistory.WebApp.csproj", "{38673E33-19E3-4907-B048-3E21972D3FE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{3B7D6DF7-F9A5-4021-84EA-9F3A9ED32FEA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.WebApi", "WebApi\TaskHistory.WebApi.csproj", "{3B7D6DF7-F9A5-4021-84EA-9F3A9ED32FEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
