@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using TaskHistory.Impl.Sql;
 using TaskHistory.Impl.Users;
+using TaskHistory.TestFramework;
 
 namespace TaskHistory.Impl.Test.Users
 {

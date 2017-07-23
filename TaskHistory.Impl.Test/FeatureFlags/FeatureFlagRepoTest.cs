@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using TaskHistory.Api.FeatureFlags;
 using TaskHistory.Impl.FeatureFlags;
+using TaskHistory.TestFramework;
 
 namespace TaskHistory.Impl.Test.FeatureFlags
 {

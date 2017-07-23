@@ -13,7 +13,7 @@ using TaskHistory.Impl.TaskPriorities;
 using TaskHistory.Impl.Tasks;
 using TaskHistory.Impl.Users;
 
-namespace TaskHistory.Impl.Test
+namespace TaskHistory.TestFramework
 {
 	public class TestFixtures
 	{

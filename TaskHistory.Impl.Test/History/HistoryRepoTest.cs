@@ -6,6 +6,7 @@ using TaskHistory.Api.History;
 using TaskHistory.Api.History.DataTransferObjects;
 using TaskHistory.Impl.History;
 using TaskHistory.Impl.Sql;
+using TaskHistory.TestFramework;
 
 namespace TaskHistory.Impl.Test
 {

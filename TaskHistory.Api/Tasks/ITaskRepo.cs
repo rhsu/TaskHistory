@@ -10,8 +10,6 @@ namespace TaskHistory.Api.Tasks
 
 		ITask CreateTaskOnList(int userId, int listId, string content);
 
-		bool AssociateTaskToList(int userId, int taskId, int listId);
-
 		ITask UpdateTask(int userId,
 						 TaskUpdatingParameters taskUpdatingParameters, 
 		                 int taskId);
