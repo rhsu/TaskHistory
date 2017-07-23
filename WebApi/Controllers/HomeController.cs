@@ -7,31 +7,19 @@ namespace WebApi.Controllers
 {
 	public class HomeController : ApiController
 	{
-		/*public ActionResult Index()
-		{
-			var mvcName = typeof(Controller).Assembly.GetName();
-			var isMono = Type.GetType("Mono.Runtime") != null;
-
-			ViewData["Version"] = mvcName.Version.Major + "." + mvcName.Version.Minor;
-			ViewData["Runtime"] = isMono ? "Mono" : ".NET";
-
-			return View();
-		}*/
-
 		public IHttpActionResult GetTest()
 		{
 			return Json("Hello World");
 		}
 
+		// TODO this might be the correct syntax to use but 
+		//		I don't understand how it will interact with
+		//		Angular 2 yet.
+		//		In a Curl Test, I was not able to get a response
+		//		I am sticking with Json(_blah) until this is sorted out
 		public OkNegotiatedContentResult<string> Hello()
 		{
-			//var response = Request.CreateResponse(HttpStatusCode.OK, "Hello World");
-			//return response;
 			return Ok("Hello World");
-		}
-
-		public HomeController()
-		{
 		}
 	}
 }
