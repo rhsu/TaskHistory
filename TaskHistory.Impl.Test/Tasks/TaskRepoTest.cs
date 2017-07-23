@@ -5,6 +5,7 @@ using NUnit.Framework;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.Tasks;
+using TaskHistory.TestFramework;
 
 namespace TaskHistory.Impl.Test.Tasks
 {

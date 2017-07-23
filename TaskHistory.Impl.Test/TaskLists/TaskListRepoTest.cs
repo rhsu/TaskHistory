@@ -6,6 +6,7 @@ using TaskHistory.Api.TaskLists.DataTransferObjects;
 using TaskHistory.Api.Tasks;
 using TaskHistory.Impl.TaskLists;
 using TaskHistory.Impl.Tasks;
+using TaskHistory.TestFramework;
 
 namespace TaskHistory.Impl.Test.TaskLists
 {

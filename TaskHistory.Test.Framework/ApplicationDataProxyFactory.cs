@@ -1,7 +1,7 @@
 ﻿using TaskHistory.Impl.Configuration;
 using TaskHistory.Impl.Sql;
 
-namespace TaskHistory.Impl.Test
+namespace TaskHistory.TestFramework
 {
 	// TODO: Do I want to Keep this or replace this with
 	//       a  DI container?

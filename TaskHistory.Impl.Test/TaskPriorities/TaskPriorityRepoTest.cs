@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using TaskHistory.Api.TaskPriorities;
 using TaskHistory.Impl.TaskPriorities;
+using TaskHistory.TestFramework;
 
 namespace TaskHistory.Impl.Test.TaskPriorities
 {
