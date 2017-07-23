@@ -48,19 +48,13 @@ namespace TaskHistory.Impl.Tasks
 			parameters.Add(_dataProxy.CreateParameter("pListId", listId));
 
 			var retVal = _dataProxy.ExecuteReader(_taskFactory,
-			                                      CreateTaskAndAssociateToList,
-			                                      parameters);
+												  CreateTaskAndAssociateToList,
+												  parameters);
 
 			if (retVal == null)
 				throw new NullReferenceException();
 
 			return retVal;
-		}
-
-		// TODO Marking for possible deletion
-		public bool AssociateTaskToList(int userId, int taskId, int listId)
-		{
-			return false;
 		}
 
 		public IEnumerable<ITask> ReadAll(int userId)
