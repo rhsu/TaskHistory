@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using TaskHistory.Api.Users;
 using TaskHistory.Impl.Users;
+using TaskHistory.TestFramework;
 
 namespace TaskHistory.Impl.Test.Users
 {

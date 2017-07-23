@@ -37,8 +37,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Terminal\TerminalInterpreterHelperTest.cs" />
     <Compile Include="Users\UserRepoTest.cs" />
-    <Compile Include="AppDataProxyFactory\ApplicationDataProxyFactory.cs" />
-    <Compile Include="TestFixtures.cs" />
     <Compile Include="Tasks\TaskRepoTest.cs" />
     <Compile Include="FeatureFlags\FeatureFlagRepoTest.cs" />
     <Compile Include="TaskLists\TaskListRepoTest.cs" />
@@ -61,11 +59,14 @@
       <Project>{72D931D2-0537-4089-A50A-D7E2622073A2}</Project>
       <Name>TaskHistory.Impl</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TaskHistory.Test.Framework\TaskHistory.TestFramework.csproj">
+      <Project>{B86586AD-F2E5-4401-9BEE-BD49ACFA4F5A}</Project>
+      <Name>TaskHistory.TestFramework</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Terminal\" />
     <Folder Include="Users\" />
-    <Folder Include="AppDataProxyFactory\" />
     <Folder Include="TaskLists\" />
     <Folder Include="Tasks\" />
     <Folder Include="FeatureFlags\" />
