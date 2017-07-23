@@ -17,7 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Impl.Test", "Ta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.WebApp", "TaskHistory.WebApp\TaskHistory.WebApp.csproj", "{38673E33-19E3-4907-B048-3E21972D3FE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{3B7D6DF7-F9A5-4021-84EA-9F3A9ED32FEA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.WebApi", "WebApi\TaskHistory.WebApi.csproj", "{3B7D6DF7-F9A5-4021-84EA-9F3A9ED32FEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.WebApi.Test", "TaskHistory.WebApi.Test\TaskHistory.WebApi.Test.csproj", "{412D4373-794E-42E7-A9D3-BE0DEB68DE71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,5 +63,9 @@ Global
 		{3B7D6DF7-F9A5-4021-84EA-9F3A9ED32FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B7D6DF7-F9A5-4021-84EA-9F3A9ED32FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B7D6DF7-F9A5-4021-84EA-9F3A9ED32FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{412D4373-794E-42E7-A9D3-BE0DEB68DE71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{412D4373-794E-42E7-A9D3-BE0DEB68DE71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{412D4373-794E-42E7-A9D3-BE0DEB68DE71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{412D4373-794E-42E7-A9D3-BE0DEB68DE71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
