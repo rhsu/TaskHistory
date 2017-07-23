@@ -48,9 +48,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationDataProxyFactory.cs" />
+    <Compile Include="TestFixtures.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TestFixtures\" />
+    <ProjectReference Include="..\TaskHistory.Impl\TaskHistory.Impl.csproj">
+      <Project>{72D931D2-0537-4089-A50A-D7E2622073A2}</Project>
+      <Name>TaskHistory.Impl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskHistory.Api\TaskHistory.Api.csproj">
+      <Project>{D9A05272-F06F-4AF4-816C-FB3B8E770AFA}</Project>
+      <Name>TaskHistory.Api</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
