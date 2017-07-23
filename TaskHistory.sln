@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.WebApi", "WebAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.WebApi.Test", "TaskHistory.WebApi.Test\TaskHistory.WebApi.Test.csproj", "{412D4373-794E-42E7-A9D3-BE0DEB68DE71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.Test.Framework", "TaskHistory.Test.Framework\TaskHistory.Test.Framework.csproj", "{B86586AD-F2E5-4401-9BEE-BD49ACFA4F5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskHistory.TestFramework", "TaskHistory.Test.Framework\TaskHistory.TestFramework.csproj", "{B86586AD-F2E5-4401-9BEE-BD49ACFA4F5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
