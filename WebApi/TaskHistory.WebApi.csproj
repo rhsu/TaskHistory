@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
