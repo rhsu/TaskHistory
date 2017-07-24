@@ -14,7 +14,7 @@ namespace TaskHistory.Impl.Test.TaskLists
 	public class TaskListRepoTest
 	{
 		ITaskListRepo _repo;
-		TestFixtures _testFixtures;
+		ITestFixtures _testFixtures;
 
 		ITaskRepo _taskRepo;
 
