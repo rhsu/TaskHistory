@@ -1,13 +1,13 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Http;
+using System.Web.Mvc;
 
 namespace WebApi.Controllers
 {
-	public class TaskController : Controller
+	public class TasksController : ApiController
     {
-		public JsonResult Get()
+		public IHttpActionResult Get(int userId)
 		{
-			
-			return Json(null);
+			return Json(userId);
 		}
     }
 }
