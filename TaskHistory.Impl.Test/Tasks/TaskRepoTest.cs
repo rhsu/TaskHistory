@@ -12,7 +12,7 @@ namespace TaskHistory.Impl.Test.Tasks
 	[TestFixture]
 	public class Tasks
 	{
-		TestFixtures _testFixtures;
+		ITestFixtures _testFixtures;
 		ITaskRepo _taskRepo;
 		IUser _user;
 

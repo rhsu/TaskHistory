@@ -11,7 +11,7 @@ namespace TaskHistory.Impl.Test.TaskPriorities
 	{
 		ITaskPriorityRepo _repo;
 		TaskPriorityFactory _factory;
-		TestFixtures _fixtures;
+		ITestFixtures _fixtures;
 
 		[SetUp]
 		public void Init()

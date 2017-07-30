@@ -17,7 +17,7 @@ namespace TaskHistory.Impl.Test
 		HistoryFactory _factory;
 
 		IHistoryRepo _repo;
-		TestFixtures _testFixtures;
+		ITestFixtures _testFixtures;
 
 		[SetUp]
 		public void Init()

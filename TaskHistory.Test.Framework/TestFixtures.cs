@@ -15,7 +15,7 @@ using TaskHistory.Impl.Users;
 
 namespace TaskHistory.TestFramework
 {
-	public class TestFixtures
+	public class TestFixtures : ITestFixtures
 	{
 		readonly IUserRepo _userRepo;
 		readonly ITaskRepo _taskRepo;

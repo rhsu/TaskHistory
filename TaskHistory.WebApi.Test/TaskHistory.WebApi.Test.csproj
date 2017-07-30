@@ -45,14 +45,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Controllers\TasksControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebApi\TaskHistory.WebApi.csproj">
       <Project>{3B7D6DF7-F9A5-4021-84EA-9F3A9ED32FEA}</Project>
       <Name>TaskHistory.WebApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TaskHistory.Test.Framework\TaskHistory.TestFramework.csproj">
+      <Project>{B86586AD-F2E5-4401-9BEE-BD49ACFA4F5A}</Project>
+      <Name>TaskHistory.TestFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
